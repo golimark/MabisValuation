@@ -1,0 +1,16 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block css %}
+
+{% block title %}Prospect{% endblock %}
+{% block content %}
+<div class="form-container">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+</div>
+{% endblock %}
+{% endblock %}

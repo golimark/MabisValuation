@@ -1,0 +1,771 @@
+{% extends "home/base.html" %} {% block title %}Dashboard{% endblock %}
+
+<!--  -->
+{% block content %}
+<section class="dashboard">
+    <div class="leading-area">
+        <!-- <div class="header">
+            <p>{{request.user.company.name}}</p>
+        </div> -->
+        <div class="app-updates">
+            <div class="divide">
+                <a class="cta" href="">New Features</a>
+                <span class="sub-text">Last Update: 2nd August 2024 </span>
+            </div>
+            <a class="cta" href="">New Videos</a>
+        </div>
+        <!-- <div class="form-area">
+            <form action="">
+                <input type="text" class="form-control" />
+                <input
+                    class="form-control"
+                    list="currencies"
+                    id="currency"
+                    name="currency"
+                    placeholder="Type a currency..."
+                />
+                <div class="cta-area">
+                    <button class="cta-emph">Update This Page</button>
+                </div>
+            </form>
+        </div>
+        <div class="form-container">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="modal-form-area">
+                    <div class="modal-form-heading">
+                        <span class="form-title">User Company</span>
+                        <span class="form-part-minimizer">
+                            <i class="fas fa-chevron-up show"></i>
+                            <i class="fas fa-chevron-down hidden"></i>
+                        </span>
+                    </div>
+                    <div class="modal-form">
+                        <p style="font-size:12px; font-weight: bold;">Current Company: {{ request.user.company }}</p>
+                        <div class="modal-form split">
+                            {{ form.as_p }}
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </form>
+        </div> -->
+        {% if 'can_switch_companies' in request.user.permissions %}
+        <div class="form-area">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                
+                <!-- Input fields with simplified styling -->
+                <input type="text" class="form-control" placeholder="Current Company: {{ request.user.company }}" disabled />
+        
+                <!-- Dropdown field for selecting a new company -->
+                {{ form.as_p }}  <!-- Assuming 'company' is the field name in the form -->
+                <div class="cta-area">
+                    <button class="cta-emph">Update Company</button>
+                </div>
+                
+            </form>
+        </div>
+        {%endif%}
+    </div>
+    <div class="status-update-area">
+        <p>
+            Last updated on <b>31st Oct at 2:03:30 PM</b>. To see the latest
+            version, click <b>Update this page</b> button above <span>↑</span>
+        </p>
+    </div>
+
+    <div class="summary-cards">
+        <div class="summary-card">
+            <div class="content">
+                <div class="items">
+                    <p class="content-row">
+                        <a href=""><i class="fa fa-fw fa-plus-circle"></i></a>
+                        <span> {{total_borrowers}} - Total</span>
+                    </p>
+                    <p class="content-row">
+                        <a href=""><i class="fa fa-fw fa-plus-circle"></i></a>
+                        <span> {{total_active_borrowers}} - Active</span>
+                    </p>
+                    <p class="content-row">
+                        <a href=""><i class="fa fa-fw fa-plus-circle"></i></a>
+                        <span> {{total_fully_paid_borrowers}} - Fully Paid</span>
+                    </p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-user"></i>
+                </div>
+            </div>
+            <div class="card-footer">
+                <p>Borrrowers</p>
+            </div>
+        </div>
+
+        <div class="summary-card">
+            <div class="content">
+                <div class="items">
+                    <p class="content-row">
+                        <a href=""><i class="fa fa-fw fa-plus-circle"></i></a>
+                        <span> {{total_borrowers}} - Total</span>
+                    </p>
+                    <p class="content-row">
+                        <a href=""><i class="fa fa-fw fa-plus-circle"></i></a>
+                        <span> {{total_active_borrowers}} - Active</span>
+                    </p>
+                    <p class="content-row">
+                        <a href=""><i class="fa fa-fw fa-plus-circle"></i></a>
+                        <span> {{total_fully_paid_borrowers}} - Fully Paid</span>
+                    </p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-user"></i>
+                </div>
+            </div>
+            <div class="card-footer">
+                <p>Principal Released <i class="bi bi-arrow-right-circle"></i></p>
+                
+            </div>
+        </div>
+        <div class="summary-card">
+            <div class="content">
+                <div class="items">
+                    <p class="content-row">
+                        <a href=""><i class="fa fa-fw fa-plus-circle"></i></a>
+                        <span> {{total_borrowers}} - Total</span>
+                    </p>
+                    <p class="content-row">
+                        <a href=""><i class="fa fa-fw fa-plus-circle"></i></a>
+                        <span> {{total_active_borrowers}} - Active</span>
+                    </p>
+                    <p class="content-row">
+                        <a href=""><i class="fa fa-fw fa-plus-circle"></i></a>
+                        <span> {{total_fully_paid_borrowers}} - Fully Paid</span>
+                    </p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-user"></i>
+                </div>
+            </div>
+            <div class="card-footer">
+                <p>Collection Incl. Deductable Fees <i class="bi bi-arrow-right-circle"></i></p>
+                
+            </div>
+        </div>
+        
+        <div class="summary-card">
+            <div class="content">
+                <div class="items">
+                    <p class="content-row">
+                        <a href=""><i class="fa fa-fw fa-plus-circle"></i></a>
+                        <span> {{total_borrowers}} - Total</span>
+                    </p>
+                    <p class="content-row">
+                        <a href=""><i class="fa fa-fw fa-plus-circle"></i></a>
+                        <span> {{total_active_borrowers}} - Active</span>
+                    </p>
+                    <p class="content-row">
+                        <a href=""><i class="fa fa-fw fa-plus-circle"></i></a>
+                        <span> {{total_fully_paid_borrowers}} - Fully Paid</span>
+                    </p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-user"></i>
+                </div>
+            </div>
+            <div class="card-footer">
+                <p>New Borrowers with First Loan </p>
+            </div>
+        </div>
+        <div class="summary-card">
+            <div class="content">
+                <div class="items">
+                    <p class="content-row">
+                        <a href=""><i class="fa fa-fw fa-plus-circle"></i></a>
+                        <span> {{total_borrowers}} - Total</span>
+                    </p>
+                    <p class="content-row">
+                        <a href=""><i class="fa fa-fw fa-plus-circle"></i></a>
+                        <span> {{total_active_borrowers}} - Active</span>
+                    </p>
+                    <p class="content-row">
+                        <a href=""><i class="fa fa-fw fa-plus-circle"></i></a>
+                        <span> {{total_fully_paid_borrowers}} - Fully Paid</span>
+                    </p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-user"></i>
+                </div>
+            </div>
+            <div class="card-footer">
+                <p></p>
+            </div>
+        </div>
+        
+        <div class="summary-card">
+            <div class="content">
+                <div class="items">
+                    <p class="content-row">
+                        <span>{{total_principal_released}} - Total</span>
+                    </p>
+                    <p class="content-row">
+                        <span>{{total_principal_released_this_year}} - This Year</span>
+                    </p>
+                    <p class="content-row">
+                        <span>{{total_principal_released_this_month}} - This Month </span>
+                    </p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-file"></i>
+                </div>
+            </div>
+            <div class="card-footer">
+                <a href=""
+                    ><p></p>
+                    <!-- <i class="fa fa-fw fa-arrow-right"></i -->
+            </a>
+            </div>
+        </div>
+        <div class="summary-card">
+            <div class="content">
+                <div class="items">
+                    <p class="content-row">
+                        <span>{{total_collections}} - Total</span>
+                    </p>
+                    <p class="content-row">
+                        <span>{{total_collections_this_year}} - This Year</span>
+                    </p>
+                    <p class="content-row">
+                        <span>{{total_collections_this_month}} - This Month </span>
+                    </p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-dollar"></i>
+                </div>
+            </div>
+            <div class="card-footer">
+                <a href=""
+                    ><p></p>
+                    <!-- <i class="fa fa-fw fa-arrow-right"></i
+                > -->
+            </a>
+            </div>
+        </div>
+        <div class="summary-card">
+            <div class="content">
+                <div class="items">
+                    <p class="content-row">
+                        <span> {{total_new_borrowers}} - This Year</span>
+                    </p>
+                    <p class="content-row">
+                        <span> {{total_new_borrowers_three_months}} - Last 3 Months</span>
+                    </p>
+                    <p class="content-row">
+                        <span> {{total_new_borrowers_this_month}} - This Month </span>
+                    </p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-user-plus"></i>
+                </div>
+            </div>
+            <div class="card-footer">
+                <p></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="summary-cards">
+        <div class="summary-card-mod">
+            <div class="icon">
+                <i class="fa fa-balance-scale"></i>
+            </div>
+            <div class="content">
+                <div class="header">
+                    <p>Total Outstanding</p>
+                </div>
+                <div class="cta-link">
+                    <p>Open Loans</p>
+                    <a href=""><i class="fa fa-fw fa-plus-circle"></i></a>
+                </div>
+                <p class="value">{{total_outstanding_loans}}</p>
+            </div>
+        </div>
+        <div class="summary-card-mod">
+            <div class="icon">
+                <i class="fa fa-balance-scale"></i>
+            </div>
+            <div class="content">
+                <div class="header">
+                    <p>Principal Outstanding</p>
+                </div>
+                <div class="cta-link">
+                    <p>Open Loans</p>
+                    <a href=""><i class="fa fa-fw fa-plus-circle"></i></a>
+                </div>
+                <p class="value">{{total_outstanding_principal_open}}</p>
+            </div>
+        </div>
+        <div class="summary-card-mod">
+            <div class="icon">
+                <i class="fa fa-balance-scale"></i>
+            </div>
+            <div class="content">
+                <div class="header">
+                    <p>Interest Outstanding</p>
+                </div>
+                <div class="cta-link">
+                    <p>Open Loans</p>
+                    <a href=""><i class="fa fa-fw fa-plus-circle"></i></a>
+                </div>
+                <p class="value"></p>
+            </div>
+        </div>
+        <div class="summary-card-mod">
+            <div class="icon">
+                <i class="fa fa-balance-scale"></i>
+            </div>
+            <div class="content">
+                <div class="header">
+                    <p>Fees Outstanding</p>
+                </div>
+                <div class="cta-link">
+                    <p>Open Loans</p>
+                    <a href=""><i class="fa fa-fw fa-plus-circle"></i></a>
+                </div>
+                <p class="value"></p>
+            </div>
+        </div>
+        <div class="summary-card-mod">
+            <div class="icon">
+                <i class="fa fa-balance-scale"></i>
+            </div>
+            <div class="content">
+                <div class="header">
+                    <p>Penalty Outstanding</p>
+                </div>
+                <div class="cta-link">
+                    <p>Open Loans</p>
+                    <a href=""><i class="fa fa-fw fa-plus-circle"></i></a>
+                </div>
+                <p class="value"></p>
+            </div>
+        </div>
+        <!-- <div class="summary-card-mod">
+            <div class="icon">
+                <i class="fa fa-balance-scale"></i>
+            </div>
+            <div class="content">
+                <div class="cta-link">
+                    <p>Open Loans</p>
+                    <a href=""><i class="fa fa-fw fa-plus-circle"></i></a>
+                </div>
+                <p class="value">7 - Total</p>
+                <p class="value">3 - Released this Month</p>
+            </div>
+        </div> -->
+    </div>
+
+    <div class="loan-collection-breakdown">
+        <div class="header">
+            <p>Open/Fully Paid Loans</p>
+        </div>
+        <div class="content-area">
+            <div class="item">
+                <p class="header"><a href="">Weekly Goal Completion (0%)</a></p>
+                <div class="progress-group">
+                    <span class="progress-text"> Collections/Due</span>
+                    <span class="progress-number">0/1,540,051.84</span>
+                    <div class="progress">
+                        <div
+                            class="progress-bar progress-bar-red"
+                            style="width: 90.15%"
+                        ></div>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <p class="header">
+                    <a href="">Monthly Goal Completion (90.15%)</a>
+                </p>
+                <div class="progress-group">
+                    <span class="progress-text"> Collections/Due</span>
+                    <span class="progress-number"
+                        >4,000,000.00/4,436,846.97</span
+                    >
+                    <div class="progress">
+                        <div
+                            class="progress-bar progress-bar-blue"
+                            style="width: 50%"
+                        ></div>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <p class="header">
+                    <a href="">Yearly Goal Completion (32.86%)</a>
+                </p>
+                <div class="progress-group">
+                    <span class="progress-text"> Collections/Due</span>
+                    <span class="progress-number">0/1,540,051.84</span>
+                    <div class="progress">
+                        <div
+                            class="progress-bar progress-bar-yellow"
+                            style="width: 90.15%"
+                        ></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="charts-area">
+        <div class="chart-generate-form">
+            <form action="">
+                <label for="">Generate Below Charts</label>
+                <select
+                    class="form-control"
+                    id="HomeChartType"
+                    name="HomeBranchChartsPeriod"
+                >
+                    <option value="Daily">Daily</option>
+                    <option value="Weekly">Weekly</option>
+                    <option value="Monthly" selected="">Monthly</option>
+                    <option value="Quarterly">Quarterly</option>
+                    <option value="Half-Yearly">Half-Yearly</option>
+                    <option value="Yearly">Yearly</option>
+                </select>
+                <button class="btn btn-info pull-left submit-button">
+                    Submit
+                </button>
+            </form>
+        </div>
+        <div class="chart-card">
+            <div class="header">
+                <p>Loans Released - <span>Monthly</span></p>
+
+                <div class="box-tools">
+                    <button class="btn btn-box-tool" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                    <button class="btn btn-box-tool" data-widget="remove">
+                        <i class="fa fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="chart-content">
+                <canvas id="loanReleasesChart"></canvas>
+            </div>
+        </div>
+        <div class="chart-card">
+            <div class="header">
+                <p>Loan Collections - <span>Monthly</span></p>
+
+                <div class="box-tools">
+                    <button class="btn btn-box-tool" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                    <button class="btn btn-box-tool" data-widget="remove">
+                        <i class="fa fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="chart-content">
+                <canvas id="loanCollectionsChart"></canvas>
+            </div>
+        </div>
+        <div class="chart-card">
+            <div class="header">
+                <p>
+                    Loan Collections vs Due Loans - Open Loans -
+                    <span>Monthly</span>
+                </p>
+
+                <div class="box-tools">
+                    <button class="btn btn-box-tool" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                    <button class="btn btn-box-tool" data-widget="remove">
+                        <i class="fa fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="chart-content">
+                <canvas id="loanComparsionChart"></canvas>
+            </div>
+        </div>
+
+        <div class="chart-card">
+            <div class="header">
+                <p>
+                    Loan Collections vs Due Loans (Cumulative) -
+                    <span>Monthly</span>
+                </p>
+
+                <div class="box-tools">
+                    <button class="btn btn-box-tool" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                    <button class="btn btn-box-tool" data-widget="remove">
+                        <i class="fa fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="chart-content">
+                <canvas id="loanComparsionCumulationChart"></canvas>
+            </div>
+        </div>
+
+        <div class="chart-card">
+            <div class="header">
+                <p>
+                    Loan Collections vs Loans Released -
+                    <span>Monthly</span>
+                </p>
+
+                <div class="box-tools">
+                    <button class="btn btn-box-tool" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                    <button class="btn btn-box-tool" data-widget="remove">
+                        <i class="fa fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="chart-content">
+                <canvas id="loanCollectionVsLoanReleasedChart"></canvas>
+            </div>
+        </div>
+
+        <div class="chart-card">
+            <div class="header">
+                <p>
+                    Total Outstanding Open Loans -
+                    <span>Monthly</span>
+                </p>
+
+                <div class="box-tools">
+                    <button class="btn btn-box-tool" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                    <button class="btn btn-box-tool" data-widget="remove">
+                        <i class="fa fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="chart-content">
+                <canvas id="TotalOutstandingOpenLoanChart"></canvas>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Loan Releases Chart
+    //
+    const months = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+    ];
+    const loanReleasesCtx = document
+        .getElementById("loanReleasesChart")
+        .getContext("2d");
+    const loanReleasesChart = new Chart(loanReleasesCtx, {
+        type: "line",
+        data: {
+            labels: months,
+            datasets: [
+                {
+                    label: "Loan Releases",
+                    data: [
+                        500000, 750000, 600000, 900000, 1000000, 800000, 750000,
+                        950000, 850000, 700000, 950000, 800000,
+                    ],
+                    borderColor: "red",
+                    backgroundColor: "rgba(54, 162, 235, 0)",
+                    fill: true,
+                    tension: 0.2,
+                },
+            ],
+        },
+        options: { responsive: true, maintainAspectRatio: false },
+    });
+
+    const loanCollectionsCtx = document
+        .getElementById("loanCollectionsChart")
+        .getContext("2d");
+    const loanCollectionsChart = new Chart(loanCollectionsCtx, {
+        type: "line",
+        data: {
+            labels: months,
+            datasets: [
+                {
+                    label: "Loan Collection",
+                    data: [
+                        500000, 750000, 600000, 900000, 1000000, 800000, 750000,
+                        950000, 850000, 700000, 950000, 800000,
+                    ],
+                    borderColor: "rgba(54, 162, 235, 1)",
+                    backgroundColor: "rgba(54, 162, 235, 0)",
+                    fill: true,
+                    tension: 0.2,
+                },
+            ],
+        },
+        options: { responsive: true, maintainAspectRatio: false },
+    });
+
+    const loanComparsionCtx = document
+        .getElementById("loanComparsionChart")
+        .getContext("2d");
+    const loanComparsionChart = new Chart(loanComparsionCtx, {
+        type: "line",
+        data: {
+            labels: months,
+            datasets: [
+                {
+                    label: "Loan Collections",
+                    data: [
+                        50000, 75000, 60000, 55000, 100000, 80000, 75000, 95000,
+                        85000, 70000, 55000, 80000,
+                    ],
+                    borderColor: "red",
+                    backgroundColor: "rgba(54, 162, 235, 0)",
+                    fill: true,
+                    tension: 0.2,
+                },
+                {
+                    label: "Open Loans",
+                    data: [
+                        50000, 75000, 60000, 90000, 100000, 80000, 75000, 95000,
+                        85000, 70000, 95000, 80000,
+                    ],
+                    borderColor: "rgba(54, 162, 235, 1)",
+                    backgroundColor: "rgba(54, 162, 235, 0)",
+                    fill: true,
+                    tension: 0.2,
+                },
+                {
+                    label: "Due Loans",
+                    data: [
+                        50000, 65000, 620000, 90000, 100000, 80000, 45000,
+                        95000, 85000, 70000, 95000, 80000,
+                    ],
+                    borderColor: "orange",
+                    backgroundColor: "rgba(54, 162, 235, 0)",
+                    fill: true,
+                    tension: 0.2,
+                },
+            ],
+        },
+        options: { responsive: true, maintainAspectRatio: false },
+    });
+    const loanComparsionCumulationCtx = document
+        .getElementById("loanComparsionCumulationChart")
+        .getContext("2d");
+    const loanComparsionCumulationChart = new Chart(
+        loanComparsionCumulationCtx,
+        {
+            type: "line",
+            data: {
+                labels: months,
+                datasets: [
+                    {
+                        label: "Loan Collections",
+                        data: [
+                            50000, 75000, 60000, 90000, 100000, 80000, 75000,
+                            95000, 85000, 70000, 95000, 80000,
+                        ],
+                        borderColor: "rgba(54, 162, 235, 1)",
+                        backgroundColor: "rgba(54, 162, 235, 0)",
+                        fill: true,
+                        tension: 0.2,
+                    },
+                    {
+                        label: "Open Loans",
+                        data: [
+                            50000, 75000, 60000, 90000, 100000, 80000, 75000,
+                            95000, 85000, 70000, 95000, 80000,
+                        ],
+                        borderColor: "rgba(54, 162, 235, 1)",
+                        backgroundColor: "rgba(54, 162, 235, 0)",
+                        fill: true,
+                        tension: 0.2,
+                    },
+                    {
+                        label: "Due Loans",
+                        data: [
+                            50000, 65000, 620000, 90000, 100000, 80000, 45000,
+                            95000, 85000, 70000, 95000, 80000,
+                        ],
+                        borderColor: "orange",
+                        backgroundColor: "rgba(54, 162, 235, 0)",
+                        fill: true,
+                        tension: 0.2,
+                    },
+                ],
+            },
+            options: { responsive: true, maintainAspectRatio: false },
+        },
+    );
+
+    const loanCollectionVsLoanReleasedChart = new Chart(
+        "loanCollectionVsLoanReleasedChart",
+        {
+            type: "bar",
+            data: {
+                labels: months,
+                datasets: [
+                    {
+                        label: "Loan Collections",
+                        data: [
+                            50000, 75000, 60000, 90000, 100000, 80000, 75000,
+                            95000, 85000, 70000, 95000, 80000,
+                        ],
+                        fill: true,
+                    },
+                    {
+                        label: "Due Loans",
+                        data: [
+                            50000, 65000, 620000, 90000, 100000, 80000, 45000,
+                            95000, 85000, 70000, 95000, 80000,
+                        ],
+                        fill: true,
+                        tension: 0.2,
+                    },
+                ],
+            },
+            options: { responsive: true, maintainAspectRatio: false },
+        },
+    );
+    new Chart("TotalOutstandingOpenLoanChart", {
+        type: "line",
+        data: {
+            labels: months,
+            datasets: [
+                {
+                    label: "Loan Releases",
+                    data: [
+                        500000, 750000, 600000, 900000, 1000000, 800000, 750000,
+                        950000, 850000, 700000, 950000, 800000,
+                    ],
+                    borderColor: "red",
+                    backgroundColor: "rgba(54, 162, 235, 0)",
+                    fill: true,
+                    tension: 0.2,
+                },
+            ],
+        },
+        options: { responsive: true, maintainAspectRatio: false },
+    });
+</script>
+{% endblock %}

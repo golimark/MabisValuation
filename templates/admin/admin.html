@@ -1,0 +1,68 @@
+{% extends 'home/base.html' %} {% block title %}Admin Panel{%endblock %}
+<!--  -->
+{% block content %}
+<div class="container">
+    <h4>Admin Dashboard</h4>
+    <div class="admin-view mt-2">
+        <div class="action-list">
+            <p>Users and Roles</p>
+            <ul>
+                <li>
+                    <a
+                        href="{% url 'roles_create' %}"
+                        class="link-opacity-10-hover"
+                        style="font-size: 12px"
+                        >Create Role</a
+                    >
+                </li>
+                <li>
+                    <a
+                        href="{% url 'roles_list' %}"
+                        class="link-opacity-10-hover"
+                        style="font-size: 12px"
+                        >View All Roles</a
+                    >
+                </li>
+                <li>
+                    <a
+                        href="{% url 'users_create' %}"
+                        class="link-opacity-10-hover"
+                        style="font-size: 12px"
+                        >Add Company User</a
+                    >
+                </li>
+                <li>
+                    <a
+                        href="{% url 'users_list' %}"
+                        class="link-opacity-10-hover"
+                        style="font-size: 12px"
+                        >View Company Users</a
+                    >
+                </li>
+            </ul>
+        </div>
+        
+        <div class="action-list">
+            <p>Companies</p>
+            <ul>
+                <li>
+                    <a
+                        href="{% url 'create_company' %}"
+                        class="link-opacity-10-hover"
+                        >Add Company</a
+                    >
+                </li>
+                <li>
+                    <a
+                        href="{% url 'company_list' %}"
+                        class="link-opacity-10-hover"
+                        >View Companies</a
+                    >
+                </li>
+            </ul>
+        </div>
+        
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'home/base.html' %} {% block title %}Prospects{% endblock %}
+
+<!-- new block -->
+{% block content%}
+<h1>Prospects</h1>
+{% if 'can_create_prospect' in request.user.permissions %}
+<a href="{% url 'prospect_create' %}" class="btn btn-primary">Add Prospect</a>
+{% endif %}
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Gender</th>
+            <th>Phone Number</th>
+            <th>Company</th>
+            <th>Status</th>
+            <th>Created At</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for prospect in prospects %}
+        <tr>
+            <td>{{ prospect.name }}</td>
+            <td>{{ prospect.gender }}</td>
+            <td>{{ prospect.phone_number }}</td>
+            <td>{{ prospect.company }}</td>
+
+            {% if prospect.status in 'Declined, Failed' %}
+            <td style="font-style: italic; color: red">
+                {{ prospect.status }}
+            </td>
+            {% else %}
+            <td style="font-style: italic; color: blueviolet">
+                {{ prospect.status }}
+            </td>
+            {% endif %}
+            <td>{{ prospect.created_at|date:"Y-m-d H:i:s" }}</td>
+            <td>
+                <a
+                    href="{% url 'prospect_detail' prospect.slug %}"
+                    class="btn btn-success btn-sm"
+                    ><i class="fas fa-eye"></i>View</a
+                >
+                <!-- <a href="#" class="btn btn-warning" data-toggle="modal" data-target="#valuationModal" data-prospect="{{ prospect.id }}">Submit to Valuation</a> -->
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

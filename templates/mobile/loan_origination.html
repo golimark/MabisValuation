@@ -1,0 +1,222 @@
+{% extends "home/base.html" %} {% block title %}Mobile View{% endblock %}
+<!--  -->
+{% block content %}
+
+<div class="mb-links">
+    {% if 'can_create_prospect' in request.user.permissions %}
+    <div class="link-group">
+        <div class="group-header">
+            <p>Prospects</p>
+        </div>
+        <div class="links">
+            <a class="link" href="{% url 'prospect_create' %}"
+                >Create Prospect</a
+            >
+            <a class="link" href="{% url 'prospect_list' %}">View Prospects</a>
+            <a class="link" href="{% url 'prospect_pending' %}"
+                >Pending Valuation</a
+            >
+            <a class="link" href="{% url 'prospect_declined' %}"
+                >Declined Valuation</a
+            >
+            <a class="link" href="{% url 'prospect_failed' %}"
+                >Failed Prospects</a
+            >
+        </div>
+    </div>
+    {%endif%}
+    <!--  -->
+    {% if 'can_view_valuation_requests' in request.user.permissions %}
+    <div class="link-group">
+        <div class="group-header">
+            <p>Valuation</p>
+        </div>
+        <div class="links">
+            {% if 'can_verify_payment_as_valuer' in request.user.permissions %}
+            <a class="link" href="{% url 'valuation_prospect_pending' %}"
+                >Payment Verification</a
+            >
+            {% endif %}
+            <a class="link" href="{% url 'prospect_valuation' %}"
+                >Valuation Requests</a
+            >
+            {% if 'can_complete_asset_valuation_details' in request.user.permissions %}
+            <a class="link" href="{% url 'prospect_review' %}">Review</a>
+            {% endif %}
+        </div>
+    </div>
+    {%endif%}
+
+    <!--  -->
+    {% if 'can_make_loan_application' in request.user.permissions %}
+    <div class="link-group">
+        <div class="group-header">
+            <p>Loan Application</p>
+        </div>
+        <div class="links">
+            {% if 'can_view_pipeline' in request.user.permissions %}
+            <a
+                href="{% url 'view-pipeline' %}"
+                class="link {% if sub_page_name == 'view_pipeline' %} open active {%endif%}"
+                >View Pipeline</a
+            >{%endif%} {% if 'can_view_queried_applications' in request.user.permissions %}
+            <a
+                href="{% url 'queried' %}"
+                class="link {% if sub_page_name == 'queried_applications' %} open active {%endif%}"
+                >Queried Applications</a
+            >
+            {%endif%} {% if 'can_make_sale_manager_recommandation' in request.user.permissions %}
+            <a
+                href="{% url 'sales_manager_review' %}"
+                class="link {% if sub_page_name == 'sales_manager_review' %} open active {%endif%}"
+                >Sales Manager Review</a
+            >
+            {% endif %} {% if 'can_make_operation_manager_recommandation' in request.user.permissions %}
+            <a
+                href="{% url 'ops_review' %}"
+                class="link {% if sub_page_name == 'ops_review' %} open active {%endif%}"
+                >OPS Review</a
+            >
+            {% endif %} {% if 'can_view_failed_applications' in request.user.permissions %}
+            <a
+                href="{% url 'declined' %}"
+                class="link {% if sub_page_name == 'failed_applications' %} open active {%endif%}"
+                >Failed Applications</a
+            >
+            {%endif%}
+        </div>
+    </div>
+    {%endif%}
+    <!--  -->
+
+    {% if 'can_make_loan_approval' in request.user.permissions %}
+    <div class="link-group">
+        <div class="group-header">
+            <p>Loan Approval</p>
+        </div>
+        <div class="links">
+            <a
+                href="{% url 'awaiting_approval' %}"
+                class="link {% if sub_page_name == 'approve_loan_applications' %} open active {%endif%}"
+                >Approve Loan Applications</a
+            >
+            <!-- {% if 'can_review_loan_approvals' in request.user.permissions %}
+            <a
+                href=""
+                class="link {% if sub_page_name == 'review_approval' %} open active {%endif%}"
+                >Review Approval</a
+            >{%endif%} -->
+            <a
+                href="{% url 'declined' %}"
+                class="link {% if sub_page_name == 'declined_loans' %} open active {%endif%}"
+                >Declined Loans</a
+            >
+        </div>
+    </div>
+    {%endif%}
+    <!--  -->
+
+    {% if 'can_do_offer_review' in request.user.permissions %}
+    <div class="link-group">
+        <div class="group-header">
+            <p>Offer Review</p>
+        </div>
+        <div class="links">
+            {% if 'can_view_approved_loans' in request.user.permissions %}
+            <a
+                href="{% url 'approved_applications' %}"
+                class="link {% if sub_page_name == 'view_approved_loans' %} open active {%endif%}"
+                >View Approved Loans</a
+            >
+            {%endif%} {% if 'can_review_loan_documents' in request.user.permissions %}
+            <a
+                href="{% url 'signed_documents_applications' %}"
+                class="link {% if sub_page_name == 'review_loan_documents' %} open active {%endif%}"
+                >Review Loan Documents</a
+            >
+            {%endif%} {% if 'can_review_signed_loan_documents' in request.user.permissions %}
+            <a
+                href="{% url 'signed_documents_applications' %}"
+                class="link {% if sub_page_name == 'signed_load_documents' %} open active {%endif%}"
+                >Signed Loan Documents</a
+            >{%endif%} {% if 'can_view_declined_loan_offers' in request.user.permissions %}
+            <a
+                href="{% url 'declined' %}"
+                class="link {% if sub_page_name == 'declined_loan_offers' %} open active {%endif%}"
+                >Declined Loan Offers</a
+            >{%endif%}
+        </div>
+    </div>
+    {%endif%}
+    <!--  -->
+
+    {% if 'can_do_loan_perfections' in request.user.permissions %}
+    <div class="link-group">
+        <div class="group-header">
+            <p>Loan Perfection</p>
+        </div>
+        <div class="links">
+            <a
+                href="{% url 'loan_perfections_applications' %}"
+                class="link {% if sub_page_name == 'perfection_review' %} open active {%endif%}"
+                >Perfection Review</a
+            >
+            <a
+                href="{% url 'declined' %}"
+                class="link {% if sub_page_name == 'failed_perfection' %} open active {%endif%}"
+                >Failed Perfection</a
+            >
+        </div>
+    </div>
+    {%endif%}
+    <!--  -->
+
+    {% if 'can_do_disbursement_review' in request.user.permissions or 'can_do_disbursement_review_as_ops' in request.user.permissions or 'can_do_disbursement_review_as_credit' in request.user.permissions or 'can_do_disbursement_review_as_legal_team' in request.user.permissions or 'can_do_disbursement_review_as_finance' in request.user.permissions %}
+    <div class="link-group">
+        <div class="group-header">
+            <p>DISBURSEMENT REVIEW</p>
+        </div>
+        <div class="links">
+            {% if 'can_do_disbursement_review' in request.user.permissions %}
+            <a
+                href="{% url 'awaiting_disbursement_applications' %}"
+                class="link {% if sub_page_name == 'loans_awaiting_disbursement' %} open active {%endif%}"
+                >Disbursement Review</a
+            >
+            {% endif %} {% if 'can_do_disbursement_review_as_ops' in request.user.permissions %}
+            <a
+                href="{% url 'awaiting_disbursement_applications' %}?stage=ops&status=Disbursement_Review_By_Ops"
+                class="link {% if sub_page_name == 'loans_awaiting_disbursement_ops' %} open active {%endif%}"
+                >Disbursement Review by Ops</a
+            >
+            {% endif %} {% if 'can_do_disbursement_review_as_credit' in request.user.permissions %}
+            <a
+                href="{% url 'awaiting_disbursement_applications' %}?stage=credit&status=Disbursement_Review_By_Credit_Manager"
+                class="link {% if sub_page_name == 'loans_awaiting_disbursement_credit' %} open active {%endif%}"
+                >Disbursement Review by Credit Manager</a
+            >
+            {% endif %} {% if 'can_do_disbursement_review_as_legal_team' in request.user.permissions %}
+            <a
+                href="{% url 'awaiting_disbursement_applications' %}?stage=legal&status=Disbursement_Review_By_Legal_Team"
+                class="link {% if sub_page_name == 'loans_awaiting_disbursement_legal' %} open active {%endif%}"
+                >Disbursement Review by Legal Team</a
+            >
+            {% endif %} {% if 'can_do_disbursement_review_as_finance' in request.user.permissions %}
+            <a
+                href="{% url 'awaiting_disbursement_applications' %}?stage=finance&status=Disbursement_Review_By_Finance_Team"
+                class="link {% if sub_page_name == 'loans_awaiting_disbursement_finance' %} open active {%endif%}"
+                >Disbursement Review by Finance Team</a
+            >
+            {% endif %}
+            <a
+                href="{% url 'declined' %}"
+                class="link {% if sub_page_name == 'declined_review' %} open active {%endif%}"
+                >Declined Review</a
+            >
+        </div>
+    </div>
+    {%endif%}
+    <!--  -->
+</div>
+
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'home/base.html' %} {% block title %}Valuation{% endblock %}
+<!--  -->
+{% block content %}
+
+<h2>Valuation</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Gender</th>
+            <th>Company</th>
+            <th>Phone Number</th>
+            <th>Status</th>
+            <th>Valuer</th>
+            <th>Submitted On</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for prospect in prospects %}
+        <tr>
+            <td>{{ prospect.name }}</td>
+            <td>{{ prospect.gender }}</td>
+            <td>{{prospect.company}}</td>
+            <td>{{ prospect.phone_number }}</td>
+            <td>{{ prospect.status }}</td>
+            <!-- <td>{{ prospect.submitted_for_valuation_by }}</td> -->
+            <td>{{prospect.valuer_assigned}}</td>
+            <!-- <td>{{ prospect.submitted_for_valuation_on }}</td> -->
+            <td>{{ prospect.valuer_assigned_on }}</td>
+            <td>
+                <a
+                    href="{% url 'valuation_prospect_detail' prospect.slug %}"
+                    class="btn btn-success btn-sm"
+                    ><i class="fa fa-eye"></i>View</a
+                >
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

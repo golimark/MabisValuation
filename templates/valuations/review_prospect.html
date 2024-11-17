@@ -1,0 +1,32 @@
+{% extends 'home/base.html' %} {% block title %}Failed Prospects{% endblock %}
+{% block content %}
+<h1>Review Prospects</h1>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Gender</th>
+            <th>Phone Number</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for prospect in prospects %}
+        <tr>
+            <td>{{ prospect.name }}</td>
+            <td>{{ prospect.gender }}</td>
+            <td>{{ prospect.phone_number }}</td>
+            <td>{{ prospect.status }}</td>
+            <td>
+                <a
+                    href="{% url 'valuation_prospect_detail' prospect.slug %}"
+                    class="btn btn-success"
+                    ><i class="fas fa-eye"></i>View</a
+                >
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends 'home/base.html' %}
+
+{% block title %}Company User{% endblock %}
+{% block content %}
+
+<h2>Detail Company User</h2>
+
+<div class="container mt-2">
+    <div class="card mb-3">
+        <div class="card-header with-minimizer">
+            <p class="">Company User Details</p>
+            <span class="card-body-minimizer">
+                <i class="fas fa-chevron-up show"></i>
+                <i class="fas fa-chevron-down hidden"></i>
+            </span>
+        </div>
+        <div class="card-body">
+            <form
+                method="POST"
+                action="{% url 'users_details' user.slug %}"
+                style="display: grid; gap: 1rem"
+                enctype="multipart/form-data"
+            >
+                {% csrf_token %}
+                <div class="modal-form split">
+                    {{ form.as_p }}
+                    
+                </div>
+                <!-- {{ form.add_password_button }} -->
+                <!-- Password Change Button -->
+                
+                <hr />
+                <input type="submit" value="Save" class="btn btn-primary" name="update_user" />
+            </form>
+        </div>
+        
+    </div>
+    {% if 'can_change_user_password' in request.user.permissions %}
+                <button type="button" class="btn btn-secondary mt-2" style="color: white;" data-toggle="modal" data-target="#passwordChangeModal">
+                    CHANGE USER PASSWORD
+                </button>
+                {%endif%}
+</div>
+
+<!-- Password Change Modal -->
+<div class="modal fade" id="passwordChangeModal" tabindex="-1" aria-labelledby="passwordChangeModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="post" action="{% url 'users_details' form.instance.slug %}">
+                {% csrf_token %}
+                <div class="modal-header">
+                    <h5 class="modal-title" id="passwordChangeModalLabel">Change Password</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {{ password_form.as_p }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" name="change_password">Update Password</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- 
+<script>
+    document.getElementById('passwordChangeModal').addEventListener('submit', function(event) {
+        const newPassword = document.querySelector('[name="new_password"]').value;
+        const confirmPassword = document.querySelector('[name="confirm_password"]').value;
+
+        if (newPassword !== confirmPassword) {
+            event.preventDefault();  // Prevent form submission
+            alert("The new password and confirmation password do not match. Please try again.");
+        }
+    });
+</script>
+ -->
+{% endblock %}

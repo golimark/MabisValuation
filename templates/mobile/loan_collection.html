@@ -1,0 +1,139 @@
+{% extends "home/base.html" %} {% block title %}Mobile View{% endblock %}
+<!--  -->
+{% block content %}
+{% if 'can_view_loan_collections' in request.user.permissions %}
+
+<div class="mb-links">
+    <div class="link-group">
+        <div class="group-header">
+            <p>Loan Portfolio</p>
+        </div>
+        <div class="links">
+            <a
+                href="{% url 'loan_accounts_list' %}"
+                class="link {% if sub_page_name == 'active_loan_accounts' %} open active {%endif%}"
+                >Active Loan Accounts</a
+            >
+            <a
+                href="{% url 'loan_accounts_list' %}?status=Closed"
+                class="link {% if sub_page_name == 'closed_loan_accounts' %} open active {%endif%}"
+                >Closed Loan Accounts</a
+            >
+        </div>
+    </div>
+    <div class="link-group">
+        <div class="group-header">
+            <p>Expected Paymetns</p>
+        </div>
+        <div class="links">
+            <a
+                href="{% url 'expected_payments_list' %}?days_due=0&page_name=payments_due_today"
+                class="link {% if sub_page_name == 'payments_due_today' %} open active {%endif%}"
+                >Due Today</a
+            >
+            <a
+                href="{% url 'expected_payments_list' %}?days_due=-1&page_name=payments_due_in_one_day"
+                class="link {% if sub_page_name == 'payments_due_in_one_day' %} open active {%endif%}"
+                >One day to due</a
+            >
+            <a
+                href="{% url 'expected_payments_list' %}?days_due=-3&page_name=payments_due_in_three_days"
+                class="link {% if sub_page_name == 'payments_due_in_three_days' %} open active {%endif%}"
+                >Three Days to Due</a
+            >
+            <a
+                href="{% url 'expected_payments_list' %}?days_due=-7&page_name=payments_due_in_seven_days"
+                class="link {% if sub_page_name == 'payments_due_in_seven_days' %} open active {%endif%}"
+                >Seven Days to Due</a
+            >
+        </div>
+    </div>
+    <div class="link-group">
+        <div class="group-header">
+            <p>Arrears</p>
+        </div>
+        <div class="links">
+            <a
+                href="{% url 'arrears_list' %}?page_name=in_arrears"
+                class="link {% if sub_page_name == 'in_arrears' %} open active {%endif%}"
+                >All Arrears</a
+            >
+            <a
+                href="{% url 'arrears_list' %}?days_due=3&page_name=in_arrears_for_3"
+                class="link {% if sub_page_name == 'in_arrears_for_3' %} open active {%endif%}"
+                >1st Demand Notice</a
+            >
+            <a
+                href="{% url 'arrears_list' %}?days_due=8&page_name=in_arrears_for_8"
+                class="link {% if sub_page_name == 'in_arrears_for_8' %} open active {%endif%}"
+                >2nd Demand Notice</a
+            >
+            <a
+                href="{% url 'arrears_list' %}?days_due=16&page_name=in_arrears_for_16"
+                class="link {% if sub_page_name == 'in_arrears_for_16' %} open active {%endif%}"
+                >3rd Demand Notice</a
+            >
+            <a
+                href="{% url 'arrears_list' %}?days_due=17&page_name=in_arrears_for_17"
+                class="link {% if sub_page_name == 'in_arrears_for_17' %} open active {%endif%}"
+                >4th Demand Notice</a
+            >
+            <a
+                href="{% url 'arrears_list' %}?days_due=18&page_name=in_arrears_for_18"
+                class="link {% if sub_page_name == 'in_arrears_for_18' %} open active {%endif%}"
+                >Notice To impound</a
+            >
+            <a
+                href="{% url 'arrears_list' %}?days_due=21&page_name=in_arrears_for_21"
+                class="link {% if sub_page_name == 'in_arrears_for_21' %} open active {%endif%}"
+                >Instruction to Impound</a
+            >
+        </div>
+    </div>
+
+    <div class="link-group">
+        <div class="group-header">
+            <p>Collateral Register</p>
+        </div>
+        <div class="links">
+            <a
+                href="{% url 'collateral_register' %}?page_name=all_collatoral"
+                class="link {% if sub_page_name == 'all_collatoral' %} open active {%endif%}"
+                >All Collateral</a
+            >
+            <a
+                href="{% url 'collateral_register' %}?status=UNPOSESSED&page_name=unposessed_collateral"
+                class="link {% if sub_page_name == 'unposessed_collateral' %} open active {%endif%}"
+                >Unposessed Collateral</a
+            >
+            <a
+                href="{% url 'collateral_register' %}?status=REPOSESSED&page_name=reposessed_collateral"
+                class="link {% if sub_page_name == 'reposessed_collateral' %} open active {%endif%}"
+                >Reposessed Collateral</a
+            >
+            <a
+                href="{% url 'collateral_register' %}?status=IMPOUNDED&page_name=impounded_collateral"
+                class="link {% if sub_page_name == 'impounded_collateral' %} open active {%endif%}"
+                >Impounded Collateral</a
+            >
+            <a
+                href="{% url 'collateral_register' %}?status=SELF_PARKED&page_name=self_parked_collateral"
+                class="link {% if sub_page_name == 'self_parked_collateral' %} open active {%endif%}"
+                >Self Parked Collateral</a
+            >
+            <a
+                href="{% url 'collateral_register' %}?status=RECLAIMED&page_name=reclaimed_collatral"
+                class="link {% if sub_page_name == 'reclaimed_collatral' %} open active {%endif%}"
+                >Reclaimed Collateral</a
+            >
+            <a
+                href="{% url 'collateral_register' %}?status=DISPOSED_OFF&page_name=disposed_off_collatral"
+                class="link {% if sub_page_name == 'disposed_off_collatral' %} open active {%endif%}"
+                >Disposed Off Collateral</a
+            >
+        </div>
+    </div>
+
+</div>
+{% endif %}
+{% endblock %}

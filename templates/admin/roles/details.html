@@ -1,0 +1,112 @@
+{% extends 'home/base.html' %}
+<!--  -->
+{% block title %}User Roles{%endblock %}
+<!--  -->
+{% block content %}
+<!-- verify_payment.html -->
+<h2>User Roles</h2>
+
+<div class="container mt-2">
+    <div class="container mt-2">
+        <div class="card mb-3">
+            <div class="card-header with-minimizer">
+                <p class="">User Role Details</p>
+                <span class="card-body-minimizer">
+                    <i class="fas fa-chevron-up show"></i>
+                    <i class="fas fa-chevron-down hidden"></i>
+                </span>
+            </div>
+            <div class="card-body">
+                <div class="modal-form">
+                    <form
+                        method="POST"
+                        action="{% url 'roles_details' role.slug %}"
+                        class="permission-select-form"
+                    >
+                        <div class="form-area">
+                            {% csrf_token %}
+                            <!--  -->
+                            {{form.as_p}}
+
+                            <!-- list user's companies -->
+                            <div class="company-select">
+                                <p>Select Company:</p>
+                                <div class="company-list">
+                                    <div class="company-item">
+                                        <input
+                                            type="checkbox"
+                                            name="{{role.company.name}} company_option"
+                                            id="{{role.company.name}}"
+                                            class="company-option"
+                                            value="{{role.company.name}}"
+                                            checked
+                                        />
+                                        <label for="{{role.company.name}}"
+                                            >{{role.company.name}}</label
+                                        >
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="form-area">
+                            <div class="header-area">
+                                <p class="font-heading">
+                                    Select permissions for this role.
+                                </p>
+                                <div class="cta-area permission-item">
+                                    <input
+                                        type="checkbox"
+                                        name=""
+                                        id="select_all_permissions"
+                                    />
+                                    <label
+                                        for="select_all_permissions"
+                                        style="font-size: 12px"
+                                        >Select All</label
+                                    >
+                                </div>
+                            </div>
+                            <div class="permission-select-area">
+                                {% for permission in permissions %}
+                                <div class="permission-item">
+                                    {% if permission in role.permissions.all %}
+                                    <input
+                                        type="checkbox"
+                                        name="{{permission.name}} permission_option"
+                                        id="{{permission.code}}"
+                                        class="permission-option"
+                                        value="{{permission.name}}"
+                                        checked
+                                    />
+                                    {% else %}
+                                    <input
+                                        type="checkbox"
+                                        name="{{permission.name}} permission_option"
+                                        id="{{permission.code}}"
+                                        class="permission-option"
+                                        value="{{permission.name}}"
+                                    />
+                                    {% endif %}
+
+                                    <label for="{{permission.code}}"
+                                        >{{permission.name}}</label
+                                    >
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <hr />
+                        <input
+                            type="submit"
+                            value="Save"
+                            class="btn btn-primary"
+                        />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

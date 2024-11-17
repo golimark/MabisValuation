@@ -1,0 +1,24 @@
+{% extends 'home/base.html' %} {% load static %} {% block css %}
+<!--  -->
+{% block title%}UPDATE LOAN PRODUCT {% endblock %} {% block content %}
+<div class="form-container">
+    <h1>{% if form.instance.pk %}Edit{% else %}Add{% endif %} UPDATE COMPANY </h1>
+    <form method="post" enctype="multipart/form-data">
+        <div class="modal-form-area">
+            <div class="modal-form-heading">
+                <span class="form-title">UPDATE COMPANY DETAILS</span>
+                <span class="form-part-minimizer">
+                    <i class="fas fa-chevron-up show"></i>
+                    <i class="fas fa-chevron-down hidden"></i>
+                </span>
+            </div>
+            <div class="modal-form">
+                <div class="modal-form split">
+                    {% csrf_token %} {{ form.as_p }}
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">UPDATE</button>
+    </form>
+</div>
+{% endblock %} {% endblock %}

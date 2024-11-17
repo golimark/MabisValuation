@@ -1,0 +1,33 @@
+{% extends 'home/base.html' %} {% block title %}User Roles{% endblock %}
+
+<!-- new block -->
+{% block content%}
+<h1>User Roles</h1>
+<a href="{% url 'roles_create' %}" class="btn btn-primary">Add User Role</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Company</th>
+            <th>Created At</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for role in roles %}
+        <tr>
+            <td>{{ role.name }}</td>
+            <td>{{ role.company.name }}</td>
+            <td>{{ role.created_at|date:"Y-m-d H:i:s" }}</td>
+            <td>
+                <a
+                    href="{% url 'roles_details' role.slug %}"
+                    class="btn btn-success btn-sm"
+                    ><i class="fas fa-eye"></i>View</a
+                >
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

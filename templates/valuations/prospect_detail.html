@@ -1,0 +1,686 @@
+{% extends 'home/base.html' %}
+
+{% block content %}
+
+    <div class="card mb-3">
+        <div class="card-header with-minimizer">
+            <p class="">BIO DATA</p>
+            <span class="card-body-minimizer">
+                <i class="fas fa-chevron-up show"></i>
+                <i class="fas fa-chevron-down hidden"></i>
+            </span>
+        </div>
+        <div class="card-body">
+        <div class="row">  <!-- Centering text -->
+            <div class="col-md-6">
+
+                <table class="table">
+                    <tr>
+                        <th><strong>Name:</strong></th><td style="color: blue; text-align: right;">{{ prospect.title }} {{ prospect.name }}</td>
+                        </tr>
+                        <tr>
+                        <th><strong>Phone Number:</strong></th><td style="color: blue; text-align: right;">{{ prospect.phone_number }}</td>
+                        </tr>
+                        <tr>
+                        <th><strong>Agent:</strong></th><td style="color: blue; text-align: right;">{{ prospect.agent }}</td>
+                        </tr>
+                        <tr>
+                        {% if prospect.alt_number%}
+                        <th><strong>Other Number:</strong></th><td style="color: blue; text-align: right;">{{ prospect.alt_number }}</td>
+                        {% endif %}
+                    </tr>
+                </table>
+
+            </div>
+            <div class="col-md-6">
+                <table class="table">
+                    <tr>
+                        <th>Age:</th><td style="color: blue; text-align: right;">{{ prospect.age }}</td>
+                        </tr>
+                        <tr>
+                        <th>Gender:</th><td style="color: blue; text-align: right;">{{ prospect.gender }}</td>
+                        </tr>
+                        <tr>
+                        <th>Team Leader:</th><td style="color: blue; text-align: right;">{{ prospect.created_by }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    {% if v_evaluation_reports %}
+    <div class="card mb-3">
+        <div class="card-header with-minimizer">
+                <p class="">ASSETS</p>
+                <span class="card-body-minimizer">
+                    <i class="fas fa-chevron-up show"></i>
+                    <i class="fas fa-chevron-down hidden"></i>
+                </span>
+            </div>
+        <div class="card-body">
+            {% if v_evaluation_reports %}
+            {% for v_report in v_evaluation_reports %}
+            {% if vehicle_asset %}
+            {% for vehicle in vehicle_asset %}
+            <div class="row">  <!-- Centering text -->
+                <div class="col-md-6">
+                    <table class="table">
+                        <tr>
+                            <th><strong>Vehicle Registration Number:</strong></th><td style="color: blue; text-align: right;">{{ vehicle.license_plate }}</td>
+                        </tr>
+                        <tr>
+                            <th><strong>Car Make</strong></th><td style="color: blue; text-align: right;">{{ v_report.make }}</td>
+                        </tr>
+                        <tr>
+                            <th><strong>Car Model:</strong></th><td style="color: blue; text-align: right;">{{ v_report.model }}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    <table class="table">
+                    <tr>
+                        <th><strong>body description:</strong></th><td style="color: blue; text-align: right;">{{ v_report.body_description }}</td>
+                    </tr>
+                    <tr>
+                        <th><strong>chassis number:</strong></th><td style="color: blue; text-align: right;">{{ v_report.chassis_number }}</td>
+                    </tr>
+                    <tr>
+                        <th><strong>engine number:</strong></th><td style="color: blue; text-align: right;">{{ v_report.engine_number }}</td>
+                    </tr>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    <table class="table">
+                    <tr {% if v_report.color_by_logbook|lower != v_report.color_by_inspection|lower %} style="color: red" {% endif %}>
+                        <th><strong>colour as per logbook:</strong></th><td style="color: blue; text-align: right;">{{ v_report.color_by_logbook }}</td>
+                    </tr>
+                    <tr {% if v_report.color_by_logbook|lower != v_report.color_by_inspection|lower %} style="color: red" {% endif %}>
+                        <th><strong>colour as per inspection:</strong></th><td style="color: blue; text-align: right;">{{ v_report.color_by_inspection }}</td>
+                    </tr>
+                    <tr>
+                        <th><strong>Fuel Type:</strong></th><td style="color: blue; text-align: right;">{{ v_report.fuel_type }}</td>
+                    </tr>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    <table class="table">
+                    <tr>
+                        <th><strong>Year of manufacture:</strong></th><td style="color: blue; text-align: right;">{{ v_report.year_of_manufacture }}</td>
+                    </tr>
+                    <tr>
+                        <th><strong>date of registration:</strong></th><td style="color: blue; text-align: right;">{{ v_report.date_of_registration }}</td>
+                    </tr>
+                    <tr>
+                        <th><strong>milage:</strong></th><td style="color: blue; text-align: right;">{{ v_report.mileage }}</td>
+                    </tr>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    <table class="table">
+                    <tr>
+                        <th><strong>Power(cubic capacity):</strong></th><td style="color: blue; text-align: right;">{{ v_report.power }}</td>
+                    </tr>
+                    <tr>
+                        <th><strong>Gear box transmission:</strong></th><td style="color: blue; text-align: right;">{{ v_report.gearbox_transmission }}</td>
+                    </tr>
+                    <tr>
+                        <th><strong>Country of origin:</strong></th><td style="color: blue; text-align: right;">{{ v_report.country_of_origin }}</td>
+                    </tr>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    <table class="table">
+                    <tr>
+                        <th><strong>years since manufacture:</strong></th><td style="color: blue; text-align: right;">{{ v_report.years_since_manufacture }}</td>
+                    </tr>
+                    <tr>
+                        <th><strong>years since on uganda roads:</strong></th><td style="color: blue; text-align: right;">{{ v_report.years_since_on_uganda_roads }}</td>
+                    </tr>
+                    <tr>
+                        <th><strong>location of vehicle:</strong></th><td style="color: blue; text-align: right;">{{ vehicle.location }}</td>
+                    </tr>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    <table class="table">
+                    <tr>
+                        <th><strong>seating capacity:</strong></th><td style="color: blue; text-align: right;">{{ v_report.seating_capacity }}</td>
+                    </tr>
+                    </table>
+                </div>
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="card mb-3">
+        <div class="card-header with-minimizer">
+                <p class="">FILES</p>
+                <span class="card-body-minimizer">
+                    <i class="fas fa-chevron-up show"></i>
+                    <i class="fas fa-chevron-down hidden"></i>
+                </span>
+            </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <p style="margin-bottom: .5rem;">
+                        <strong>Proof Of Payment:  </strong>
+                        {%if prospect.proof_of_payment %}
+                        <a data-fancybox="gallery" style="color:aqua;margin-left: .5rem;" href="{{prospect.proof_of_payment.url }}">View</a>
+                        {% else %}
+                        <p>Not Available</p>
+                        {%endif%}
+                    </p>
+                    {% if prospect.valuer_assigned%}
+                    <p> Valuer Assigned: {{prospect.valuer_assigned}}</p>
+                    {% endif %}
+
+                    {% if vehicle_asset %}
+                    {% for vehicle in vehicle_asset %}
+                    <p style="margin-bottom: .5rem;">
+                        <strong>Log Book:</strong>
+                        {% if vehicle.logbook %}
+                        <a data-fancybox="gallery" style="color:aqua;margin-left: .5rem;" class="image-link" href="{{ vehicle.logbook.url }}">View</a>
+                        {% else %}
+                        <p>Not Available</p>
+                        {%endif%}
+                    </p>
+                    {%endfor%}
+                    {%endif%}
+
+                    {% if land_asset %}
+                    {% for land in land_asset %}
+                    <p>
+                        <strong>Land Title:</strong>
+                        {% if vehicle.logbook %}
+                        <a data-fancybox="gallery" class="image-link" href="{{ vehicle.landtitle.url }}">View</a>
+                        {% else %}
+                        <p>Not Available</p>
+                        {% endif %}
+                    </p>
+                    {%endfor%}
+                    {%endif%}
+                </div>
+                <div class="col-md-6"></div>
+            </div>
+        </div>
+    </div>
+
+    {% if v_evaluation_reports %}
+
+        {% for v_report in v_evaluation_reports %}
+            <div id="print" class="card mb-3">
+                <div class="card-header with-minimizer">
+                    <p class="">VEHICLE VALUATION FOR {{ v_report.vehicle.license_plate }}</p>
+                    <span class="card-body-minimizer">
+                        <i class="fas fa-chevron-up show"></i>
+                        <i class="fas fa-chevron-down hidden"></i>
+                    </span>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <table class="table">
+                                <tr>
+                                    <th><strong>name in logbook:</strong></th><td style="color:blue;">{{ v_report.name_in_logbook }}</td>
+                                </tr>
+                                <tr>
+                                    <th><strong>tax identification number:</strong></th><td style="color:blue;">{{ v_report.tax_identification_number }}</td>
+                                </tr>
+                                <tr>
+                                    <th><strong>chassis frame:</strong></th><td style="color:blue;">{{ v_report.chassis_frame }}</td>
+                                </tr>
+                                <tr>
+                                    <th><strong>body shell paint:</strong></th><td style="color:blue;">{{ v_report.body_shell_paint }}</td>
+                                </tr>
+                                <tr>
+                                    <th><strong>condition of seats:</strong></th><td style="color:blue;">{{ v_report.condition_of_seats }}</td>
+                                </tr>
+                                <tr>
+                                    <th><strong>engine assembly:</strong></th><td style="color:blue;">{{ v_report.engine_assembly }}</td>
+                                </tr>
+                                <tr>
+                                    <th><strong>accessories:</strong></th><td style="color:blue;">{{ v_report.accessories }}</td>
+                                </tr>
+                                <tr>
+                                    <th><strong>cooling system:</strong></th><td style="color:blue;">{{ v_report.cooling_system }}</td>
+                                </tr>
+                                <tr>
+                                    <th><strong>gearbox assembly:</strong></th><td style="color:blue;">{{ v_report.gearbox_assembly }}</td>
+                                </tr>
+                                <tr>
+                                    <th><strong>transmission system:</strong></th><td style="color:blue;">{{ v_report.transmission_system }}</td>
+                                </tr>
+                                <tr>
+                                    <th><strong>steering system:</strong></th><td style="color:blue;">{{ v_report.steering_system }}</td>
+                                </tr>
+                                {% if v_report.vehicle.prospect.status == "Review" %}
+                                <tr>
+                                    <th><strong>place of inspection:</strong></th><td style="color:blue;">{{ v_report.place_of_inspection }}</td>
+                                </tr>
+                                <tr>
+                                    <th><strong>date of valuation:</strong></th><td style="color:blue;">{{ v_report.date_of_valuation }}</td>
+                                </tr>
+                                {% endif %}
+                            </table>
+                        </div>
+                        <div class="col-md-6">
+                            <table class="table">
+                                <tr>
+                                    <th><strong>electrical system:</strong></th><td style="color:blue;">{{ v_report.electrical_system }}</td>
+                                </tr>
+                                <tr>
+                                    <th><strong>windshield:</strong></th><td style="color:blue;">{{ v_report.windshield }}</td>
+                                </tr>
+                                <tr>
+                                    <th><strong>air conditioning system:</strong></th><td style="color:blue;">{{ v_report.air_conditioning_system }}</td>
+                                </tr>
+                                <tr>
+                                    <th><strong>wheels:</strong></th><td style="color:blue;">{{ v_report.wheels }}</td>
+                                </tr>
+                                <tr>
+                                    <th><strong>tyre condition:</strong></th><td style="color:blue;">{{ v_report.tyre_condition }}</td>
+                                </tr>
+                                <tr>
+                                    <th><strong>road test:</strong></th><td style="color:blue;">{{ v_report.road_test }}</td>
+                                </tr>
+                                <tr>
+                                    <th><strong>market value:</strong></th><td style="color:blue;">{{ v_report.market_value }}</td>
+                                </tr>
+                                <tr>
+                                    <th><strong>forced sale:</strong></th><td style="color:blue;">{{ v_report.forced_sale }}</td>
+                                </tr>
+                                <tr>
+                                    <th><strong>insurance valuation:</strong></th><td style="color:blue;">{{ v_report.insurance_valuation }}</td>
+                                </tr>
+                                <tr>
+                                    <th><strong>suspension:</strong></th><td style="color:blue;">{{ v_report.suspension }}</td>
+                                </tr>
+                                <tr>
+                                    <th><strong>braking system:</strong></th><td style="color:blue;">{{ v_report.braking_system }}</td>
+                                </tr>
+                                <tr>
+                                    <th><strong>date of valuation:</strong></th><td style="color:blue;">{{ v_report.date_of_valuation }}</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="report-imgs">
+                            <div class="img-wrapper">
+                                <img src="{{v_report.right_hand_side_view.url}}" alt="">
+                                    <p>RIGHT HAND SIDE VIEW</p>
+                            </div>
+                            <div class="img-wrapper">
+                                <img src="{{v_report.left_hand_eside_view.url}}" alt="">
+                                <p>LEFT HAND SIDE VIEW</p>
+                            </div>
+                            <div class="img-wrapper">
+                                <img src="{{v_report.engine_compartment.url}}" alt="">
+                                <p>ENGINE COMPARTMENT</p>
+                            </div>
+                            <div class="img-wrapper">
+                                <img src="{{v_report.upholstery.url}}" alt="">
+                                <p>UPHOLSTERY</p>
+                            </div>
+                            <div class="img-wrapper">
+                                <img src="{{v_report.vehicle_id_plate.url}}" alt="">
+                                <p>VEHICLE PLATE</p>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 1rem;">
+                            <span>effective report summary:</span>
+                            <p style="color:blue;">{{ v_report.effective_report_summary }}</p>
+                        </div>
+                        <div style="margin-top: 1rem;">
+                            <span>limiting conditions:</span>
+                            <p style="color:blue;">{{ v_report.limiting_conditions }}</p>
+                        </div>
+                        <!-- <div style="margin-top: 1rem;">
+                            <span>recommendation:</span>
+                            <p style="color:blue;">{{ v_report.recommendation }}</p>
+                        </div> -->
+                        <div style="margin-top: 1rem;">
+                            <span>valuation:</span>
+                            <p style="color:blue;">{{ v_report.valuation }}</p>
+                        </div>
+                        <div style="margin-top: 1rem;">
+                            <span>market value description:</span>
+                            <p style="color:blue;">{{ v_report.market_value_description }}</p>
+                        </div>
+                        <div style="margin-top: 1rem;">
+                            <span>current value description:</span>
+                            <p style="color:blue;">{{ v_report.current_value_description }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card mb-3">
+                <div class="card-header with-minimizer">
+                    <p class="">VALUATION REMARKS BY VALUER</p>
+                    <span class="card-body-minimizer">
+                        <i class="fas fa-chevron-up show"></i>
+                        <i class="fas fa-chevron-down hidden"></i>
+                    </span>
+                </div>
+                <div class="card-body">
+                <div class="row">  <!-- Centering text -->
+                    <div class="col-md-9">
+                        <div style="margin-top: 1rem;" class="row">
+                            <span>VALUATION DONE BY: <strong>{{ prospect.valuer_assigned }}</strong></span>
+                            <p style="margin-top: 1rem; color:blue;">{{ v_report.recommendation }}</p>
+                        </div>
+                    </div>
+                    
+                </div>
+                </div>
+            </div>
+
+            {% if v_report.company_supervisor_remarks %} 
+            <div class="card mb-3">
+                <div class="card-header with-minimizer">
+                    <p class="">VALUATION REMARKS BY SUPERVISOR</p>
+                    <span class="card-body-minimizer">
+                        <i class="fas fa-chevron-up show"></i>
+                        <i class="fas fa-chevron-down hidden"></i>
+                    </span>
+                </div>
+                <div class="card-body">
+                <div class="row">  <!-- Centering text -->
+                    <div class="col-md-9">
+                        <div style="margin-top: 1rem;" class="row">
+                            <span>SUPERVISION DONE BY: <strong>{{ prospect.valuation_submitted_by }}</strong></span>
+                            <p style="margin-top: 1rem; color:blue;">{{ v_report.company_supervisor_remarks }}</p>
+                        </div>
+                    </div>
+                    
+                </div>
+                </div>
+            </div>
+            {%endif%}
+
+
+            {% if v_report.company_approver_remarks %} 
+            <div class="card mb-3">
+                <div class="card-header with-minimizer">
+                    <p class="">VALUATION REMARKS BY APPROVER</p>
+                    <span class="card-body-minimizer">
+                        <i class="fas fa-chevron-up show"></i>
+                        <i class="fas fa-chevron-down hidden"></i>
+                    </span>
+                </div>
+                <div class="card-body">
+                <div class="row">  <!-- Centering text -->
+                    <div class="col-md-9">
+                        <div style="margin-top: 1rem;" class="row">
+                            <span>APPROVAL DONE BY: <strong>{{ prospect.valuation_reviewd_by }}</strong></span>
+                            <p style="margin-top: 1rem; color:blue;">{{ v_report.company_approver_remarks }}</p>
+                        </div>
+                    </div>
+                    
+                </div>
+                </div>
+            </div>
+            {%endif%}
+        
+        {% endfor %}
+    {%endif%}
+
+
+{% if prospect.status == 'Pending' %}
+<!-- Trigger the modal with a button -->
+
+    {% csrf_token %}
+    <!-- <a href="#" id="verify-payment" class="btn btn-primary" onclick="verifyPayment({{ prospect.pk }});">Verify Payment</a> -->
+    <!-- <a href="#" id="verify-payment" class="btn btn-primary" onclick="verifyPayment();">Verify Payment</a> -->
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#paymentVerificationModal">
+        Verify Payment
+    </button>
+    <!-- Modal -->
+
+    <!-- <a href="{% url 'decline' prospect.slug %}" class="btn btn-danger">Decline</a> -->
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#declineReasonModal">
+        Decline
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="declineReasonModal" tabindex="-1" role="dialog" aria-labelledby="declineReasonModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="declineReasonModalLabel">Decline Reason</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="declineReasonForm" method="POST" action="{% url 'decline' prospect.slug %}">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="declineReasonInput">Reason</label>
+                            <input type="text" class="form-control" id="declineReasonInput" name="declinereason" required>
+                        </div>
+                        <button type="submit" class="btn btn-danger">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <a href="{% url 'valuate_prospect' prospect.slug %}" class="btn btn-secondary">Change Valuer</a> -->
+    <!-- <a href="{% url 'valuate_prospect' prospect.slug %}" class="btn btn-secondary">Next</a> -->
+
+
+    <!-- <a href="{% url 'valuate_prospect' prospect.slug %}" id="submit-button" class="btn btn-secondary">Submit to Valuation</a> -->
+    <!-- <a href="{% url 'valuate_prospect' prospect.slug %}" id="submit-button" class="btn btn-secondary" style="display: none;">Submit to Valuation</a> -->
+    <!-- <a href="{% url 'decline' prospect.slug %}" id="decline-button" class="btn btn-danger" style="display: none;">Decline</a> -->
+
+{% endif %}
+{% if prospect.status == 'Payment Verified' %}
+
+    <!-- <a href="{% url 'valuate_prospect' prospect.slug %}" class="btn btn-secondary">Submit to Valuation</a> -->
+    <a href="{% url 'set_valuation' prospect.slug %}" id="submit-button" class="btn btn-primary">Submit for Valuation</a>
+    <button type="button" data-bs-toggle="modal" data-bs-target="#assignValuerModal" class="btn btn-primary">
+        Reassign Valuer
+    </button>
+
+{% endif %}
+
+
+        <div class="d-flex justify-content-start mt-3" style="display: flex; gap: 30px;">
+        {% if v_evaluation_reports %}
+        {% if prospect.status == 'Valuation Supervisor' %}
+            {%if 'can_be_supervisor' in request.user.permissions %}
+                <form action="{% url 'submit_report' prospect.slug %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-warning">Submit</button>
+                    
+                </form>
+                <a style="color: white; background-color: #0d6efd;" href="{% url 'create_valuation_report' prospect.slug %}" class="btn btn-info"><i class="fa fa-pen"></i> EDIT ASSET VALUATION</a>
+                <!-- <a href="{% url 'submit_report' prospect.slug %}" class="btn btn-warning">Submit Report</a> -->
+                <!-- <a href="javascript:void(0);" class="btn btn-info" onclick="printDiv()">Print</a> -->
+            {%endif%}
+        {% endif %}
+        {% endif %}
+        {% if prospect.status == 'Valuation' %}
+        <a style="color: white; background-color: #0d6efd;" href="{% url 'create_valuation_report' prospect.slug %}" class="btn btn-info"><i class="fa fa-add"></i> ASSET VALUATION</a>
+      {% endif %}
+
+        </div>
+
+
+{% if prospect.status == 'Review' %}
+
+    <div class="d-flex justify-content-start mt-3" style="display: flex; gap: 30px;">
+        <!-- Transform to Customer Button -->
+        <form action="{% url 'pipeline' prospect.slug %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-success">Complete</button>
+        </form>
+
+        <a style="color: white; background-color: #0d6efd;" href="{% url 'print_valuation_report' prospect.slug %}" class="btn btn-info"><i class="fa fa-pen"></i> VIEW REPORT</a>
+
+        <a style="color: white; background-color: #0d6efd;" href="{% url 'create_valuation_report' prospect.slug %}" class="btn btn-info"><i class="fa fa-pen"></i> EDIT ASSET VALUATION</a>
+            <!-- change status to Pipeline -->
+    </div>
+
+{%endif%}
+
+<!-- <div class="modal fade" id="paymentVerificationModal" tabindex="-1" role="dialog" aria-labelledby="paymentVerificationModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="paymentVerificationModalLabel">Verify the Payment</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="paymentVerificationForm">
+                    <div class="form-group">
+                        <label for="paymentIdInput">Enter Payment ID</label>
+                        <input type="number" class="form-control" id="paymentIdInput" placeholder="Payment ID">
+                    </div>
+                    <button type="button" class="btn btn-primary" id="verity_payment_cta">Verify</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<div class="modal fade" id="paymentVerificationModal" tabindex="-1" role="dialog" aria-labelledby="paymentVerificationModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="paymentVerificationModalLabel">Verify the Payment</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="padding: 0.5rem 1rem;border: none; outline: transparent;background-color: black;color: white; font-size: 12px;">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="paymentVerificationForm">
+                    <div class="form-group">
+                        <label for="paymentIdInput">Enter Payment ID</label>
+                        <input style="width: 100%;" type="number" class="form-control" id="paymentIdInput" placeholder="Payment ID" required>
+                    </div>
+                    <button style="margin-top: 20px;" type="button" class="btn btn-primary" id="verify_payment_cta">Verify</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal for Assign Valuer -->
+<div class="modal fade" id="assignValuerModal" tabindex="-1" role="dialog" aria-labelledby="assignValuerModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="assignValuerModalLabel">REASSIGN VALUER</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="assignValuerForm" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="valuerSelect">Select Valuer</label>
+                        <select class="form-control" id="valuerSelect" name="valuer">
+                            {% for valuer in valuers %}
+                                <option value="{{ valuer.id }}">{{ valuer.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Assign</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- <script>
+        let verity_payment_cta = document.querySelector("#verity_payment_cta");
+        if (verity_payment_cta != null) {
+        verity_payment_cta.addEventListener("click", () => {
+            const userInput = document.getElementById("paymentIdInput").value;
+
+
+            fetch('{% url "valuate_prospect" prospect.slug %}', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": document.querySelector("[name=csrfmiddlewaretoken]")
+                .value,
+            },
+            body: JSON.stringify({ payment_id: userInput }),
+            })
+            .then((response) => {
+                console.log(response.status);
+                if (response.ok) {
+                    alert("Payment ID verified successfully.");
+                    location.reload();
+                    return response.json();
+                } else {
+                    alert("Please review your submission and try again.");
+                }
+            })
+            .then((data) => {})
+            .catch((error) => {});
+
+            document.querySelector("#paymentVerificationModal").classList.add("hide");
+        });
+        }
+
+        $('#assignAgentToLoanAccount').on('click', function() {
+            $('#assignValuerModal').modal('show');
+        });
+    </script> -->
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const verifyPaymentCta = document.querySelector("#verify_payment_cta");
+        
+            if (verifyPaymentCta) {
+                verifyPaymentCta.addEventListener("click", () => {
+                    const userInput = document.getElementById("paymentIdInput").value;
+        
+                    if (!userInput) {
+                        alert("Please enter a Payment ID.");
+                        return;
+                    }
+        
+                    fetch("{% url 'valuate_prospect' prospect.slug %}", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "X-CSRFToken": document.querySelector("[name=csrfmiddlewaretoken]").value,
+                        },
+                        body: JSON.stringify({ payment_id: userInput }),
+                    })
+                    .then((response) => {
+                        console.log(response);  // Log response for debugging
+                        if (response.ok) {
+                            // alert("Payment ID verified successfully.");
+                            $('#paymentVerificationModal').modal('hide');  // Close the modal
+                            location.reload();  // Reload the page to reflect changes
+                        } else {
+                            alert("Invalid Payment ID. Please try again");
+                        }
+                    })
+                    .catch((error) => {
+                        console.error("Error:", error);
+                    });
+                });
+            }
+        });
+    </script>
+        
+{% endblock %}

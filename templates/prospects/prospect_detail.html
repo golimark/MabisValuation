@@ -1,0 +1,405 @@
+{% extends 'home/base.html' %}
+
+{% block content %}
+
+{% if prospect.decline_reason %}
+<div class="card mb-3">
+    <div class="alert-danger">Reason for Decline: <strong>{{ prospect.decline_reason }}</strong> </div>
+</div>
+{% endif %}
+
+<div class="card mb-3">
+    <div class="card-header">BIO-DATA</div>
+    <div class="card-body">
+        <div class="row"> <!-- Centering text -->
+            <div class="col-md-6">
+
+                <table class="table">
+                    <tr>
+                        <th><strong>Name:</strong></th>
+                        <td style="color: blue; text-align: right;">{{ prospect.title }} {{ prospect.name }}</td>
+                    </tr>
+                    <tr>
+                        <th><strong>Phone Number:</strong></th>
+                        <td style="color: blue; text-align: right;">{{ prospect.phone_number }}</td>
+                    </tr>
+                    <tr>
+                        <th><strong>Agent:</strong></th>
+                        <td style="color: blue; text-align: right;">{{ prospect.agent }}</td>
+                    </tr>
+                    <tr>
+                        {% if prospect.alt_number%}
+                        <th><strong>Other Number:</strong></th>
+                        <td style="color: blue; text-align: right;">{{ prospect.alt_number }}</td>
+                        {% endif %}
+                    </tr>
+                </table>
+
+            </div>
+            <div class="col-md-6">
+                <table class="table">
+                    <tr>
+                        <th>Age:</th>
+                        <td style="color: blue; text-align: right;">{{ prospect.age }}</td>
+                    </tr>
+                    <tr>
+                        <th>Gender:</th>
+                        <td style="color: blue; text-align: right;">{{ prospect.gender }}</td>
+                    </tr>
+                    <tr>
+                        <th>Team Leader:</th>
+                        <td style="color: blue; text-align: right;">{{ user.username }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="card mb-3">
+    <div class="card-header">ASSETS</div>
+    <div class="card-body">
+        {% if v_evaluation_reports %}
+        {% for v_report in v_evaluation_reports %}
+        {% if vehicle_asset %}
+        {% for vehicle in vehicle_asset %}
+        <div class="row"> <!-- Centering text -->
+            <div class="col-md-6">
+                <table class="table">
+                    <tr>
+                        <th><strong>Vehicle Registration Number:</strong></th>
+                        <td style="color: blue; text-align: right;">{{ vehicle.license_plate }}</td>
+                    </tr>
+                    <tr>
+                        <th><strong>Car Make</strong></th>
+                        <td style="color: blue; text-align: right;">{{ v_report.make }}</td>
+                    </tr>
+                    <tr>
+                        <th><strong>Car Model:</strong></th>
+                        <td style="color: blue; text-align: right;">{{ v_report.model }}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-md-6">
+                <table class="table">
+                    <tr>
+                        <th><strong>body description:</strong></th>
+                        <td style="color: blue; text-align: right;">{{ v_report.body_description }}</td>
+                    </tr>
+                    <tr>
+                        <th><strong>chassis number:</strong></th>
+                        <td style="color: blue; text-align: right;">{{ v_report.chassis_number }}</td>
+                    </tr>
+                    <tr>
+                        <th><strong>engine number:</strong></th>
+                        <td style="color: blue; text-align: right;">{{ v_report.engine_number }}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-md-6">
+                <table class="table">
+                    <tr {% if vehicle.color_by_logbook|lower != v_report.color_by_inspection|lower %} style="color: red"
+                        {% endif %}>
+                        <th><strong>colour as per logbook:</strong></th>
+                        <td style="color: blue; text-align: right;">{{ v_report.color_by_logbook }}</td>
+                    </tr>
+                    <tr {% if vehicle.color_by_logbook|lower != v_report.color_by_inspection|lower %} style="color: red"
+                        {% endif %}>
+                        <th><strong>colour as per inspection:</strong></th>
+                        <td style="color: blue; text-align: right;">{{ v_report.color_by_inspection }}</td>
+                    </tr>
+                    <tr>
+                        <th><strong>Fuel Type:</strong></th>
+                        <td style="color: blue; text-align: right;">{{ v_report.fuel_type }}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-md-6">
+                <table class="table">
+                    <tr>
+                        <th><strong>Year of manufacture:</strong></th>
+                        <td style="color: blue; text-align: right;">{{ v_report.year_of_manufacture }}</td>
+                    </tr>
+                    <tr>
+                        <th><strong>date of registration:</strong></th>
+                        <td style="color: blue; text-align: right;">{{ v_report.date_of_registration }}</td>
+                    </tr>
+                    <tr>
+                        <th><strong>milage:</strong></th>
+                        <td style="color: blue; text-align: right;">{{ v_report.mileage }}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-md-6">
+                <table class="table">
+                    <tr>
+                        <th><strong>Power(cubic capacity):</strong></th>
+                        <td style="color: blue; text-align: right;">{{ v_report.power }}</td>
+                    </tr>
+                    <tr>
+                        <th><strong>Gear box transmission:</strong></th>
+                        <td style="color: blue; text-align: right;">{{ v_report.gearbox_transmission }}</td>
+                    </tr>
+                    <tr>
+                        <th><strong>Country of origin:</strong></th>
+                        <td style="color: blue; text-align: right;">{{ v_report.country_of_origin }}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-md-6">
+                <table class="table">
+                    <tr>
+                        <th><strong>years since manufacture:</strong></th>
+                        <td style="color: blue; text-align: right;">{{ v_report.years_since_manufacture }}</td>
+                    </tr>
+                    <tr>
+                        <th><strong>years since on uganda roads:</strong></th>
+                        <td style="color: blue; text-align: right;">{{ v_report.years_since_on_uganda_roads }}</td>
+                    </tr>
+                    <tr>
+                        <th><strong>location of vehicle:</strong></th>
+                        <td style="color: blue; text-align: right;">{{ vehicle.location }}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-md-6">
+                <table class="table">
+                    <tr>
+                        <th><strong>seating capacity:</strong></th>
+                        <td style="color: blue; text-align: right;">{{ v_report.seating_capacity }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+    </div>
+
+</div>
+<div class="card mb-3">
+    <div class="card-header">FILES</div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <p style="margin-bottom: .5rem;">
+                    <strong>Proof Of Payment: </strong>
+                    {%if prospect.proof_of_payment %}
+                    <a data-fancybox="gallery" style="color:aqua;margin-left: .5rem;"
+                        href="{{prospect.proof_of_payment.url }}">View</a>
+                    {% else %}
+                <p>Not Available</p>
+                {%endif%}
+                </p>
+
+                {% if vehicle_asset %}
+                {% for vehicle in vehicle_asset %}
+                <p style="margin-bottom: .5rem;">
+                    <strong>Log Book:</strong>
+                    {% if vehicle.logbook %}
+                    <a data-fancybox="gallery" style="color:aqua;margin-left: .5rem;" class="image-link"
+                        href="{{ vehicle.logbook.url }}">View</a>
+                    {% else %}
+                <p>Not Available</p>
+                {%endif%}
+                </p>
+                {%endfor%}
+                {%endif%}
+
+                {% if land_asset %}
+                {% for land in land_asset %}
+                <p>
+                    <strong>Land Title:</strong>
+                    {% if vehicle.logbook %}
+                    <a data-fancybox="gallery" class="image-link" href="{{ vehicle.landtitle.url }}">View</a>
+                    {% else %}
+                <p>Not Available</p>
+                {%endif%}
+                </p>
+                {%endfor%}
+                {%endif%}
+            </div>
+            <div class="col-md-6"></div>
+        </div>
+    </div>
+</div>
+
+{% if prospect.status == 'New' %}
+{%if 'can_create_prospect' in request.user.permissions %}
+<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+    data-bs-target="#completeProspectDetailsFormModal">
+    COMPLETE PROSPECT DETAILS
+</button>
+{% endif %}
+{% endif %}
+
+{% if prospect.decline_reason %}
+<button type="button" style="border-radius: 10px;" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+    data-bs-target="#completeProspectDetailsFormModal">
+    RESTORE
+</button>
+{% endif %}
+
+
+<!-- Modal -->
+<div class="modal fade" id="completeProspectDetailsFormModal" tabindex="-1"
+    aria-labelledby="completeProspectDetailsFormModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="completeProspectDetailsFormModalLabel">COMPLETE PROSPECT DETAILS</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" enctype="multipart/form-data" autocomplete="off">
+                    {% csrf_token %}
+                    <div class="modal-form-area">
+                        <div class="modal-form-heading">
+                            <span class="form-title">PERSON DETAILS</span>
+                            <span class="form-part-minimizer">
+                                <i class="fas fa-chevron-up show"></i>
+                                <i class="fas fa-chevron-down hidden"></i>
+                            </span>
+                        </div>
+                        <div class="modal-form">
+                            <div class="modal-form split">
+                                {{ complete_prospect_details_form.as_p }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-form-area">
+                        <div class="modal-form-heading">
+                            <span class="form-title">ASSET DETAILS</span>
+                            <span class="form-part-minimizer">
+                                <i class="fas fa-chevron-up show"></i>
+                                <i class="fas fa-chevron-down hidden"></i>
+                            </span>
+                        </div>
+                        <div class="modal-form">
+                            <div class="modal-form split">
+                                <div class="select-asset-area">
+                                    <div class="asset-type-selector">
+                                        <span class="selector active" data-asset-select-form-id="vehicle">VEHICLE</span>
+                                        <span class="selector" data-asset-select-form-id="land">LAND</span>
+                                    </div>
+                                    <div class="asset-selection-forms">
+                                        <div id="vehicle" class="show selection-form">
+                                            <div class="modal-form split">
+                                                {{ vehicle_asset_form.as_p }}
+                                                <div id="customMakeWrapper" style="display: none;">
+                                                    <label for="id_custom_make">Custom Car Make</label>
+                                                    <input type="text" id="id_custom_make" name="custom_make"
+                                                        class="form-control" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="land" class="hidden selection-form">
+                                            <div class="modal-form split">
+                                                {{ land_asset_form.as_p }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% csrf_token %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="border-radius: 12px;">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<datalist id="allowable-car-makes">
+    <option value="TOYOTA">
+    <option value="NISSAN">
+    <option value="OTHER">
+</datalist>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const maketypeField = document.getElementById("id_make_types");
+        const makeField = document.getElementById("id_make");
+
+        // Function to toggle the make field based on maketype value
+        function toggleMakeField() {
+            if (maketypeField.value.toLowerCase() === "other") {
+                const makeLabel = document.querySelector("label[for='id_make']");
+                if (makeLabel) {
+                    makeLabel.style.display = "block"; // Hide the make field label
+                }
+                makeField.style.display = "block";
+                makeField.value = ""; // Clear any pre-existing value if it's set to "Other"
+            } else {
+                makeField.style.display = "none";
+                makeField.value = maketypeField.value; // Set the make field value to maketypes value
+                const makeLabel = document.querySelector("label[for='id_make']");
+                if (makeLabel) {
+                    makeLabel.style.display = "none"; // Hide the make field label
+                }
+            }
+        }
+
+        // Run on load in case of form reloads
+        toggleMakeField();
+
+        // Listen for changes on the maketype field
+        maketypeField.addEventListener("change", toggleMakeField);
+    });
+</script>
+
+
+<!-- 
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const makeField = document.getElementById("id_make_types");
+        const customMakeWrapper = document.getElementById("customMakeWrapper");
+        const customMakeField = document.getElementById("id_custom_make");
+        if (makeField != null) {
+            makeField.addEventListener("change", function () {
+                const showCustomOptions = ["other", "nissan", "toyota"];
+                if (showCustomOptions.includes(makeField.value.toLowerCase())) {
+                    customMakeWrapper.style.display = 'block';
+                    customMakeField.value = makeField.value;
+                } else {
+                    customMakeWrapper.style.display = 'none';
+                }
+                // Show custom make input if any of the specified options are selected
+            });
+        }
+        // original
+        //   if (customMakeField != null) {
+        //       customMakeField.addEventListener("keyup", () => {
+        //           makeField.value = customMakeField.value
+        //       })
+        //   }
+
+        // if (customMakeField === null) {
+        //     makeField.value = customMakeField.value
+        // }
+
+        // On form submission, if "OTHER" is selected, set makeField value to customMakeField value
+        document.querySelector("form").addEventListener("submit", function (event) {
+            if (makeField.value === "OTHER" && customMakeField.value.trim() !== "") {
+                makeField.value = customMakeField.value;  // Replace make value with custom input
+                console.log("makeField.value:", makeField.value);
+            }
+        });
+    });
+
+</script> -->
+
+<script>
+    Fancybox.bind('[data-fancybox="gallery"]', {
+        infinite: false
+    });
+</script>
+
+{% endblock %}

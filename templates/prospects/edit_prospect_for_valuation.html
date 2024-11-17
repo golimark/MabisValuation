@@ -1,0 +1,49 @@
+{% extends 'home/base.html' %}
+
+{% block title %} Update Prospect {% endblock %}
+
+{% block content %}
+    <script>
+        // JavaScript to handle changes on the form fields
+        function handleGenderChange() {
+            const genderField = document.getElementById('id_gender');
+            const selectedGender = genderField.value;
+            
+            // Example: Change background color based on gender selection
+            if (selectedGender === 'Male') {
+                document.body.style.backgroundColor = 'lightblue';
+            } else if (selectedGender === 'Female') {
+                document.body.style.backgroundColor = 'lightpink';
+            } else {
+                document.body.style.backgroundColor = 'white';
+            }
+        }
+
+        function validatePhoneNumber() {
+            const phoneField = document.getElementById('id_phone_number');
+            const phoneNumber = phoneField.value;
+
+            if (phoneNumber.length !== 10) {
+                alert("Phone number must be 10 digits");
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Update {{ prospect.name }}</h1>
+    
+    <!-- Render the Django form -->
+    <form method="POST" enctype="multipart/form-data" action="{% url 'update_prospect' prospect_id=prospect.id %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        
+        <!-- Submit button -->
+        <button type="submit" onclick="validatePhoneNumber()">Update</button>
+    </form>
+    
+    <script>
+        // Attach event listeners to form fields
+        document.getElementById('id_gender').addEventListener('change', handleGenderChange);
+    </script>
+</body>
+{% endblock %}

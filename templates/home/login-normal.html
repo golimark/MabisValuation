@@ -1,0 +1,384 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Login to MABiS</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+        />
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
+            rel="stylesheet"
+        />
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background: linear-gradient(
+                    to bottom,
+                    #001f3f 50%,
+                    #cacdd0 50%
+                );
+            }
+
+            .header-div {
+                background-color: white;
+                border-radius: 10px;
+                box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+                text-align: center;
+                width: 450px;
+                font-size: 24px;
+                padding: 20px;
+                font-weight: bold;
+                color: #001f3f;
+                margin-bottom: 20px;
+            }
+
+            .container {
+                background-color: white;
+                /* border-radius: 10px; */
+                padding: 20px;
+                /* box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); */
+                width: 450px;
+                text-align: left;
+            }
+
+            .form-group {
+                margin-bottom: 15px;
+            }
+
+            .input-group-text {
+                background-color: #001f3f;
+                color: white;
+                border: none;
+            }
+
+            .form-control {
+                /* border-radius: 5px; */
+                /* border: 1px solid #ced4da; */
+            }
+
+            .btn-submit {
+                width: 100%;
+                background-color: #001f3f;
+                border: none;
+                color: white;
+                padding: 10px;
+                border-radius: 5px;
+                margin-top: 10px;
+                transition: all 0.3s ease-in-out;
+            }
+
+            .btn-submit:hover {
+                background-color: #0b427e;
+                transform: translateY(-5px);
+                /* box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); */
+            }
+
+            .forgot-password,
+            .back-to-login {
+                color: #001f3f;
+                text-align: right;
+                margin-top: 10px;
+            }
+
+            .forgot-password a,
+            .back-to-login a {
+                color: red;
+                text-decoration: none;
+            }
+
+            .forgot-password a:hover,
+            .back-to-login a:hover {
+                text-decoration: underline;
+            }
+
+            .input-group-text i {
+                font-size: 1.2em;
+            }
+
+            .help-text {
+                margin-top: 10px;
+                text-align: center;
+                color: #001f3f;
+            }
+            .form-check {
+                margin-top: 10px;
+                color: #001f3f;
+            }
+
+            .alert {
+                position: fixed;
+                z-index: 10000;
+                top: 10%;
+                left: 50%;
+                transform: translate(-50%, -10%);
+                display: grid;
+                grid-auto-flow: column;
+                gap: 2rem;
+                align-items: center;
+            }
+
+            .alert button {
+                padding: 0;
+                background: transparent;
+                border: none;
+                font-size: 24px;
+            }
+
+            .alert.hidden {
+                display: none;
+            }
+
+            /* Media Query for smaller screens */
+            @media screen and (max-width: 600px) {
+                .container {
+                    background-color: white;
+                    padding: 1rem 1rem;
+                    width: 90vw;
+                    border-radius: 10px;
+                }
+                .header-div {
+                    width: 90vw;
+                    font-size: 20px;
+                    padding: 1rem 1rem;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        {% if messages %}
+        <!--  -->
+        {% for message in messages %}
+        <!--  -->
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+        <div
+            class="alert alert-danger alert-dismissible fade show"
+            role="alert"
+        >
+            <strong>
+                <p>{{ message }}</p>
+            </strong>
+            <button
+                type="button"
+                class="close"
+                data-dismiss="alert"
+                aria-label="Close"
+            >
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+        <div
+            class="alert alert-success alert-dismissible fade show"
+            role="alert"
+        >
+            <strong>
+                <p>{{ message }}</p>
+            </strong>
+            <button
+                type="button"
+                class="close"
+                data-dismiss="alert"
+                aria-label="Close"
+            >
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endif %}
+        <!--  -->
+        {% endfor %}
+        <!--  -->
+        {% endif %}
+        <div>
+            <div class="header-div">
+                LOGIN TO MAB<span style="color: red; text-transform: lowercase"
+                    >i</span
+                >S
+            </div>
+
+            <div class="container">
+                <!-- Login Form -->
+
+                <form method="post" id="login-form">
+                    {% csrf_token %}
+                    <!-- <input type="hidden" name="csrfmiddlewaretoken" value="5MyshEqud846r9OvgfRZSxojNhgSsclHWrruueBoozVspKheN3EQHdhxJVkU2FGB"> -->
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <div
+                            class="input-group"
+                            style="
+                                display: grid;
+                                justify-items: stretch;
+                                grid-template-columns: 10fr 0fr;
+                            "
+                        >
+                            <!-- <input type="text" name="username" autofocus autocapitalize="none" autocomplete="username" maxlength="150" required id="id_username" class="form-control"> -->
+
+                            <span
+                                class="input-group-text"
+                                style="
+                                    display: grid;
+                                    justify-items: stretch;
+                                    grid-template-columns: 10fr 1fr;
+                                "
+                            >
+                                {{ form.username }} <i class="bi bi-person"></i
+                            ></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <div
+                            class="input-group"
+                            style="
+                                display: grid;
+                                justify-items: stretch;
+                                grid-template-columns: 10fr 0fr;
+                            "
+                        >
+                            <!-- <input type="password" name="password" autocomplete="current-password" required id="id_password" class="form-control"> -->
+                            <span
+                                style="
+                                    display: grid;
+                                    justify-items: stretch;
+                                    grid-template-columns: 9fr 1fr;
+                                "
+                                class="input-group-text"
+                                id="toggle-password"
+                            >
+                                {{ form.password }}
+                                <i class="bi bi-eye"></i>
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="keepSignedIn">
+                    <label class="form-check-label" for="keepSignedIn">
+                        Keep me signed in
+                    </label>
+                </div> -->
+
+                    <!-- <div class="forgot-password">
+                    <a href="#" id="forgot-password-link">Forgotten Password?</a>
+                </div> -->
+
+                    <button
+                        type="submit"
+                        class="btn btn-submit"
+                        id="login-button"
+                    >
+                        <span id="button-text">Sign In</span>
+                        <span
+                            id="loading-spinner"
+                            class="d-none spinner-border spinner-border-sm"
+                        ></span>
+                    </button>
+
+                    <!-- <div class="help-text">
+                    <p>[Help: +256700000000]</p>
+                </div> -->
+                </form>
+
+                <!-- Forgot Password Form -->
+                <form id="forgot-password-form" style="display: none">
+                    <div class="form-group">
+                        <label for="reset-email"
+                            >Enter your email address</label
+                        >
+                        <div class="input-group">
+                            <input
+                                type="email"
+                                class="form-control"
+                                id="reset-email"
+                                placeholder="Email Address"
+                                required
+                            />
+                            <span class="input-group-text"
+                                ><i class="bi bi-envelope"></i
+                            ></span>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-submit">
+                        Send Reset Link
+                    </button>
+
+                    <div class="back-to-login">
+                        <a href="#" id="back-to-login-link">Back to Login</a>
+                    </div>
+
+                    <!-- <div class="help-text">
+                    <p>[Help: +256700000000]</p>
+                </div> -->
+                </form>
+            </div>
+        </div>
+
+        <script>
+            // Toggle between login and forgot password forms
+            document
+                .getElementById("forgot-password-link")
+                .addEventListener("click", function (event) {
+                    event.preventDefault();
+                    document.getElementById("login-form").style.display =
+                        "block";
+                    document.getElementById(
+                        "forgot-password-form",
+                    ).style.display = "block";
+                });
+
+            document
+                .getElementById("back-to-login-link")
+                .addEventListener("click", function (event) {
+                    event.preventDefault();
+                    document.getElementById(
+                        "forgot-password-form",
+                    ).style.display = "none";
+                    document.getElementById("login-form").style.display =
+                        "block";
+                });
+
+            // Password toggle visibility
+            document
+                .getElementById("toggle-password")
+                .addEventListener("click", function () {
+                    const passwordField =
+                        document.getElementById("id_password");
+                    const eyeIcon = this.querySelector("i");
+                    if (passwordField.type === "password") {
+                        passwordField.type = "text";
+                        eyeIcon.classList.replace("bi-eye", "bi-eye-slash");
+                    } else {
+                        passwordField.type = "password";
+                        eyeIcon.classList.replace("bi-eye-slash", "bi-eye");
+                    }
+                });
+
+            // Submit button loading state
+            document
+                .getElementById("login-form")
+                .addEventListener("submit", function () {
+                    const loginButton = document.getElementById("login-button");
+                    const loadingSpinner =
+                        document.getElementById("loading-spinner");
+                    const buttonText = document.getElementById("button-text");
+
+                    loadingSpinner.classList.remove("d-none");
+                    buttonText.classList.add("d-none");
+                    loginButton.disabled = true;
+                });
+        </script>
+        <script src="{% static 'assets/js/script.js' %}"></script>
+    </body>
+</html>

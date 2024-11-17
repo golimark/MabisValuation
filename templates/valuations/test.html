@@ -1,0 +1,34 @@
+{% extends 'home/base.html' %} {% block content %}
+<h1>Vehicle Assets</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Prospect</th>
+            <th>Vehicle Model</th>
+            <th>Vehicle Make</th>
+            <th>Registration Number</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for vehicle in vehicle_data %}
+        <tr>
+            <td>{{ vehicle.prospect }}</td>
+            <td>{{ vehicle.model }}</td>
+            <td>{{ vehicle.make }}</td>
+            <td>{{ vehicle.license_plate }}</td>
+            <td>{{ vehicle.status }}</td>
+            <td>
+                <a
+                    href=""
+                    class="btn btn-success btn-sm"
+                    ><i class="fa fa-eye"></i><span>Detail</span></a
+                >
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

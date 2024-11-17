@@ -1,0 +1,40 @@
+{% extends 'home/base.html' %} {% block title %} {% endblock %} {% block content
+%}
+<h1>
+    {%for prospect in prospects%} {% if prospect.status == 'Pending'%} Pending
+    Prospects {%elif prospect.status == 'Review' %} Review Prospects {%endif%}
+</h1>
+{%endfor%}
+<a href="{% url 'prospect_create' %}" class="btn btn-primary btn-sm"
+    >Add Prospect</a
+>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Gender</th>
+            <th>Phone Number</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for prospect in prospects %}
+        <tr>
+            <td>{{ prospect.name }}</td>
+            <td>{{ prospect.gender }}</td>
+            <td>{{ prospect.phone_number }}</td>
+            <td>{{ prospect.status }}</td>
+            <td>
+                <a
+                    href="{% url 'prospect_detail' prospect.slug %}"
+                    class="btn btn-primary"
+                    >View</a
+                >
+                <!-- <a href="#" class="btn btn-warning" data-toggle="modal" data-target="#valuationModal" data-prospect="{{ prospect.id }}">Submit to Valuation</a> -->
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

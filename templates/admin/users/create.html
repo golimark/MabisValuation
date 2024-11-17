@@ -1,0 +1,40 @@
+{% extends 'home/base.html' %}
+<!--  -->
+{% block title %}Company User{%endblock %}
+<!--  -->
+{% block content %}
+<!-- verify_payment.html -->
+<h2>Create {{request.user.company}} Company User</h2>
+
+<div class="container mt-2">
+    <div class="container mt-2">
+        <div class="card mb-3">
+            <div class="card-header with-minimizer">
+                <p class="">Company User Details</p>
+                <span class="card-body-minimizer">
+                    <i class="fas fa-chevron-up show"></i>
+                    <i class="fas fa-chevron-down hidden"></i>
+                </span>
+            </div>
+            <div class="card-body">
+                <form
+                    method="POST"
+                    action="{% url 'users_create' %}"
+                    style="display: grid; gap: 1rem"
+                    enctype="multipart/form-data"
+                >
+                    {% csrf_token%}
+                    <div class="modal-form split">
+                        <!--  -->
+                        {{ form.as_p }}
+                        <!--  -->
+                    </div>
+                    <hr />
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

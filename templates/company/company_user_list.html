@@ -1,0 +1,44 @@
+{% extends 'home/base.html' %} {% block title %}Prospects{% endblock %}
+
+<!-- new block -->
+{% block content%}
+<h1>ALL USERS</h1>
+<a href="{% url 'users_create' %}" class="btn btn-primary">Add Company User</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <!-- <th>Gender</th> -->
+            <th>Phone Number</th>
+            <th>Role</th>
+            <th>Company</th>
+            <th>Status</th>
+            <th>Created At</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for company_user in company_users %}
+        <tr>
+            <td>{{ company_user.name }}</td>
+            <!-- <td>{{ agent.gender }}</td> -->
+            <td>{{ company_user.phone_number }}</td>
+            <td>{{ company_user.role }}</td>
+            <td>{{ company_user.company.name }}</td>
+            <td style="font-style: italic; color: blueviolet">
+                {{ company_user.status }}
+            </td>
+            <td>{{ company_user.created_at|date:"Y-m-d H:i:s" }}</td>
+            <td>
+                <a
+                    href=""
+                    class="btn btn-success btn-sm"
+                    ><i class="fas fa-eye"></i>View</a
+                >
+                <!-- <a href="#" class="btn btn-warning" data-toggle="modal" data-target="#valuationModal" data-prospect="{{ prospect.id }}">Submit to Valuation</a> -->
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valuation Report</title>
+
+    <style>
+        .report-imgs {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .img-wrapper {
+            width: 50%;
+        }
+
+        .img-wrapper img {
+            width: 80%;
+        }
+
+        table {
+            border-collapse: collapse;
+            border: 1px solid #ddd;
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            table-layout: fixed;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            background-color: #f2f2f2;
+        }
+
+        th {
+            background-color: #e0e0e0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="printreport" class="card mb-3">
+
+        <div style="align-content: center; justify-items: center;">
+            <center><img src="{{ user.active_company.logo.url }}" alt=""></center>
+        </div>
+
+        <div class="card-header">
+            <center> <strong>MOTOR VEHICLE VALUATION REPORT</strong> <br><br> <br> Applicant / Client :
+                <strong>{{prospect.company}}</strong>
+
+                <p>(herein after referred to as the Lending Institution)</p> <br>
+
+                C/o: {{prospect.title}} {{ prospect.name }} <br> <br>
+
+                Date of Valuation: {{ evaluation_report.date_of_valuation }} <br><br>
+
+                <div style="display: flex; justify-content: center;">
+                    <div class="img-wrapper">
+                        <img src="{{evaluation_report.right_hand_side_view.url}}" alt="">
+                        <p>RIGHT HAND SIDE VIEW</p>
+                    </div>
+                    <div class="img-wrapper">
+                        <img src="{{evaluation_report.left_hand_eside_view.url}}" alt="">
+                        <p>LEFT HAND SIDE VIEW</p>
+                    </div>
+                </div>
+                <strong>PLACE OF INSPECTION: {{ evaluation_report.place_of_inspection}}</strong> <br><br>
+                <strong>VALUATION REPORT DATE: {{ evaluation_report.valuation_report_date}}</strong> <br><br>
+
+
+                <p style="text-align:justify;"><strong>Effective Report Summary:
+                    </strong>{{evaluation_report.effective_report_summary}}</p>
+                <br>
+                <p style="text-align:justify;"><strong>Limiting Conditions:
+                    </strong>{{evaluation_report.limiting_conditions}}</p>
+                <br>
+                <p style="text-align:justify;"><strong>Valuation: </strong>{{evaluation_report.valuation}}</p>
+                <br>
+                <p style="text-align:justify;"><strong>Market Valuation Description:
+                    </strong>{{evaluation_report.market_value_description}}</p>
+                <br>
+                <p><strong>REGISTERED OWNER AS PER THE CAR LOGBOOK PROVIDED AT VALUATION:</strong></p>
+                <table style="width: 100%; border-collapse: collapse; text-align: left; table-layout: fixed;">
+                    <thead style="background-color: #f2f2f2;">
+                        <tr>
+                            <th style="border: 1px solid; padding: 8px; background-color: #e0e0e0;">Name</th>
+                            <td style="border: 1px solid; padding: 8px;">{{evaluation_report.name_in_logbook}}</td>
+                        </tr>
+                    </thead>
+                    <tbody style="background-color: #f2f2f2;">
+                        <tr>
+                            <th style="border: 1px solid; padding: 8px; background-color: #e0e0e0;">TAX IDENTIFICATION
+                                NUMBER (TIN):</th>
+                            <td style="border: 1px solid; padding: 8px;">{{evaluation_report.tax_identification_number}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <br>
+                <p><strong>VEHICLE DETAILS</strong></p>
+                <div class="col-md-6">
+
+                    <table>
+                        <tr>
+                            <th>Vehicle Registration Number</th>
+                            <td style="color:blue;">{{ evaluation_report.vehicle }}</td>
+                        </tr>
+
+                        <tr>
+                            <th>Vehicle Make</th>
+                            <td style="color:blue;">{{ evaluation_report.make }}</td>
+                        </tr>
+                        <tr>
+                            <th>Model</th>
+                            <td style="color:blue;">{{ evaluation_report.model }}</td>
+                        </tr>
+
+                        <tr>
+                            <th>Body Description</th>
+                            <td style="color:blue;">{{ evaluation_report.body_description }}</td>
+                        </tr>
+                        <tr>
+                            <th>Chasis Number</th>
+                            <td style="color:blue;">{{ evaluation_report.chassis_number }}</td>
+                        </tr>
+
+                        <tr>
+                            <th>Engine Number</th>
+                            <td style="color:blue;">{{ evaluation_report.engine_number }}</td>
+                        </tr>
+
+                        <tr>
+                            <th>Color by Logbook</th>
+                            <td style="color:blue;">{{ evaluation_report.color_by_logbook }}</td>
+                        </tr>
+                        <tr>
+                            <th>Color by Inspection:</th>
+                            <td style="color:blue;">{{ evaluation_report.color_by_inspection }}</td>
+                        </tr>
+                        <tr>
+                            <th>Fuel Type</th>
+                            <td style="color:blue;">{{ evaluation_report.fuel_type }}</td>
+                        </tr>
+                        <tr>
+                            <th>Year of Manufacture:</th>
+                            <td style="color:blue;">{{ evaluation_report.year_of_manufacture }}</td>
+                        </tr>
+                        <tr>
+                            <th>Date of Registration:</th>
+                            <td style="color:blue;">{{ evaluation_report.date_of_registration }}</td>
+                        </tr>
+
+                        <tr>
+                            <th>Years Since Manufacture:</th>
+                            <td style="color:blue;">{{ evaluation_report.years_since_manufacture }}</td>
+                        </tr>
+
+                        <tr>
+                            <th>Mileage</th>
+                            <td style="color:blue;">{{ evaluation_report.mileage }}</td>
+                        </tr>
+                        <tr>
+                            <th>Power</th>
+                            <td style="color:blue;">{{ evaluation_report.power }}</td>
+                        </tr>
+                        <tr>
+                            <th>Gear Box Transmission</th>
+                            <td style="color:blue;">{{ evaluation_report.gearbox_transmission }}</td>
+                        </tr>
+
+                        <tr>
+                            <th>Power</th>
+                            <td style="color:blue;">{{ evaluation_report.power }}</td>
+                        </tr>
+                        <tr>
+                            <th>Country of Origin</th>
+                            <td style="color:blue;">{{ evaluation_report.country_of_origin }}</td>
+                        </tr>
+
+                        <tr>
+                            <th>Years on Uganda Road:</th>
+                            <td style="color:blue;">{{ evaluation_report.years_since_on_uganda_roads }}</td>
+                        </tr>
+
+                    </table>
+                </div>
+
+                <br>
+                <p><strong>REMARKS ON THE CONDITION OF THE COMPONENTS / SYSTEMS OF THE VEHICLE:</strong></p>
+                <table class="table">
+                    <tr>
+                        <th><strong>Tax Identification:</strong></th>
+                        <td style="color:blue;">{{ evaluation_report.tax_identification_number }}</td>
+                    </tr>
+                    <tr>
+                        <th>Chassis Frame Condition:</th>
+                        <td style="color:blue;">{{ evaluation_report.chassis_frame }}</td>
+                    </tr>
+                    <tr>
+                        <th>No. of Seats</th>
+                        <td style="color:blue;">{{ evaluation_report.seating_capacity }}</td>
+                    </tr>
+                    <tr>
+                        <th>Engine Assembly Condition</th>
+                        <td style="color:blue;">{{ evaluation_report.engine_assembly }}</td>
+                    </tr>
+                    <tr>
+                        <th>Accessories Condition:</th>
+                        <td style="color:blue;">{{ evaluation_report.accessories }}</td>
+                    </tr>
+                    <tr>
+                        <th>Cooling System Condition:</th>
+                        <td style="color:blue;">{{ evaluation_report.cooling_system }}</td>
+                    </tr>
+                    <tr>
+                        <th>Market Value:</th>
+                        <td style="color:blue;">{{evaluation_report.market_value}}</td>
+                    </tr>
+                    <tr>
+                        <th>Forced Sale Value</th>
+                        <td style="color:blue;">{{evaluation_report.forced_sale}}</td>
+                    </tr>
+                    <tr>
+                        <th>Tyre Condition</th>
+                        <td style="color:blue;">{{evaluation_report.tyre_condition}}</td>
+                    </tr>
+                    <tr>
+                        <th>Road Test Result</th>
+                        <td style="color:blue;">{{evaluation_report.road_test}}</td>
+                    </tr>
+
+                    <tr>
+                        <th>Body Shell Paint Condition:</th>
+                        <td style="color:blue;">{{ evaluation_report.body_shell_paint }}</td>
+                    </tr>
+                    <tr>
+                        <th>Gearbox Assembly Condition</th>
+                        <td style="color:blue;">{{ evaluation_report.gearbox_assembly }}</td>
+                    </tr>
+                    <tr>
+                        <th>
+                            Transmission System Condition
+                        </th>
+                        <td style="color:blue;">{{ evaluation_report.transmission_system }}</td>
+                    </tr>
+                    <tr>
+                        <th>Steering System Condition</th>
+                        <td style="color:blue;">{{ evaluation_report.steering_system }}</td>
+                    </tr>
+                    <tr>
+                        <th>Suspension Condition</th>
+                        <td style="color:blue;">{{ evaluation_report.suspension }}</td>
+                    </tr>
+                    <tr>
+                        <th>Braking System Condition</th>
+                        <td style="color:blue;">{{ evaluation_report.braking_system }}</td>
+                    </tr>
+                    <tr>
+                        <th>Electrical System Condition</th>
+                        <td style="color:blue;">{{ evaluation_report.electrical_system }}</td>
+                    </tr>
+                    <tr>
+                        <th>Windshield Condition</th>
+                        <td style="color:blue;">{{ evaluation_report.windshield }}</td>
+                    </tr>
+                    <tr>
+                        <th>A/C System Condition</th>
+                        <td style="color:blue;">{{ evaluation_report.air_conditioning_system }}</td>
+                    </tr>
+                    <tr>
+                        <th>Wheels Condition</th>
+                        <td style="color:blue;">{{evaluation_report.wheels}}</td>
+                    </tr>
+                </table>
+                <br>
+
+                <p><strong>Current Value Description: <br></strong>{{evaluation_report.current_value_description}}</p>
+                <br>
+
+                <table>
+                    <tr>
+                        <th ><strong>Market Value</strong></th>
+                        <td class="make-words" style="color:blue;font-weight:bold; font-size: large;">{{ evaluation_report.market_value }}</td>
+                    </tr>
+                    <tr>
+                        <th><strong>Forced Sale Value</strong></th>
+                        <td style="color:blue;font-weight:bold; font-size: large;">{{ evaluation_report.forced_sale }}</td>
+                    </tr>
+                    <tr>
+                        <th>Insurance Valuation</th>
+                        <td style="color:blue;">{{evaluation_report.insurance_valuation}}</td>
+                    </tr>
+                </table>
+                <p><strong>RECOMMENDATION REMARKS BY VALUERS: <br></strong></p>
+                <p>{{evaluation_report.recommendation}}</p>
+
+                <p><strong>Yours Faithfully,<br> <i>For: </i> {{user.active_company.name}}</strong></p>
+
+                <p>PICTORIAL VIEW</p>
+
+                <div class="report-imgs">
+                    <div class="img-wrapper">
+                        <img src="{{evaluation_report.right_hand_side_view.url}}" alt="">
+                        <p>RIGHT HAND SIDE VIEW</p>
+                    </div>
+                    <div class="img-wrapper">
+                        <img src="{{evaluation_report.left_hand_eside_view.url}}" alt="">
+                        <p>LEFT HAND SIDE VIEW</p>
+                    </div>
+                    <div class="img-wrapper">
+                        <img src="{{evaluation_report.engine_compartment.url}}" alt="">
+                        <p>ENGINE COMPARTMENT</p>
+                    </div>
+                    <div class="img-wrapper">
+                        <img src="{{evaluation_report.upholstery.url}}" alt="">
+                        <p>UPHOLSTERY</p>
+                    </div>
+                    <div class="img-wrapper" style="width:100%;">
+                        <img src="{{evaluation_report.vehicle_id_plate.url}}" alt="">
+                        <p>VEHICLE PLATE</p>
+                    </div>
+                </div>
+                <p><strong>END</strong></p>
+            </center>
+        </div>
+    </div>
+
+    <button onclick="printDiv1('printreport')">Print</button>
+
+    <script>
+        function printDiv1() {
+            var printContents = document.getElementById("printreport").innerHTML;
+            var originalContents = document.body.innerHTML;
+
+            document.body.innerHTML = printContents;
+
+            window.print();
+
+            document.body.innerHTML = originalContents;
+        }
+    </script>
+</body>
+
+</html>

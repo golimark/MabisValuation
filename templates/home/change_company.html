@@ -1,0 +1,24 @@
+{% extends 'home/base.html' %} {% load static %} {% block css %}
+<!--  -->
+{% block title%}User Company{% endblock %} {% block content %}
+<div class="form-container">
+    <form method="post" enctype="multipart/form-data">
+        <div class="modal-form-area">
+            <div class="modal-form-heading">
+                <span class="form-title">User Company</span>
+                <span class="form-part-minimizer">
+                    <i class="fas fa-chevron-up show"></i>
+                    <i class="fas fa-chevron-down hidden"></i>
+                </span>
+            </div>
+            <div class="modal-form">
+                <p style="font-size:12px;font-weight: bold">Current Company: {{request.user.company}}</p>
+                <div class="modal-form split">
+                    {% csrf_token %} {{ form.as_p }}
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+</div>
+{% endblock %} {% endblock %}

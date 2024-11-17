@@ -1,0 +1,640 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+             <title>MABiS Loan Management System</title>
+
+        <link rel="icon" href="{% static 'assets/app-icons/1.jfif' %}" />
+        <!-- Bootstrap CSS -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+        />
+        <!-- Font Awesome for icons -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        />
+        <!-- Magnific Popup CSS -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css"
+        />
+        <link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
+
+        <!-- cdn for alerts -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+        <!-- Bootstrap 5 Icons -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
+            rel="stylesheet"
+            
+        />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+
+        <!-- htmx functionality -->
+        <script src="{% static 'assets/js/htmx.min.js' %}"></script>
+
+        <!-- datatables -->
+        <link href="{% static 'assets/DataTables/datatables.min.css' %}" rel="stylesheet">
+        <script src="{% static 'assets/DataTables/jquery-3.7.1.js' %}"></script>
+        <script src="{% static 'assets/DataTables/datatables.min.js' %}"></script>
+
+        <!-- Add these in the <head> or at the end of the <body> tag in home/base.html -->
+        <!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"> -->
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+
+
+
+    </head>
+    <body>
+        <!-- Sidebar -->
+        <div class="sidebar dekstop" id="sidebar">
+            <!-- Logo and Company Name -->
+            <div class="logo">
+                <!-- <img src="" alt="Company Logo"> -->
+                <h4 class="company-name" style="text-align: center;">{{request.user.company.name}}</h4>
+
+                <div class="sidebar-avator-area">
+                    {% if request.user.image %}
+                    <img
+                        class="avator_img"
+                        src="{{ request.user.image.url }}"
+                        alt=""
+                    />
+                    {% else %}
+                    <img
+                        class="avator_img"
+                        src="{% static 'assets/img/avator.png' %}"
+                        alt=""
+                    />
+                    {% endif %}
+                </div>
+
+                <h6 class="username" style="text-align: center;">{{request.user}}</h6>
+            </div>
+            {% if 'can_view_dashboard' in request.user.permissions %}
+            <a
+                class="sidebar-item d-flex justify-content-between align-items-center {% if page_name == 'dashboard' %} open active {%endif%}"
+                href="{% url 'dashboard' %}"
+            >
+                <div class="menu-item-submenu">
+                    <i class="fas fa-home"></i>
+                    <span>DASHBOARD </span>
+                </div>
+            </a>
+            {% endif %}
+
+            <!-- LOAN PROCESSIN DASHBOARD -->
+            {% if 'can_view_loan_origination' in request.user.permissions %}
+            <a
+                href="#loanProcessing"
+                data-bs-toggle="collapse"
+                aria-expanded="false"
+                class="sidebar-item d-flex justify-content-between align-items-center {% if page_name in 'prospects, valuation, loan_application, loan_approval, offer_review, loan_perfection, disbursement_review, loan_disbursement' %} open active {%endif%}"
+            >
+                <!-- <div class="menu-item-submenu"> -->
+                <!-- <i class="fas fa-users"></i> -->
+                <!-- Icon -->
+                <span >ASSET VALUATION</span>
+                <!-- </div> -->
+                <!-- <span><i class="fas fa-chevron-down"></i></span> -->
+                <!-- Dropdown Toggle Icon -->
+            </a>
+            {% endif %}
+
+            <div class="collapse section-lead" id="loanProcessing">
+                {% if 'can_view_valuation_requests' in request.user.permissions %}
+                <a
+                    href="#valuationsSubmenu"
+                    data-bs-toggle="collapse"
+                    aria-expanded="false"
+                    class="sidebar-item d-flex justify-content-between align-items-center {% if page_name == 'valuation' %} open active{%endif%}"
+                >
+                    <div>
+                        <i class="fas fa-money-bill-wave"></i>
+                        <!-- Icon -->
+                        <span>VALUATION</span>
+                    </div>
+                    <span><i class="fas fa-chevron-down"></i></span>
+                    <!-- Dropdown Toggle Icon -->
+                </a>
+
+                <div class="collapse" id="valuationsSubmenu">
+                    {% if 'can_verify_payment_as_valuer' in request.user.permissions %}
+                    <a
+                        href="{% url 'get_data_from_mabis' %}"
+                        class="submenu {% if sub_page_name == 'payment_verification' %} open active {%endif%}"
+                        >Payment Verification</a
+                    >
+                    {%endif%}
+                    {% if 'can_be_valuers' in request.user.permissions %}
+                    <a
+                        href="{% url 'prospect_valuation' %}"
+                        class="submenu {% if sub_page_name == 'valuation_requests' %} open active {%endif%}"
+                        >Valuation Requests</a
+                    >
+                    {%endif%}
+                    {% if 'can_be_supervisor' in request.user.permissions %}
+                    <a
+                        href="{% url 'prospect_supervisor_review' %}"
+                        class="submenu {% if sub_page_name == 'supevisor_valuation_requests' %} open active {%endif%}"
+                        >Supervisory Valuation Review</a
+                    >
+
+                    {%endif%}
+                    {% if 'can_complete_asset_valuation_details' in request.user.permissions %}
+                    <a
+                        href="{% url 'prospect_review' %}"
+                        class="submenu {% if sub_page_name == 'valuation_review' %} open active {%endif%}"
+                        >Review</a
+                    >{%endif%}
+
+                    <a href="{% url 'get_vehicle_asset_data' %}" class="submenu {% if sub_page_name == 'asset_vehicle_list' %} open active {%endif%}">
+                        Vehicle Assets
+                    </a>
+                </div>
+                {%endif%}
+            </div>
+
+        </div>
+
+        <div class="sidebar mobile">
+            <a class="tab" href="{% url 'dashboard' %}">
+                <i class="fas fa-home"></i>
+            </a>
+            <a class="tab" href="{% url 'loan_origination' %}">
+                <i class="fas fa-file-download"></i>
+            </a>
+            <a class="tab" href="{% url 'loan_collection' %}">
+                <i class="fas fa-money-check"></i>
+            </a>
+            <a class="tab" href="">
+                <i class="fas fa-user"></i>
+            </a>
+        </div>
+
+        <!-- Navbar -->
+        <nav class="navbar" id="navbar">
+            <!-- Sidebar Toggle Button -->
+            <div class="d-flex align-items-center">
+                <button class="btn btn-dark" id="sidebarToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <span
+                    class="navbar-brand"
+                    style="
+                        color: white;
+                        font-size: 28px;
+                        font-weight: 800;
+                        letter-spacing: 1px;
+                        padding-left: 10px;
+                    "
+                >
+                    MAB<span style="color: red; text-transform: lowercase"
+                        >i</span
+                    >S
+                </span>
+            </div>
+
+            <!-- Notifications and Profile -->
+            <div class="d-flex desktop">
+                <div class="dropdown me-4"> <a href="#" class="text-white" id="notificationsDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false"> <i class="fas fa-bell notification-icon"></i>
+                        <span>
+                            <!-- class="badge bg-danger rounded-pill badge-notifications" -->
+                            <!-- 3 -->
+                        </span> <!-- Change the number dynamically -->
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="notificationsDropdown">
+                        <!-- <li><a class="dropdown-item" href="#">Notification 1</a></li>
+                        <li><a class="dropdown-item" href="#">Notification 2</a></li>
+                        <li><a class="dropdown-item" href="#">Notification 3</a></li> -->
+                    </ul>
+                </div>
+
+                <!-- Admin Icon (Replaced with the one shown in the image) -->
+                {% if 'can_perform_admin_functions' in request.user.permissions %}
+                <div class="dropdown me-4">
+                    <a
+                        href="/admin-dashboard"
+                        class="text-white"
+                        style="text-decoration: none"
+                    >
+                        <i class="bi bi-slash-circle"></i> Admin
+                    </a>
+                </div>
+                {%endif%}
+
+                <!-- Settings with Dropdown -->
+                <div class="dropdown me-4">
+                    <a
+                        href="#"
+                        class="text-white dropdown-toggle"
+                        id="settingsDropdown"
+                        role="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                    >
+                        <i class="bi bi-gear"></i> Settings
+                    </a>
+                    <ul
+                        class="dropdown-menu dropdown-menu-end"
+                        aria-labelledby="settingsDropdown"
+                    >
+                        <li><a class="dropdown-item" href="#">Billing</a></li>
+                        <li>
+                            <a class="dropdown-item" href=""
+                                >Change Password</a
+                                
+                            >
+                            <!-- change_password -->
+                        </li>
+                        {% if 'can_switch_companies' in request.user.permissions %}
+                        <li>
+                            <a class="dropdown-item" href="{% url 'company_toggle' %}"
+                                >Change Company</a
+                            >
+                        </li>
+                        {%endif%}
+
+                        <li>
+                            <a class="dropdown-item" href="{% url 'logout' %}"
+                                >Logout
+                            <a>
+                        </li>
+                    </ul>
+                </div>
+
+
+                <!-- Help Icon -->
+                <div class="dropdown me-4">
+                    <a
+                        href="#"
+                        class="text-white"
+                        style="text-decoration: none"
+                    >
+                        <i class="bi bi-life-preserver"></i> Help
+                    </a>
+                </div>
+            </div>
+
+            <div class="mobile nav-tabs">
+                <span class="notif">
+                    <i class="fas fa-bell"></i>
+                </span>
+                <button class="btn btn-dark" id="mb-menu-cta">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <div class="tabs-list mobile">
+                {% if 'can_perform_admin_functions' in request.user.permissions %}
+                <a class="tab" href="/admin-dashboard">Admin</a>
+                {% endif %}
+                <a class="tab" href="">Settings</a>
+                <a class="tab" href="">Billing</a>
+                <a class="tab" href="{% url 'logout' %}">Logout</a>
+                <a class="tab" href="">Help</a>
+            </div>
+        </nav>
+
+            <section class="main-content-area">
+
+            {% if messages %}
+            <!--  -->
+            {% for message in messages %}
+            <!--  -->
+            {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+            <div
+                class="alert alert-danger alert-dismissible fade show"
+                role="alert"
+            >
+                <strong><p>{{ message }}</p></strong>
+                <button
+                    type="button"
+                    class="close"
+                    data-dismiss="alert"
+                    aria-label="Close"
+                >
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+            <div
+                class="alert alert-success alert-dismissible fade show"
+                role="alert"
+            >
+                <strong><p>{{ message }}</p></strong>
+                <button
+                    type="button"
+                    class="close"
+                    data-dismiss="alert"
+                    aria-label="Close"
+                >
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {% endif %}
+            <!--  -->
+            {% endfor %}
+            <!--  -->
+            {% endif %}
+
+            <!-- Main Content -->
+            <div class="content" id="content">
+                <!-- Adjust margin for fixed navbar -->
+                {% block content %}
+                <!-- Page-specific content goes here -->
+                {% endblock %}
+
+                <!-- Footer -->
+                <footer class="content-footer footer bg-footer-theme">
+                    <div
+                        class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column"
+                    >
+                        <div class="mb-2 mb-md-0">
+                            ©
+                            <script>
+                                document.write(new Date().getFullYear());
+                            </script>
+                            , Baifam Group. All rights reserved
+                            <a
+                                href="https://Baifam Group.com/"
+                                target="_blank"
+                                class="footer-link fw-medium"
+                                >Baifam</a
+                            >
+                        </div>
+                        <div class="d-none d-lg-inline-block">
+                            <a href="#" class="footer-link me-4" target="_blank"
+                                >License</a
+                            >
+
+                            <!-- <a href="#" target="_blank" class="footer-link me-4">Documentation</a>
+
+                            <a href="" target="_blank" class="footer-link d-none d-sm-inline-block">Support</a> -->
+                        </div>
+                    </div>
+                </footer>
+
+                <!-- Footer -->
+            </div>
+        </section>
+
+        <datalist id="car-makes">
+            <option value="Audi">
+            <option value="BMW">
+            <option value="Chevrolet">
+            <option value="Dodge">
+            <option value="Ford">
+            <option value="Honda">
+            <option value="Hyundai">
+            <option value="Kia">
+            <option value="Nissan">
+            <option value="Toyota">
+            <option value="Volkswagen">
+            <option value="Subaru">
+            <option value="Mercedes Benz">
+            <option value="Mazda">
+            <option value="Porsche">
+            <option value="Lexus">
+            <option value="Jaguar">
+            <option value="Fiat">
+            <option value="Land Rover">
+            <option value="Chrysler">
+            <option value="Buick">
+        </datalist>
+
+        <datalist id="currencies">
+            <option value="AED - United Arab Emirates Dirham">
+            <option value="AFN - Afghan Afghani">
+            <option value="ALL - Albanian Lek">
+            <option value="AMD - Armenian Dram">
+            <option value="ANG - Netherlands Antillean Guilder">
+            <option value="AOA - Angolan Kwanza">
+            <option value="ARS - Argentine Peso">
+            <option value="AUD - Australian Dollar">
+            <option value="AWG - Aruban Florin">
+            <option value="AZN - Azerbaijani Manat">
+            <option value="BAM - Bosnian Convertible Mark">
+            <option value="BBD - Barbadian Dollar">
+            <option value="BDT - Bangladeshi Taka">
+            <option value="BGN - Bulgarian Lev">
+            <option value="BHD - Bahraini Dinar">
+            <option value="BIF - Burundian Franc">
+            <option value="BMD - Bermudian Dollar">
+            <option value="BND - Brunei Dollar">
+            <option value="BOB - Bolivian Boliviano">
+            <option value="BRL - Brazilian Real">
+            <option value="BSD - Bahamian Dollar">
+            <option value="BTN - Bhutanese Ngultrum">
+            <option value="BWP - Botswanan Pula">
+            <option value="BYN - Belarusian Ruble">
+            <option value="BZD - Belize Dollar">
+            <option value="CAD - Canadian Dollar">
+            <option value="CDF - Congolese Franc">
+            <option value="CHF - Swiss Franc">
+            <option value="CLP - Chilean Peso">
+            <option value="CNY - Chinese Yuan">
+            <option value="COP - Colombian Peso">
+            <option value="CRC - Costa Rican Colón">
+            <option value="CUP - Cuban Peso">
+            <option value="CZK - Czech Koruna">
+            <option value="DJF - Djiboutian Franc">
+            <option value="DKK - Danish Krone">
+            <option value="DOP - Dominican Peso">
+            <option value="DZD - Algerian Dinar">
+            <option value="EGP - Egyptian Pound">
+            <option value="ERN - Eritrean Nakfa">
+            <option value="ETB - Ethiopian Birr">
+            <option value="EUR - Euro">
+            <option value="FJD - Fijian Dollar">
+            <option value="FKP - Falkland Islands Pound">
+            <option value="FOK - Faroese Króna">
+            <option value="GBP - British Pound">
+            <option value="GEL - Georgian Lari">
+            <option value="GHS - Ghanaian Cedi">
+            <option value="GIP - Gibraltar Pound">
+            <option value="GMD - Gambian Dalasi">
+            <option value="GNF - Guinean Franc">
+            <option value="GTQ - Guatemalan Quetzal">
+            <option value="GYD - Guyanese Dollar">
+            <option value="HKD - Hong Kong Dollar">
+            <option value="HNL - Honduran Lempira">
+            <option value="HRK - Croatian Kuna">
+            <option value="HTG - Haitian Gourde">
+            <option value="HUF - Hungarian Forint">
+            <option value="IDR - Indonesian Rupiah">
+            <option value="ILS - Israeli New Shekel">
+            <option value="IMP - Isle of Man Pound">
+            <option value="INR - Indian Rupee">
+            <option value="IQD - Iraqi Dinar">
+            <option value="IRR - Iranian Rial">
+            <option value="ISK - Icelandic Króna">
+            <option value="JEP - Jersey Pound">
+            <option value="JMD - Jamaican Dollar">
+            <option value="JOD - Jordanian Dinar">
+            <option value="JPY - Japanese Yen">
+            <option value="KES - Kenyan Shilling">
+            <option value="KGS - Kyrgyzstani Som">
+            <option value="KHR - Cambodian Riel">
+            <option value="KPW - North Korean Won">
+            <option value="KRW - South Korean Won">
+            <option value="KWD - Kuwaiti Dinar">
+            <option value="KYD - Cayman Islands Dollar">
+            <option value="KZT - Kazakhstani Tenge">
+            <option value="LAK - Laotian Kip">
+            <option value="LBP - Lebanese Pound">
+            <option value="LKR - Sri Lankan Rupee">
+            <option value="LRD - Liberian Dollar">
+            <option value="LSL - Lesotho Loti">
+            <option value="LYD - Libyan Dinar">
+            <option value="MAD - Moroccan Dirham">
+            <option value="MDL - Moldovan Leu">
+            <option value="MGA - Malagasy Ariary">
+            <option value="MKD - Macedonian Denar">
+            <option value="MMK - Myanma Kyat">
+            <option value="MNT - Mongolian Tögrög">
+            <option value="MOP - Macanese Pataca">
+            <option value="MRU - Mauritanian Ouguiya">
+            <option value="MUR - Mauritian Rupee">
+            <option value="MVR - Maldivian Rufiyaa">
+            <option value="MWK - Malawian Kwacha">
+            <option value="MXN - Mexican Peso">
+            <option value="MYR - Malaysian Ringgit">
+            <option value="MZN - Mozambican Metical">
+            <option value="NAD - Namibian Dollar">
+            <option value="NGN - Nigerian Naira">
+            <option value="NIO - Nicaraguan Córdoba">
+            <option value="NOK - Norwegian Krone">
+            <option value="NZD - New Zealand Dollar">
+            <option value="OMR - Omani Rial">
+            <option value="PAB - Panamanian Balboa">
+            <option value="PEN - Peruvian Nuevo Sol">
+            <option value="PGK - Papua New Guinean Kina">
+            <option value="PHP - Philippine Peso">
+            <option value="PKR - Pakistani Rupee">
+            <option value="PLN - Polish Zloty">
+            <option value="PYG - Paraguayan Guarani">
+            <option value="QAR - Qatari Rial">
+            <option value="RON - Romanian Leu">
+            <option value="RSD - Serbian Dinar">
+            <option value="RUB - Russian Ruble">
+            <option value="RWF - Rwandan Franc">
+            <option value="SAR - Saudi Riyal">
+            <option value="SBD - Solomon Islands Dollar">
+            <option value="SCR - Seychellois Rupee">
+            <option value="SDG - Sudanese Pound">
+            <option value="SEK - Swedish Krona">
+            <option value="SGD - Singapore Dollar">
+            <option value="SHP - Saint Helenian Pound">
+            <option value="SLL - Sierra Leonean Leone">
+            <option value="SOS - Somali Shilling">
+            <option value="SRD - Surinamese Dollar">
+            <option value="SSP - South Sudanese Pound">
+            <option value="STN - São Tomé and Príncipe Dobra">
+            <option value="SVC - Salvadoran Colón">
+            <option value="SYP - Syrian Pound">
+            <option value="SZL - Swazi Lilangeni">
+            <option value="THB - Thai Baht">
+            <option value="TJS - Tajikistani Somoni">
+            <option value="TMT - Turkmenistani Manat">
+            <option value="TND - Tunisian Dinar">
+            <option value="TOP - Tongan Paʻanga">
+            <option value="TRY - Turkish Lira">
+            <option value="TTD - Trinidad and Tobago Dollar">
+            <option value="TWD - New Taiwan Dollar">
+            <option value="TZS - Tanzanian Shilling">
+            <option value="UAH - Ukrainian Hryvnia">
+            <option value="UGX - Ugandan Shilling">
+            <option value="USD - United States Dollar">
+            <option value="UYU - Uruguayan Peso">
+            <option value="UZS - Uzbekistani Som">
+            <option value="VES - Venezuelan Bolívar Soberano">
+            <option value="VND - Vietnamese Dong">
+            <option value="VUV - Vanuatu Vatu">
+            <option value="WST - Samoan Tala">
+            <option value="XAF - Central African CFA Franc">
+            <option value="XAG - Silver Ounce">
+            <option value="XAU - Gold Ounce">
+            <option value="XCD - East Caribbean Dollar">
+            <option value="XDR - IMF Special Drawing Rights">
+            <option value="XOF - West African">
+        </datalist>
+
+        <!-- Bootstrap JS and Popper.js -->
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
+        <script src="{% static 'assets/js/script.js' %}"></script>
+
+
+        <div class="notifications-area"></div>
+
+
+        <!-- handling notifications web socket connections -->
+        <script>
+
+          let protocol = window.location.host.includes("localhost") ? "ws://" : "ws://"
+          url = protocol + window.location.host + `/ws/notifications/`
+
+          // let notificationAlert = document.querySelector("#notification-alert")
+          const chatSocket = new WebSocket(url);
+          chatSocket.onmessage = async function (e) {
+            // {"title": "","description": "","time": "", "permission": "can_make_sales_manager_review"}
+            var user_permissions = "{{ request.user.permissions|safe }}";
+            var user_company = "{{ request.user.company.name|safe }}";
+            const data = JSON.parse(e.data);
+
+            if (user_company.toLowerCase() != data.company.toLowerCase()) {return}
+
+            // only show notification if permission in found
+            if (user_permissions.includes(data.permission)) {
+              const alert = document.createElement("div")
+              alert.className = "notification-alert show"
+              alert.innerHTML = `
+                <div class="alert-header">
+                    <p>${data.title}</p>
+                    <button class="close-cta"><i class="fa fa-close"></i></button>
+                </div>
+                <div class="alert-content">
+                    <p>${data.description}</p>
+                    <span class="time">${data.time}</span>
+                </div>
+              `;
+
+              const notifications_area = document.querySelector(".notifications-area")
+              notifications_area.appendChild(alert)
+
+              const cta = alert.querySelector(".notification-alert .close-cta")
+              cta.addEventListener("click", () => {
+                console.log(cta);
+                alert.classList.remove("show");
+                alert.classList.add("hidden");
+              }),
+
+              setTimeout(() => {
+                alert.classList.remove("show");
+                alert.classList.add("hidden");
+              }, 10000)
+            }
+        }
+        </script>
+
+        <div class="img-zoomer">
+            <img src="" alt="" class="zoomed-img" />
+            <button class="close-cta">X</button>
+        </div>
+
+    </body>
+</html>

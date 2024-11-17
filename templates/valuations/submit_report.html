@@ -1,0 +1,14 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block css %}
+
+{% block title %}{% endblock %}
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-warning">Submit Report</button>
+</form>
+
+{% endblock %}
+{% endblock %}

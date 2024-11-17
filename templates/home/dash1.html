@@ -1,0 +1,108 @@
+{% extends "home/base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+    <h1 class="text-center mb-4">Dashboard</h1>
+
+    <div class="container">
+        <div class="row">
+
+            <!-- Prospects Section -->
+            <div class="col-md-4">
+                <div class="card border-primary mb-4 shadow-sm">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="my-0 font-weight-normal">Prospects</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Prospects Created
+                                <span class="badge badge-primary badge-pill"></span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Awaiting Valuation
+                                <span class="badge badge-warning badge-pill"></span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Active Valuations
+                                <span class="badge badge-success badge-pill"></span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Completed Valuations
+                                <span class="badge badge-secondary badge-pill"></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Loan Applications Section -->
+            <div class="col-md-4">
+                <div class="card border-success mb-4 shadow-sm">
+                    <div class="card-header bg-success text-white">
+                        <h5 class="my-0 font-weight-normal">Loan Applications</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Total Applications
+                                <span class="badge badge-success badge-pill"></span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Applications Declined
+                                <span class="badge badge-danger badge-pill"></span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Applications Approved
+                                <span class="badge badge-success badge-pill"></span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Approval Percentage
+                                <span class="badge badge-info badge-pill">%</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Decline Percentage
+                                <span class="badge badge-warning badge-pill">%</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Collections Section -->
+            <div class="col-md-4">
+                <div class="card border-warning mb-4 shadow-sm">
+                    <div class="card-header bg-warning text-dark">
+                        <h5 class="my-0 font-weight-normal">Collections</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Total Collections
+                                <span class="badge badge-light badge-pill">$</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Successful Collections
+                                <span class="badge badge-success badge-pill">$</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Failed Collections
+                                <span class="badge badge-danger badge-pill">$</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Collection Percentage
+                                <span class="badge badge-info badge-pill">%</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Failed Collection Percentage
+                                <span class="badge badge-warning badge-pill">%</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div> <!-- End of row -->
+    </div> <!-- End of container -->
+{% endblock %}

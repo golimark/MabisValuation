@@ -1,0 +1,141 @@
+{% extends 'home/base.html' %} {% block title %}Admin Panel{% endblock %}
+<!--  -->
+{% block content %}
+<style>
+    .bg-custom {
+        background-color: #ecf0f5;
+        padding: 20px; /* Add some padding if you want spacing around the content */
+        font-size: 14px;
+    }
+
+    .top-border-blue {
+        border-top: 5px solid #007bff !important; /* Blue line on top */
+    }
+    /* Style for top row */
+    .top-row {
+        display: flex;
+        align-items: center;
+        background-color: #f8f9fa;
+        padding: 10px 20px;
+    }
+
+    .top-row .dropdown {
+        margin-right: 20px;
+    }
+    /* Custom button style for Borrowers dropdown */
+    .top-row .dropdown-toggle {
+        background-color: #ecf0f5;
+        border: 1px solid #b0b0b0; /* Darker border */
+        color: #333; /* Darker text for contrast */
+    }
+
+    .top-row .dropdown-toggle:hover {
+        background-color: #d6dadd; /* Slightly darker on hover */
+    }
+    .top-row .dropdown-menu {
+        min-width: 180px;
+    }
+
+    .top-row .search-container {
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+    }
+
+    .top-row .search-container input {
+        flex: 1;
+        border: 1px solid #ced4da;
+        padding: 5px;
+        border-radius: 3px 0 0 3px;
+        outline: none;
+    }
+
+    .top-row .search-container button {
+        border: 1px solid #ced4da;
+        background-color: #f8f9fa;
+        padding: 5px 10px;
+        border-left: none;
+        border-radius: 0 3px 3px 0;
+        cursor: pointer;
+    }
+</style>
+
+<div class="bg-custom">
+    <div class="top-row">
+        <!-- Dropdown for Borrowers -->
+        <!-- <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" id="borrowersDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                Borrowers
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="borrowersDropdown">
+                <li><a class="dropdown-item" href="#">Borrower 1</a></li>
+                <li><a class="dropdown-item" href="#">Borrower 2</a></li>
+                <li><a class="dropdown-item" href="#">Borrower 3</a></li>
+            </ul>
+        </div> -->
+
+        <!-- Search Field -->
+        <div class="search-container">
+            <input type="text" placeholder="Search" aria-label="Search" />
+            <button><i class="fa fa-search"></i></button>
+        </div>
+    </div>
+
+    <br />
+
+    <div
+        style="
+            display: grid;
+            grid-template-columns: 0.5fr 5fr;
+            align-items: center;
+            gap: 2rem;
+            margin-block-end: 1rem;
+        "
+    >
+        <h4 style="margin: 0">Admin</h4>
+        <input
+            type="text"
+            class="form-control"
+            placeholder="Type here to search in the settings"
+            id="settings-search"
+            style="width: 100%; font-size: 14px; padding: 0.5rem 1rem"
+        />
+    </div>
+
+    <div class="p-3 bg-white border rounded top-border-blue">
+        <div class="row">
+            <!-- Row 1 -->
+            <div class="setttings-group col-md-4 mb-4">
+                <h6>Users and Roles</h6>
+                <ul class="list-unstyled ms-3">
+                    <li class="setting-item">
+                        <span class="me-2" style="color: black">&#x25A0;</span
+                        ><a href="{% url 'roles_create' %}" class="text-primary"
+                            >Create Role</a
+                        >
+                    </li>
+                    <li class="setting-item">
+                        <span class="me-2" style="color: black">&#x25A0;</span
+                        ><a href="{% url 'roles_list' %}" class="text-primary"
+                            >View All Roles</a
+                        >
+                    </li>
+                    <li class="setting-item">
+                        <span class="me-2" style="color: black">&#x25A0;</span
+                        ><a href="{% url 'users_create' %}" class="text-primary"
+                            >Add Company User</a
+                        >
+                    </li>
+                    <li class="setting-item">
+                        <span class="me-2" style="color: black">&#x25A0;</span
+                        ><a href="{% url 'users_list' %}" class="text-primary"
+                            >View Company Users</a
+                        >
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <hr />
+    </div>
+</div>
+{% endblock %}
