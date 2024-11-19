@@ -50,10 +50,12 @@
                 <button type="submit" class="btn btn-primary">Save</button>
             </form>
         </div> -->
+        {% if 'can_perform_admin_functions' in request.user.permissions %}
         <div class="button-group">
             <a href="{% url 'create_company' %}" class="btn btn-success">Create Loan Company</a>
             <a href="{% url 'company_list' %}" class="btn btn-info">View Available Loan Companies</a>
         </div>
+        {% endif %}
         
         <div class="form-area">
             <form method="post" enctype="multipart/form-data">
