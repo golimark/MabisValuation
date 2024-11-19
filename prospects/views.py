@@ -144,24 +144,13 @@ class ProspectDetailView(LoginRequiredMixin, View):
                 # update saved record to track any changes
                 prospect = Prospect.objects.filter(slug = slug).first()
                 serializer = ApiSerializers.ProspectSerializer(prospect, data=data, partial=True)
-<<<<<<< HEAD
-                print('\n prospect serializer',serializer)
-=======
                
->>>>>>> e60934b4968c3cd1b815e42dcb5992dc1a5b88c0
             else:
                 serializer = ApiSerializers.ProspectSerializer(data=data)
 
             if serializer.is_valid():
                 prospect = serializer.save()    
                 context['prospect'] = prospect
-<<<<<<< HEAD
-            else:
-
-                print("\n", serializer.errors)
-
-=======
->>>>>>> e60934b4968c3cd1b815e42dcb5992dc1a5b88c0
                 
             # fetch vechicle assets
                 
@@ -177,11 +166,6 @@ class ProspectDetailView(LoginRequiredMixin, View):
                 
                 if not vehicle:
                     vehicleSerializer = ApiSerializers.VehicleAssetSerializer(data=vehicle_data)
-<<<<<<< HEAD
-                    print('\n vehicleserializer',vehicleSerializer)
-                    # print('\n\n\n\n\n',vehicleSerializer, '\n\n\n\n\n')
-=======
->>>>>>> e60934b4968c3cd1b815e42dcb5992dc1a5b88c0
                    
                 else:
                     vehicleSerializer = ApiSerializers.VehicleAssetSerializer(vehicle.first(), data=vehicle_data, partial=True)
@@ -190,14 +174,7 @@ class ProspectDetailView(LoginRequiredMixin, View):
             
                 if vehicleSerializer.is_valid(raise_exception=True):
                     vehicleSerializer.save()
-<<<<<<< HEAD
-                        
-                else:
-                    print('\n\n',vehicleSerializer.errors)
-                    
-=======
                
->>>>>>> e60934b4968c3cd1b815e42dcb5992dc1a5b88c0
 
             vehicle_assets = VehicleAsset.objects.filter(prospect=prospect)
             if vehicle_assets:
@@ -222,92 +199,6 @@ class ProspectDetailView(LoginRequiredMixin, View):
             return JsonResponse({'error': str(e)}, status=500)
 
 
-<<<<<<< HEAD
-    def post(self, request, *args, **kwargs):
-        context = {}
-        
-        # fetch prospect
-        api_url = f'{request.user.active_company.api}/prospects/{self.slug}'
-        try:
-            response = requests.get(api_url)
-            response.raise_for_status()
-            prospect = response.json()
-
-            context['prospect'] = prospect
-        except:
-            pass
-
-        # save vehicle asset if available
-        if request.POST.get("license_plate"):
-            vehicle_asset = VehicleAsset.objects.filter(prospect=prospect)
-            if not vehicle_asset:
-                # no record
-                vehicle_form = VehicleAssetForm(request.POST, request.FILES)
-                if vehicle_form.is_valid():
-                    v_asset = vehicle_form.save()
-                    v_asset.prospect = prospect
-                    v_asset.license_plate = v_asset.license_plate.upper()
-                    v_asset.save()
-                    prospect.status = 'Pending'
-                    prospect.asset_submitted_on = datetime.now()
-                    prospect.asset_submitted_by = request.user
-                    prospect.save()
-                    messages.add_message(request, messages.SUCCESS, "Submitted for Payment verification")
-                else:
-                    messages.add_message(request, messages.ERROR, "Error Creating Vehicle Record. Try Again.")
-            else:
-                # update old record
-                vehicle_form = VehicleAssetForm(request.POST, request.FILES, instance=vehicle_asset.first())
-                if vehicle_form.is_valid():
-                    vehicle_form.save()
-                    prospect.status = 'Pending'
-                    prospect.asset_submitted_on = datetime.now()
-                    prospect.asset_submitted_by = request.user
-                    prospect.save()
-                    messages.add_message(request, messages.SUCCESS, "Submitted for Payment verification")
-                else:
-                    messages.add_message(request, messages.ERROR, "Error Modifying Vehicle Records. Try Again")
-
-
-        # save land asset if available
-        if request.POST.get("land_location"):
-            land_asset = LandAsset.objects.filter(prospect=prospect)
-            if not land_asset:
-                # no record
-                land_form = LandAssetForm(request.POST, request.FILES)
-                if land_form.is_valid():
-                    l_asset = land_form.save()
-                    l_asset.prospect = prospect
-                    l_asset.save()
-                    prospect.status = 'Pending'
-                    prospect.asset_submitted_on = datetime.now()
-                    prospect.asset_submitted_by = request.user
-                    prospect.save()
-                    messages.add_message(request, messages.SUCCESS, "Submitted for Payment verification")
-                else:
-                    messages.add_message(request, messages.ERROR, "Error Creating Land Record. Try Again")
-            else:
-                # update old record
-                land_form = LandAssetForm(request.POST, request.FILES, instance=land_asset.first())
-                if land_form.is_valid():
-                    land_form.save()
-                    prospect.status = 'Pending'
-                    prospect.asset_submitted_on = datetime.now()
-                    prospect.asset_submitted_by = request.user
-                    prospect.save()
-
-                    if request.GET.get("action") == "revaluation_request":
-                        for loan_app in LoanApplication.objects.filter(prospect = prospect):
-                            loan_app.delete()
-                            
-                    messages.add_message(request, messages.SUCCESS, "Submitted for Payment verification")
-                else:
-                    messages.add_message(request, messages.ERROR, "Error Modifying Land Records. Try Again")
-
-        return redirect(reverse_lazy("prospect_list"))
-
-=======
->>>>>>> e60934b4968c3cd1b815e42dcb5992dc1a5b88c0
 # View to display prospects with 'Pending' status
 class ProspectPendingView(LoginRequiredMixin, ListView):
     model = Prospect
@@ -1178,15 +1069,6 @@ def PipelineView(request, slug):
                     "upholstery": open(f"{settings.BASE_DIR}{serializer.data.get('upholstery')}", "rb"),
                     "vehicle_id_plate": open(f"{settings.BASE_DIR}{serializer.data.get('vehicle_id_plate')}", "rb"),
                 }
-<<<<<<< HEAD
-                serializer.data.pop('right_hand_side_view', None)
-                serializer.data.pop('left_hand_eside_view', None)
-                serializer.data.pop('engine_compartment', None)
-                serializer.data.pop('upholstery', None)
-                serializer.data.pop('vehicle_id_plate', None)
-                # serializer.data['pk'] = v_report.prospect.pk
-=======
->>>>>>> e60934b4968c3cd1b815e42dcb5992dc1a5b88c0
 
                 # Remove file fields from data
                 file_fields = ['right_hand_side_view', 'left_hand_eside_view', 'engine_compartment', 'upholstery', 'vehicle_id_plate']
