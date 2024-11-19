@@ -46,7 +46,7 @@ class UserActiveCompanyForm(forms.ModelForm):
 class UserUpdateForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ["first_name", "last_name", "username", "email", "role", "companies", "status", "image"]
+        fields = ["first_name", "last_name", "username", "email", "role", "company", "status", "image"]
 
     def __init__(self, *args, user=None, **kwargs):
         super().__init__(*args, **kwargs)
@@ -56,7 +56,7 @@ class UserUpdateForm(forms.ModelForm):
 
         if user:
             self.fields['role'].queryset = Role.objects.filter(company=user.company)
-            self.fields['companies'].queryset = user.companies.all()
+            self.fields['company'].queryset = user.company
 
     def add_password_button(self):
         return mark_safe('<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#passwordChangeModal">Change Password</button>')
@@ -121,7 +121,7 @@ class UserCreateForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ["first_name", "last_name", "username", "email", "role", "companies", "status", "password", "image"]
+        fields = ["first_name", "last_name", "username", "email", "role", "company", "status", "password", "image"]
         widgets = {
             'password': forms.PasswordInput(attrs={'class': 'form-control'}),
         }
@@ -129,7 +129,7 @@ class UserCreateForm(forms.ModelForm):
     def __init__(self, *args, user=None, **kwargs):
         super().__init__(*args, **kwargs)
 
-        fields = ["first_name", "last_name", "username", "email", "role", "companies", "status", "password", "image"]
+        fields = ["first_name", "last_name", "username", "email", "role", "company", "status", "password", "image"]
 
         for field in fields:
             self.fields[field].required = True
@@ -143,7 +143,7 @@ class UserCreateForm(forms.ModelForm):
 
             if user:
                 self.fields['role'].queryset = Role.objects.filter(company=user.company)
-                self.fields['companies'].queryset = user.companies.all()
+                self.fields['company'].initial = user.company
 
 class RoleForm(forms.ModelForm):
     class Meta:

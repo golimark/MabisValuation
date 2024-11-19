@@ -32,7 +32,6 @@
                             <div class="company-select">
                                 <p>Select Company:</p>
                                 <div class="company-list">
-                                    {% for company in user_companies %}
                                     <div class="company-item">
                                         <input
                                             type="checkbox"
@@ -45,7 +44,6 @@
                                             >{{company.name}}</label
                                         >
                                     </div>
-                                    {% endfor %}
                                 </div>
                             </div>
                         </div>

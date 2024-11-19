@@ -107,7 +107,7 @@ class User(AbstractUser):
         ]
 
     email = models.EmailField("user email", blank=True, null=True)
-    companies = models.ManyToManyField(Company, related_name="companies")
+    company = models.ForeignKey(Company, on_delete=models.CASCADE ,related_name="company", null=True, blank=True)
     active_company = models.ForeignKey(LoanCompany, on_delete=models.CASCADE, blank=True, null=True)
     updated_on = models.DateTimeField("Updated on", auto_now=True)
     role = models.ForeignKey("Role", on_delete=models.CASCADE, blank=True, null=True)
@@ -126,14 +126,14 @@ class User(AbstractUser):
     def save(self, *args, **kwargs):
         self.slug = slugify(f"{self.first_name}-{self.last_name}-{uuid.uuid4()}")[:200]
 
-        if self.pk and not self.active_company and self.companies.all():
-            self.active_company = self.companies.first()
+        # if self.pk and self.company:
+        #     self.active_company = self.company
 
         super().save(*args, **kwargs)
 
-    @property
-    def company(self):
-        return self.active_company
+    # @property
+    # def company(self):
+    #     return self.active_company
 
     @property
     def permissions(self):

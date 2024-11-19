@@ -403,7 +403,7 @@ class RolesDetailView(LoginRequiredMixin, View):
 
         self.context["form"] = RoleForm(instance = role)
         self.context["permissions"] = Permission.objects.all()
-        self.context["user_companies"] = request.user.companies.all()
+        self.context["user_companies"] = request.user.company
         self.context["companies_with_role"] = [role.company for role in Role.objects.filter(name=role.name)]
         return render(request, self.template_name, context=self.context)
 
@@ -460,7 +460,7 @@ class RolesCreateView(LoginRequiredMixin, View):
         self.context["form"] = RoleForm()
 
         self.context["permissions"] = Permission.objects.all()
-        self.context["user_companies"] = request.user.companies.all()
+        self.context["company"] = request.user.company
         return render(request, self.template_name, context=self.context)
 
     def post(self, request):
@@ -509,7 +509,7 @@ class CreateListView(LoginRequiredMixin, View):
     context = {}
 
     def get(self, request):
-        self.context["users"] = User.objects.filter(companies=request.user.company)
+        self.context["users"] = User.objects.filter(company=request.user.company)
         return render(request, self.template_name, context=self.context)
 
 
@@ -663,7 +663,7 @@ class CreateCreateView(LoginRequiredMixin, View):
             user = form.save(commit=False)
             user.set_password(form.cleaned_data['password'])
             user.save()
-            user.companies.add(request.user.company)
+            user.company = request.user.company
             user.save()
 
             if user.email:
