@@ -153,7 +153,7 @@ class CompanyUpdateView(View):
         return render(request, 'company/update_company.html', context)
 
     def post(self, request, company_id):
-        company = get_object_or_404(Company, id=company_id)
+        company = get_object_or_404(LoanCompany, id=company_id)
         form = LoanCompanyForm(request.POST, request.FILES, instance=company)  # Include request.FILES for the logo field
         if form.is_valid():
             form.save()  # Save the updated company data

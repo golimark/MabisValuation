@@ -221,7 +221,7 @@ class ProspectDetailView(LoginRequiredMixin, View):
         context = {}
         
         # fetch prospect
-        api_url = f'{request.user.active_company.api}/prospects/{slug}'
+        api_url = f'{request.user.active_company.api}/prospects/{self.slug}'
         try:
             response = requests.get(api_url)
             response.raise_for_status()
@@ -308,7 +308,7 @@ class ProspectPendingView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         # Filter the queryset to only include prospects with 'Pending' status
-        return Prospect.objects.filter(status='Pending').order_by('-updated_at').filter(agent__company=self.request.user.company)
+        return Prospect.objects.filter(Q(status='Pending')|Q(status='Payment Verified')).order_by('-updated_at').filter(agent__company=self.request.user.company)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -1320,6 +1320,7 @@ def PipelineView(request, slug):
                 serializer.data.pop('engine_compartment', None)
                 serializer.data.pop('upholstery', None)
                 serializer.data.pop('vehicle_id_plate', None)
+                serializer.data['pk'] = v_report.prosepect.pk
 
                 response = requests.post(api_url, data=serializer.data, files=files)
 
