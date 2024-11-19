@@ -177,9 +177,8 @@ class VehicleEvaluationReportForm(forms.ModelForm):
         for date_field in date_fields:
             self.fields[date_field].widget = forms.DateInput(
                 format='%d/%m/%Y',
-                attrs={'type': 'date', 'placeholder': 'dd/mm/yyyy'}
+                attrs={'type': 'date', 'placeholder': 'dd/mm/yyyy', 'value': self.instance.date_field if self.instance and hasattr(self.instance, date_field) else None}
             )
-            # self.fields[date_field].input_formats = ['%d/%m/%Y']
 
 
         if prospect.status == 'Valuation':
