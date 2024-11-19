@@ -21,7 +21,7 @@ urlpatterns = [
     # path('submit-report/<str:slug>/', views.submit_report, name='submit_report'),
 
     # fetch data 
-    path('vehicle-assets', views.fetch_prospects_from_mabis, name='get_data_from_mabis'),
-    path('vehicle-asset-data', views.fetch_vehicle_asset_for_prospect, name='get_vehicle_asset_data'),
+    path('prospects', views.fetch_prospects_from_mabis, name='get_data_from_mabis'),
+    path('vehicles', views.fetch_vehicle_asset_for_prospect, name='get_vehicle_asset_data'),
 
 ]

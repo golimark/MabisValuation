@@ -549,7 +549,6 @@ def fetch_prospects_from_mabis(request):
         response = requests.get(api_url)
         response.raise_for_status()
         data = response.json()
-        print(data)
         context = {'prospects': data, "page_name": "valuation", "sub_page_name": "payment_verification"}
         return render(request, 'valuations/pending_prospect.html', context)
     except requests.exceptions.RequestException as e:
