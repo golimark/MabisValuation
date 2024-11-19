@@ -1,0 +1,13 @@
+[Unit]
+Description=celery worker service for MABiS
+After=network.target
+
+[Service]
+user=baifam-admin
+Group=www-data
+WorkingDirectory=/home/baifam-admin/MABiS
+ExecStart=/home/baifam-admin/MABiS/venv/bin/celery -A loanMS worker --loglevel=info
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

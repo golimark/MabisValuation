@@ -6,6 +6,8 @@ urlpatterns = [
     path('login/', login_view, name='login'),
     path('', dashboard_view, name='dashboard'),
     path('dashboard/', dashboard_view, name='dashboard'),
+    path('create-company/', CompanyCreateView.as_view(), name='create_company'),
+    path('company-list/', CompanyListView.as_view(), name='company_list'),
     path('logout/', logout_view, name='logout'),
     path('executive_dashboard/', executive_dashboard, name='executive_dashboard'),
     path('valuer_dashboard/', valuer_dashboard, name='valuer_dashboard'),
@@ -24,7 +26,7 @@ urlpatterns = [
     path("users/", CreateListView.as_view(), name="users_list"),
     path("users/<str:slug>/detail", CreateDetailView.as_view(), name="users_details"),
     path("users/create/", CreateCreateView.as_view(), name="users_create"),
-    path("company/toggle/", UserCompanyToggleView.as_view(), name="company_toggle"),
+    path("company/toggle/", LoanCompanyToggleView.as_view(), name="company_toggle"),
     path('user/<str:slug>/change-password/', change_password, name='change_password'),
     path('reset-password/<str:uidb64>/<str:token>/', reset_password_view, name='reset_password'),
 

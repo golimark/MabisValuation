@@ -1,0 +1,12 @@
+[Unit]
+Description=gunicorn daemon for MABiS
+After=network.target
+
+[Service]
+user=baifam-admin
+Group=www-data
+WorkingDirectory=/home/baifam-admin/MABiS
+ExecStart=/home/baifam-admin/MABiS/venv/bin/gunicorn --access-logfile - --workers 3 --bind unix:/home/baifam-admin/MABiS/mabis.sock loanMS.wsgi:application
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,6686 @@
+[
+  {
+    "model": "admin.logentry",
+    "pk": 23,
+    "fields": {
+      "action_time": "2024-10-29T17:07:27.870Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "17",
+      "object_repr": "Can Verify Payement",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 24,
+    "fields": {
+      "action_time": "2024-10-29T17:07:42.809Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "18",
+      "object_repr": "Can Edit Payement",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 25,
+    "fields": {
+      "action_time": "2024-10-29T17:07:56.121Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "19",
+      "object_repr": "Can Create Payment",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 28,
+    "fields": {
+      "action_time": "2024-10-29T17:11:06.365Z",
+      "user": 1,
+      "content_type": 9,
+      "object_id": "2",
+      "object_repr": "JOHN MERCY",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 32,
+    "fields": {
+      "action_time": "2024-10-30T03:32:01.978Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "3",
+      "object_repr": "tumuhimbise john",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"STATUS\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 33,
+    "fields": {
+      "action_time": "2024-10-30T03:52:29.653Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "2",
+      "object_repr": "talina manyi",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"STATUS\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 35,
+    "fields": {
+      "action_time": "2024-10-30T10:23:15.954Z",
+      "user": 1,
+      "content_type": 17,
+      "object_id": "3",
+      "object_repr": "UBT 554G",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Vehicle Registration Number\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 36,
+    "fields": {
+      "action_time": "2024-10-30T12:11:01.050Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "15",
+      "object_repr": "Can create payment",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 37,
+    "fields": {
+      "action_time": "2024-10-30T12:13:03.372Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "21",
+      "object_repr": "Can Decline Prospect",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 38,
+    "fields": {
+      "action_time": "2024-10-30T12:13:49.417Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "22",
+      "object_repr": "Can Verify payment as Valuer",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 39,
+    "fields": {
+      "action_time": "2024-10-30T12:14:17.354Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "23",
+      "object_repr": "Can submit Valuation Details",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 40,
+    "fields": {
+      "action_time": "2024-10-30T12:15:02.611Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "24",
+      "object_repr": "Can Complete Asset Valuation Details",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 41,
+    "fields": {
+      "action_time": "2024-10-30T12:15:29.810Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "25",
+      "object_repr": "Can View Valuation Requests",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 42,
+    "fields": {
+      "action_time": "2024-10-30T12:21:27.669Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "26",
+      "object_repr": "Can Review Signed Documents",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 43,
+    "fields": {
+      "action_time": "2024-10-30T12:21:59.929Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "27",
+      "object_repr": "Can Edit Loan Fees",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 44,
+    "fields": {
+      "action_time": "2024-10-30T12:22:26.167Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "28",
+      "object_repr": "Can Create Loan Fees",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 45,
+    "fields": {
+      "action_time": "2024-10-30T12:22:47.019Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "29",
+      "object_repr": "Can Create Loan Products",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 46,
+    "fields": {
+      "action_time": "2024-10-30T12:23:24.729Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "30",
+      "object_repr": "Can Edit Loan Products",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 47,
+    "fields": {
+      "action_time": "2024-10-30T12:23:44.437Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "31",
+      "object_repr": "Can Delete Loan Products",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 48,
+    "fields": {
+      "action_time": "2024-10-30T12:24:15.654Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "32",
+      "object_repr": "Can Update Loan Products",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 49,
+    "fields": {
+      "action_time": "2024-10-30T12:24:37.491Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "33",
+      "object_repr": "Can Update Loan Collection Products",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 50,
+    "fields": {
+      "action_time": "2024-10-30T12:24:52.606Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "34",
+      "object_repr": "Can Create Loan Collection Products",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 51,
+    "fields": {
+      "action_time": "2024-10-30T12:25:13.206Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "35",
+      "object_repr": "Can Edit Loan Collection Products",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 52,
+    "fields": {
+      "action_time": "2024-10-30T12:27:27.690Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "33",
+      "object_repr": "Can Update Loan Collection Products",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 53,
+    "fields": {
+      "action_time": "2024-10-30T12:27:27.690Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "32",
+      "object_repr": "Can Update Loan Products",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 54,
+    "fields": {
+      "action_time": "2024-10-30T12:29:40.004Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "36",
+      "object_repr": "Can View Loan Products",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 55,
+    "fields": {
+      "action_time": "2024-10-30T12:29:54.734Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "37",
+      "object_repr": "Can View Loan Collection Products",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 56,
+    "fields": {
+      "action_time": "2024-10-30T12:54:45.139Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "23",
+      "object_repr": "Can Edit Valuation Details",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Name\", \"Description\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 57,
+    "fields": {
+      "action_time": "2024-10-30T13:31:56.916Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "38",
+      "object_repr": "Can complete prospect details",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 58,
+    "fields": {
+      "action_time": "2024-10-30T13:33:30.726Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "39",
+      "object_repr": "Can Delete Prospect",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 59,
+    "fields": {
+      "action_time": "2024-10-30T13:34:51.247Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "40",
+      "object_repr": "Can View Agent",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 60,
+    "fields": {
+      "action_time": "2024-10-30T13:37:49.833Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "41",
+      "object_repr": "Can make loan application",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 61,
+    "fields": {
+      "action_time": "2024-10-30T13:45:08.383Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "42",
+      "object_repr": "Can do offer review",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 62,
+    "fields": {
+      "action_time": "2024-10-30T13:45:43.080Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "43",
+      "object_repr": "Can do Loan Perfection",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 63,
+    "fields": {
+      "action_time": "2024-10-30T13:46:57.922Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "44",
+      "object_repr": "Can do disbursement review",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 64,
+    "fields": {
+      "action_time": "2024-10-30T13:47:28.732Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "45",
+      "object_repr": "Can do loan Disbursement",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 65,
+    "fields": {
+      "action_time": "2024-10-30T13:47:48.095Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "46",
+      "object_repr": "Can view loan Collections",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 66,
+    "fields": {
+      "action_time": "2024-10-31T05:08:04.886Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "47",
+      "object_repr": "Can preform agent functions",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 67,
+    "fields": {
+      "action_time": "2024-10-31T07:25:29.267Z",
+      "user": 1,
+      "content_type": 11,
+      "object_id": "10",
+      "object_repr": "test time",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 68,
+    "fields": {
+      "action_time": "2024-10-31T07:55:36.135Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "48",
+      "object_repr": "Can View Pipeline",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 69,
+    "fields": {
+      "action_time": "2024-10-31T07:55:44.316Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "48",
+      "object_repr": "Can View Pipeline",
+      "action_flag": 2,
+      "change_message": "[]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 70,
+    "fields": {
+      "action_time": "2024-10-31T08:04:04.735Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "41",
+      "object_repr": "Can make loan application",
+      "action_flag": 2,
+      "change_message": "[]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 71,
+    "fields": {
+      "action_time": "2024-10-31T08:04:18.982Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "49",
+      "object_repr": "Can view failed applications",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 72,
+    "fields": {
+      "action_time": "2024-10-31T08:04:29.623Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "49",
+      "object_repr": "Can view failed applications",
+      "action_flag": 2,
+      "change_message": "[]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 73,
+    "fields": {
+      "action_time": "2024-10-31T08:19:20.824Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "47",
+      "object_repr": "Can preform admin functions",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Name\", \"Code\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 74,
+    "fields": {
+      "action_time": "2024-10-31T08:20:35.195Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "47",
+      "object_repr": "Can preform admin functions",
+      "action_flag": 2,
+      "change_message": "[]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 75,
+    "fields": {
+      "action_time": "2024-10-31T08:27:49.001Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "50",
+      "object_repr": "Can view queried applications",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 76,
+    "fields": {
+      "action_time": "2024-10-31T08:27:55.676Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "50",
+      "object_repr": "Can view queried applications",
+      "action_flag": 2,
+      "change_message": "[]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 77,
+    "fields": {
+      "action_time": "2024-10-31T09:02:50.505Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "51",
+      "object_repr": "Can review loan approvals",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 78,
+    "fields": {
+      "action_time": "2024-10-31T09:05:15.975Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "52",
+      "object_repr": "Can view approved loans",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 79,
+    "fields": {
+      "action_time": "2024-10-31T09:05:41.177Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "53",
+      "object_repr": "Can review loan documents",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 80,
+    "fields": {
+      "action_time": "2024-10-31T09:06:13.807Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "54",
+      "object_repr": "Can review signed loan documents",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 81,
+    "fields": {
+      "action_time": "2024-10-31T09:06:50.188Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "55",
+      "object_repr": "Can view declined loan offers",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 82,
+    "fields": {
+      "action_time": "2024-10-31T10:16:35.465Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "56",
+      "object_repr": "can view loan origination",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 83,
+    "fields": {
+      "action_time": "2024-10-31T10:16:43.685Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "56",
+      "object_repr": "can view loan origination",
+      "action_flag": 2,
+      "change_message": "[]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 84,
+    "fields": {
+      "action_time": "2024-10-31T19:32:15.546Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "1",
+      "object_repr": "baifam",
+      "action_flag": 2,
+      "change_message": "[]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 85,
+    "fields": {
+      "action_time": "2024-10-31T19:32:39.051Z",
+      "user": 1,
+      "content_type": 21,
+      "object_id": "1",
+      "object_repr": "car log book finance",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Company\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 86,
+    "fields": {
+      "action_time": "2024-11-01T10:13:38.079Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "57",
+      "object_repr": "Can perform credit manager functions",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 87,
+    "fields": {
+      "action_time": "2024-11-01T10:14:25.075Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "58",
+      "object_repr": "Can perform legal team functions",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 88,
+    "fields": {
+      "action_time": "2024-11-01T12:19:46.264Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "59",
+      "object_repr": "Can view all application data",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 89,
+    "fields": {
+      "action_time": "2024-11-01T12:20:32.678Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "60",
+      "object_repr": "Can View Dashboard",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 90,
+    "fields": {
+      "action_time": "2024-11-01T12:20:44.578Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "61",
+      "object_repr": "Can perform admin functions",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 91,
+    "fields": {
+      "action_time": "2024-11-01T12:40:43.453Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "62",
+      "object_repr": "Can change user password",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 92,
+    "fields": {
+      "action_time": "2024-11-01T15:47:55.506Z",
+      "user": 1,
+      "content_type": 22,
+      "object_id": "3",
+      "object_repr": "Loan Application for Alexander Lee - Status: Awaiting Approval",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 93,
+    "fields": {
+      "action_time": "2024-11-01T15:48:45.488Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "25",
+      "object_repr": "Alexander Lee",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"STATUS\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 94,
+    "fields": {
+      "action_time": "2024-11-02T07:02:20.527Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "63",
+      "object_repr": "can do disbursement review as credit",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 95,
+    "fields": {
+      "action_time": "2024-11-02T07:02:25.090Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "64",
+      "object_repr": "can do disbursement review as ops",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 96,
+    "fields": {
+      "action_time": "2024-11-02T07:02:33.932Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "65",
+      "object_repr": "can do disbursement review as legal team",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 97,
+    "fields": {
+      "action_time": "2024-11-02T07:02:40.635Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "66",
+      "object_repr": "can do disbursement review as finance team",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 98,
+    "fields": {
+      "action_time": "2024-11-02T11:11:38.438Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "47",
+      "object_repr": "Can perform admin functions",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Name\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 99,
+    "fields": {
+      "action_time": "2024-11-02T11:27:05.333Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "47",
+      "object_repr": "Can perform admin functions",
+      "action_flag": 2,
+      "change_message": "[]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 100,
+    "fields": {
+      "action_time": "2024-11-02T11:30:22.880Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "47",
+      "object_repr": "Can perform admin functions",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 101,
+    "fields": {
+      "action_time": "2024-11-02T11:30:22.880Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "61",
+      "object_repr": "Can perform admin functions",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 102,
+    "fields": {
+      "action_time": "2024-11-02T11:30:35.153Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "67",
+      "object_repr": "Can Perform Admin Functions",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 103,
+    "fields": {
+      "action_time": "2024-11-04T07:15:06.755Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "66",
+      "object_repr": "can do disbursement review as finance",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Name\", \"Code\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 104,
+    "fields": {
+      "action_time": "2024-11-04T08:31:18.785Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "2",
+      "object_repr": "talina manyi",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Created by\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 105,
+    "fields": {
+      "action_time": "2024-11-04T08:56:19.546Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "63",
+      "object_repr": "mukwano apollo",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"STATUS\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 106,
+    "fields": {
+      "action_time": "2024-11-05T07:40:31.208Z",
+      "user": 1,
+      "content_type": 22,
+      "object_id": "4",
+      "object_repr": "Loan Application for Amelia Walker - Status: Sales Manager Review",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 107,
+    "fields": {
+      "action_time": "2024-11-05T07:43:03.101Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "18",
+      "object_repr": "Amelia Walker",
+      "action_flag": 2,
+      "change_message": "[]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 108,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "67",
+      "object_repr": "prospect test1",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 109,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "66",
+      "object_repr": "Kobusinge",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 110,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "65",
+      "object_repr": "Kamal haris",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 111,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "64",
+      "object_repr": "Nachwa Julie",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 112,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "63",
+      "object_repr": "mukwano apollo",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 113,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "62",
+      "object_repr": "Namunya ANgel",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 114,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "61",
+      "object_repr": "Kamera Julie",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 115,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "60",
+      "object_repr": "lwanga junior",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 116,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "59",
+      "object_repr": "Musimenta angel",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 117,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "58",
+      "object_repr": "Hannah Evans",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 118,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "57",
+      "object_repr": "Anthony Nelson",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 119,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "56",
+      "object_repr": "Kayla Hill",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 120,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "55",
+      "object_repr": "Leo Thompson",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 121,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "54",
+      "object_repr": "Sarah Martinez",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 122,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "53",
+      "object_repr": "Jason Lee",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 123,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "52",
+      "object_repr": "Nora Wright",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 124,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "51",
+      "object_repr": "Grayson King",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 125,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "50",
+      "object_repr": "Layla Gonzalez",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 126,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "49",
+      "object_repr": "Tyler Hughes",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 127,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "48",
+      "object_repr": "Stella Reed",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 128,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "47",
+      "object_repr": "Nathan Stewart",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 129,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "46",
+      "object_repr": "Sadie Brooks",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 130,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "45",
+      "object_repr": "Leo Allen",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 131,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "44",
+      "object_repr": "Ella Roberts",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 132,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "43",
+      "object_repr": "Hunter Wright",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 133,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "42",
+      "object_repr": "Zoey Brown",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 134,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "41",
+      "object_repr": "Caleb Perez",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 135,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "40",
+      "object_repr": "Aria Martinez",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 136,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "39",
+      "object_repr": "Jacob Lee",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 137,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "38",
+      "object_repr": "Scarlett Green",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 138,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "37",
+      "object_repr": "Anthony Thompson",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 139,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "36",
+      "object_repr": "Mia Edwards",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 140,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "35",
+      "object_repr": "Charlotte Carter",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 141,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "34",
+      "object_repr": "Daniel Young",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 142,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "33",
+      "object_repr": "Lily Gonzalez",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 143,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "32",
+      "object_repr": "William Harris",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 144,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "31",
+      "object_repr": "Chloe White",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 145,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "30",
+      "object_repr": "Ella Moore",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 146,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "29",
+      "object_repr": "Jackson Martin",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 147,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "28",
+      "object_repr": "Grace Taylor",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 148,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "27",
+      "object_repr": "Samuel Smith",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 149,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "26",
+      "object_repr": "Abigail Johnson",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 150,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "25",
+      "object_repr": "Alexander Lee",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 151,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "24",
+      "object_repr": "Harper Wright",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 152,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "23",
+      "object_repr": "Lucas King",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 153,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "22",
+      "object_repr": "Mia Hernandez",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 154,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "21",
+      "object_repr": "Benjamin Young",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 155,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "20",
+      "object_repr": "James Hall",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 156,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "19",
+      "object_repr": "James Hall",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 157,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "18",
+      "object_repr": "Amelia Walker",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 158,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "17",
+      "object_repr": "Charlotte Rodriguez",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 159,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "16",
+      "object_repr": "Aiden Clark",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 160,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "15",
+      "object_repr": "Ella White",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 161,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "14",
+      "object_repr": "Mason Lee",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 162,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "13",
+      "object_repr": "Isabella Thomas",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 163,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "12",
+      "object_repr": "Ava Anderson",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 164,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "11",
+      "object_repr": "Liam Martinez",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 165,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "10",
+      "object_repr": "Olivia Wilson",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 166,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "9",
+      "object_repr": "Sophia Davis",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 167,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "8",
+      "object_repr": "Michael Brown",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 168,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "7",
+      "object_repr": "Emily Johnson",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 169,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "6",
+      "object_repr": "Jane Smith",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 170,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "5",
+      "object_repr": "kakembo emmanuel",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 171,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "4",
+      "object_repr": "janet mugumu",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 172,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "3",
+      "object_repr": "tumuhimbise john",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 173,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "2",
+      "object_repr": "talina manyi",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 174,
+    "fields": {
+      "action_time": "2024-11-05T10:26:27.792Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "1",
+      "object_repr": "avako hanuna",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 175,
+    "fields": {
+      "action_time": "2024-11-05T10:26:37.470Z",
+      "user": 1,
+      "content_type": 17,
+      "object_id": "11",
+      "object_repr": "uba 111b",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 176,
+    "fields": {
+      "action_time": "2024-11-05T10:26:37.470Z",
+      "user": 1,
+      "content_type": 17,
+      "object_id": "10",
+      "object_repr": "uaa 111a",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 177,
+    "fields": {
+      "action_time": "2024-11-05T10:26:37.470Z",
+      "user": 1,
+      "content_type": 17,
+      "object_id": "9",
+      "object_repr": "uwa 999j",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 178,
+    "fields": {
+      "action_time": "2024-11-05T10:26:37.470Z",
+      "user": 1,
+      "content_type": 17,
+      "object_id": "8",
+      "object_repr": "UAA 111A",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 179,
+    "fields": {
+      "action_time": "2024-11-05T10:26:37.470Z",
+      "user": 1,
+      "content_type": 17,
+      "object_id": "7",
+      "object_repr": "ubj 123k",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 180,
+    "fields": {
+      "action_time": "2024-11-05T10:26:37.470Z",
+      "user": 1,
+      "content_type": 17,
+      "object_id": "6",
+      "object_repr": "ubk-098 l",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 181,
+    "fields": {
+      "action_time": "2024-11-05T10:26:37.470Z",
+      "user": 1,
+      "content_type": 17,
+      "object_id": "5",
+      "object_repr": "ubj-120 h",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 182,
+    "fields": {
+      "action_time": "2024-11-05T10:26:37.470Z",
+      "user": 1,
+      "content_type": 17,
+      "object_id": "4",
+      "object_repr": "ubk-123 l",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 183,
+    "fields": {
+      "action_time": "2024-11-05T10:26:37.470Z",
+      "user": 1,
+      "content_type": 17,
+      "object_id": "3",
+      "object_repr": "UBT 554G",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 184,
+    "fields": {
+      "action_time": "2024-11-05T10:26:37.470Z",
+      "user": 1,
+      "content_type": 17,
+      "object_id": "2",
+      "object_repr": "UBD456T",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 185,
+    "fields": {
+      "action_time": "2024-11-05T10:26:37.470Z",
+      "user": 1,
+      "content_type": 17,
+      "object_id": "1",
+      "object_repr": "ubj-012 j",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 186,
+    "fields": {
+      "action_time": "2024-11-05T10:27:07.238Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "14",
+      "object_repr": "Kamala mark",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 187,
+    "fields": {
+      "action_time": "2024-11-05T10:27:07.238Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "13",
+      "object_repr": "Ruby Bagaya",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 188,
+    "fields": {
+      "action_time": "2024-11-05T10:27:07.238Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "12",
+      "object_repr": "Lorna Bagaya",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 189,
+    "fields": {
+      "action_time": "2024-11-05T10:27:07.238Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "11",
+      "object_repr": "Sarah Nanfuka",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 190,
+    "fields": {
+      "action_time": "2024-11-05T10:27:07.238Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "10",
+      "object_repr": "joan mirembe",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 191,
+    "fields": {
+      "action_time": "2024-11-05T10:27:07.238Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "9",
+      "object_repr": "manya samuel",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 192,
+    "fields": {
+      "action_time": "2024-11-05T10:27:07.238Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "8",
+      "object_repr": "Aiden clark",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 193,
+    "fields": {
+      "action_time": "2024-11-05T10:27:07.238Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "7",
+      "object_repr": "Musimenta Jenippher",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 194,
+    "fields": {
+      "action_time": "2024-11-05T10:27:07.238Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "6",
+      "object_repr": "kalima mellisa",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 195,
+    "fields": {
+      "action_time": "2024-11-05T10:27:07.238Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "5",
+      "object_repr": "apio sarah",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 196,
+    "fields": {
+      "action_time": "2024-11-05T10:27:07.238Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "4",
+      "object_repr": "manny Sala",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 197,
+    "fields": {
+      "action_time": "2024-11-05T10:27:07.238Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "3",
+      "object_repr": "Kayira John",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 198,
+    "fields": {
+      "action_time": "2024-11-05T10:27:07.238Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "2",
+      "object_repr": "Ibrahim bagaya",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 199,
+    "fields": {
+      "action_time": "2024-11-05T10:27:49.752Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "1",
+      "object_repr": "baifam",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Companies\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 200,
+    "fields": {
+      "action_time": "2024-11-05T10:36:53.850Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "15",
+      "object_repr": "bdm_admin",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Companies\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 201,
+    "fields": {
+      "action_time": "2024-11-05T10:36:59.672Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "15",
+      "object_repr": "bdm_admin",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Active company\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 202,
+    "fields": {
+      "action_time": "2024-11-05T10:37:09.481Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "17",
+      "object_repr": "loro_admin",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Companies\", \"Active company\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 203,
+    "fields": {
+      "action_time": "2024-11-05T10:37:16.844Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "16",
+      "object_repr": "subik_admin",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Companies\", \"Active company\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 204,
+    "fields": {
+      "action_time": "2024-11-05T10:39:19.438Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "15",
+      "object_repr": "bdm_admin",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Role\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 205,
+    "fields": {
+      "action_time": "2024-11-05T10:39:32.997Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "16",
+      "object_repr": "subik_admin",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Role\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 206,
+    "fields": {
+      "action_time": "2024-11-05T10:39:41.735Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "17",
+      "object_repr": "loro_admin",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Role\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 207,
+    "fields": {
+      "action_time": "2024-11-06T07:45:17.795Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "76",
+      "object_repr": "ketra noel",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"STATUS\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 208,
+    "fields": {
+      "action_time": "2024-11-06T08:21:49.767Z",
+      "user": 1,
+      "content_type": 9,
+      "object_id": "1",
+      "object_repr": "Alex Mukulu",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Company\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 209,
+    "fields": {
+      "action_time": "2024-11-06T08:23:32.397Z",
+      "user": 1,
+      "content_type": 22,
+      "object_id": "9",
+      "object_repr": "Loan Application for Kamu send - Status: Pipeline",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Company name\", \"Fees\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 210,
+    "fields": {
+      "action_time": "2024-11-06T08:24:44.115Z",
+      "user": 1,
+      "content_type": 22,
+      "object_id": "9",
+      "object_repr": "Loan Application for Kamu send - Status: Pipeline",
+      "action_flag": 2,
+      "change_message": "[]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 211,
+    "fields": {
+      "action_time": "2024-11-06T08:28:06.510Z",
+      "user": 16,
+      "content_type": 22,
+      "object_id": "10",
+      "object_repr": "Loan Application for natrina janet - Status: Pipeline",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 212,
+    "fields": {
+      "action_time": "2024-11-06T10:56:02.362Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "1",
+      "object_repr": "baifam",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Active company\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 213,
+    "fields": {
+      "action_time": "2024-11-06T10:56:12.484Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "1",
+      "object_repr": "baifam",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Role\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 214,
+    "fields": {
+      "action_time": "2024-11-06T10:58:26.103Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "1",
+      "object_repr": "baifam",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Active company\", \"Role\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 215,
+    "fields": {
+      "action_time": "2024-11-06T12:16:24.964Z",
+      "user": 16,
+      "content_type": 21,
+      "object_id": "3",
+      "object_repr": "CAR LOG BOOK FINANCE - Subik Finance Limited",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Company\", \"Approval_criteria\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 216,
+    "fields": {
+      "action_time": "2024-11-06T12:16:33.352Z",
+      "user": 16,
+      "content_type": 21,
+      "object_id": "1",
+      "object_repr": "CAR LOG BOOK FINANCE - Blue Diamond MICROFINANCE",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Company\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 217,
+    "fields": {
+      "action_time": "2024-11-06T12:16:37.785Z",
+      "user": 16,
+      "content_type": 21,
+      "object_id": "3",
+      "object_repr": "CAR LOG BOOK FINANCE - Subik Finance Limited",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Approval_criteria\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 218,
+    "fields": {
+      "action_time": "2024-11-06T14:04:26.462Z",
+      "user": 1,
+      "content_type": 6,
+      "object_id": "4",
+      "object_repr": "Bic and Bos",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 219,
+    "fields": {
+      "action_time": "2024-11-06T14:08:29.869Z",
+      "user": 17,
+      "content_type": 7,
+      "object_id": "68",
+      "object_repr": "can approve agent",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 220,
+    "fields": {
+      "action_time": "2024-11-06T14:08:37.907Z",
+      "user": 17,
+      "content_type": 7,
+      "object_id": "69",
+      "object_repr": "can decline agent",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 221,
+    "fields": {
+      "action_time": "2024-11-06T14:09:00.082Z",
+      "user": 17,
+      "content_type": 7,
+      "object_id": "70",
+      "object_repr": "can switch companies",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 222,
+    "fields": {
+      "action_time": "2024-11-06T14:09:22.503Z",
+      "user": 1,
+      "content_type": 11,
+      "object_id": "34",
+      "object_repr": "admin - Bic and Bos",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 223,
+    "fields": {
+      "action_time": "2024-11-06T14:09:27.893Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "41",
+      "object_repr": "bicadmin",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Companies\", \"Active company\", \"Role\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 224,
+    "fields": {
+      "action_time": "2024-11-08T09:23:28.120Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "1",
+      "object_repr": "Mugalu Benjamin",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"STATUS\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 225,
+    "fields": {
+      "action_time": "2024-11-08T09:33:57.191Z",
+      "user": 41,
+      "content_type": 6,
+      "object_id": "4",
+      "object_repr": "Bik and Bos",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Logo\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 226,
+    "fields": {
+      "action_time": "2024-11-08T09:34:38.253Z",
+      "user": 41,
+      "content_type": 6,
+      "object_id": "1",
+      "object_repr": "Subik Finance Limited",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Logo\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 227,
+    "fields": {
+      "action_time": "2024-11-08T09:34:54.815Z",
+      "user": 41,
+      "content_type": 6,
+      "object_id": "2",
+      "object_repr": "Blue Diamond MICROFINANCE",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Logo\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 228,
+    "fields": {
+      "action_time": "2024-11-08T09:35:04.445Z",
+      "user": 41,
+      "content_type": 6,
+      "object_id": "3",
+      "object_repr": "LORO CREDIT",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Logo\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 229,
+    "fields": {
+      "action_time": "2024-11-08T09:39:28.940Z",
+      "user": 17,
+      "content_type": 19,
+      "object_id": "1",
+      "object_repr": "STANBIC BANK",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 230,
+    "fields": {
+      "action_time": "2024-11-08T09:39:33.297Z",
+      "user": 17,
+      "content_type": 19,
+      "object_id": "2",
+      "object_repr": "HOUSING FINANCE BANK",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 231,
+    "fields": {
+      "action_time": "2024-11-08T09:39:38.111Z",
+      "user": 17,
+      "content_type": 19,
+      "object_id": "3",
+      "object_repr": "KCB BANK",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 232,
+    "fields": {
+      "action_time": "2024-11-08T09:40:07.359Z",
+      "user": 17,
+      "content_type": 19,
+      "object_id": "4",
+      "object_repr": "DIAMOND TRUST BANK",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 233,
+    "fields": {
+      "action_time": "2024-11-08T09:49:51.588Z",
+      "user": 1,
+      "content_type": 21,
+      "object_id": "2",
+      "object_repr": "CAR LOGBOOK FINANCE - LORO CREDIT",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Approval_criteria\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 234,
+    "fields": {
+      "action_time": "2024-11-08T10:07:13.462Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "25",
+      "object_repr": "katumba timothy",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Last login\", \"Companies\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 235,
+    "fields": {
+      "action_time": "2024-11-08T10:08:02.642Z",
+      "user": 1,
+      "content_type": 22,
+      "object_id": "2",
+      "object_repr": "Loan Application for Babiiha Mark - Status: Awaiting Approval",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Status\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 236,
+    "fields": {
+      "action_time": "2024-11-08T10:15:19.685Z",
+      "user": 1,
+      "content_type": 22,
+      "object_id": "2",
+      "object_repr": "Loan Application for Babiiha Mark - Status: Loan Perfection",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Status\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 237,
+    "fields": {
+      "action_time": "2024-11-08T10:37:08.127Z",
+      "user": 1,
+      "content_type": 22,
+      "object_id": "2",
+      "object_repr": "Loan Application for Babiiha Mark - Status: Sales Manager Review",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Status\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 238,
+    "fields": {
+      "action_time": "2024-11-08T10:39:36.007Z",
+      "user": 1,
+      "content_type": 22,
+      "object_id": "2",
+      "object_repr": "Loan Application for Babiiha Mark - Status: Awaiting Disbursement",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Status\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 239,
+    "fields": {
+      "action_time": "2024-11-08T10:43:11.315Z",
+      "user": 1,
+      "content_type": 22,
+      "object_id": "2",
+      "object_repr": "Loan Application for Babiiha Mark - Status: Sales Manager Review",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Status\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 240,
+    "fields": {
+      "action_time": "2024-11-08T10:43:46.196Z",
+      "user": 1,
+      "content_type": 22,
+      "object_id": "2",
+      "object_repr": "Loan Application for Babiiha Mark - Status: Awaiting Disbursement",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Status\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 241,
+    "fields": {
+      "action_time": "2024-11-08T10:44:55.721Z",
+      "user": 16,
+      "content_type": 22,
+      "object_id": "1",
+      "object_repr": "Loan Application for Mugalu Benjamin - Status: Disbursed",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Company name\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 242,
+    "fields": {
+      "action_time": "2024-11-08T10:47:24.969Z",
+      "user": 16,
+      "content_type": 22,
+      "object_id": "1",
+      "object_repr": "Loan Application for Mugalu Benjamin - Status: Awaiting Disbursement",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Status\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 243,
+    "fields": {
+      "action_time": "2024-11-08T11:11:45.532Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "6",
+      "object_repr": "Semanyi Isaac ssozi",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"STATUS\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 244,
+    "fields": {
+      "action_time": "2024-11-08T11:15:35.132Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "6",
+      "object_repr": "Semanyi Isaac ssozi",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"STATUS\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 245,
+    "fields": {
+      "action_time": "2024-11-08T11:18:35.269Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "6",
+      "object_repr": "Semanyi Isaac ssozi",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"STATUS\", \"Payment verified on\", \"Valuer assigned on\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 246,
+    "fields": {
+      "action_time": "2024-11-08T11:19:28.426Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "6",
+      "object_repr": "Semanyi Isaac ssozi",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Valuer assigned\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 247,
+    "fields": {
+      "action_time": "2024-11-08T11:24:16.772Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "2",
+      "object_repr": "kAGWA JONATHAN",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"STATUS\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 248,
+    "fields": {
+      "action_time": "2024-11-08T12:15:27.165Z",
+      "user": 1,
+      "content_type": 15,
+      "object_id": "2",
+      "object_repr": "kAGWA JONATHAN",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"STATUS\"]}}]"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "088ofe0zfcfulxrxqboc3unp9bajz5ig",
+    "fields": {
+      "session_data": ".eJxVjDsOwjAUBO_iGln-J6Gkzxmstd8zDqBEyqdC3B1ZSgHtzsy-RcSx13hsvMaJxFVocfndEvKT5wbogfm-yLzM-zol2RR50k2OC_Hrdrp_BxVbbbXXnJyD6WmAtc5xn50vcCZ0A3qg09CkQKF4WFXYZkNBJXQBOjOLzxfvbDio:1t7BXq:uEkHOxgDxpZQ2cEuY-1k0Z0KGjY6famPDXi1mz0MPHI",
+      "expire_date": "2024-11-16T10:39:50.232Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "0de1w7a2dhbtxbisx7djnf8km6z7mt12",
+    "fields": {
+      "session_data": ".eJxVjDsOwjAUBO_iGln-J6Gkzxmstd8zDqBEyqdC3B1ZSgHtzsy-RcSx13hsvMaJxFVocfndEvKT5wbogfm-yLzM-zol2RR50k2OC_Hrdrp_BxVbbbXXnJyD6WmAtc5xn50vcCZ0A3qg09CkQKF4WFXYZkNBJXQBOjOLzxfvbDio:1t7CE3:ti7lXTCTs1JiLpOIfhwNZn_LcTbCNtqUrbS0cmjD4hQ",
+      "expire_date": "2024-11-16T11:23:27.715Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "0salpc90ho7pputkxhcoe6992zp8akok",
+    "fields": {
+      "session_data": ".eJxVjDsOwjAQRO_iGln-brKU9DmDtbY3OIAcKU4qxN1JpBTQTDHvzbxFoG0tYWu8hCmLq9AgLr9lpPTkepD8oHqfZZrrukxRHoo8aZPDnPl1O92_g0Kt7Gu2jAgK-siOjHHZQUQPGW3sNQImnyx1HlVk042YWO_hCNSIVitlxecL-203kA:1t8eRQ:wnvkPo3gK2VV0I6gJsa9wnwE7H1W4wWRfUAjuAXgLf4",
+      "expire_date": "2024-11-20T11:43:16.355Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "2eyv4r23nxvd1c1claifrvvcoyqbv9wf",
+    "fields": {
+      "session_data": ".eJxVjDsOwjAQBe_iGlmJP1mbkj5niHa9XhxAjpRPhbg7iZQC2jcz760G3NYybEueh5HVVbVOXX5HwvTM9SD8wHqfdJrqOo-kD0WfdNH9xPl1O92_g4JL2WuxIBBRbGJCNCYYoey6JoROKCIQe5cpiLc2gifDyILJA8BucdOqzxc09TkJ:1t7tF1:X36DxqgXyLXKhBJ58iV-7-vRVUISucnRu9IORpwTgSg",
+      "expire_date": "2024-11-18T09:19:19.708Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "2llr837x6ry9xi8vzg40ohmz93q8mwhn",
+    "fields": {
+      "session_data": ".eJxVjDsOwjAQBe_iGln-xD9Kes5grXdtHEC2FCcV4u4QKQW0b2bei0XY1hq3kZc4EzuzSbPT75gAH7nthO7Qbp1jb-syJ74r_KCDXzvl5-Vw_w4qjPqtg8FAJQVUzmuJ5BQWskrbkHQhn8AHW6wRUgqj3CRACenAaoGmkA6CvT8Jpzd6:1t8h1x:n2kfOf4btf6ce8fvuVaRvOtOi8cEKmwknVFnJ20eGik",
+      "expire_date": "2024-11-20T14:29:09.980Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "412dg39l9yqmgpd2zve4dz5cw2howsf0",
+    "fields": {
+      "session_data": ".eJxVjDsOwjAUBO_iGln-J6Gkzxmstd8zDqBEyqdC3B1ZSgHtzsy-RcSx13hsvMaJxFVocfndEvKT5wbogfm-yLzM-zol2RR50k2OC_Hrdrp_BxVbbbXXnJyD6WmAtc5xn50vcCZ0A3qg09CkQKF4WFXYZkNBJXQBOjOLzxfvbDio:1t7CVv:wUdXTOVG8nexTwgbW58wO-twYXFOwv-QOOpZzqD_mVM",
+      "expire_date": "2024-11-16T11:41:55.002Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "43yabqmz7tybnwrv1jvasn7s3paete6h",
+    "fields": {
+      "session_data": ".eJxVjDsOwjAQBe_iGlmJP1mbkj5niHa9XhxAjpRPhbg7iZQC2jcz760G3NYybEueh5HVVbVOXX5HwvTM9SD8wHqfdJrqOo-kD0WfdNH9xPl1O92_g4JL2WuxIBBRbGJCNCYYoey6JoROKCIQe5cpiLc2gifDyILJA8BucdOqzxc09TkJ:1t7tDK:M78m_pj6r3G3t8K33ujxHNTp91fIcJuVjvAh-kUlo1g",
+      "expire_date": "2024-11-18T09:17:34.413Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "4fn0xo8vsau66gxguohfgm9o452ai8ic",
+    "fields": {
+      "session_data": ".eJxVjDsOwjAUBO_iGln-J6Gkzxmstd8zDqBEyqdC3B1ZSgHtzsy-RcSx13hsvMaJxFVocfndEvKT5wbogfm-yLzM-zol2RR50k2OC_Hrdrp_BxVbbbXXnJyD6WmAtc5xn50vcCZ0A3qg09CkQKF4WFXYZkNBJXQBOjOLzxfvbDio:1t7Fli:cNAOnfdLtxbfVKs47OVwjLcAC4jez3v1aGHY_Uts1Lk",
+      "expire_date": "2024-11-16T15:10:26.068Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "5csr8o5kibaymit48pf4nbzf1pcrpqzv",
+    "fields": {
+      "session_data": ".eJxVjDsOwjAQBe_iGlmJP1mbkj5niHa9XhxAjpRPhbg7iZQC2jcz760G3NYybEueh5HVVbVOXX5HwvTM9SD8wHqfdJrqOo-kD0WfdNH9xPl1O92_g4JL2WuxIBBRbGJCNCYYoey6JoROKCIQe5cpiLc2gifDyILJA8BucdOqzxc09TkJ:1t7tDD:z-9jAdUPLb-M5-HkXxDD_Jbeia8S3ghC6JK6FY1YjAM",
+      "expire_date": "2024-11-18T09:17:27.718Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "7amyynntg9ab8cfj4pjmia2mb1t9d5z7",
+    "fields": {
+      "session_data": ".eJxVjDEOwjAMRe-SGUVN7BCZkZ0zRK7jkAJqpaadKu4OlTrA-t97fzOJ16WmtemchmwuxgVz-h17lqeOO8kPHu-TlWlc5qG3u2IP2uxtyvq6Hu7fQeVWv3XMgoGEvAfGglGpxKLcAQApY44CTNR1BfpAHsNZnBaPDoMHUYnm_QEIazfi:1t8LQC:-SySG8Cbbt3LgeSXgA8sE1ViMEsXGi5xGEb0qT_vzgk",
+      "expire_date": "2024-11-19T15:24:44.500Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "7uq0sxufnn3ehte52z94grt09qrf29ee",
+    "fields": {
+      "session_data": ".eJxVjDsOwjAUBO_iGln-J6Gkzxmstd8zDqBEyqdC3B1ZSgHtzsy-RcSx13hsvMaJxFVocfndEvKT5wbogfm-yLzM-zol2RR50k2OC_Hrdrp_BxVbbbXXnJyD6WmAtc5xn50vcCZ0A3qg09CkQKF4WFXYZkNBJXQBOjOLzxfvbDio:1t69id:HAN3YUBZP7qoDIquTOdkb75miGojUo-4_mrXzKgJZ4k",
+      "expire_date": "2024-11-13T11:30:43.461Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "82ozd80lajht3lz3hj6gbn3kw5srg7un",
+    "fields": {
+      "session_data": ".eJxVjDEOwjAMRe-SGUVN7BCZkZ0zRK7jkAJqpaadKu4OlTrA-t97fzOJ16WmtemchmwuxgVz-h17lqeOO8kPHu-TlWlc5qG3u2IP2uxtyvq6Hu7fQeVWv3XMgoGEvAfGglGpxKLcAQApY44CTNR1BfpAHsNZnBaPDoMHUYnm_QEIazfi:1t9LY1:duILEn9k-e-NB-L1p0mUANGsPz9vWckLEu2FIHek1w4",
+      "expire_date": "2024-11-22T09:44:57.985Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "84m6fpfpx0d9x4qstw01rwnqavrqb2nr",
+    "fields": {
+      "session_data": ".eJxVjDsOwyAQBe9CHSGwWT4p0_sMaNdAcBKBZOwqyt2DJRdJOzPvvZnHfct-b3H1S2BXpiS7_ELC-RnLYcIDy73yuZZtXYgfCT9t41MN8XU727-DjC339SxAi0ELHLWxAJGiURJJoOvMgSXQOiXjggiWaLDBJZV6RCDVaJJkny_x5jfh:1t9O2S:B3pygEvQkWjL2cWrv4qZG_aIP7FaEYGor6Hm2VdGBYQ",
+      "expire_date": "2024-11-22T12:24:32.307Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "87yf8f902ii9dp2oghxjtwm3ifa4wb27",
+    "fields": {
+      "session_data": ".eJxVjDsOwjAUBO_iGln-J6Gkzxmstd8zDqBEyqdC3B1ZSgHtzsy-RcSx13hsvMaJxFVocfndEvKT5wbogfm-yLzM-zol2RR50k2OC_Hrdrp_BxVbbbXXnJyD6WmAtc5xn50vcCZ0A3qg09CkQKF4WFXYZkNBJXQBOjOLzxfvbDio:1t7sQ6:cP36Cn0RcWiGLOhRyEc8ZE2N0AdUV8gLmuAGO5Z7cAg",
+      "expire_date": "2024-11-18T08:26:42.932Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "8ekri907uwia7bf1t8npldssrrcjtack",
+    "fields": {
+      "session_data": ".eJxVjDsOwjAUBO_iGln-J6Gkzxmstd8zDqBEyqdC3B1ZSgHtzsy-RcSx13hsvMaJxFVocfndEvKT5wbogfm-yLzM-zol2RR50k2OC_Hrdrp_BxVbbbXXnJyD6WmAtc5xn50vcCZ0A3qg09CkQKF4WFXYZkNBJXQBOjOLzxfvbDio:1t7Bbd:1N1O1eAJvxbsM8gfuR_-JqMhiBIlLIWXmsLaIKX2wHE",
+      "expire_date": "2024-11-16T10:43:45.500Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "94fnzs0vke00shpysdhfzwww1zf4ouki",
+    "fields": {
+      "session_data": ".eJxVjDsOwjAUBO_iGln-J6Gkzxmstd8zDqBEyqdC3B1ZSgHtzsy-RcSx13hsvMaJxFVocfndEvKT5wbogfm-yLzM-zol2RR50k2OC_Hrdrp_BxVbbbXXnJyD6WmAtc5xn50vcCZ0A3qg09CkQKF4WFXYZkNBJXQBOjOLzxfvbDio:1t6s2E:ePAmrtFKIyBNaXkvHWAoe30j0dE8XRR9tKN6CH80tss",
+      "expire_date": "2024-11-15T13:49:54.148Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "a03egpu36injkojnmyxsnokqohdyrnpf",
+    "fields": {
+      "session_data": ".eJxVjDsOwjAUBO_iGln-J6Gkzxmstd8zDqBEyqdC3B1ZSgHtzsy-RcSx13hsvMaJxFVocfndEvKT5wbogfm-yLzM-zol2RR50k2OC_Hrdrp_BxVbbbXXnJyD6WmAtc5xn50vcCZ0A3qg09CkQKF4WFXYZkNBJXQBOjOLzxfvbDio:1t69fW:SuGVO_ck-am86HUz6cQIa0Hz1QHPPcGSQ6r9ifxZGIA",
+      "expire_date": "2024-11-13T11:27:30.106Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "bev5jfpndnxbha6tawl86ck5fi8sxpes",
+    "fields": {
+      "session_data": ".eJxVjDsOwjAQRO_iGln-brKU9DmDtbY3OIAcKU4qxN1JpBTQTDHvzbxFoG0tYWu8hCmLq9AgLr9lpPTkepD8oHqfZZrrukxRHoo8aZPDnPl1O92_g0Kt7Gu2jAgK-siOjHHZQUQPGW3sNQImnyx1HlVk042YWO_hCNSIVitlxecL-203kA:1t9L5G:Dt4SFbwfHe8HuyzvDxRInFQlcWKRkZKYh-0uwEbjOLQ",
+      "expire_date": "2024-11-22T09:15:14.809Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "bsnn44yh3z2vm6t657u5pwq3l8bgxrzl",
+    "fields": {
+      "session_data": ".eJxVjDsOwjAQBe_iGlmJP1mbkj5niHa9XhxAjpRPhbg7iZQC2jcz760G3NYybEueh5HVVbVOXX5HwvTM9SD8wHqfdJrqOo-kD0WfdNH9xPl1O92_g4JL2WuxIBBRbGJCNCYYoey6JoROKCIQe5cpiLc2gifDyILJA8BucdOqzxc09TkJ:1t7tDZ:BVpDVipqMFCVDZoBYMM-O9D0oLs7riGHz9tCAZGiJiE",
+      "expire_date": "2024-11-18T09:17:49.718Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "crrcf18s1en3y2ggd7bpapgcqfrxmyr8",
+    "fields": {
+      "session_data": ".eJxVjDsOwjAQBe_iGlnxrn9Q0ucMkde7JgFkS_lUiLtDpBTQvpl5LzWkbR2HbZF5mFhdlAnq9DtSyg-pO-F7qremc6vrPJHeFX3QRfeN5Xk93L-DMS3jty6JShZAztIZT5GpFIwiuetsIQQEBhcwG-OdxeAo2kDujIjgLRCr9wc41Tgn:1t8aSx:koa89_A-nLDo9e_lV1i5IfbTQ5fuMmy3g8aVpUN13ao",
+      "expire_date": "2024-11-20T07:28:35.877Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "d2zt2njhzgtrr08w49sr99qcf3rthx3v",
+    "fields": {
+      "session_data": ".eJxVjDsOwjAQBe_iGlnxrn9Q0ucMkde7JgFkS_lUiLtDpBTQvpl5LzWkbR2HbZF5mFhdlAnq9DtSyg-pO-F7qremc6vrPJHeFX3QRfeN5Xk93L-DMS3jty6JShZAztIZT5GpFIwiuetsIQQEBhcwG-OdxeAo2kDujIjgLRCr9wc41Tgn:1t9MMj:56W0kNRjAhUgHFj-HtE7a8GPBk9F71wVpZRIdB6VO0g",
+      "expire_date": "2024-11-22T10:37:21.315Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "dhvsw7om5xjm0etnfn0u3z37kq5wl2rs",
+    "fields": {
+      "session_data": ".eJxVjDsOwjAQRO_iGln-brKU9DmDtbY3OIAcKU4qxN1JpBTQTDHvzbxFoG0tYWu8hCmLq9AgLr9lpPTkepD8oHqfZZrrukxRHoo8aZPDnPl1O92_g0Kt7Gu2jAgK-siOjHHZQUQPGW3sNQImnyx1HlVk042YWO_hCNSIVitlxecL-203kA:1t8aCf:JTc8eiN1f0JPbq0w12x1ojtP5AgAjn9_NwCT_eXnJOc",
+      "expire_date": "2024-11-20T07:11:45.812Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "f15nngmrw9t2jpp9qz6cwyrbvmiwayvi",
+    "fields": {
+      "session_data": ".eJxVjDsOwjAUBO_iGln-J6Gkzxmstd8zDqBEyqdC3B1ZSgHtzsy-RcSx13hsvMaJxFVocfndEvKT5wbogfm-yLzM-zol2RR50k2OC_Hrdrp_BxVbbbXXnJyD6WmAtc5xn50vcCZ0A3qg09CkQKF4WFXYZkNBJXQBOjOLzxfvbDio:1t7sKB:Y7x9Dhpu3AJVc6ysqTYk5v1OfZCGaOsWnQFOjWfe2mk",
+      "expire_date": "2024-11-18T08:20:35.591Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "fc6xw1uhk9lxaq2n95hqtwgicgtr39f6",
+    "fields": {
+      "session_data": ".eJxVjDsOwjAUBO_iGln-J6Gkzxmstd8zDqBEyqdC3B1ZSgHtzsy-RcSx13hsvMaJxFVocfndEvKT5wbogfm-yLzM-zol2RR50k2OC_Hrdrp_BxVbbbXXnJyD6WmAtc5xn50vcCZ0A3qg09CkQKF4WFXYZkNBJXQBOjOLzxfvbDio:1t7s9B:Ko_q-yucry5GRyfF-jcYs_gwIDi0XSvYs9WMVizs0Fg",
+      "expire_date": "2024-11-18T08:09:13.988Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "fnfpbi4ts9v3fj48ed467nun4o0lyip2",
+    "fields": {
+      "session_data": ".eJxVjMsOwiAQRf-FtSFAecy4dO83EIaHVA0kpV0Z_12bdKHbe865L-bDtla_jbz4ObEzU4adfkcK8ZHbTtI9tFvnsbd1mYnvCj_o4Nee8vNyuH8HNYz6raVTQaJMkVBKIKNBFMwWSadspIJi7QSCIkzgCkwWi00mkEJDQit07P0B7pM3Ng:1t9Lsx:Wfb9vI6oaT1QZrnYgFGdI4BP6D-M7-OpU4Z1WvBelTI",
+      "expire_date": "2024-11-22T10:06:35.674Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "h5glpua5twun2qv199wnfvqfpoox2vry",
+    "fields": {
+      "session_data": ".eJxVjDsOwjAUBO_iGln-J6Gkzxmstd8zDqBEyqdC3B1ZSgHtzsy-RcSx13hsvMaJxFVocfndEvKT5wbogfm-yLzM-zol2RR50k2OC_Hrdrp_BxVbbbXXnJyD6WmAtc5xn50vcCZ0A3qg09CkQKF4WFXYZkNBJXQBOjOLzxfvbDio:1t6SWE:KSQkQ4VIvEECVYuuVOerHmaFvkxBwqvPTol0LGGIJqk",
+      "expire_date": "2024-11-14T07:35:10.081Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "hec3x1evazs0s84bclkfh1f9olyhr3qp",
+    "fields": {
+      "session_data": ".eJxVjDsOwjAUBO_iGln-J6Gkzxmstd8zDqBEyqdC3B1ZSgHtzsy-RcSx13hsvMaJxFVocfndEvKT5wbogfm-yLzM-zol2RR50k2OC_Hrdrp_BxVbbbXXnJyD6WmAtc5xn50vcCZ0A3qg09CkQKF4WFXYZkNBJXQBOjOLzxfvbDio:1t60tm:t0hgBQaEHlO6iQDJKHRK7d9u6A1H-SMaPQYWzrifG9c",
+      "expire_date": "2024-11-13T02:05:38.107Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "j33egs4wlf8qx0eozbfaacl2pfmb622e",
+    "fields": {
+      "session_data": ".eJxVjEEOwiAQRe_C2pACZUCX7j0DmYGpVA0kpV0Z7y5NutDte-__twi4rTlsjZcwJ3ERIE6_jDA-uewiPbDcq4y1rMtMck_kYZu81cSv69H-HWRsua8n7yzjmRVpBD2gM8Zhh2A9x46idkyTUl4bpNFbAhiT5wTRAw5oxOcL64M4DA:1t6UxA:HZ_Ya3Vh83GrytUf89jGUFcuHE4tIxam34MvPZ-uMhA",
+      "expire_date": "2024-11-14T10:11:08.042Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "l6oiiekljkyvzlqgxgn2w3x8xlp3g641",
+    "fields": {
+      "session_data": ".eJxVjDsOwyAQBe9CHSGwWT4p0_sMaNdAcBKBZOwqyt2DJRdJOzPvvZnHfct-b3H1S2BXpiS7_ELC-RnLYcIDy73yuZZtXYgfCT9t41MN8XU727-DjC339SxAi0ELHLWxAJGiURJJoOvMgSXQOiXjggiWaLDBJZV6RCDVaJJkny_x5jfh:1t9LQy:AVoe_NSAQjcSUkts6abNt4N-5OeIhyQcqIcYOGIvALo",
+      "expire_date": "2024-11-22T09:37:40.673Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "lclc7mf57oc5czyh9lfbv2amwzrhh70m",
+    "fields": {
+      "session_data": ".eJxVjDsOwjAUBO_iGln-J6Gkzxmstd8zDqBEyqdC3B1ZSgHtzsy-RcSx13hsvMaJxFVocfndEvKT5wbogfm-yLzM-zol2RR50k2OC_Hrdrp_BxVbbbXXnJyD6WmAtc5xn50vcCZ0A3qg09CkQKF4WFXYZkNBJXQBOjOLzxfvbDio:1t6att:F3pFD8Or0LTebAI7zGAtjy4cYf9djQEq-A-wsUHMs60",
+      "expire_date": "2024-11-14T19:32:09.503Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "mk6h0pc9mqry4zokn9cu1y9g54sq31zs",
+    "fields": {
+      "session_data": ".eJxVjDsOwjAUBO_iGln-J6Gkzxmstd8zDqBEyqdC3B1ZSgHtzsy-RcSx13hsvMaJxFVocfndEvKT5wbogfm-yLzM-zol2RR50k2OC_Hrdrp_BxVbbbXXnJyD6WmAtc5xn50vcCZ0A3qg09CkQKF4WFXYZkNBJXQBOjOLzxfvbDio:1t7BzV:fdeizMsvs6eR1QXA0nFE3llF4cVxrHhJMalLj4SE2xg",
+      "expire_date": "2024-11-16T11:08:25.936Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "mvtdct0a23tqlu9kc3pvvpxbs4si1s5w",
+    "fields": {
+      "session_data": ".eJxVjDsOwjAUBO_iGln-J6Gkzxmstd8zDqBEyqdC3B1ZSgHtzsy-RcSx13hsvMaJxFVocfndEvKT5wbogfm-yLzM-zol2RR50k2OC_Hrdrp_BxVbbbXXnJyD6WmAtc5xn50vcCZ0A3qg09CkQKF4WFXYZkNBJXQBOjOLzxfvbDio:1t7C3E:4TEqixgAKYWYoJ8JxcdUkFLGsJDaELyMkY8bgZOoaNk",
+      "expire_date": "2024-11-16T11:12:16.798Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "n91tkezrkg72019coo6slqve4f0opvze",
+    "fields": {
+      "session_data": ".eJxVjDsOwjAUBO_iGln-J6Gkzxmstd8zDqBEyqdC3B1ZSgHtzsy-RcSx13hsvMaJxFVocfndEvKT5wbogfm-yLzM-zol2RR50k2OC_Hrdrp_BxVbbbXXnJyD6WmAtc5xn50vcCZ0A3qg09CkQKF4WFXYZkNBJXQBOjOLzxfvbDio:1t69hP:qo_Q_vojMQkNlGYFWQmSCn9coHOLUqSpm9og0bE0ZWI",
+      "expire_date": "2024-11-13T11:29:27.409Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "nhh8t36w1n3d3z9kdb836hjh7njmp3nc",
+    "fields": {
+      "session_data": ".eJxVjDsOwjAUBO_iGln-J6Gkzxmstd8zDqBEyqdC3B1ZSgHtzsy-RcSx13hsvMaJxFVocfndEvKT5wbogfm-yLzM-zol2RR50k2OC_Hrdrp_BxVbbbXXnJyD6WmAtc5xn50vcCZ0A3qg09CkQKF4WFXYZkNBJXQBOjOLzxfvbDio:1t7C6D:QfBKafWkGmEAUHSTwZ6sFq-m5GcuKFbo3J2zffFloXI",
+      "expire_date": "2024-11-16T11:15:21.796Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "o2uyb4w7s8d2nr8mexokihciorriealf",
+    "fields": {
+      "session_data": ".eJxVjDsOwjAUBO_iGln-J6Gkzxmstd8zDqBEyqdC3B1ZSgHtzsy-RcSx13hsvMaJxFVocfndEvKT5wbogfm-yLzM-zol2RR50k2OC_Hrdrp_BxVbbbXXnJyD6WmAtc5xn50vcCZ0A3qg09CkQKF4WFXYZkNBJXQBOjOLzxfvbDio:1t6DXo:aWmcQhdn26Q7ZFdgu-_YHVPOjO4yzrsmJENbwoZMnuY",
+      "expire_date": "2024-11-13T15:35:48.299Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "o8jtpck9pgnmf54vukar5ehjn1rhkq6r",
+    "fields": {
+      "session_data": ".eJxVjDsOwjAUBO_iGln-J6Gkzxmstd8zDqBEyqdC3B1ZSgHtzsy-RcSx13hsvMaJxFVocfndEvKT5wbogfm-yLzM-zol2RR50k2OC_Hrdrp_BxVbbbXXnJyD6WmAtc5xn50vcCZ0A3qg09CkQKF4WFXYZkNBJXQBOjOLzxfvbDio:1t8aOn:7l3sC53VgYyXTAu1SA1pXvuY4ua3Qn2NJeJLge_T4l4",
+      "expire_date": "2024-11-20T07:24:17.680Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "od6xrthkop5z3eqz0filrpiali16m8p8",
+    "fields": {
+      "session_data": ".eJxVjDsOwjAUBO_iGln-J6Gkzxmstd8zDqBEyqdC3B1ZSgHtzsy-RcSx13hsvMaJxFVocfndEvKT5wbogfm-yLzM-zol2RR50k2OC_Hrdrp_BxVbbbXXnJyD6WmAtc5xn50vcCZ0A3qg09CkQKF4WFXYZkNBJXQBOjOLzxfvbDio:1t6AQk:q1bkMHWtDB34liaE4_0Sa4kjt_yv4SL13ZtnubcmCw8",
+      "expire_date": "2024-11-13T12:16:18.552Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "p7o5atkvwgvsiucox9opl5wp55kehvga",
+    "fields": {
+      "session_data": ".eJxVjDsOwjAUBO_iGln-J6Gkzxmstd8zDqBEyqdC3B1ZSgHtzsy-RcSx13hsvMaJxFVocfndEvKT5wbogfm-yLzM-zol2RR50k2OC_Hrdrp_BxVbbbXXnJyD6WmAtc5xn50vcCZ0A3qg09CkQKF4WFXYZkNBJXQBOjOLzxfvbDio:1t7xGr:rfK2VK1IqxAIf6RavF6cvmmmirs_JM8Mdx5HhnFbOBw",
+      "expire_date": "2024-11-18T13:37:29.301Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "p9c8e71fj94iz67p77uai4pkp6dzwa1e",
+    "fields": {
+      "session_data": ".eJxVjDsOwjAUBO_iGln-J6Gkzxmstd8zDqBEyqdC3B1ZSgHtzsy-RcSx13hsvMaJxFVocfndEvKT5wbogfm-yLzM-zol2RR50k2OC_Hrdrp_BxVbbbXXnJyD6WmAtc5xn50vcCZ0A3qg09CkQKF4WFXYZkNBJXQBOjOLzxfvbDio:1t9LE8:6e_CKR13DnGH2g2VWPvXarK7idUTbpIl4DKmdVre4us",
+      "expire_date": "2024-11-22T09:24:24.579Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "pbks5hn88pik5loek48830ee3lc1341v",
+    "fields": {
+      "session_data": ".eJxVjDsOwjAUBO_iGln-J6Gkzxmstd8zDqBEyqdC3B1ZSgHtzsy-RcSx13hsvMaJxFVocfndEvKT5wbogfm-yLzM-zol2RR50k2OC_Hrdrp_BxVbbbXXnJyD6WmAtc5xn50vcCZ0A3qg09CkQKF4WFXYZkNBJXQBOjOLzxfvbDio:1t8bPS:rT0BGq0vSMipfXkoLvJ7RCHoGsfGDvzH4A-TCucDnTs",
+      "expire_date": "2024-11-20T08:29:02.133Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "qqisdtv0orbbjmyoxf2p0bttx9c663hp",
+    "fields": {
+      "session_data": ".eJxVjEEOwiAQRe_C2hBgoIBL956BDMNgq4YmpV0Z765NutDtf-_9l0i4rWPaOi9pKuIsQJx-t4z04LaDcsd2myXNbV2mLHdFHrTL61z4eTncv4MR-_itcyXnWdtIMQ-M2hAMNagCWJxVWVGNlSOzCQCDxeAJja_ATmkAUE68PwEzOAA:1t6Cp9:6ohQMRFsJ4hsNw0sGy5xzZARlxwoU4_L7k7RuK8pX3Y",
+      "expire_date": "2024-11-13T14:49:39.829Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "qu8qmjtiw2jscntt95y6nnez1vw7lfi2",
+    "fields": {
+      "session_data": ".eJxVjDsOwjAUBO_iGln-J6Gkzxmstd8zDqBEyqdC3B1ZSgHtzsy-RcSx13hsvMaJxFVocfndEvKT5wbogfm-yLzM-zol2RR50k2OC_Hrdrp_BxVbbbXXnJyD6WmAtc5xn50vcCZ0A3qg09CkQKF4WFXYZkNBJXQBOjOLzxfvbDio:1t8FtR:T6_5UnqW1ZgXeTo86RsfckyVq8tqmX9uPW2PTNgQy1I",
+      "expire_date": "2024-11-19T09:30:33.751Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "un8ag0ku19sdwvc8frr9qtmtvs6y8iuy",
+    "fields": {
+      "session_data": ".eJxVjDsOwjAUBO_iGln-J6Gkzxmstd8zDqBEyqdC3B1ZSgHtzsy-RcSx13hsvMaJxFVocfndEvKT5wbogfm-yLzM-zol2RR50k2OC_Hrdrp_BxVbbbXXnJyD6WmAtc5xn50vcCZ0A3qg09CkQKF4WFXYZkNBJXQBOjOLzxfvbDio:1t6mar:Aq977Obxn3Aqn0DSwdZAQkVCGpOfv-txBkTq-OI1Hx8",
+      "expire_date": "2024-11-15T08:01:17.110Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "vup5w5sbwc9fxmgqa9mgr63uyt941kd3",
+    "fields": {
+      "session_data": ".eJxVjDsOwjAUBO_iGln-J6Gkzxmstd8zDqBEyqdC3B1ZSgHtzsy-RcSx13hsvMaJxFVocfndEvKT5wbogfm-yLzM-zol2RR50k2OC_Hrdrp_BxVbbbXXnJyD6WmAtc5xn50vcCZ0A3qg09CkQKF4WFXYZkNBJXQBOjOLzxfvbDio:1t6sEs:WzyFGoo67UHAZpZFyDzEtOJaFzljt9BuiG5VD4E_AQg",
+      "expire_date": "2024-11-15T14:02:58.664Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "w1usqn1whqkzcr0whetf02cvko1t9aiq",
+    "fields": {
+      "session_data": ".eJxVjDsOwjAQBe_iGlmJP1mbkj5niHa9XhxAjpRPhbg7iZQC2jcz760G3NYybEueh5HVVbVOXX5HwvTM9SD8wHqfdJrqOo-kD0WfdNH9xPl1O92_g4JL2WuxIBBRbGJCNCYYoey6JoROKCIQe5cpiLc2gifDyILJA8BucdOqzxc09TkJ:1t7tEY:PoK5OdxFnTnm6chvWNErdIF6Mzb2AW056J6TstV1V90",
+      "expire_date": "2024-11-18T09:18:50.795Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "wg0fbasd9pwxds0xlseqieer7b8uok5c",
+    "fields": {
+      "session_data": ".eJxVjDsOwjAUBO_iGln-J6Gkzxmstd8zDqBEyqdC3B1ZSgHtzsy-RcSx13hsvMaJxFVocfndEvKT5wbogfm-yLzM-zol2RR50k2OC_Hrdrp_BxVbbbXXnJyD6WmAtc5xn50vcCZ0A3qg09CkQKF4WFXYZkNBJXQBOjOLzxfvbDio:1t80on:dW0mvIm2uY9ckQINsWz3L9bVqtmJfKOJAJ2Q4UfIoes",
+      "expire_date": "2024-11-18T17:24:45.866Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "wr0a3e83sj4xbnkphvwzx53iapbzm8kv",
+    "fields": {
+      "session_data": ".eJxVjMsOwiAQRf-FtSE8Bjq6dO83kAGmUjWQlHZl_HdD0oVu7znnvkWgfSth77yGJYuLMOL0u0VKT64D5AfVe5Op1W1dohyKPGiXt5b5dT3cv4NCvYwaPeYEkQwksBlQ--wVw5T87ByS0mwZ1Rk0Y-QYiXjyRjMTWgd-Fp8v6so4Nw:1t5sOd:2aInZRF4RNV_cju19cjsGFyP-o3hHChQ0sYPCnvqADg",
+      "expire_date": "2024-11-12T17:00:55.804Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "wx07dzib5i8h1m8nuzrgm881i6jtwvzs",
+    "fields": {
+      "session_data": ".eJxVjMsOwiAQRf-FtSFAecy4dO83EIaHVA0kpV0Z_12bdKHbe865L-bDtla_jbz4ObEzU4adfkcK8ZHbTtI9tFvnsbd1mYnvCj_o4Nee8vNyuH8HNYz6raVTQaJMkVBKIKNBFMwWSadspIJi7QSCIkzgCkwWi00mkEJDQit07P0B7pM3Ng:1t9Mb2:7880kkky30LDHYMU1bNAe62ErvXMY4NBwpQRsQsWsfY",
+      "expire_date": "2024-11-22T10:52:08.165Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "xftlpudgj2bzsu4zo15opxihtyyg3vlo",
+    "fields": {
+      "session_data": ".eJxVjDsOwjAUBO_iGln-J6Gkzxmstd8zDqBEyqdC3B1ZSgHtzsy-RcSx13hsvMaJxFVocfndEvKT5wbogfm-yLzM-zol2RR50k2OC_Hrdrp_BxVbbbXXnJyD6WmAtc5xn50vcCZ0A3qg09CkQKF4WFXYZkNBJXQBOjOLzxfvbDio:1t7CBL:DUhIJgfxt-YzJpc8eOYkqlWWW42oBc-WjKBdLUQD97M",
+      "expire_date": "2024-11-16T11:20:39.255Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "yqvwzb5auz5wzmbf2iisn8py6pdu8tc3",
+    "fields": {
+      "session_data": ".eJxVjDsOwjAUBO_iGln-J6Gkzxmstd8zDqBEyqdC3B1ZSgHtzsy-RcSx13hsvMaJxFVocfndEvKT5wbogfm-yLzM-zol2RR50k2OC_Hrdrp_BxVbbbXXnJyD6WmAtc5xn50vcCZ0A3qg09CkQKF4WFXYZkNBJXQBOjOLzxfvbDio:1t5sPT:52u2Nahp7Ah6gWfMhnFG4gqa7-5h3zzvkMS-adbK2OQ",
+      "expire_date": "2024-11-12T17:01:47.089Z"
+    }
+  },
+  {
+    "model": "accounts.company",
+    "pk": 1,
+    "fields": {
+      "name": "Subik Finance Limited",
+      "logo": "company_logo/WhatsApp_Image_2024-10-22_at_20_BgppaRI.01.15.jpeg",
+      "address": "Ntinda",
+      "code": "1101",
+      "slug": "subik-finance-limited98399837-e7d8-4486-827c-ebc2c4d76ab7",
+      "created_at": "2024-10-29T17:03:00.551Z",
+      "updated_at": "2024-11-08T09:34:38.252Z"
+    }
+  },
+  {
+    "model": "accounts.company",
+    "pk": 2,
+    "fields": {
+      "name": "Blue Diamond MICROFINANCE",
+      "logo": "company_logo/WhatsApp_Image_2024-10-22_at_20_KhYZKPR.01.17.jpeg",
+      "address": "Kampala",
+      "code": "1101",
+      "slug": "blue-diamond-microfinancef310eba4-ae6e-4999-83b8-7a40c0a07645",
+      "created_at": "2024-10-29T17:03:15.799Z",
+      "updated_at": "2024-11-08T09:34:54.815Z"
+    }
+  },
+  {
+    "model": "accounts.company",
+    "pk": 3,
+    "fields": {
+      "name": "LORO CREDIT",
+      "logo": "company_logo/WhatsApp_Image_2024-10-22_at_20_a9UYcHb.01.16.jpeg",
+      "address": "Kampala",
+      "code": "1101",
+      "slug": "loro-credit-finance3a244eb6-2ed7-484f-a8a2-b237b9062f10",
+      "created_at": "2024-10-29T17:03:37.026Z",
+      "updated_at": "2024-11-08T09:35:04.444Z"
+    }
+  },
+  {
+    "model": "accounts.company",
+    "pk": 4,
+    "fields": {
+      "name": "Bik and Bos",
+      "logo": "company_logo/bik_XvgTYsD.png",
+      "address": "Ntinda Nakasero",
+      "code": "0000",
+      "slug": "bic-and-bosa2bd80fa-61f3-4920-bcff-e474bc24c5c1",
+      "created_at": "2024-11-06T14:04:26.461Z",
+      "updated_at": "2024-11-08T09:33:57.190Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 1,
+    "fields": {
+      "name": "Can Create Agent",
+      "code": "can_create_agent",
+      "description": "User Can Create Agent",
+      "created_at": "2024-10-29T17:02:45.918Z",
+      "updated_at": "2024-10-29T17:02:45.918Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 2,
+    "fields": {
+      "name": "Can Create Collection Officer",
+      "code": "can_create_collection_officer",
+      "description": "User Can Create Collection Officer",
+      "created_at": "2024-10-29T17:02:50.647Z",
+      "updated_at": "2024-10-29T17:02:50.647Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 3,
+    "fields": {
+      "name": "Can Create Company User",
+      "code": "can_create_company_user",
+      "description": "User Can Create Company User",
+      "created_at": "2024-10-29T17:02:55.247Z",
+      "updated_at": "2024-10-29T17:02:55.247Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 4,
+    "fields": {
+      "name": "Can Create Prospect",
+      "code": "can_create_prospect",
+      "description": "User Can Create Prospect",
+      "created_at": "2024-10-29T17:02:59.059Z",
+      "updated_at": "2024-10-29T17:02:59.059Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 5,
+    "fields": {
+      "name": "Can Delete Agent",
+      "code": "can_delete_agent",
+      "description": "User Can Delete Agent",
+      "created_at": "2024-10-29T17:03:02.929Z",
+      "updated_at": "2024-10-29T17:03:02.929Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 6,
+    "fields": {
+      "name": "Can Delete Collection Officer",
+      "code": "can_delete_collection_officer",
+      "description": "User Can Delete Collection Officer",
+      "created_at": "2024-10-29T17:03:15.096Z",
+      "updated_at": "2024-10-29T17:03:15.096Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 7,
+    "fields": {
+      "name": "Can disburse loan",
+      "code": "can_disburse_loan",
+      "description": "User Can disburse loan",
+      "created_at": "2024-10-29T17:03:27.986Z",
+      "updated_at": "2024-10-29T17:03:27.986Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 8,
+    "fields": {
+      "name": "Can make loan approval",
+      "code": "can_make_loan_approval",
+      "description": "User Can make loan approval",
+      "created_at": "2024-10-29T17:03:33.718Z",
+      "updated_at": "2024-10-29T17:03:33.718Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 9,
+    "fields": {
+      "name": "Can make operation manager recommandation",
+      "code": "can_make_operation_manager_recommandation",
+      "description": "User Can make operation manager recommandation",
+      "created_at": "2024-10-29T17:03:40.031Z",
+      "updated_at": "2024-10-29T17:03:40.031Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 10,
+    "fields": {
+      "name": "Can make sale manager recommandation",
+      "code": "can_make_sale_manager_recommandation",
+      "description": "User Can make sale manager recommandation",
+      "created_at": "2024-10-29T17:03:48.596Z",
+      "updated_at": "2024-10-29T17:03:48.596Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 11,
+    "fields": {
+      "name": "Can Update Agent",
+      "code": "can_update_agent",
+      "description": "User Can Update Agent",
+      "created_at": "2024-10-29T17:03:54.957Z",
+      "updated_at": "2024-10-29T17:03:54.957Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 12,
+    "fields": {
+      "name": "Can Update Collection Officer",
+      "code": "can_update_collection_officer",
+      "description": "User Can Update Collection Officer",
+      "created_at": "2024-10-29T17:04:00.386Z",
+      "updated_at": "2024-10-29T17:04:00.386Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 14,
+    "fields": {
+      "name": "Can View Prospects",
+      "code": "can_view_prospects",
+      "description": "User Can View Prospects",
+      "created_at": "2024-10-29T17:04:20.715Z",
+      "updated_at": "2024-10-29T17:04:20.715Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 15,
+    "fields": {
+      "name": "Can create payment",
+      "code": "can_create_payment",
+      "description": "User Can create payment",
+      "created_at": "2024-10-29T17:04:31.885Z",
+      "updated_at": "2024-10-29T17:04:31.885Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 16,
+    "fields": {
+      "name": "Can create payment as RO",
+      "code": "can_create_payment_as_ro",
+      "description": "User Can create payment as RO",
+      "created_at": "2024-10-29T17:04:40.577Z",
+      "updated_at": "2024-10-29T17:04:40.577Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 17,
+    "fields": {
+      "name": "Can Verify Payement",
+      "code": "can_verify_payement",
+      "description": "verify payment",
+      "created_at": "2024-10-29T17:07:27.869Z",
+      "updated_at": "2024-10-29T17:07:27.869Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 18,
+    "fields": {
+      "name": "Can Edit Payement",
+      "code": "can_edit_payement",
+      "description": "edit payments",
+      "created_at": "2024-10-29T17:07:42.808Z",
+      "updated_at": "2024-10-29T17:07:42.808Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 19,
+    "fields": {
+      "name": "Can Create Payment",
+      "code": "can_create_payment",
+      "description": "make payment",
+      "created_at": "2024-10-29T17:07:56.120Z",
+      "updated_at": "2024-10-29T17:07:56.120Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 20,
+    "fields": {
+      "name": "Can edit loan account",
+      "code": "can_edit_loan_account",
+      "description": "User Can edit loan account",
+      "created_at": "2024-10-29T17:54:00.742Z",
+      "updated_at": "2024-10-29T17:54:00.742Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 21,
+    "fields": {
+      "name": "Can Decline Prospect",
+      "code": "can_decline_prospect",
+      "description": "Can Decline Prospect",
+      "created_at": "2024-10-30T12:13:03.369Z",
+      "updated_at": "2024-10-30T12:13:03.369Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 22,
+    "fields": {
+      "name": "Can Verify payment as Valuer",
+      "code": "can_verify_payment_as_valuer",
+      "description": "Can Verify payment as Valuer",
+      "created_at": "2024-10-30T12:13:49.416Z",
+      "updated_at": "2024-10-30T12:13:49.416Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 23,
+    "fields": {
+      "name": "Can Edit Valuation Details",
+      "code": "can_edit_valuation_details",
+      "description": "Can Edit  Valuation Details",
+      "created_at": "2024-10-30T12:14:17.353Z",
+      "updated_at": "2024-10-30T12:54:45.138Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 24,
+    "fields": {
+      "name": "Can Complete Asset Valuation Details",
+      "code": "can_complete_asset_valuation_details",
+      "description": "Can Complete Asset Valuation Details",
+      "created_at": "2024-10-30T12:15:02.609Z",
+      "updated_at": "2024-10-30T12:15:02.609Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 25,
+    "fields": {
+      "name": "Can View Valuation Requests",
+      "code": "can_view_valuation_requests",
+      "description": "Can View Valuation Requests",
+      "created_at": "2024-10-30T12:15:29.809Z",
+      "updated_at": "2024-10-30T12:15:29.809Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 26,
+    "fields": {
+      "name": "Can Review Signed Documents",
+      "code": "can_review_signed_documents",
+      "description": "Can Review Signed Documents",
+      "created_at": "2024-10-30T12:21:27.668Z",
+      "updated_at": "2024-10-30T12:21:27.668Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 27,
+    "fields": {
+      "name": "Can Edit Loan Fees",
+      "code": "can_edit_loan_fees",
+      "description": "Can Edit Loan Fees",
+      "created_at": "2024-10-30T12:21:59.928Z",
+      "updated_at": "2024-10-30T12:21:59.928Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 28,
+    "fields": {
+      "name": "Can Create Loan Fees",
+      "code": "can_create_loan_fees",
+      "description": "Can Create Loan Fees",
+      "created_at": "2024-10-30T12:22:26.166Z",
+      "updated_at": "2024-10-30T12:22:26.166Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 29,
+    "fields": {
+      "name": "Can Create Loan Products",
+      "code": "can_create_loan_products",
+      "description": "Can Create Loan Products",
+      "created_at": "2024-10-30T12:22:47.018Z",
+      "updated_at": "2024-10-30T12:22:47.018Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 30,
+    "fields": {
+      "name": "Can Edit Loan Products",
+      "code": "can_edit_loan_products",
+      "description": "Can Edit Loan Products",
+      "created_at": "2024-10-30T12:23:24.728Z",
+      "updated_at": "2024-10-30T12:23:24.729Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 31,
+    "fields": {
+      "name": "Can Delete Loan Products",
+      "code": "can_delete_loan_products",
+      "description": "Can Delete Loan Products",
+      "created_at": "2024-10-30T12:23:44.436Z",
+      "updated_at": "2024-10-30T12:23:44.436Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 34,
+    "fields": {
+      "name": "Can Create Loan Collection Products",
+      "code": "can_create_loan_collection_products",
+      "description": "Can Create Loan Collection Products",
+      "created_at": "2024-10-30T12:24:52.605Z",
+      "updated_at": "2024-10-30T12:24:52.605Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 35,
+    "fields": {
+      "name": "Can Edit Loan Collection Products",
+      "code": "can_edit_loan_collection_products",
+      "description": "Can Edit Loan Collection Products",
+      "created_at": "2024-10-30T12:25:13.204Z",
+      "updated_at": "2024-10-30T12:25:13.205Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 36,
+    "fields": {
+      "name": "Can View Loan Products",
+      "code": "can_view_loan_products",
+      "description": "Can View Loan Products",
+      "created_at": "2024-10-30T12:29:40.003Z",
+      "updated_at": "2024-10-30T12:29:40.003Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 37,
+    "fields": {
+      "name": "Can View Loan Collection Products",
+      "code": "can_view_loan_collection_products",
+      "description": "Can View Loan Collection Products",
+      "created_at": "2024-10-30T12:29:54.733Z",
+      "updated_at": "2024-10-30T12:29:54.733Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 38,
+    "fields": {
+      "name": "Can complete prospect details",
+      "code": "can_complete_prospect_details",
+      "description": "Can complete prospect details",
+      "created_at": "2024-10-30T13:31:56.915Z",
+      "updated_at": "2024-10-30T13:31:56.915Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 39,
+    "fields": {
+      "name": "Can Delete Prospect",
+      "code": "can_delete_prospect",
+      "description": "Can Delete Prospect",
+      "created_at": "2024-10-30T13:33:30.725Z",
+      "updated_at": "2024-10-30T13:33:30.725Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 40,
+    "fields": {
+      "name": "Can View Agent",
+      "code": "can_view_agent",
+      "description": "Can View Agent",
+      "created_at": "2024-10-30T13:34:51.246Z",
+      "updated_at": "2024-10-30T13:34:51.246Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 41,
+    "fields": {
+      "name": "Can make loan application",
+      "code": "can_make_loan_application",
+      "description": "Can make loan application",
+      "created_at": "2024-10-30T13:37:49.831Z",
+      "updated_at": "2024-10-31T08:04:04.733Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 42,
+    "fields": {
+      "name": "Can do offer review",
+      "code": "can_do_offer_review",
+      "description": "Can do offer review",
+      "created_at": "2024-10-30T13:45:08.382Z",
+      "updated_at": "2024-10-30T13:45:08.382Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 43,
+    "fields": {
+      "name": "Can do Loan Perfection",
+      "code": "can_do_loan_perfections",
+      "description": "Can do Loan Perfection",
+      "created_at": "2024-10-30T13:45:43.079Z",
+      "updated_at": "2024-10-30T13:45:43.079Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 44,
+    "fields": {
+      "name": "Can do disbursement review",
+      "code": "can_do_disbursement_review",
+      "description": "Can do disbursement review",
+      "created_at": "2024-10-30T13:46:57.921Z",
+      "updated_at": "2024-10-30T13:46:57.921Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 45,
+    "fields": {
+      "name": "Can do loan Disbursement",
+      "code": "can_do_loan_disbursement",
+      "description": "Can do loan Disbursement",
+      "created_at": "2024-10-30T13:47:28.731Z",
+      "updated_at": "2024-10-30T13:47:28.731Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 46,
+    "fields": {
+      "name": "Can view loan Collections",
+      "code": "can_view_loan_collections",
+      "description": "Can view loan Collections",
+      "created_at": "2024-10-30T13:47:48.093Z",
+      "updated_at": "2024-10-30T13:47:48.093Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 48,
+    "fields": {
+      "name": "Can View Pipeline",
+      "code": "can_view_pipeline",
+      "description": "Can View Pipeline",
+      "created_at": "2024-10-31T07:55:36.133Z",
+      "updated_at": "2024-10-31T07:55:44.315Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 49,
+    "fields": {
+      "name": "Can view failed applications",
+      "code": "can_view_failed_applications",
+      "description": "User Can view failed applications",
+      "created_at": "2024-10-31T08:04:18.981Z",
+      "updated_at": "2024-10-31T08:04:29.620Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 50,
+    "fields": {
+      "name": "Can view queried applications",
+      "code": "can_view_queried_applications",
+      "description": "User Can view queried applications",
+      "created_at": "2024-10-31T08:27:49Z",
+      "updated_at": "2024-10-31T08:27:55.675Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 51,
+    "fields": {
+      "name": "Can review loan approvals",
+      "code": "can_review_loan_approvals",
+      "description": "User Can review loan approvals",
+      "created_at": "2024-10-31T09:02:50.503Z",
+      "updated_at": "2024-10-31T09:02:50.503Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 52,
+    "fields": {
+      "name": "Can view approved loans",
+      "code": "can_view_approved_loans",
+      "description": "User Can view approved loans",
+      "created_at": "2024-10-31T09:05:15.974Z",
+      "updated_at": "2024-10-31T09:05:15.974Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 53,
+    "fields": {
+      "name": "Can review loan documents",
+      "code": "can_review_loan_documents",
+      "description": "User Can review loan documents",
+      "created_at": "2024-10-31T09:05:41.175Z",
+      "updated_at": "2024-10-31T09:05:41.175Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 54,
+    "fields": {
+      "name": "Can review signed loan documents",
+      "code": "can_review_signed_loan_documents",
+      "description": "User Can review signed loan documents",
+      "created_at": "2024-10-31T09:06:13.806Z",
+      "updated_at": "2024-10-31T09:06:13.806Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 55,
+    "fields": {
+      "name": "Can view declined loan offers",
+      "code": "can_view_declined_loan_offers",
+      "description": "User Can view declined loan offers",
+      "created_at": "2024-10-31T09:06:50.187Z",
+      "updated_at": "2024-10-31T09:06:50.187Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 56,
+    "fields": {
+      "name": "can view loan origination",
+      "code": "can_view_loan_origination",
+      "description": "User can view loan origination",
+      "created_at": "2024-10-31T10:16:35.464Z",
+      "updated_at": "2024-10-31T10:16:43.683Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 57,
+    "fields": {
+      "name": "Can perform credit manager functions",
+      "code": "can_perform_credit_manager_functions",
+      "description": "User Can perform credit manager functions",
+      "created_at": "2024-11-01T10:13:38.078Z",
+      "updated_at": "2024-11-01T10:13:38.079Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 58,
+    "fields": {
+      "name": "Can perform legal team functions",
+      "code": "can_perform_legal_team_functions",
+      "description": "User Can perform legal team functions",
+      "created_at": "2024-11-01T10:14:25.074Z",
+      "updated_at": "2024-11-01T10:14:25.074Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 59,
+    "fields": {
+      "name": "Can view all application data",
+      "code": "can_view_all_application_data",
+      "description": "User Can view all application data",
+      "created_at": "2024-11-01T12:19:46.263Z",
+      "updated_at": "2024-11-01T12:19:46.263Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 60,
+    "fields": {
+      "name": "Can View Dashboard",
+      "code": "can_view_dashboard",
+      "description": "User Can View Dashboard",
+      "created_at": "2024-11-01T12:20:32.677Z",
+      "updated_at": "2024-11-01T12:20:32.677Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 62,
+    "fields": {
+      "name": "Can change user password",
+      "code": "can_change_user_password",
+      "description": "User Can change user password",
+      "created_at": "2024-11-01T12:40:43.452Z",
+      "updated_at": "2024-11-01T12:40:43.452Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 63,
+    "fields": {
+      "name": "can do disbursement review as credit",
+      "code": "can_do_disbursement_review_as_credit",
+      "description": "User can do disbursement review as credit",
+      "created_at": "2024-11-02T07:02:20.527Z",
+      "updated_at": "2024-11-02T07:02:20.527Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 64,
+    "fields": {
+      "name": "can do disbursement review as ops",
+      "code": "can_do_disbursement_review_as_ops",
+      "description": "User can do disbursement review as ops",
+      "created_at": "2024-11-02T07:02:25.090Z",
+      "updated_at": "2024-11-02T07:02:25.090Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 65,
+    "fields": {
+      "name": "can do disbursement review as legal team",
+      "code": "can_do_disbursement_review_as_legal_team",
+      "description": "User can do disbursement review as legal team",
+      "created_at": "2024-11-02T07:02:33.932Z",
+      "updated_at": "2024-11-02T07:02:33.932Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 66,
+    "fields": {
+      "name": "can do disbursement review as finance",
+      "code": "can_do_disbursement_review_as_finance",
+      "description": "User can do disbursement review as finance team",
+      "created_at": "2024-11-02T07:02:40.634Z",
+      "updated_at": "2024-11-04T07:15:06.754Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 67,
+    "fields": {
+      "name": "Can Perform Admin Functions",
+      "code": "can_perform_admin_functions",
+      "description": "User Can Perform Admin Functions",
+      "created_at": "2024-11-02T11:30:35.153Z",
+      "updated_at": "2024-11-02T11:30:35.153Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 68,
+    "fields": {
+      "name": "can approve agent",
+      "code": "can_approve_agent",
+      "description": "User can approve agent",
+      "created_at": "2024-11-06T14:08:29.868Z",
+      "updated_at": "2024-11-06T14:08:29.868Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 69,
+    "fields": {
+      "name": "can decline agent",
+      "code": "can_decline_agent",
+      "description": "User can decline agent",
+      "created_at": "2024-11-06T14:08:37.906Z",
+      "updated_at": "2024-11-06T14:08:37.906Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 70,
+    "fields": {
+      "name": "can switch companies",
+      "code": "can_switch_companies",
+      "description": "User can switch companies",
+      "created_at": "2024-11-06T14:09:00.081Z",
+      "updated_at": "2024-11-06T14:09:00.081Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 71,
+    "fields": {
+      "name": "Can be valuers",
+      "code": "can_be_valuers",
+      "description": "User Can be valuers",
+      "created_at": "2024-11-07T13:14:30.431Z",
+      "updated_at": "2024-11-07T13:14:30.431Z"
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 72,
+    "fields": {
+      "name": "Can be supervisor",
+      "code": "can_be_supervisor",
+      "description": "User Can be supervisor",
+      "created_at": "2024-11-07T13:14:45.448Z",
+      "updated_at": "2024-11-07T13:14:45.448Z"
+    }
+  },
+  {
+    "model": "accounts.role",
+    "pk": 1,
+    "fields": {
+      "name": "admin",
+      "company": 3,
+      "created_at": "2024-10-29T17:08:15.340Z",
+      "updated_at": "2024-11-08T09:40:40.028Z",
+      "slug": "adminaaa58102-b608-48e9-b35e-16f9ae26a012",
+      "permissions": [
+        72, 71, 70, 69, 68, 66, 67, 65, 64, 63, 62, 60, 59, 58, 57, 56, 55, 54,
+        53, 52, 51, 50, 49, 41, 48, 46, 45, 44, 43, 42, 40, 39, 38, 23, 37, 36,
+        35, 34, 31, 30, 29, 28, 27, 26, 25, 24, 22, 21, 20, 19, 18, 17, 16, 15,
+        14, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1
+      ]
+    }
+  },
+  {
+    "model": "accounts.role",
+    "pk": 2,
+    "fields": {
+      "name": "Team leader",
+      "company": 3,
+      "created_at": "2024-10-29T17:09:16.550Z",
+      "updated_at": "2024-10-31T10:20:23.122Z",
+      "slug": "team-leader855fbddf-19d5-4958-934e-278189cf0d1d",
+      "permissions": [56, 41, 48, 40, 39, 38, 21, 19, 14, 11, 4, 1]
+    }
+  },
+  {
+    "model": "accounts.role",
+    "pk": 3,
+    "fields": {
+      "name": "Relation officer",
+      "company": 3,
+      "created_at": "2024-10-29T17:12:18.123Z",
+      "updated_at": "2024-10-31T10:19:52.431Z",
+      "slug": "relation-officera168054a-c87d-496b-ab5f-e286c3f31f12",
+      "permissions": [56, 16]
+    }
+  },
+  {
+    "model": "accounts.role",
+    "pk": 4,
+    "fields": {
+      "name": "OPS",
+      "company": 3,
+      "created_at": "2024-10-29T17:13:18.474Z",
+      "updated_at": "2024-11-05T07:29:56.634Z",
+      "slug": "opsec9bfed3-05a2-4959-a333-ffaab83fecae",
+      "permissions": [64, 56, 50, 49, 41, 48, 37, 36, 9]
+    }
+  },
+  {
+    "model": "accounts.role",
+    "pk": 5,
+    "fields": {
+      "name": "Collection manager",
+      "company": 3,
+      "created_at": "2024-10-29T17:13:23.036Z",
+      "updated_at": "2024-10-31T10:13:30.499Z",
+      "slug": "collection-manager5a82883d-dfc2-4579-a5e8-42d2c3ee8555",
+      "permissions": [46, 31, 30, 29, 19, 18, 17]
+    }
+  },
+  {
+    "model": "accounts.role",
+    "pk": 6,
+    "fields": {
+      "name": "Sales manager",
+      "company": 3,
+      "created_at": "2024-10-29T17:15:57.002Z",
+      "updated_at": "2024-10-31T10:20:04.794Z",
+      "slug": "sales-managerbd322fbd-6df6-41c6-a3f8-e5786a216516",
+      "permissions": [56, 50, 49, 41, 48, 12, 10, 6, 3, 2]
+    }
+  },
+  {
+    "model": "accounts.role",
+    "pk": 7,
+    "fields": {
+      "name": "Valuer",
+      "company": 3,
+      "created_at": "2024-10-30T12:20:04.022Z",
+      "updated_at": "2024-10-31T10:20:44.219Z",
+      "slug": "valuercf605905-f6da-4157-bc41-637fb242e226",
+      "permissions": [56, 23, 25, 24, 22]
+    }
+  },
+  {
+    "model": "accounts.role",
+    "pk": 8,
+    "fields": {
+      "name": "Credit Officer",
+      "company": 3,
+      "created_at": "2024-10-30T12:28:15.904Z",
+      "updated_at": "2024-11-05T07:52:39.339Z",
+      "slug": "credit-officer719e1eb1-f6df-49e5-9ce4-ee345d47fabe",
+      "permissions": [
+        56, 55, 54, 52, 51, 41, 48, 46, 45, 44, 43, 42, 37, 36, 35, 34, 31, 30,
+        29, 28, 27, 26, 20, 18, 17
+      ]
+    }
+  },
+  {
+    "model": "accounts.role",
+    "pk": 9,
+    "fields": {
+      "name": "TOP EXECUTIVE OFFICER",
+      "company": 3,
+      "created_at": "2024-10-30T12:33:05.576Z",
+      "updated_at": "2024-10-31T10:20:33.741Z",
+      "slug": "top-executive-officera9f42a96-44de-44c8-be07-b0ab80e9e7de",
+      "permissions": [
+        56, 55, 54, 53, 52, 51, 46, 45, 44, 43, 42, 37, 36, 26, 21, 14, 12, 8,
+        7, 6, 2
+      ]
+    }
+  },
+  {
+    "model": "accounts.role",
+    "pk": 10,
+    "fields": {
+      "name": "Finance TEaM",
+      "company": 3,
+      "created_at": "2024-11-02T09:22:41.430Z",
+      "updated_at": "2024-11-02T09:23:06.481Z",
+      "slug": "finance-team8fc24986-6294-4636-8d16-e6a4f44a4222",
+      "permissions": [66, 44]
+    }
+  },
+  {
+    "model": "accounts.role",
+    "pk": 11,
+    "fields": {
+      "name": "LegaL Team",
+      "company": 3,
+      "created_at": "2024-11-02T09:23:32.287Z",
+      "updated_at": "2024-11-02T09:23:32.298Z",
+      "slug": "legal-teambaac8ee0-c695-4ab6-b9cd-f913d3b77455",
+      "permissions": [65, 44]
+    }
+  },
+  {
+    "model": "accounts.role",
+    "pk": 12,
+    "fields": {
+      "name": "Credit Officer",
+      "company": 1,
+      "created_at": "2024-11-05T10:33:02.940Z",
+      "updated_at": "2024-11-08T10:02:18.354Z",
+      "slug": "credit-officere9ab5545-d0d0-40bd-b97d-74faef2c0623",
+      "permissions": [
+        63, 56, 55, 54, 52, 51, 41, 48, 46, 45, 44, 43, 42, 37, 36, 35, 34, 31,
+        30, 29, 28, 27, 26, 20, 18, 17
+      ]
+    }
+  },
+  {
+    "model": "accounts.role",
+    "pk": 13,
+    "fields": {
+      "name": "Credit Officer",
+      "company": 2,
+      "created_at": "2024-11-05T10:33:03.024Z",
+      "updated_at": "2024-11-05T10:33:03.104Z",
+      "slug": "credit-officerffa37d43-cfe2-4772-a053-e744f6b3ea0c",
+      "permissions": [
+        56, 55, 54, 52, 51, 41, 48, 46, 45, 44, 43, 42, 37, 36, 35, 34, 31, 30,
+        29, 28, 27, 26, 20, 18, 17
+      ]
+    }
+  },
+  {
+    "model": "accounts.role",
+    "pk": 14,
+    "fields": {
+      "name": "OPS",
+      "company": 1,
+      "created_at": "2024-11-05T10:33:03.106Z",
+      "updated_at": "2024-11-08T09:58:01.675Z",
+      "slug": "opsf973d473-147a-40be-b629-ce70339c577a",
+      "permissions": [64, 56, 54, 53, 50, 49, 41, 48, 43, 42, 37, 36, 9]
+    }
+  },
+  {
+    "model": "accounts.role",
+    "pk": 15,
+    "fields": {
+      "name": "OPS",
+      "company": 2,
+      "created_at": "2024-11-05T10:33:03.136Z",
+      "updated_at": "2024-11-05T10:33:03.166Z",
+      "slug": "opsb4f44d2d-8607-4601-997c-cdd4ab362c5f",
+      "permissions": [64, 56, 50, 49, 41, 48, 37, 36, 9]
+    }
+  },
+  {
+    "model": "accounts.role",
+    "pk": 16,
+    "fields": {
+      "name": "admin",
+      "company": 1,
+      "created_at": "2024-11-05T10:33:03.168Z",
+      "updated_at": "2024-11-06T14:14:14.831Z",
+      "slug": "adminb50a47c1-6c64-4434-a4ce-cc7d9ab7bd39",
+      "permissions": [
+        70, 69, 68, 66, 67, 65, 64, 63, 62, 60, 59, 58, 57, 56, 55, 54, 53, 52,
+        51, 50, 49, 41, 48, 46, 45, 44, 43, 42, 40, 39, 38, 23, 37, 36, 35, 34,
+        31, 30, 29, 28, 27, 26, 25, 24, 22, 21, 20, 19, 18, 17, 16, 15, 14, 12,
+        11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1
+      ]
+    }
+  },
+  {
+    "model": "accounts.role",
+    "pk": 17,
+    "fields": {
+      "name": "admin",
+      "company": 2,
+      "created_at": "2024-11-05T10:33:03.362Z",
+      "updated_at": "2024-11-06T14:16:15.021Z",
+      "slug": "admin439dd4de-db8d-4b4b-9d74-aa496c825b58",
+      "permissions": [
+        70, 69, 68, 66, 67, 65, 64, 63, 62, 60, 59, 58, 57, 56, 55, 54, 53, 52,
+        51, 50, 49, 41, 48, 46, 45, 44, 43, 42, 40, 39, 38, 23, 37, 36, 35, 34,
+        31, 30, 29, 28, 27, 26, 25, 24, 22, 21, 20, 19, 18, 17, 16, 15, 14, 12,
+        11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1
+      ]
+    }
+  },
+  {
+    "model": "accounts.role",
+    "pk": 18,
+    "fields": {
+      "name": "LegaL Team",
+      "company": 1,
+      "created_at": "2024-11-05T10:33:03.591Z",
+      "updated_at": "2024-11-08T10:05:51.076Z",
+      "slug": "legal-team3a0f20e8-5dc0-4cda-8d1a-50fb79fd0ec4",
+      "permissions": [65, 56, 44]
+    }
+  },
+  {
+    "model": "accounts.role",
+    "pk": 19,
+    "fields": {
+      "name": "LegaL Team",
+      "company": 2,
+      "created_at": "2024-11-05T10:33:03.599Z",
+      "updated_at": "2024-11-05T10:33:03.605Z",
+      "slug": "legal-team5ec6e1f6-b795-44bf-8bfc-f8a44d8d9cb3",
+      "permissions": [65, 44]
+    }
+  },
+  {
+    "model": "accounts.role",
+    "pk": 20,
+    "fields": {
+      "name": "Finance TEaM",
+      "company": 1,
+      "created_at": "2024-11-05T10:33:03.607Z",
+      "updated_at": "2024-11-08T10:09:11.598Z",
+      "slug": "finance-teamf588f606-c040-445c-a16a-11c64125d90d",
+      "permissions": [66, 56, 44]
+    }
+  },
+  {
+    "model": "accounts.role",
+    "pk": 21,
+    "fields": {
+      "name": "Finance TEaM",
+      "company": 2,
+      "created_at": "2024-11-05T10:33:03.615Z",
+      "updated_at": "2024-11-05T10:33:03.622Z",
+      "slug": "finance-teama8cdf320-3ce0-4649-bcfb-fd2af4aed54f",
+      "permissions": [66, 44]
+    }
+  },
+  {
+    "model": "accounts.role",
+    "pk": 22,
+    "fields": {
+      "name": "Valuer",
+      "company": 1,
+      "created_at": "2024-11-05T10:33:03.624Z",
+      "updated_at": "2024-11-05T10:33:03.640Z",
+      "slug": "valuere44e6409-cbaa-4eb6-8d21-6c831d8f5b15",
+      "permissions": [56, 23, 25, 24, 22]
+    }
+  },
+  {
+    "model": "accounts.role",
+    "pk": 23,
+    "fields": {
+      "name": "Valuer",
+      "company": 2,
+      "created_at": "2024-11-05T10:33:03.641Z",
+      "updated_at": "2024-11-05T10:33:03.656Z",
+      "slug": "valuerc2eeccb8-4a3f-4024-9a2b-aa4ab8429b0a",
+      "permissions": [56, 23, 25, 24, 22]
+    }
+  },
+  {
+    "model": "accounts.role",
+    "pk": 24,
+    "fields": {
+      "name": "TOP EXECUTIVE OFFICER",
+      "company": 1,
+      "created_at": "2024-11-05T10:33:03.659Z",
+      "updated_at": "2024-11-05T10:33:03.734Z",
+      "slug": "top-executive-officera74d2f9c-44d1-46dc-ad3a-4ef0a2924636",
+      "permissions": [
+        56, 55, 54, 53, 52, 51, 46, 45, 44, 43, 42, 37, 36, 26, 21, 14, 12, 8,
+        7, 6, 2
+      ]
+    }
+  },
+  {
+    "model": "accounts.role",
+    "pk": 25,
+    "fields": {
+      "name": "TOP EXECUTIVE OFFICER",
+      "company": 2,
+      "created_at": "2024-11-05T10:33:03.736Z",
+      "updated_at": "2024-11-05T10:33:03.824Z",
+      "slug": "top-executive-officerc4f992ec-0b1a-4e08-b04a-5f7c6873bf59",
+      "permissions": [
+        56, 55, 54, 53, 52, 51, 46, 45, 44, 43, 42, 37, 36, 26, 21, 14, 12, 8,
+        7, 6, 2
+      ]
+    }
+  },
+  {
+    "model": "accounts.role",
+    "pk": 26,
+    "fields": {
+      "name": "Team leader",
+      "company": 1,
+      "created_at": "2024-11-05T10:33:03.826Z",
+      "updated_at": "2024-11-05T10:33:03.862Z",
+      "slug": "team-leaderca3cfb44-92eb-4a58-87fb-26f32f4dfa6d",
+      "permissions": [56, 41, 48, 40, 39, 38, 21, 19, 14, 11, 4, 1]
+    }
+  },
+  {
+    "model": "accounts.role",
+    "pk": 27,
+    "fields": {
+      "name": "Team leader",
+      "company": 2,
+      "created_at": "2024-11-05T10:33:03.864Z",
+      "updated_at": "2024-11-05T10:33:03.900Z",
+      "slug": "team-leadercc1d44f3-43e0-4755-aa7c-e91a4c0a4580",
+      "permissions": [56, 41, 48, 40, 39, 38, 21, 19, 14, 11, 4, 1]
+    }
+  },
+  {
+    "model": "accounts.role",
+    "pk": 28,
+    "fields": {
+      "name": "Sales manager",
+      "company": 1,
+      "created_at": "2024-11-05T10:33:03.902Z",
+      "updated_at": "2024-11-05T10:33:03.933Z",
+      "slug": "sales-manager40bde9ec-ee91-49ab-b607-b6ad10290c08",
+      "permissions": [56, 50, 49, 41, 48, 12, 10, 6, 3, 2]
+    }
+  },
+  {
+    "model": "accounts.role",
+    "pk": 29,
+    "fields": {
+      "name": "Sales manager",
+      "company": 2,
+      "created_at": "2024-11-05T10:33:03.935Z",
+      "updated_at": "2024-11-08T10:01:31.441Z",
+      "slug": "sales-managerb7acc38a-aee9-4e82-b222-118d61c80bab",
+      "permissions": [69, 68, 56, 50, 49, 41, 48, 12, 10, 6, 3, 2]
+    }
+  },
+  {
+    "model": "accounts.role",
+    "pk": 30,
+    "fields": {
+      "name": "Relation officer",
+      "company": 1,
+      "created_at": "2024-11-05T10:33:03.975Z",
+      "updated_at": "2024-11-05T10:33:03.982Z",
+      "slug": "relation-officer915e0020-ab7b-4e0f-99b6-27f02297b1b9",
+      "permissions": [56, 16]
+    }
+  },
+  {
+    "model": "accounts.role",
+    "pk": 31,
+    "fields": {
+      "name": "Relation officer",
+      "company": 2,
+      "created_at": "2024-11-05T10:33:03.983Z",
+      "updated_at": "2024-11-05T10:33:03.990Z",
+      "slug": "relation-officer65a5914a-1aab-4fc1-aba5-8534748b0cff",
+      "permissions": [56, 16]
+    }
+  },
+  {
+    "model": "accounts.role",
+    "pk": 32,
+    "fields": {
+      "name": "Collection manager",
+      "company": 1,
+      "created_at": "2024-11-05T10:33:03.991Z",
+      "updated_at": "2024-11-05T10:33:04.013Z",
+      "slug": "collection-manager7cbe5f4d-1dca-4d6c-8d8f-f5d2f8970f42",
+      "permissions": [46, 31, 30, 29, 19, 18, 17]
+    }
+  },
+  {
+    "model": "accounts.role",
+    "pk": 33,
+    "fields": {
+      "name": "Collection manager",
+      "company": 2,
+      "created_at": "2024-11-05T10:33:04.015Z",
+      "updated_at": "2024-11-05T10:33:04.042Z",
+      "slug": "collection-manager8f061a13-9936-4273-b0da-cfbd5bead550",
+      "permissions": [46, 31, 30, 29, 19, 18, 17]
+    }
+  },
+  {
+    "model": "accounts.role",
+    "pk": 34,
+    "fields": {
+      "name": "admin",
+      "company": 4,
+      "created_at": "2024-11-06T14:09:22.501Z",
+      "updated_at": "2024-11-08T11:25:33.411Z",
+      "slug": "adminc002bd30-0624-40f4-a461-9abfed6845ca",
+      "permissions": [
+        72, 71, 70, 69, 68, 66, 67, 65, 64, 63, 62, 60, 59, 58, 57, 56, 55, 54,
+        53, 52, 51, 50, 49, 48, 46, 45, 44, 43, 42, 40, 39, 38, 23, 37, 36, 35,
+        34, 31, 30, 29, 28, 27, 26, 25, 24, 22, 21, 20, 19, 18, 17, 16, 15, 12,
+        11, 10, 9, 8, 7, 6, 5, 3, 2, 1
+      ]
+    }
+  },
+  {
+    "model": "accounts.role",
+    "pk": 35,
+    "fields": {
+      "name": "approver",
+      "company": 4,
+      "created_at": "2024-11-06T14:11:53.315Z",
+      "updated_at": "2024-11-06T14:28:55.659Z",
+      "slug": "approver465008a8-45d9-4705-bd88-de0fd63ceff6",
+      "permissions": [56, 23, 25, 24, 22]
+    }
+  },
+  {
+    "model": "accounts.role",
+    "pk": 36,
+    "fields": {
+      "name": "supervisor",
+      "company": 4,
+      "created_at": "2024-11-06T14:13:12.642Z",
+      "updated_at": "2024-11-08T09:30:44.642Z",
+      "slug": "supervisordc98d644-9ef5-4e32-a3aa-ee7d4edcdcac",
+      "permissions": [72, 56, 23, 25]
+    }
+  },
+  {
+    "model": "accounts.role",
+    "pk": 37,
+    "fields": {
+      "name": "valuer",
+      "company": 4,
+      "created_at": "2024-11-06T14:14:05.678Z",
+      "updated_at": "2024-11-08T09:22:26.678Z",
+      "slug": "valuer25147b8f-3a3c-4f37-ad00-1717ead1d241",
+      "permissions": [71, 56, 25, 24]
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$QENSmi9E0zluWOQcP4j9mz$xssIuiD7hL1ClRxZOgz1TsqfgmXJ/QOytDHZJlDj8+M=",
+      "last_login": "2024-11-08T11:17:01.707Z",
+      "is_superuser": true,
+      "username": "baifam",
+      "first_name": "",
+      "last_name": "",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2024-10-29T16:59:26Z",
+      "email": "admin@baifam.co.ug",
+      "active_company": 1,
+      "updated_on": "2024-11-08T12:06:24.825Z",
+      "role": 16,
+      "status": "Approved",
+      "image": "",
+      "slug": "d5e49bf3-ba60-4a1b-89a9-b86e18f4225e",
+      "created_at": "2024-10-29T16:59:26.835Z",
+      "updated_at": "2024-11-08T12:06:24.825Z",
+      "groups": [],
+      "user_permissions": [],
+      "companies": [2]
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 15,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$pFaUiVy9PJW6XrUGsBm4Lu$luoWO9T4IAaKYq2YL0L7GpozbxWbHIsylvNM7ovAjdw=",
+      "last_login": "2024-11-08T09:44:57.981Z",
+      "is_superuser": true,
+      "username": "bdm_admin",
+      "first_name": "",
+      "last_name": "",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2024-11-05T10:34:30Z",
+      "email": "admin@baifamgroup.co.ug",
+      "active_company": 2,
+      "updated_on": "2024-11-05T10:39:19.435Z",
+      "role": 17,
+      "status": "Approved",
+      "image": "",
+      "slug": "1b4b809d-3480-49de-837c-deaac98ca296",
+      "created_at": "2024-11-05T10:34:30.568Z",
+      "updated_at": "2024-11-05T10:39:19.435Z",
+      "groups": [],
+      "user_permissions": [],
+      "companies": [2]
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 16,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$vTdfMQUks8HFDvwHUF3zTs$I18AEaqCzCOfrY/xDZSdLIQo13qXcHE377w/sTJ4MDg=",
+      "last_login": "2024-11-08T10:35:17.568Z",
+      "is_superuser": true,
+      "username": "subik_admin",
+      "first_name": "",
+      "last_name": "",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2024-11-05T10:34:58Z",
+      "email": "admin@baifamgroup.co.ug",
+      "active_company": 1,
+      "updated_on": "2024-11-08T09:34:22.719Z",
+      "role": 16,
+      "status": "Approved",
+      "image": "",
+      "slug": "47dba02e-4604-45b6-93f6-f97be225e22a",
+      "created_at": "2024-11-05T10:34:58.723Z",
+      "updated_at": "2024-11-08T09:34:22.719Z",
+      "groups": [],
+      "user_permissions": [],
+      "companies": [1]
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 17,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$bPdRAJY92nKcoGjsfglGFo$d8SGOTVmae9xF0EpPgm36uRsOowJy/uRBrrsUN9OLcc=",
+      "last_login": "2024-11-08T10:37:21.312Z",
+      "is_superuser": true,
+      "username": "loro_admin",
+      "first_name": "",
+      "last_name": "",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2024-11-05T10:35:56Z",
+      "email": "admin@baifamgroup.co.ug",
+      "active_company": 3,
+      "updated_on": "2024-11-05T10:39:41.732Z",
+      "role": 1,
+      "status": "Approved",
+      "image": "",
+      "slug": "d9c3c50c-c6c6-40de-8d7f-c31b724f97de",
+      "created_at": "2024-11-05T10:35:56.788Z",
+      "updated_at": "2024-11-05T10:39:41.732Z",
+      "groups": [],
+      "user_permissions": [],
+      "companies": [3]
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 18,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$H6epJGiypKIvksAUlqE02F$z3LkI5oBdH0uWTvR33ocXY78TJjTjO1r4KQ8WSQH18I=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "katumba_credit",
+      "first_name": "katumba",
+      "last_name": "credit",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-11-05T10:53:55.319Z",
+      "email": "katumbacredit@gmail.com",
+      "active_company": 3,
+      "updated_on": "2024-11-05T10:53:55.550Z",
+      "role": 8,
+      "status": "Approved",
+      "image": "accounts/user/profile_E5z7fqA.jpg",
+      "slug": "katumba-credit-b855bb56-bb1b-4e1b-b824-dee6125279ac",
+      "created_at": "2024-11-05T10:53:55.536Z",
+      "updated_at": "2024-11-05T10:53:55.550Z",
+      "groups": [],
+      "user_permissions": [],
+      "companies": [3]
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 19,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$oZZz9pgEJMB9nhdRiL4fEE$GBkr7kBX0HAfl+JAGdFE94YOwFegMIxB9Om4i1D6cqY=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "katumba_ops",
+      "first_name": "katumba",
+      "last_name": "ops",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-11-05T10:55:07.992Z",
+      "email": "katumbaops@gmail.com",
+      "active_company": 3,
+      "updated_on": "2024-11-05T10:55:08.183Z",
+      "role": 4,
+      "status": "Approved",
+      "image": "accounts/user/profile_Rtz0DOg.jpg",
+      "slug": "katumba-ops-f1ca8c63-9583-4ad6-b284-07cfc4676197",
+      "created_at": "2024-11-05T10:55:08.172Z",
+      "updated_at": "2024-11-05T10:55:08.183Z",
+      "groups": [],
+      "user_permissions": [],
+      "companies": [3]
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 20,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$aCfepxa17aiRlSIGZu7thr$zvyDuPWwn4cu6O6zB9vknsBnTyrafFsZl1HBBXCnLTA=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "katumba_legal",
+      "first_name": "katumba",
+      "last_name": "legal",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-11-05T10:57:43.380Z",
+      "email": "katumbalegal@gmail.com",
+      "active_company": 3,
+      "updated_on": "2024-11-05T10:57:43.552Z",
+      "role": 11,
+      "status": "Approved",
+      "image": "accounts/user/profile_YTbnkIl.jpg",
+      "slug": "katumba-legal-d7f2f346-cbe7-4faa-8764-5578d982096d",
+      "created_at": "2024-11-05T10:57:43.544Z",
+      "updated_at": "2024-11-05T10:57:43.552Z",
+      "groups": [],
+      "user_permissions": [],
+      "companies": [3]
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 21,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$zij5hrKRdepbBJqpVxUom1$5ORE9YxGEWRp5Hoa3gVSxMGkAEsxxzMyWef6x2GEAHg=",
+      "last_login": "2024-11-08T09:44:36.396Z",
+      "is_superuser": false,
+      "username": "kembabazi_tl",
+      "first_name": "Kembabazi",
+      "last_name": "TL",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-11-05T10:57:55.472Z",
+      "email": "KEMBABAZI_TL@subik.com",
+      "active_company": 1,
+      "updated_on": "2024-11-06T07:16:39.539Z",
+      "role": 26,
+      "status": "Approved",
+      "image": "accounts/user/man_RPjmlr7.jpg",
+      "slug": "kembabazi-tl-f23ff6c3-988b-4830-98c7-cf365eab563c",
+      "created_at": "2024-11-05T10:57:55.636Z",
+      "updated_at": "2024-11-06T07:16:39.539Z",
+      "groups": [],
+      "user_permissions": [],
+      "companies": [1]
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 22,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$DgDK1KN2NSiRvBfYTe19st$P0mHDgA348cS94A1Wx55zTO1R+3bt7/tPt1bD97CVAQ=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "katumba_finance",
+      "first_name": "katumba",
+      "last_name": "finance",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-11-05T10:58:49.609Z",
+      "email": "katumbafinance@gmail.com",
+      "active_company": 3,
+      "updated_on": "2024-11-05T10:58:49.822Z",
+      "role": 10,
+      "status": "Approved",
+      "image": "accounts/user/profile_TxzCY3q.jpg",
+      "slug": "katumba-finance-5d15998f-0289-4f09-b3e6-8b0a4a085203",
+      "created_at": "2024-11-05T10:58:49.810Z",
+      "updated_at": "2024-11-05T10:58:49.822Z",
+      "groups": [],
+      "user_permissions": [],
+      "companies": [3]
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 23,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$gb8faNCSLsIMVCH8AANLWq$UOXEhMpCkzLHRhZbjGvs+hl/JvX2ZcBMHfoAlyj0FUU=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "katumba_valuer",
+      "first_name": "katumba",
+      "last_name": "valuer",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-11-05T10:59:47.105Z",
+      "email": "katumbavaluer@gmail.com",
+      "active_company": 3,
+      "updated_on": "2024-11-05T10:59:47.285Z",
+      "role": 7,
+      "status": "Approved",
+      "image": "accounts/user/profile_nya0G6A.jpg",
+      "slug": "katumba-valuer-88d159a9-b662-4fb6-bda5-4bfd822305fc",
+      "created_at": "2024-11-05T10:59:47.274Z",
+      "updated_at": "2024-11-05T10:59:47.285Z",
+      "groups": [],
+      "user_permissions": [],
+      "companies": [3]
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 24,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$6V8nrsskrM5g37x91MhnpP$nEjtZ+aAAzsHHkXay+uY+WK5OKyXwmqDXsmpiFJmT/o=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "katumba_teo",
+      "first_name": "katumba",
+      "last_name": "teo",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-11-05T11:00:50.487Z",
+      "email": "katumbateo@gmail.com",
+      "active_company": 3,
+      "updated_on": "2024-11-05T11:00:50.662Z",
+      "role": 9,
+      "status": "Approved",
+      "image": "accounts/user/profile_8e1z0mI.jpg",
+      "slug": "katumba-teo-fabca83f-89eb-4418-978d-dde3f3b784cd",
+      "created_at": "2024-11-05T11:00:50.655Z",
+      "updated_at": "2024-11-05T11:00:50.662Z",
+      "groups": [],
+      "user_permissions": [],
+      "companies": [3]
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 25,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$IhyumrbfJkZuEeV4Mbmoxw$NZIC0rzIJcxivpODYjx03xkjTo5/PnCSQSOVYNvojvU=",
+      "last_login": "2024-11-08T10:52:08.163Z",
+      "is_superuser": false,
+      "username": "katumba_tl",
+      "first_name": "katumba",
+      "last_name": "timothy",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-11-05T11:02:11Z",
+      "email": "katumbatl@gmail.com",
+      "active_company": 3,
+      "updated_on": "2024-11-08T10:07:13.458Z",
+      "role": 2,
+      "status": "Approved",
+      "image": "accounts/user/profile_VRZCUAw.jpg",
+      "slug": "katumba-timothy-10bf5f36-9746-452d-acc1-44a433456538",
+      "created_at": "2024-11-05T11:02:11.650Z",
+      "updated_at": "2024-11-08T10:07:13.458Z",
+      "groups": [],
+      "user_permissions": [],
+      "companies": [3]
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 26,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$Tywj2wPr8gRTMJFlJNJlHn$jrK0o3KQqEoWbGG1Ad7IdfmPgFpJj1AJaY2sFJkv4nc=",
+      "last_login": "2024-11-06T08:20:39.915Z",
+      "is_superuser": false,
+      "username": "katumba_sm",
+      "first_name": "katumba",
+      "last_name": "sm",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-11-05T11:03:21.845Z",
+      "email": "katumbasm@gmail.com",
+      "active_company": 3,
+      "updated_on": "2024-11-05T11:03:22.019Z",
+      "role": 6,
+      "status": "Approved",
+      "image": "accounts/user/profile_869z8nB.jpg",
+      "slug": "katumba-sm-f7c3b344-b4ca-465a-b322-2b9134c3be56",
+      "created_at": "2024-11-05T11:03:22.011Z",
+      "updated_at": "2024-11-05T11:03:22.019Z",
+      "groups": [],
+      "user_permissions": [],
+      "companies": [3]
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 27,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$7OVl8mDTfMCWFd3VuxrZS5$VnwhcqCjIUnRt3wIfDqW5/erCO3T8rbSYQVdVfqj/Y8=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "katumba_ro",
+      "first_name": "katumba",
+      "last_name": "ro",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-11-05T11:04:13.451Z",
+      "email": "katumbaro@gmail.com",
+      "active_company": 3,
+      "updated_on": "2024-11-05T11:04:13.624Z",
+      "role": 3,
+      "status": "Approved",
+      "image": "accounts/user/profile_Xv2HvQT.jpg",
+      "slug": "katumba-ro-9fa89f25-ba55-4dc0-9d2c-0c785ade5040",
+      "created_at": "2024-11-05T11:04:13.615Z",
+      "updated_at": "2024-11-05T11:04:13.624Z",
+      "groups": [],
+      "user_permissions": [],
+      "companies": [3]
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 28,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$xKgHE8dM8d43pLnhkV4bWG$nbCXR3qJ84vxOFtufkjdytigv5esT2CzwMh3NSzog08=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "katumba_cm",
+      "first_name": "katumba",
+      "last_name": "cm",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-11-05T11:05:32.101Z",
+      "email": "katumbacm@gmail.com",
+      "active_company": 3,
+      "updated_on": "2024-11-05T11:05:32.274Z",
+      "role": 5,
+      "status": "Approved",
+      "image": "accounts/user/profile_YDp8cYn.jpg",
+      "slug": "katumba-cm-e7f74362-b535-4678-89e2-dbef36443a66",
+      "created_at": "2024-11-05T11:05:32.267Z",
+      "updated_at": "2024-11-05T11:05:32.274Z",
+      "groups": [],
+      "user_permissions": [],
+      "companies": [3]
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 29,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$lMesRwJCPKwMC98i0ugvQq$ZVAoVHrR2YVtB/zv0QY3l8VMnCiTrXdXuRAXibc6WK0=",
+      "last_login": "2024-11-08T09:46:38.858Z",
+      "is_superuser": false,
+      "username": "mugarura_sm",
+      "first_name": "mugarura",
+      "last_name": "sm",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-11-05T11:11:56.111Z",
+      "email": "mugarura_sm@subik.com",
+      "active_company": 1,
+      "updated_on": "2024-11-05T11:11:56.285Z",
+      "role": 28,
+      "status": "Approved",
+      "image": "accounts/user/man_VjaL0tl.jpg",
+      "slug": "mugarura-sm-772caa80-752b-485c-8fd6-c0ba07479e02",
+      "created_at": "2024-11-05T11:11:56.277Z",
+      "updated_at": "2024-11-05T11:11:56.285Z",
+      "groups": [],
+      "user_permissions": [],
+      "companies": [1]
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 30,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$guLsMVwQsOnIL3YgMNS2D3$MZezRJimrTXyB6VyUFcy3OFwAq9fraZZUKiX2+Wa5I4=",
+      "last_login": "2024-11-08T10:02:25.155Z",
+      "is_superuser": false,
+      "username": "nakimuli_ops",
+      "first_name": "Nakimuli",
+      "last_name": "ops",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-11-05T11:13:41.297Z",
+      "email": "nakimuli_ops@subik.com",
+      "active_company": 1,
+      "updated_on": "2024-11-05T11:13:41.471Z",
+      "role": 14,
+      "status": "Approved",
+      "image": "accounts/user/man_GyEH3xA.jpg",
+      "slug": "nakimuli-ops-7d156d07-97a4-487f-9652-06b92d0fda99",
+      "created_at": "2024-11-05T11:13:41.462Z",
+      "updated_at": "2024-11-05T11:13:41.471Z",
+      "groups": [],
+      "user_permissions": [],
+      "companies": [1]
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 31,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$Tj1SSdWxXsIVA8QHGpPXEo$PDaBkZILTQ6RMRP1iXNkiwdYAgfwN9t8nh8hdCSzK5g=",
+      "last_login": "2024-11-08T10:02:42.272Z",
+      "is_superuser": false,
+      "username": "alupo_co",
+      "first_name": "alupo",
+      "last_name": "Co",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-11-05T11:16:46.686Z",
+      "email": "alupo_co@subik.com",
+      "active_company": 1,
+      "updated_on": "2024-11-05T11:16:46.860Z",
+      "role": 12,
+      "status": "Approved",
+      "image": "accounts/user/man_SIZVFOM.jpg",
+      "slug": "alupo-co-8b300c66-2fe6-4967-8152-423d21860d9a",
+      "created_at": "2024-11-05T11:16:46.852Z",
+      "updated_at": "2024-11-05T11:16:46.860Z",
+      "groups": [],
+      "user_permissions": [],
+      "companies": [1]
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 32,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$ebtWSo47NVjxzF7AGoc7Zb$/InXpul6GahumECFy5/08bkpTy8eni0cTgPTGzYZkXg=",
+      "last_login": "2024-11-08T10:48:15.874Z",
+      "is_superuser": false,
+      "username": "mugenyi_teo",
+      "first_name": "Mugenyi",
+      "last_name": "TEO",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-11-05T11:20:45.860Z",
+      "email": "mugenyi_teo@subik.com",
+      "active_company": 1,
+      "updated_on": "2024-11-05T11:20:46.035Z",
+      "role": 24,
+      "status": "Approved",
+      "image": "",
+      "slug": "mugenyi-teo-c0dda459-044c-484d-be8c-91bd86ac1c00",
+      "created_at": "2024-11-05T11:20:46.026Z",
+      "updated_at": "2024-11-05T11:20:46.035Z",
+      "groups": [],
+      "user_permissions": [],
+      "companies": [1]
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 33,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$lkpyYTvBxoAH9u79D4wPzT$NBZRZOkc3/4wA8WyQWcvnRL/s7vPv5K2plRW+k5FwzI=",
+      "last_login": "2024-11-06T07:52:14.302Z",
+      "is_superuser": false,
+      "username": "apio_val",
+      "first_name": "Apio",
+      "last_name": "Val",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-11-05T11:23:34.451Z",
+      "email": "apio_val@subik.com",
+      "active_company": 1,
+      "updated_on": "2024-11-05T11:23:34.627Z",
+      "role": 22,
+      "status": "Approved",
+      "image": "accounts/user/man_jt4ke6m.jpg",
+      "slug": "apio-val-088f604e-daeb-478d-9ff8-586132a3e7f1",
+      "created_at": "2024-11-05T11:23:34.618Z",
+      "updated_at": "2024-11-05T11:23:34.627Z",
+      "groups": [],
+      "user_permissions": [],
+      "companies": [1]
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 34,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$mca0pWyLwreganIfgDuPqi$7iHD2muTuXtow4l2z2j8shCCfBvFVe/gh1KbMj44RMU=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "jane_cm",
+      "first_name": "jane",
+      "last_name": "cM",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-11-05T11:27:10.309Z",
+      "email": "jane_cm@subik.com",
+      "active_company": 1,
+      "updated_on": "2024-11-05T11:27:10.484Z",
+      "role": 32,
+      "status": "Approved",
+      "image": "accounts/user/man_1f9bmuh.jpg",
+      "slug": "jane-cm-613b29b9-6434-4ad9-b098-c4a5f5def9fa",
+      "created_at": "2024-11-05T11:27:10.475Z",
+      "updated_at": "2024-11-05T11:27:10.484Z",
+      "groups": [],
+      "user_permissions": [],
+      "companies": [1]
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 35,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$Y8X86Dhc0rE2Fvwpoa5EtV$saA9U4Hg6muDCa9lHx1yChDboYiqv0F/qC5jBFBD/r4=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "mary_ro",
+      "first_name": "Mary",
+      "last_name": "Ro",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-11-05T11:29:38.508Z",
+      "email": "mary_ro@subik.com",
+      "active_company": 1,
+      "updated_on": "2024-11-05T11:29:40.943Z",
+      "role": 30,
+      "status": "Approved",
+      "image": "accounts/user/man_M8t8VdG.jpg",
+      "slug": "mary-ro-88a627dc-84c9-434d-a849-97ad62e6d6a3",
+      "created_at": "2024-11-05T11:29:38.674Z",
+      "updated_at": "2024-11-05T11:29:40.943Z",
+      "groups": [],
+      "user_permissions": [],
+      "companies": [1]
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 36,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$V0tUhx0FrZjXsC7UbNHQtH$JWQMXm0WIeN/Tjb+SEk8HMQxUTlm8ehbYgw+FtPBcIw=",
+      "last_login": "2024-11-08T10:09:23.872Z",
+      "is_superuser": false,
+      "username": "jenipher_ft",
+      "first_name": "Jenipher",
+      "last_name": "FT",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-11-05T11:32:28.951Z",
+      "email": "jenipher_ft@subik.com",
+      "active_company": 1,
+      "updated_on": "2024-11-05T11:32:29.124Z",
+      "role": 20,
+      "status": "Approved",
+      "image": "accounts/user/man_BcSpBI0.jpg",
+      "slug": "jenipher-ft-d2077c2f-3afb-4acd-ad6a-77d323a516b9",
+      "created_at": "2024-11-05T11:32:29.115Z",
+      "updated_at": "2024-11-05T11:32:29.124Z",
+      "groups": [],
+      "user_permissions": [],
+      "companies": [1]
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 37,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$jKTGOpPiKbD1sTqVLwxAIP$J/XcSOTd3PufVGDaMMD51WQcXQAX9aLHsGtRjoDKaI8=",
+      "last_login": "2024-11-08T10:05:58.910Z",
+      "is_superuser": false,
+      "username": "hilder_lt",
+      "first_name": "Hilder",
+      "last_name": "lt",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-11-05T11:34:17.894Z",
+      "email": "hilder_lt@subik.com",
+      "active_company": 1,
+      "updated_on": "2024-11-05T11:34:18.068Z",
+      "role": 18,
+      "status": "Approved",
+      "image": "accounts/user/man_6U2Dvb6.jpg",
+      "slug": "hilder-lt-be0b69f3-d306-4566-9442-d80c54991ee9",
+      "created_at": "2024-11-05T11:34:18.059Z",
+      "updated_at": "2024-11-05T11:34:18.068Z",
+      "groups": [],
+      "user_permissions": [],
+      "companies": [1]
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 38,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$zc68q2kver12E6TFlMpnod$UnHGgvmO2QWNrEMg1Tu7GYITtiLEgaevMq9plkb/GpQ=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "allan_tl",
+      "first_name": "ALLAN",
+      "last_name": "tl",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-11-05T15:22:50.570Z",
+      "email": "allan_tl@bdm.com",
+      "active_company": 2,
+      "updated_on": "2024-11-05T15:22:50.745Z",
+      "role": 27,
+      "status": "Approved",
+      "image": "accounts/user/man_xHtA4gn.jpg",
+      "slug": "allan-tl-6b598728-3ac0-47ee-99be-1e561a6a0d2d",
+      "created_at": "2024-11-05T15:22:50.736Z",
+      "updated_at": "2024-11-05T15:22:50.745Z",
+      "groups": [],
+      "user_permissions": [],
+      "companies": [2]
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 39,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$bq3wIT1G5ARW1sIX45Y336$80IWHy9kibzws6u2LmKMekRcgYjsecN19b8Jaihp2Gw=",
+      "last_login": "2024-11-06T07:45:43.261Z",
+      "is_superuser": false,
+      "username": "farahat_musenene",
+      "first_name": "farahat",
+      "last_name": "musenene",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-11-06T07:21:48.412Z",
+      "email": "farahatmusenene@gmail.com",
+      "active_company": 1,
+      "updated_on": "2024-11-06T07:21:48.587Z",
+      "role": 26,
+      "status": "Approved",
+      "image": "accounts/user/profile_fiLUSZR.jpg",
+      "slug": "farahat-musenene-eefcc0bd-26ae-42c2-a885-f34afe332c5d",
+      "created_at": "2024-11-06T07:21:48.578Z",
+      "updated_at": "2024-11-06T07:21:48.587Z",
+      "groups": [],
+      "user_permissions": [],
+      "companies": [1]
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 40,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$VFyR1kEwJOKmxyTHeMPKdK$vSz/o6hx7D4DF0q02xUtPWqJ7W8hM793gWMq/D5vx5Q=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "mary",
+      "first_name": "avako",
+      "last_name": "mary",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-11-06T07:23:05.960Z",
+      "email": "mary@gmail.com",
+      "active_company": 1,
+      "updated_on": "2024-11-06T07:23:06.136Z",
+      "role": 26,
+      "status": "Approved",
+      "image": "accounts/user/profile_L5jR94Y.jpg",
+      "slug": "avako-mary-223f93ff-50d4-4519-b505-94befdc053fd",
+      "created_at": "2024-11-06T07:23:06.127Z",
+      "updated_at": "2024-11-06T07:23:06.136Z",
+      "groups": [],
+      "user_permissions": [],
+      "companies": [1]
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 41,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$AZJU9xUCB2DiyZsDzIpwku$7C+AtfwqpgSifvwn/3NQBo3Bn2EwELMW8PMEgC37KpE=",
+      "last_login": "2024-11-08T12:24:32.304Z",
+      "is_superuser": true,
+      "username": "bicadmin",
+      "first_name": "",
+      "last_name": "",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2024-11-06T14:07:22Z",
+      "email": "bic@gmail.com",
+      "active_company": 4,
+      "updated_on": "2024-11-06T14:09:27.890Z",
+      "role": 34,
+      "status": "Approved",
+      "image": "",
+      "slug": "7c624e6f-bbb2-4d86-959d-f0ad1bc0f381",
+      "created_at": "2024-11-06T14:07:22.822Z",
+      "updated_at": "2024-11-06T14:09:27.890Z",
+      "groups": [],
+      "user_permissions": [],
+      "companies": [4]
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 42,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$JivQ8DGxbvp4RE8HaW7uTX$MkDQoqoCas3XMRnQDp22iLehLYaaiX/O9ap6b8b194k=",
+      "last_login": "2024-11-08T11:44:40.167Z",
+      "is_superuser": false,
+      "username": "kamunye",
+      "first_name": "kamunye",
+      "last_name": "bic",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-11-06T14:22:08.080Z",
+      "email": "kamunye@gmail.com",
+      "active_company": 4,
+      "updated_on": "2024-11-06T14:22:08.273Z",
+      "role": 37,
+      "status": "Approved",
+      "image": "accounts/user/profile_mJeEZiI.jpg",
+      "slug": "kamunye-bic-2802e7da-f66c-43d8-84db-9747a1154722",
+      "created_at": "2024-11-06T14:22:08.261Z",
+      "updated_at": "2024-11-06T14:22:08.273Z",
+      "groups": [],
+      "user_permissions": [],
+      "companies": [4]
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 43,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$evwhrtl21O1UnYM6etG63c$NmY+eWmwnwpCn7Gk7G5j/YsVsDjU4UhUFqKhmrDigyU=",
+      "last_login": "2024-11-08T12:22:43.024Z",
+      "is_superuser": false,
+      "username": "kamonde",
+      "first_name": "kamonde",
+      "last_name": "bic",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-11-06T14:23:02.376Z",
+      "email": "kamonde@gmail.com",
+      "active_company": 4,
+      "updated_on": "2024-11-06T14:23:02.563Z",
+      "role": 35,
+      "status": "Approved",
+      "image": "accounts/user/profile_cctyDFH.jpg",
+      "slug": "kamonde-bic-4e202180-4c44-478c-94e4-a9b96d7efd96",
+      "created_at": "2024-11-06T14:23:02.555Z",
+      "updated_at": "2024-11-06T14:23:02.563Z",
+      "groups": [],
+      "user_permissions": [],
+      "companies": [4]
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 44,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$gw5IDIpvEgV7xZQ6lVW2E5$4qPLqCpLSo6iCCZ9fsL2PAGCufH+ucz25eKTJ4R+Bos=",
+      "last_login": "2024-11-08T09:31:07.786Z",
+      "is_superuser": false,
+      "username": "kamugu",
+      "first_name": "kamugu",
+      "last_name": "bic",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-11-06T14:24:07.655Z",
+      "email": "kamugu@gmail.com",
+      "active_company": 4,
+      "updated_on": "2024-11-06T14:24:07.849Z",
+      "role": 36,
+      "status": "Approved",
+      "image": "accounts/user/profile_q4aOmIK.jpg",
+      "slug": "kamugu-bic-1bb1d595-bdf0-4d7a-91a0-e8cc18394d28",
+      "created_at": "2024-11-06T14:24:07.837Z",
+      "updated_at": "2024-11-06T14:24:07.849Z",
+      "groups": [],
+      "user_permissions": [],
+      "companies": [4]
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 45,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$NYyX8rnASIdoDqpHWzgm33$7GnUQSLW4Fc7iO/eK3v8/GHMlFoVCpRUCSsxzzV8dzw=",
+      "last_login": "2024-11-08T11:45:29.689Z",
+      "is_superuser": false,
+      "username": "teddy_valuer",
+      "first_name": "teddy",
+      "last_name": "valuer",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-11-08T09:16:49.752Z",
+      "email": "teddy@gmail.com",
+      "active_company": 4,
+      "updated_on": "2024-11-08T09:16:49.943Z",
+      "role": 37,
+      "status": "Approved",
+      "image": "accounts/user/profile_KFaUb7O.jpg",
+      "slug": "teddy-valuer-a7716a7b-21fd-4e63-8aad-056681fbbb11",
+      "created_at": "2024-11-08T09:16:49.929Z",
+      "updated_at": "2024-11-08T09:16:49.943Z",
+      "groups": [],
+      "user_permissions": [],
+      "companies": [4]
+    }
+  },
+  {
+    "model": "accounts.agent",
+    "pk": 1,
+    "fields": {
+      "team_leader": 1,
+      "company": 1,
+      "name": "Alex Mukulu",
+      "phone_number": "0778288274",
+      "status": "Approved",
+      "slug": "alex-mukulu14bbfe0b-0005-4a70-b403-7e274858fc44",
+      "created_at": "2024-10-29T17:10:14.571Z",
+      "updated_at": "2024-11-06T08:21:49.767Z"
+    }
+  },
+  {
+    "model": "accounts.agent",
+    "pk": 2,
+    "fields": {
+      "team_leader": 1,
+      "company": 3,
+      "name": "JOHN MERCY",
+      "phone_number": "0752549509",
+      "status": "Approved",
+      "slug": "john-mercy70aa45a2-9d2a-4891-9686-ed2022a3f0c0",
+      "created_at": "2024-10-29T17:11:06.365Z",
+      "updated_at": "2024-10-29T17:11:06.365Z"
+    }
+  },
+  {
+    "model": "accounts.agent",
+    "pk": 3,
+    "fields": {
+      "team_leader": 1,
+      "company": 3,
+      "name": "Juko ibrahim",
+      "phone_number": "078999988",
+      "status": "Approved",
+      "slug": "juko-ibrahim265114cf-3f91-4f9d-8d94-03046d666b71",
+      "created_at": "2024-11-04T09:27:46.136Z",
+      "updated_at": "2024-11-04T09:28:51.050Z"
+    }
+  },
+  {
+    "model": "accounts.agent",
+    "pk": 4,
+    "fields": {
+      "team_leader": 38,
+      "company": 2,
+      "name": "Kamara Winnie",
+      "phone_number": "07899877455",
+      "status": "Pending",
+      "slug": "kamara-winnie5a1611c4-fd64-46ee-831f-f590aa3c6ec1",
+      "created_at": "2024-11-05T15:31:24.455Z",
+      "updated_at": "2024-11-05T15:31:24.455Z"
+    }
+  },
+  {
+    "model": "accounts.agent",
+    "pk": 5,
+    "fields": {
+      "team_leader": 25,
+      "company": 2,
+      "name": "Juko Ibrahim",
+      "phone_number": "0700000000",
+      "status": "Approved",
+      "slug": "juko-ibrahim1a4fd903-488f-4775-9969-75b255e36289",
+      "created_at": "2024-11-05T15:33:42.094Z",
+      "updated_at": "2024-11-05T15:33:58.595Z"
+    }
+  },
+  {
+    "model": "accounts.agent",
+    "pk": 6,
+    "fields": {
+      "team_leader": 21,
+      "company": 1,
+      "name": "Kembatya joel",
+      "phone_number": "07895867575",
+      "status": "Approved",
+      "slug": "kembatya-joeldcee4075-370c-4a22-8719-96a7a8c4df23",
+      "created_at": "2024-11-06T07:18:34.947Z",
+      "updated_at": "2024-11-06T07:28:30.031Z"
+    }
+  },
+  {
+    "model": "accounts.agent",
+    "pk": 7,
+    "fields": {
+      "team_leader": 40,
+      "company": 1,
+      "name": "musoke jona",
+      "phone_number": "07896958586",
+      "status": "Pending",
+      "slug": "musoke-jona888cabcb-bc4f-4be0-afa1-c46302fe12a3",
+      "created_at": "2024-11-06T07:24:18.336Z",
+      "updated_at": "2024-11-06T07:35:44.298Z"
+    }
+  },
+  {
+    "model": "accounts.agent",
+    "pk": 8,
+    "fields": {
+      "team_leader": 39,
+      "company": 1,
+      "name": "namulinde hildah",
+      "phone_number": "07895845748",
+      "status": "Approved",
+      "slug": "namulinde-hildahb8d85160-1a30-45e9-b50c-032d0fca0f8e",
+      "created_at": "2024-11-06T07:24:49.652Z",
+      "updated_at": "2024-11-06T07:29:56.539Z"
+    }
+  },
+  {
+    "model": "prospects.prospect",
+    "pk": 1,
+    "fields": {
+      "company": 1,
+      "name": "Mugalu Benjamin",
+      "gender": "Male",
+      "phone_number": "0784575847",
+      "email": null,
+      "title": "Mr.",
+      "alt_number": null,
+      "agent": 6,
+      "date_of_birth": "1997-10-10",
+      "created_by": 21,
+      "proof_of_payment": "prospect/proof_of_payment/WhatsApp_Image_2024-10-15_at_20_gHKa2kk.15.28.jpeg",
+      "proof_of_payment_id": "128",
+      "status": "Pipeline",
+      "slug": "mugalu-benjamin0ea21b87-619c-473b-aa05-39bfd3d62b4c",
+      "created_at": "2024-11-08T09:14:06.069Z",
+      "updated_at": "2024-11-08T09:45:26.548Z",
+      "asset_submitted_on": "2024-11-08T09:17:13Z",
+      "asset_submitted_by": 21,
+      "payment_verified_on": "2024-11-08T09:24:04.964Z",
+      "payment_verified_by": 43,
+      "submitted_for_valuation_on": "2024-11-08T09:24:22.101Z",
+      "submitted_for_valuation_by": 43,
+      "valuer_assigned_on": "2024-11-08T09:24:04.971Z",
+      "valuer_assigned": 45,
+      "valuation_submitted_on": "2024-11-08T09:31:27.348Z",
+      "valuation_submitted_by": 44,
+      "valuation_reviewd_on": "2024-11-08T09:32:34.581Z",
+      "valuation_reviewd_by": 43
+    }
+  },
+  {
+    "model": "prospects.prospect",
+    "pk": 2,
+    "fields": {
+      "company": 1,
+      "name": "kAGWA JONATHAN",
+      "gender": "Male",
+      "phone_number": "0788734356",
+      "email": null,
+      "title": "Mr.",
+      "alt_number": null,
+      "agent": 1,
+      "date_of_birth": "2000-11-08",
+      "created_by": 21,
+      "proof_of_payment": "prospect/proof_of_payment/WhatsApp_Image_2024-10-15_at_17_gm6Qerz.38.04.jpeg",
+      "proof_of_payment_id": "129",
+      "status": "Review",
+      "slug": "kagwa-jonathan1f47dd50-6bda-4d80-bdec-a8b327cef6b5",
+      "created_at": "2024-11-08T09:18:55.812Z",
+      "updated_at": "2024-11-08T12:18:02.595Z",
+      "asset_submitted_on": "2024-11-08T09:20:57Z",
+      "asset_submitted_by": 21,
+      "payment_verified_on": null,
+      "payment_verified_by": null,
+      "submitted_for_valuation_on": "2024-11-08T11:24:25Z",
+      "submitted_for_valuation_by": 41,
+      "valuer_assigned_on": null,
+      "valuer_assigned": null,
+      "valuation_submitted_on": "2024-11-08T11:42:43Z",
+      "valuation_submitted_by": 41,
+      "valuation_reviewd_on": "2024-11-08T11:43:19Z",
+      "valuation_reviewd_by": 41
+    }
+  },
+  {
+    "model": "prospects.prospect",
+    "pk": 3,
+    "fields": {
+      "company": 1,
+      "name": "Wanyama JOHN BOSCO",
+      "gender": "Male",
+      "phone_number": "0788734356",
+      "email": null,
+      "title": "Mr.",
+      "alt_number": null,
+      "agent": 6,
+      "date_of_birth": null,
+      "created_by": 21,
+      "proof_of_payment": "prospect/proof_of_payment/WhatsApp_Image_2024-10-15_at_20_P0zVzmQ.15.28.jpeg",
+      "proof_of_payment_id": "130",
+      "status": "Valuation",
+      "slug": "wanyama-john-bosco4433e5e0-9bf4-43f8-8bd2-38b175ba8e8d",
+      "created_at": "2024-11-08T09:22:43.773Z",
+      "updated_at": "2024-11-08T11:22:46.196Z",
+      "asset_submitted_on": "2024-11-08T09:25:48.725Z",
+      "asset_submitted_by": 21,
+      "payment_verified_on": "2024-11-08T11:04:27.305Z",
+      "payment_verified_by": 41,
+      "submitted_for_valuation_on": "2024-11-08T11:22:46.196Z",
+      "submitted_for_valuation_by": 41,
+      "valuer_assigned_on": "2024-11-08T11:04:27.311Z",
+      "valuer_assigned": 45,
+      "valuation_submitted_on": null,
+      "valuation_submitted_by": null,
+      "valuation_reviewd_on": null,
+      "valuation_reviewd_by": null
+    }
+  },
+  {
+    "model": "prospects.prospect",
+    "pk": 4,
+    "fields": {
+      "company": 3,
+      "name": "Babiiha Mark",
+      "gender": "Male",
+      "phone_number": "0775403732",
+      "email": null,
+      "title": "Mr.",
+      "alt_number": null,
+      "agent": 2,
+      "date_of_birth": "2000-11-08",
+      "created_by": 1,
+      "proof_of_payment": "prospect/proof_of_payment/WhatsApp_Image_2024-10-17_at_09_O8dYenL.20.10.jpeg",
+      "proof_of_payment_id": "99928",
+      "status": "Pipeline",
+      "slug": "babiiha-mark6f2c6ace-4659-46b4-9b2c-377544a737bd",
+      "created_at": "2024-11-08T09:25:05.650Z",
+      "updated_at": "2024-11-08T09:46:55.367Z",
+      "asset_submitted_on": "2024-11-08T09:26:39.023Z",
+      "asset_submitted_by": 1,
+      "payment_verified_on": "2024-11-08T09:26:51.844Z",
+      "payment_verified_by": 1,
+      "submitted_for_valuation_on": "2024-11-08T09:41:13.635Z",
+      "submitted_for_valuation_by": 1,
+      "valuer_assigned_on": "2024-11-08T09:26:51.851Z",
+      "valuer_assigned": null,
+      "valuation_submitted_on": "2024-11-08T09:43:48.316Z",
+      "valuation_submitted_by": 1,
+      "valuation_reviewd_on": "2024-11-08T09:44:31.751Z",
+      "valuation_reviewd_by": 41
+    }
+  },
+  {
+    "model": "prospects.prospect",
+    "pk": 5,
+    "fields": {
+      "company": 3,
+      "name": "ISAAC SEmANYI",
+      "gender": "Male",
+      "phone_number": "0709962198",
+      "email": null,
+      "title": "Mr.",
+      "alt_number": null,
+      "agent": 2,
+      "date_of_birth": null,
+      "created_by": 1,
+      "proof_of_payment": "",
+      "proof_of_payment_id": null,
+      "status": "New",
+      "slug": "isaac-semanyi17dd65bf-5aa5-4e1b-b762-bcdc495ea00c",
+      "created_at": "2024-11-08T10:02:50.464Z",
+      "updated_at": "2024-11-08T10:02:50.464Z",
+      "asset_submitted_on": null,
+      "asset_submitted_by": null,
+      "payment_verified_on": null,
+      "payment_verified_by": null,
+      "submitted_for_valuation_on": null,
+      "submitted_for_valuation_by": null,
+      "valuer_assigned_on": null,
+      "valuer_assigned": null,
+      "valuation_submitted_on": null,
+      "valuation_submitted_by": null,
+      "valuation_reviewd_on": null,
+      "valuation_reviewd_by": null
+    }
+  },
+  {
+    "model": "prospects.prospect",
+    "pk": 6,
+    "fields": {
+      "company": 3,
+      "name": "Semanyi Isaac ssozi",
+      "gender": "Male",
+      "phone_number": "0750100100",
+      "email": null,
+      "title": "Mr.",
+      "alt_number": "0789254162",
+      "agent": 3,
+      "date_of_birth": null,
+      "created_by": 25,
+      "proof_of_payment": "prospect/proof_of_payment/proof_FJ6x4WK.jpg",
+      "proof_of_payment_id": "1234567890",
+      "status": "Pipeline",
+      "slug": "semanyi-isaac-ssozic01a86fa-e48f-4bd4-9bc6-fc4b3ccf1167",
+      "created_at": "2024-11-08T10:14:59.801Z",
+      "updated_at": "2024-11-08T12:28:16.234Z",
+      "asset_submitted_on": "2024-11-08T10:51:04Z",
+      "asset_submitted_by": 25,
+      "payment_verified_on": "2024-11-08T11:20:43.519Z",
+      "payment_verified_by": 43,
+      "submitted_for_valuation_on": "2024-11-08T11:41:24.087Z",
+      "submitted_for_valuation_by": 43,
+      "valuer_assigned_on": "2024-11-08T11:20:43.526Z",
+      "valuer_assigned": 45,
+      "valuation_submitted_on": "2024-11-08T12:26:40.802Z",
+      "valuation_submitted_by": 41,
+      "valuation_reviewd_on": "2024-11-08T12:28:16.234Z",
+      "valuation_reviewd_by": 41
+    }
+  },
+  {
+    "model": "prospects.prospect",
+    "pk": 7,
+    "fields": {
+      "company": 2,
+      "name": "Kabagambe Rose",
+      "gender": "Female",
+      "phone_number": "0789964443",
+      "email": null,
+      "title": "Mrs.",
+      "alt_number": null,
+      "agent": 5,
+      "date_of_birth": null,
+      "created_by": 15,
+      "proof_of_payment": "",
+      "proof_of_payment_id": null,
+      "status": "New",
+      "slug": "kabagambe-rose82375c02-cf7d-4376-9eae-ed777641a433",
+      "created_at": "2024-11-08T10:43:19.377Z",
+      "updated_at": "2024-11-08T10:43:19.377Z",
+      "asset_submitted_on": null,
+      "asset_submitted_by": null,
+      "payment_verified_on": null,
+      "payment_verified_by": null,
+      "submitted_for_valuation_on": null,
+      "submitted_for_valuation_by": null,
+      "valuer_assigned_on": null,
+      "valuer_assigned": null,
+      "valuation_submitted_on": null,
+      "valuation_submitted_by": null,
+      "valuation_reviewd_on": null,
+      "valuation_reviewd_by": null
+    }
+  },
+  {
+    "model": "loanApps.bank",
+    "pk": 1,
+    "fields": {
+      "name": "STANBIC BANK"
+    }
+  },
+  {
+    "model": "loanApps.bank",
+    "pk": 2,
+    "fields": {
+      "name": "HOUSING FINANCE BANK"
+    }
+  },
+  {
+    "model": "loanApps.bank",
+    "pk": 3,
+    "fields": {
+      "name": "KCB BANK"
+    }
+  },
+  {
+    "model": "loanApps.bank",
+    "pk": 4,
+    "fields": {
+      "name": "DIAMOND TRUST BANK"
+    }
+  },
+  {
+    "model": "loanApps.product",
+    "pk": 1,
+    "fields": {
+      "company": 1,
+      "name": "car logbook finance",
+      "product_code": "P1",
+      "bank_name": 1,
+      "bank_branch": "ntinda",
+      "bank_account_name": "subik",
+      "bank_account_number": "38989",
+      "min_interest_rate": "5.00",
+      "interest_rate": 5,
+      "max_interest_rate": "5.00",
+      "interest_method": "Flat Rate",
+      "interest_type": "Percentage",
+      "interest_period": "Monthly",
+      "min_principal_amount": "2000000.00",
+      "max_principal_amount": "40000000.00",
+      "min_repayment_period": 1,
+      "max_repayment_period": 18,
+      "disbursement_method": "Online Bank Transfer",
+      "loan_duration_period": "Monthly",
+      "minimum_loan_duration": 1,
+      "default_loan_duration": 8,
+      "maximum_loan_duration": 18,
+      "created_at": "2024-11-08T09:43:32.786Z",
+      "updated_at": "2024-11-08T10:35:49.616Z",
+      "fees_data": {
+        "tracking fee": {
+          "max": "100000",
+          "min": "100000",
+          "default": "100000"
+        },
+        "INSURANCE FEE": {
+          "max": "400000",
+          "min": "400000",
+          "default": "400000"
+        },
+        "MANAGEMENT FEE": {
+          "max": "500000",
+          "min": "500000",
+          "default": "500000"
+        },
+        "Processing fee": {
+          "max": "4",
+          "min": "4",
+          "default": "4"
+        },
+        "perfection fee": {
+          "max": "50000",
+          "min": "50000",
+          "default": "50000"
+        },
+        "bank transfer charges": {
+          "max": "30000",
+          "min": "30000",
+          "default": "30000"
+        }
+      },
+      "approval_criteria": [
+        {
+          "car-make": "toyota",
+          "percentage": "50",
+          "applicable-on": "Market Value",
+          "license-series": "ub"
+        },
+        {
+          "car-make": "toyota",
+          "percentage": "40",
+          "applicable-on": "Market Value",
+          "license-series": "ua"
+        }
+      ]
+    }
+  },
+  {
+    "model": "loanApps.product",
+    "pk": 2,
+    "fields": {
+      "company": 3,
+      "name": "CAR LOGBOOK FINANCE",
+      "product_code": "P1",
+      "bank_name": 1,
+      "bank_branch": "NTINDA",
+      "bank_account_name": "LORO",
+      "bank_account_number": "8856534535",
+      "min_interest_rate": "5.00",
+      "interest_rate": 5,
+      "max_interest_rate": "5.00",
+      "interest_method": "Flat Rate",
+      "interest_type": "Percentage",
+      "interest_period": "Monthly",
+      "min_principal_amount": "10000000.00",
+      "max_principal_amount": "20000000.00",
+      "min_repayment_period": 3,
+      "max_repayment_period": 18,
+      "disbursement_method": "Online Bank Transfer",
+      "loan_duration_period": "Monthly",
+      "minimum_loan_duration": 3,
+      "default_loan_duration": 8,
+      "maximum_loan_duration": 18,
+      "created_at": "2024-11-08T09:43:49.106Z",
+      "updated_at": "2024-11-08T10:38:08.029Z",
+      "fees_data": {
+        "TRACKING fEES": {
+          "max": "100000",
+          "min": "100000",
+          "default": "100000"
+        },
+        "Management fees": {
+          "max": "100000",
+          "min": "100000",
+          "default": "100000"
+        },
+        "Processing fees": {
+          "max": "4",
+          "min": "4",
+          "default": "4"
+        },
+        "BANK TRANSFER FEE": {
+          "max": "30000",
+          "min": "30000",
+          "default": "30000"
+        }
+      },
+      "approval_criteria": [
+        {
+          "car-make": "Toyota",
+          "percentage": "40",
+          "applicable-on": "Market Value",
+          "license-series": "UA"
+        },
+        {
+          "car-make": "Mercedes-Benz",
+          "percentage": "50",
+          "applicable-on": "Market Value",
+          "license-series": "UB"
+        },
+        {
+          "car-make": "Mercedes-Benz",
+          "percentage": "40",
+          "applicable-on": "Market Value",
+          "license-series": "UA"
+        },
+        {
+          "car-make": "Toyota",
+          "percentage": "50",
+          "applicable-on": "Market Value",
+          "license-series": "UB"
+        },
+        {
+          "car-make": "",
+          "percentage": "",
+          "applicable-on": "",
+          "license-series": ""
+        }
+      ]
+    }
+  },
+  {
+    "model": "loanApps.product",
+    "pk": 3,
+    "fields": {
+      "company": 2,
+      "name": "CAR LOGBOOK FINANCE",
+      "product_code": "P1",
+      "bank_name": 4,
+      "bank_branch": "NTINDA",
+      "bank_account_name": "BLUE DIAMOND",
+      "bank_account_number": "435346376",
+      "min_interest_rate": "5.00",
+      "interest_rate": 5,
+      "max_interest_rate": "5.00",
+      "interest_method": "Flat Rate",
+      "interest_type": "Percentage",
+      "interest_period": "Monthly",
+      "min_principal_amount": "500000.00",
+      "max_principal_amount": "3000000.00",
+      "min_repayment_period": 3,
+      "max_repayment_period": 18,
+      "disbursement_method": "Online Bank Transfer",
+      "loan_duration_period": "Monthly",
+      "minimum_loan_duration": 3,
+      "default_loan_duration": 8,
+      "maximum_loan_duration": 18,
+      "created_at": "2024-11-08T09:58:16.013Z",
+      "updated_at": "2024-11-08T09:58:16.013Z",
+      "fees_data": {
+        "TRACKING fEES": {
+          "max": "100000",
+          "min": "100000",
+          "default": "100000"
+        },
+        "Processing fees": {
+          "max": "4",
+          "min": "4",
+          "default": "4"
+        },
+        "BANK TRANSFER FEES": {
+          "max": "30000",
+          "min": "30000",
+          "default": "30000"
+        }
+      },
+      "approval_criteria": [
+        {
+          "car-make": "Toyota",
+          "percentage": "50",
+          "applicable-on": "Market Value",
+          "license-series": "ub"
+        },
+        {
+          "car-make": "Toyota",
+          "percentage": "40",
+          "applicable-on": "Market Value",
+          "license-series": "ua"
+        }
+      ]
+    }
+  },
+  {
+    "model": "loanApps.loanfee",
+    "pk": 1,
+    "fields": {
+      "company": 1,
+      "name": "MANAGEMENT FEE",
+      "calculation": "Fixed amount",
+      "percentage_of": "",
+      "is_percentage": false,
+      "is_deductable": true,
+      "active": true,
+      "slug": "management-fee0abd9798-c557-43ef-bf77-54755b93d2f3",
+      "created_at": "2024-11-08T09:35:17.160Z",
+      "updated_at": "2024-11-08T09:40:27.005Z",
+      "created_by": null
+    }
+  },
+  {
+    "model": "loanApps.loanfee",
+    "pk": 2,
+    "fields": {
+      "company": 1,
+      "name": "INSURANCE FEE",
+      "calculation": "Fixed amount",
+      "percentage_of": "",
+      "is_percentage": false,
+      "is_deductable": false,
+      "active": true,
+      "slug": "insurance-fee9003d6a7-9e81-4276-a731-60f78e25e80c",
+      "created_at": "2024-11-08T09:35:30.103Z",
+      "updated_at": "2024-11-08T09:40:09.908Z",
+      "created_by": null
+    }
+  },
+  {
+    "model": "loanApps.loanfee",
+    "pk": 3,
+    "fields": {
+      "company": 1,
+      "name": "Processing fee",
+      "calculation": "Fixed amount",
+      "percentage_of": "",
+      "is_percentage": false,
+      "is_deductable": false,
+      "active": true,
+      "slug": "processing-fee95e388f2-3a62-408a-b012-33a7d58eecfc",
+      "created_at": "2024-11-08T09:36:07.117Z",
+      "updated_at": "2024-11-08T09:40:02.027Z",
+      "created_by": null
+    }
+  },
+  {
+    "model": "loanApps.loanfee",
+    "pk": 4,
+    "fields": {
+      "company": 3,
+      "name": "TRACKING fEES",
+      "calculation": "Fixed amount",
+      "percentage_of": "",
+      "is_percentage": false,
+      "is_deductable": true,
+      "active": true,
+      "slug": "tracking-fees934e6246-22ca-43a0-9e77-fd2ac5c016c6",
+      "created_at": "2024-11-08T09:36:10.816Z",
+      "updated_at": "2024-11-08T09:36:15.222Z",
+      "created_by": null
+    }
+  },
+  {
+    "model": "loanApps.loanfee",
+    "pk": 5,
+    "fields": {
+      "company": 1,
+      "name": "bank transfer charges",
+      "calculation": "Fixed amount",
+      "percentage_of": "",
+      "is_percentage": false,
+      "is_deductable": false,
+      "active": true,
+      "slug": "bank-transfer-chargesf17c3952-be3d-4ee7-ad25-96ce19ca8941",
+      "created_at": "2024-11-08T09:36:23.742Z",
+      "updated_at": "2024-11-08T09:39:53.351Z",
+      "created_by": null
+    }
+  },
+  {
+    "model": "loanApps.loanfee",
+    "pk": 6,
+    "fields": {
+      "company": 3,
+      "name": "Processing fees",
+      "calculation": "Fixed amount",
+      "percentage_of": "",
+      "is_percentage": false,
+      "is_deductable": true,
+      "active": true,
+      "slug": "processing-fees1f146373-4ef7-4cf1-97af-8d092841c308",
+      "created_at": "2024-11-08T09:36:25.631Z",
+      "updated_at": "2024-11-08T09:36:29.883Z",
+      "created_by": null
+    }
+  },
+  {
+    "model": "loanApps.loanfee",
+    "pk": 7,
+    "fields": {
+      "company": 3,
+      "name": "BANK TRAtNSFER FEE",
+      "calculation": "Fixed amount",
+      "percentage_of": "",
+      "is_percentage": false,
+      "is_deductable": true,
+      "active": true,
+      "slug": "bank-transfer-feee307ecab-d4bd-406a-8a18-ec107c494a9a",
+      "created_at": "2024-11-08T09:36:44.522Z",
+      "updated_at": "2024-11-08T09:36:50.707Z",
+      "created_by": null
+    }
+  },
+  {
+    "model": "loanApps.loanfee",
+    "pk": 8,
+    "fields": {
+      "company": 3,
+      "name": "Management fees",
+      "calculation": "Fixed amount",
+      "percentage_of": "",
+      "is_percentage": false,
+      "is_deductable": true,
+      "active": true,
+      "slug": "management-fees65e66c1f-4450-46ef-9a09-bbbb72badfdf",
+      "created_at": "2024-11-08T09:37:02.791Z",
+      "updated_at": "2024-11-08T09:37:07.888Z",
+      "created_by": null
+    }
+  },
+  {
+    "model": "loanApps.loanfee",
+    "pk": 9,
+    "fields": {
+      "company": 1,
+      "name": "tracking fee",
+      "calculation": "Fixed amount",
+      "percentage_of": "",
+      "is_percentage": false,
+      "is_deductable": true,
+      "active": true,
+      "slug": "tracking-feecafb7523-7787-4ffa-92bb-34ab9e2cd026",
+      "created_at": "2024-11-08T09:38:13.053Z",
+      "updated_at": "2024-11-08T09:39:42.023Z",
+      "created_by": null
+    }
+  },
+  {
+    "model": "loanApps.loanfee",
+    "pk": 10,
+    "fields": {
+      "company": 2,
+      "name": "TRACKING fEES",
+      "calculation": "Fixed amount",
+      "percentage_of": "",
+      "is_percentage": false,
+      "is_deductable": true,
+      "active": true,
+      "slug": "tracking-fees5b9a9152-b622-4b1a-ad1a-d0f235e7458d",
+      "created_at": "2024-11-08T09:45:16.186Z",
+      "updated_at": "2024-11-08T09:45:21.203Z",
+      "created_by": null
+    }
+  },
+  {
+    "model": "loanApps.loanfee",
+    "pk": 11,
+    "fields": {
+      "company": 2,
+      "name": "Processing fees",
+      "calculation": "Fixed amount",
+      "percentage_of": "",
+      "is_percentage": false,
+      "is_deductable": true,
+      "active": true,
+      "slug": "processing-fees9b0e4665-803c-4346-90f9-fa2f44bdc007",
+      "created_at": "2024-11-08T09:45:47.192Z",
+      "updated_at": "2024-11-08T09:47:44.170Z",
+      "created_by": null
+    }
+  },
+  {
+    "model": "loanApps.loanfee",
+    "pk": 12,
+    "fields": {
+      "company": 2,
+      "name": "BANK TRANSFER FEES",
+      "calculation": "Fixed amount",
+      "percentage_of": "",
+      "is_percentage": false,
+      "is_deductable": true,
+      "active": true,
+      "slug": "bank-transfer-feesaffa77ef-02aa-4ed6-bb8a-6521e266b215",
+      "created_at": "2024-11-08T09:47:24.669Z",
+      "updated_at": "2024-11-08T09:47:29.191Z",
+      "created_by": null
+    }
+  },
+  {
+    "model": "loanApps.loanfee",
+    "pk": 13,
+    "fields": {
+      "company": 1,
+      "name": "perfection fee",
+      "calculation": "Fixed amount",
+      "percentage_of": "",
+      "is_percentage": false,
+      "is_deductable": false,
+      "active": true,
+      "slug": "perfection-feea8abc982-61f0-4d60-82d1-89631bcf6b10",
+      "created_at": "2024-11-08T09:54:19.947Z",
+      "updated_at": "2024-11-08T09:54:26.354Z",
+      "created_by": null
+    }
+  },
+  {
+    "model": "loanApps.loanapplication",
+    "pk": 1,
+    "fields": {
+      "prospect": 1,
+      "company_name": 1,
+      "product": 1,
+      "place_of_employment": "tugende",
+      "next_of_kin": "Kabuye jericho",
+      "next_of_kin_contact": "07895748374",
+      "date_of_birth": "1997-10-10",
+      "amount_requested": "4,000,000",
+      "repayment_period": 6,
+      "fee_amount": null,
+      "bank": 1,
+      "bank_branch": "Ntinda",
+      "bank_account_number": "4322222",
+      "bank_account_name": null,
+      "interest_rate": "5.00",
+      "nature_of_business": "education",
+      "purpose_of_loan": "buy equipment",
+      "average_financials": "10,000,000",
+      "estimated_affordability": "5,000,000",
+      "signed_loan_agreement": "signed_loan_agreements/profile_BBaAXm3.jpg",
+      "signed_key_fact_document": "signed_key_fact_documents/loan_schedule_ZbluG9U.pdf",
+      "statutory_declaration": "statutory_declarations/profile.jpg",
+      "signed_disbursement_form": "signed_disbursement_forms/profile.jpg",
+      "team_leader_recommended_amount": "4",
+      "teamleader_recommended_repayment_duration": 8,
+      "team_leader_recommendation": "good",
+      "team_leader_date_of_recommendation": "2024-11-08T09:45:26Z",
+      "team_leader_who_approved": 21,
+      "sales_manager_recommended_amount": "UGX 4,000,000.00",
+      "sales_manager_recommended_repayment_duration": 8,
+      "sales_manager_recommendation": "good to go",
+      "sales_manager_date_of_recommendation": "2024-11-08T09:47:00Z",
+      "sales_manager_query": null,
+      "sales_manager_who_approved": 29,
+      "op_reviewer_recommended_amount": "4,000,000",
+      "op_recommended_repayment_duration": 8,
+      "op_recommendation": "give",
+      "op_date_of_recommendation": "2024-11-08T09:47:58Z",
+      "ops_query": null,
+      "ops_who_approved": 30,
+      "ap_reviewer_recommended_amount": "UGX 5,000,000.00",
+      "ap_recommended_repayment_duration": 10,
+      "ap_recommendation": "good",
+      "ap_date_of_recommendation": "2024-11-08T09:49:29Z",
+      "ap_manager_query": null,
+      "ap_interest_rate": "5.00",
+      "ap_who_approved": 32,
+      "declined_reason": null,
+      "declined_by": null,
+      "decline_date": null,
+      "credit_manager_who_approved_disbursement": 31,
+      "credit_manager_remark": "give",
+      "legal_officer_who_approved_disbursement": 37,
+      "legal_officer_remark": "give",
+      "finance_officer_who_approved_disbursement": 36,
+      "finance_officer_remark": "give",
+      "approver_who_disbursed": 32,
+      "approver_remark": null,
+      "status": "Disbursed",
+      "disbursement_method": null,
+      "disbursement_date": "2024-11-08T10:48:40.769Z",
+      "interest_method": "Flat Rate",
+      "interest_type": "Percentage",
+      "repayment_recycle": null,
+      "number_of_repayments": null,
+      "scanned_loan_application": "scanned_loan_applications/loan_schedule_IxjufPF.pdf",
+      "national_id": "national_ids/profile_NNnkO8G.jpg",
+      "financial_statements": "financial_statements/loan_schedule_IBz8vD7.pdf",
+      "valuation_report": "",
+      "passport_photo": "passport_photos/profile_O10S6Ka.jpg",
+      "google_search_report": "google_search_reports/profile.jpg",
+      "crb_report": "crb_reports/profile.jpg",
+      "signed_offer_letter": "signed_offer_letters/loan_schedule_sAsLo11.pdf",
+      "tracking_certificate": "tracking_certificates/profile.jpg",
+      "simpa_certificate": "simpa_certificates/profile.jpg",
+      "concessions": "",
+      "fees_data": {
+        "tracking fee": {
+          "max": "100000",
+          "min": "100000",
+          "default": "100000"
+        },
+        "INSURANCE FEE": {
+          "max": "400000",
+          "min": "400000",
+          "default": "400000"
+        },
+        "MANAGEMENT FEE": {
+          "max": "500000",
+          "min": "500000",
+          "default": "500000"
+        },
+        "Processing fee": {
+          "max": "4",
+          "min": "4",
+          "default": "4"
+        },
+        "perfection fee": {
+          "max": "50000",
+          "min": "50000",
+          "default": "50000"
+        },
+        "bank transfer charges": {
+          "max": "30000",
+          "min": "30000",
+          "default": "30000"
+        }
+      },
+      "slug": "mugalu-benjamina7a563ac-25ca-42e2-88f8-d217b1f8c19a",
+      "created_at": "2024-11-08T09:32:34.575Z",
+      "updated_at": "2024-11-08T10:48:40.769Z"
+    }
+  },
+  {
+    "model": "loanApps.loanapplication",
+    "pk": 2,
+    "fields": {
+      "prospect": 4,
+      "company_name": null,
+      "product": 2,
+      "place_of_employment": "baifam",
+      "next_of_kin": "kamala alex",
+      "next_of_kin_contact": "0782345827",
+      "date_of_birth": "2000-11-08",
+      "amount_requested": "15,000,000",
+      "repayment_period": 5,
+      "fee_amount": null,
+      "bank": 2,
+      "bank_branch": "kampala",
+      "bank_account_number": "1234568765432",
+      "bank_account_name": null,
+      "interest_rate": "5.00",
+      "nature_of_business": "farmer",
+      "purpose_of_loan": "business",
+      "average_financials": "1,000,000",
+      "estimated_affordability": "2,000,000",
+      "signed_loan_agreement": "signed_loan_agreements/collections_process_flow_qHLridi.pdf",
+      "signed_key_fact_document": "signed_key_fact_documents/collections_process_flow_rtxjbIB.pdf",
+      "statutory_declaration": "statutory_declarations/collections_process_flow_CG2OkbT.pdf",
+      "signed_disbursement_form": "signed_disbursement_forms/collections_process_flow_LW2GWY5.pdf",
+      "team_leader_recommended_amount": "15,000,000",
+      "teamleader_recommended_repayment_duration": 5,
+      "team_leader_recommendation": "all good",
+      "team_leader_date_of_recommendation": "2024-11-08T09:46:55Z",
+      "team_leader_who_approved": 1,
+      "sales_manager_recommended_amount": "UGX 15,000,000.00",
+      "sales_manager_recommended_repayment_duration": 5,
+      "sales_manager_recommendation": "all good",
+      "sales_manager_date_of_recommendation": "2024-11-08T09:55:53Z",
+      "sales_manager_query": null,
+      "sales_manager_who_approved": 1,
+      "op_reviewer_recommended_amount": "15,000,000",
+      "op_recommended_repayment_duration": 5,
+      "op_recommendation": "all good",
+      "op_date_of_recommendation": "2024-11-08T10:02:58Z",
+      "ops_query": null,
+      "ops_who_approved": 1,
+      "ap_reviewer_recommended_amount": "UGX 10,000,000.00",
+      "ap_recommended_repayment_duration": 5,
+      "ap_recommendation": "All good",
+      "ap_date_of_recommendation": "2024-11-08T10:03:51Z",
+      "ap_manager_query": null,
+      "ap_interest_rate": "5.00",
+      "ap_who_approved": 1,
+      "declined_reason": null,
+      "declined_by": null,
+      "decline_date": null,
+      "credit_manager_who_approved_disbursement": 1,
+      "credit_manager_remark": "all good",
+      "legal_officer_who_approved_disbursement": 1,
+      "legal_officer_remark": "all good",
+      "finance_officer_who_approved_disbursement": 1,
+      "finance_officer_remark": "all good",
+      "approver_who_disbursed": 1,
+      "approver_remark": null,
+      "status": "Disbursed",
+      "disbursement_method": null,
+      "disbursement_date": "2024-08-08T20:11:00Z",
+      "interest_method": "Flat Rate",
+      "interest_type": "Percentage",
+      "repayment_recycle": null,
+      "number_of_repayments": null,
+      "scanned_loan_application": "scanned_loan_applications/collections_process_flow_V5zJWa5.pdf",
+      "national_id": "national_ids/useer_5NByNYA.jpg",
+      "financial_statements": "financial_statements/collections_process_flow_Fe8Lojt.pdf",
+      "valuation_report": "",
+      "passport_photo": "passport_photos/useer_KruMHwR.jpg",
+      "google_search_report": "google_search_reports/collections_process_flow_1atUdUA.pdf",
+      "crb_report": "crb_reports/collections_process_flow_WHbJ0NV.pdf",
+      "signed_offer_letter": "signed_offer_letters/collections_process_flow_BeFrzMe.pdf",
+      "tracking_certificate": "tracking_certificates/collections_process_flow_1b7WczZ.pdf",
+      "simpa_certificate": "simpa_certificates/collections_process_flow_MkJKAjA.pdf",
+      "concessions": "",
+      "fees_data": {
+        "TRACKING fEES": {
+          "max": "100000",
+          "min": "100000",
+          "default": "100000"
+        },
+        "Management fees": {
+          "max": "100000",
+          "min": "100000",
+          "default": "100000"
+        },
+        "Processing fees": {
+          "max": "4",
+          "min": "4",
+          "default": "4"
+        },
+        "BANK TRANSFER FEE": {
+          "max": "30000",
+          "min": "30000",
+          "default": "30000"
+        }
+      },
+      "slug": "babiiha-mark0855c975-970d-42e0-80f5-330530a5fe5c",
+      "created_at": "2024-11-08T09:44:31.749Z",
+      "updated_at": "2024-11-08T10:49:54.828Z"
+    }
+  },
+  {
+    "model": "loanApps.loanapplication",
+    "pk": 3,
+    "fields": {
+      "prospect": 2,
+      "company_name": null,
+      "product": 1,
+      "place_of_employment": "baifam",
+      "next_of_kin": "mukwano",
+      "next_of_kin_contact": "0783284732",
+      "date_of_birth": "2000-11-08",
+      "amount_requested": "20,000,000",
+      "repayment_period": 5,
+      "fee_amount": null,
+      "bank": 2,
+      "bank_branch": "kampala",
+      "bank_account_number": "4567890431234238",
+      "bank_account_name": null,
+      "interest_rate": "5.00",
+      "nature_of_business": "business",
+      "purpose_of_loan": "business",
+      "average_financials": "1,000,000",
+      "estimated_affordability": "2,000,000",
+      "signed_loan_agreement": "",
+      "signed_key_fact_document": "",
+      "statutory_declaration": "",
+      "signed_disbursement_form": "",
+      "team_leader_recommended_amount": "20,000,000",
+      "teamleader_recommended_repayment_duration": 5,
+      "team_leader_recommendation": "all good",
+      "team_leader_date_of_recommendation": "2024-11-08T12:18:02.599Z",
+      "team_leader_who_approved": 1,
+      "sales_manager_recommended_amount": "UGX 12,000,000",
+      "sales_manager_recommended_repayment_duration": 5,
+      "sales_manager_recommendation": "All good",
+      "sales_manager_date_of_recommendation": "2024-11-08T12:09:56.089Z",
+      "sales_manager_query": null,
+      "sales_manager_who_approved": 1,
+      "op_reviewer_recommended_amount": "UGX 12,000,000",
+      "op_recommended_repayment_duration": 5,
+      "op_recommendation": "All good",
+      "op_date_of_recommendation": "2024-11-08T12:10:16.167Z",
+      "ops_query": null,
+      "ops_who_approved": 1,
+      "ap_reviewer_recommended_amount": "UGX 12,000,000",
+      "ap_recommended_repayment_duration": 5,
+      "ap_recommendation": "All good",
+      "ap_date_of_recommendation": "2024-11-08T12:10:49.427Z",
+      "ap_manager_query": null,
+      "ap_interest_rate": "5.00",
+      "ap_who_approved": 1,
+      "declined_reason": "client needs more money",
+      "declined_by": 1,
+      "decline_date": "2024-11-07T21:00:00Z",
+      "credit_manager_who_approved_disbursement": null,
+      "credit_manager_remark": null,
+      "legal_officer_who_approved_disbursement": null,
+      "legal_officer_remark": null,
+      "finance_officer_who_approved_disbursement": null,
+      "finance_officer_remark": null,
+      "approver_who_disbursed": null,
+      "approver_remark": null,
+      "status": "Signed Documents",
+      "disbursement_method": null,
+      "disbursement_date": null,
+      "interest_method": "Flat Rate",
+      "interest_type": "Percentage",
+      "repayment_recycle": null,
+      "number_of_repayments": null,
+      "scanned_loan_application": "scanned_loan_applications/collections_process_flow_9x38Z4g.pdf",
+      "national_id": "national_ids/car_VCHZr1F.png",
+      "financial_statements": "financial_statements/collections_process_flow_v9GQZHb.pdf",
+      "valuation_report": "",
+      "passport_photo": "passport_photos/useer_conIk2I.jpg",
+      "google_search_report": "",
+      "crb_report": "",
+      "signed_offer_letter": "",
+      "tracking_certificate": "",
+      "simpa_certificate": "",
+      "concessions": null,
+      "fees_data": {
+        "tracking fee": {
+          "max": "100000",
+          "min": "100000",
+          "default": "100000"
+        },
+        "INSURANCE FEE": {
+          "max": "400000",
+          "min": "400000",
+          "default": "400000"
+        },
+        "MANAGEMENT FEE": {
+          "max": "500000",
+          "min": "500000",
+          "default": "500000"
+        },
+        "Processing fee": {
+          "max": "4",
+          "min": "4",
+          "default": "4"
+        },
+        "perfection fee": {
+          "max": "50000",
+          "min": "50000",
+          "default": "50000"
+        },
+        "bank transfer charges": {
+          "max": "30000",
+          "min": "30000",
+          "default": "30000"
+        }
+      },
+      "slug": "kagwa-jonathan3b33c72b-dec1-4405-b841-36f7ca06159f",
+      "created_at": "2024-11-08T11:43:19.682Z",
+      "updated_at": "2024-11-08T12:18:42.722Z"
+    }
+  },
+  {
+    "model": "loanApps.loanapplication",
+    "pk": 4,
+    "fields": {
+      "prospect": 6,
+      "company_name": null,
+      "product": null,
+      "place_of_employment": null,
+      "next_of_kin": null,
+      "next_of_kin_contact": null,
+      "date_of_birth": null,
+      "amount_requested": null,
+      "repayment_period": null,
+      "fee_amount": null,
+      "bank": null,
+      "bank_branch": null,
+      "bank_account_number": null,
+      "bank_account_name": null,
+      "interest_rate": "5.00",
+      "nature_of_business": null,
+      "purpose_of_loan": null,
+      "average_financials": null,
+      "estimated_affordability": null,
+      "signed_loan_agreement": "",
+      "signed_key_fact_document": "",
+      "statutory_declaration": "",
+      "signed_disbursement_form": "",
+      "team_leader_recommended_amount": null,
+      "teamleader_recommended_repayment_duration": null,
+      "team_leader_recommendation": null,
+      "team_leader_date_of_recommendation": null,
+      "team_leader_who_approved": null,
+      "sales_manager_recommended_amount": null,
+      "sales_manager_recommended_repayment_duration": null,
+      "sales_manager_recommendation": null,
+      "sales_manager_date_of_recommendation": null,
+      "sales_manager_query": null,
+      "sales_manager_who_approved": null,
+      "op_reviewer_recommended_amount": null,
+      "op_recommended_repayment_duration": null,
+      "op_recommendation": null,
+      "op_date_of_recommendation": null,
+      "ops_query": null,
+      "ops_who_approved": null,
+      "ap_reviewer_recommended_amount": null,
+      "ap_recommended_repayment_duration": null,
+      "ap_recommendation": null,
+      "ap_date_of_recommendation": null,
+      "ap_manager_query": null,
+      "ap_interest_rate": "5.00",
+      "ap_who_approved": null,
+      "declined_reason": null,
+      "declined_by": null,
+      "decline_date": null,
+      "credit_manager_who_approved_disbursement": null,
+      "credit_manager_remark": null,
+      "legal_officer_who_approved_disbursement": null,
+      "legal_officer_remark": null,
+      "finance_officer_who_approved_disbursement": null,
+      "finance_officer_remark": null,
+      "approver_who_disbursed": null,
+      "approver_remark": null,
+      "status": "Pipeline",
+      "disbursement_method": null,
+      "disbursement_date": null,
+      "interest_method": null,
+      "interest_type": "Percentage",
+      "repayment_recycle": null,
+      "number_of_repayments": null,
+      "scanned_loan_application": "",
+      "national_id": "",
+      "financial_statements": "",
+      "valuation_report": "",
+      "passport_photo": "",
+      "google_search_report": "",
+      "crb_report": "",
+      "signed_offer_letter": "",
+      "tracking_certificate": "",
+      "simpa_certificate": "",
+      "concessions": null,
+      "fees_data": {},
+      "slug": "semanyi-isaac-ssozi52d49a73-63a2-4a42-a891-8b37dea46ba9",
+      "created_at": "2024-11-08T12:28:16.230Z",
+      "updated_at": "2024-11-08T12:28:16.230Z"
+    }
+  },
+  {
+    "model": "collection.loanaccount",
+    "pk": 1,
+    "fields": {
+      "product": null,
+      "loan_number": "1101P11",
+      "loan_application": 1,
+      "is_arrear": false,
+      "status": "Active",
+      "next_day_due": "2024-12-08",
+      "days_due": 0,
+      "total_amount_due": "0.00",
+      "total_paid": "0.00",
+      "last_payment": null,
+      "fields": null,
+      "relation_officer": 16,
+      "slug": "loan-account-noned4707ddd-be61-4d36-b6d5-378806f28c13",
+      "created_at": "2024-11-08T10:48:40.778Z",
+      "update_at": "2024-11-08T10:48:40.792Z"
+    }
+  },
+  {
+    "model": "collection.loanaccount",
+    "pk": 2,
+    "fields": {
+      "product": null,
+      "loan_number": "1101P12",
+      "loan_application": 2,
+      "is_arrear": false,
+      "status": "Active",
+      "next_day_due": "2024-09-08",
+      "days_due": 0,
+      "total_amount_due": "10538138.00",
+      "total_paid": "0.00",
+      "last_payment": null,
+      "fields": null,
+      "relation_officer": 41,
+      "slug": "loan-account-none70a108a4-faa5-4e28-892d-fd01d8c1f27c",
+      "created_at": "2024-11-08T10:49:54.834Z",
+      "update_at": "2024-11-08T10:50:17.987Z"
+    }
+  }
+]

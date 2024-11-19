@@ -127,7 +127,7 @@ class ProspectDetailView(LoginRequiredMixin, View):
         
         # fetch prospect
         try:
-            api_url = f'http://192.168.20.83:8000/api/prospects/{slug}'
+            api_url = f'{request.user.active_company.api}/prospects/{slug}'
             response = requests.get(api_url)
             response.raise_for_status()
 
@@ -161,7 +161,7 @@ class ProspectDetailView(LoginRequiredMixin, View):
 
                 # fetch vechicle assets
                 
-            api_url = f'http://192.168.20.83:8000/api/vehicles/?prospect={slug}'
+            api_url = f'{request.user.active_company.api}/vehicles/?prospect={slug}'
             response = requests.get(api_url)
             response.raise_for_status()
             v_data = response.json()
@@ -212,7 +212,7 @@ class ProspectDetailView(LoginRequiredMixin, View):
         context = {}
         
         # fetch prospect
-        api_url = f'http://192.168.20.83:8000/api/prospects/{slug}'
+        api_url = f'{request.user.active_company.api}/prospects/{slug}'
         try:
             response = requests.get(api_url)
             response.raise_for_status()
@@ -384,7 +384,10 @@ class ValuationProspectListView(LoginRequiredMixin, View):
 
     def get(self, request):
 
-        api_url = 'http://192.168.20.83:8000/api/prospects/?status=valuation'
+        # api_url = 'http://192.168.20.83:8000/api/prospects/?status=valuation'
+        api_url = f'{request.user.active_company.api}/prospects/?status=valuation'
+
+        
         try:
             response = requests.get(api_url)
             response.raise_for_status()
@@ -425,7 +428,7 @@ class ValuationProspectDetailView(LoginRequiredMixin, DetailView):
         
         # fetch prospect
         try:
-            api_url = f'http://192.168.20.83:8000/api/prospects/{slug}'
+            api_url = f'{request.user.active_company.api}/prospects/{slug}'
             response = requests.get(api_url)
             response.raise_for_status()
 
@@ -453,7 +456,7 @@ class ValuationProspectDetailView(LoginRequiredMixin, DetailView):
 
                 # fetch vechicle assets
                 
-            api_url = f'http://192.168.20.83:8000/api/vehicles/?prospect={slug}'
+            api_url = f'{request.user.active_company.api}/vehicles/?prospect={slug}'
             response = requests.get(api_url)
             response.raise_for_status()
             v_data = response.json()
@@ -538,7 +541,7 @@ class ProspectValuationView(LoginRequiredMixin, ListView):
 
     def get(self, request):
 
-        api_url = 'http://192.168.20.83:8000/api/prospects/?status=valuation'
+        api_url = f'{request.user.active_company.api}/prospects/?status=valuation'
         try:
             response = requests.get(api_url)
             response.raise_for_status()
@@ -897,7 +900,7 @@ def prospect_in_valuation(request, slug):
             return JsonResponse({'error': 'No payment ID provided.'}, status=403)
         
 
-        api_url = f'http://192.168.20.83:8000/api/prospects/{slug}/'
+        api_url = f'{request.user.active_company.api}/prospects/{slug}/'
         try:
             response = requests.get(api_url)
             response.raise_for_status()
@@ -912,7 +915,7 @@ def prospect_in_valuation(request, slug):
 
         # Update prospect's status to "Payment Verified"
         
-        api_url = f'http://192.168.20.83:8000/api/prospects/{slug}/'
+        api_url = f'{request.user.active_company.api}/prospects/{slug}/'
         try:
             # assign valuer
 
@@ -989,7 +992,7 @@ def prospect_in_valuation(request, slug):
 
 @login_required
 def set_valuation(request, slug):
-    api_url = f'http://192.168.20.83:8000/api/prospects/{slug}/'
+    api_url = f'{request.user.active_company.api}/prospects/{slug}/'
     
     response = requests.patch(api_url, data={
         "submitted_for_valuation_by" : request.user.username,
@@ -1007,7 +1010,7 @@ def set_valuation(request, slug):
 @login_required
 def add_valuation_report_details(request, slug):
 
-    api_url = f'http://192.168.20.83:8000/api/prospects/{slug}/'
+    api_url = f'{request.user.active_company.api}/prospects/{slug}/'
     if Prospect.objects.filter(slug=slug):
         prospect = Prospect.objects.filter(slug=slug).first()
     else:
@@ -1171,7 +1174,7 @@ def view_valuation_report(request, slug):
 @login_required
 def submit_report(request, slug):
 
-    api_url = f'http://192.168.20.83:8000/api/prospects/{slug}/'
+    api_url = f'{request.user.active_company.api}/prospects/{slug}/'
     if Prospect.objects.filter(slug=slug):
         prospect = Prospect.objects.filter(slug=slug).first()
     else:
@@ -1293,7 +1296,7 @@ def PipelineView(request, slug):
             for v_report in v_reports:
                 serializer = ApiSerializers.VehicleEvaluationReportSerializer(v_report)
 
-                api_url = f'http://192.168.20.83:8000/api/vehicle-reports/'
+                api_url = f'{request.user.active_company.api}/vehicle-reports/'
                 # handle images
 
                 files = {
@@ -1313,7 +1316,7 @@ def PipelineView(request, slug):
 
                 if response.status_code >= 200 and response.status_code <= 399:
 
-                    api_url = f'http://192.168.20.83:8000/api/prospects/{slug}/'
+                    api_url = f'{request.user.active_company.api}/prospects/{slug}/'
                     response = requests.patch(api_url, data={
                         "status" : 'Pipeline',
                         "valuation_reviewd_on" : datetime.now(),

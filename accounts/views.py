@@ -103,7 +103,7 @@ def reset_password_view(request, uidb64, token):
 class CompanyCreateView(View):
 
     def get(self, request):
-        form = CompanyForm()
+        form = LoanCompanyForm()
         context = {
             'form' : form,
             'page_name' : 'company',
@@ -112,7 +112,7 @@ class CompanyCreateView(View):
         return render(request, 'company/create_company.html', context)
 
     def post(self, request):
-        form = CompanyForm(request.POST, request.FILES)  # Use request.FILES for image upload
+        form = LoanCompanyForm(request.POST, request.FILES)  # Use request.FILES for image upload
         if form.is_valid():
             form.save()  # Save the company form data and logo to the database
             return redirect('company_list')  # Redirect to a success page or list of companies
@@ -128,7 +128,7 @@ class CompanyCreateView(View):
 # company view
 class CompanyListView(View):
     def get(self, request):
-        companies = Company.objects.all()  # Fetch all companies from the database
+        companies = LoanCompany.objects.all()  # Fetch all companies from the database
 
 
         context = {
@@ -142,8 +142,8 @@ class CompanyListView(View):
 # company update
 class CompanyUpdateView(View):
     def get(self, request, company_id):
-        company = get_object_or_404(Company, id=company_id)  # Get the company by ID or return 404
-        form = CompanyForm(instance=company)  # Pre-populate the form with the company data
+        company = get_object_or_404(LoanCompany, id=company_id)  # Get the company by ID or return 404
+        form = LoanCompanyForm(instance=company)  # Pre-populate the form with the company data
         context = {
             'company': company,
             'form' : form,
@@ -154,7 +154,7 @@ class CompanyUpdateView(View):
 
     def post(self, request, company_id):
         company = get_object_or_404(Company, id=company_id)
-        form = CompanyForm(request.POST, request.FILES, instance=company)  # Include request.FILES for the logo field
+        form = LoanCompanyForm(request.POST, request.FILES, instance=company)  # Include request.FILES for the logo field
         if form.is_valid():
             form.save()  # Save the updated company data
             return redirect('company_list')  # Redirect to the list of companies after updating
@@ -213,20 +213,12 @@ def dashboard_view(request):
 
     # Aggregations for each status
 
-    form = UserActiveCompanyForm(instance=request.user)
+    form = ActiveLoanCompanyForm(instance=request.user)
 
     if request.method == "POST":
-        form = UserActiveCompanyForm(request.POST, instance=request.user)
+        form = ActiveLoanCompanyForm(request.POST, instance=request.user)
         if form.is_valid():
-            instance = form.save()
-            # Attempt to set user role
-            new_role = Role.objects.filter(name=instance.role.name, company=instance.active_company)
-            if new_role.exists():
-                instance.role = new_role.first()
-                instance.save()
-                messages.success(request, f"User Active Company set to: {instance.active_company} with Role: {instance.role.name}")
-            else:
-                messages.error(request, "Could not modify user details. Matching Role not found.")
+            form.save()
         else:
             messages.error(request, "Could not modify user details. Try again.")
 
@@ -711,27 +703,20 @@ def loan_collection(request):
     return render(request, "mobile/loan_collection.html")
 
 
-class UserCompanyToggleView(LoginRequiredMixin, View):
+class LoanCompanyToggleView(LoginRequiredMixin, View):
     template_name = "home/change_company.html"
     context = {}
 
     def get(self, request):
-        form = UserActiveCompanyForm()
+        form = ActiveLoanCompanyForm()
         self.context['form'] = form
         return render(request, self.template_name, context=self.context)
 
     def post(self, request):
-        form = UserActiveCompanyForm(request.POST, instance = request.user)
+        form = ActiveLoanCompanyForm(request.POST, instance = request.user)
         if form.is_valid():
-            instance = form.save()
+            form.save()
             # set user role
-            new_role = Role.objects.filter(name=instance.role.name, company=instance.active_company)
-            if new_role:
-                instance.role = new_role.first()
-                instance.save()
-                messages.add_message(request, messages.SUCCESS, f"User Active Company set to:{instance.active_company} with Role: {instance.role.name}")
-            else:
-                messages.add_message(request, messages.ERROR, "Couldnot modify user details. Matching Role not found")
         else:
             messages.add_message(request, messages.ERROR, "Couldnot modify user details. Try again")
 

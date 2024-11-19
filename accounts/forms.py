@@ -19,6 +19,18 @@ class LoanCompanyForm(forms.ModelForm):
             for field_name, field in self.fields.items():
                 field.widget.attrs.update({'class': 'form-control'})
 
+class ActiveLoanCompanyForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ["active_company"]
+
+    def __init__(self, *args, user=None, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        for field_name, field in self.fields.items():
+            field.widget.attrs.update({'class': 'form-control'})
+
+
 
 class UserActiveCompanyForm(forms.ModelForm):
     class Meta:

@@ -17,6 +17,9 @@ class LoanCompany(models.Model):
             self.api = self.api[:-1]
         super().save(*args, **kwargs)
 
+    def __str__(self):
+        return f'{self.name}'
+
 
 
 
@@ -31,7 +34,6 @@ class Company(models.Model):
     slug = models.SlugField("Safe Url", unique=True, blank=True, null=True, max_length=200)
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     updated_at = models.DateTimeField(auto_now=True, null=True, blank=True)
-    active = models.ForeignKey(LoanCompany, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return f'{self.name}'
@@ -106,7 +108,7 @@ class User(AbstractUser):
 
     email = models.EmailField("user email", blank=True, null=True)
     companies = models.ManyToManyField(Company, related_name="companies")
-    active_company = models.ForeignKey(Company, on_delete=models.CASCADE, blank=True, null=True)
+    active_company = models.ForeignKey(LoanCompany, on_delete=models.CASCADE, blank=True, null=True)
     updated_on = models.DateTimeField("Updated on", auto_now=True)
     role = models.ForeignKey("Role", on_delete=models.CASCADE, blank=True, null=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='Approved')

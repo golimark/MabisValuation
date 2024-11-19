@@ -50,23 +50,26 @@
                 <button type="submit" class="btn btn-primary">Save</button>
             </form>
         </div> -->
-        {% if 'can_switch_companies' in request.user.permissions %}
+        <div class="button-group">
+            <a href="{% url 'create_company' %}" class="btn btn-success">Create Loan Company</a>
+            <a href="{% url 'company_list' %}" class="btn btn-info">View Available Loan Companies</a>
+        </div>
+        
         <div class="form-area">
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 
                 <!-- Input fields with simplified styling -->
-                <input type="text" class="form-control" placeholder="Current Company: {{ request.user.company }}" disabled />
+                <input type="text" class="form-control" placeholder="Current Loan Company: {{ request.user.company }}" disabled />
         
                 <!-- Dropdown field for selecting a new company -->
                 {{ form.as_p }}  <!-- Assuming 'company' is the field name in the form -->
                 <div class="cta-area">
-                    <button class="cta-emph">Update Company</button>
+                    <button class="cta-emph">Update Current Loan Company</button>
                 </div>
                 
             </form>
         </div>
-        {%endif%}
     </div>
     <div class="status-update-area">
         <p>

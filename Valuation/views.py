@@ -543,7 +543,8 @@ def printout_report(request, slug):
 
 # API TO FETCH DATA FROM MABIS 
 def fetch_prospects_from_mabis(request):
-    api_url = 'http://192.168.20.83:8000/api/prospects/?status=pending'
+    # api_url = 'http://192.168.137.24:8000/api/prospects/?status=pending'
+    api_url = f'{request.user.active_company.api}/prospects/?status=pending'
     try:
         response = requests.get(api_url)
         response.raise_for_status()
