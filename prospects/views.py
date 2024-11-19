@@ -1320,7 +1320,7 @@ def PipelineView(request, slug):
                 serializer.data.pop('engine_compartment', None)
                 serializer.data.pop('upholstery', None)
                 serializer.data.pop('vehicle_id_plate', None)
-                serializer.data['pk'] = v_report.prosepect.pk
+                # serializer.data['pk'] = v_report.prospect.pk
 
                 response = requests.post(api_url, data=serializer.data, files=files)
 
@@ -1346,3 +1346,63 @@ def PipelineView(request, slug):
         messages.add_message(request, messages.ERROR, "NO VALUATION REPORT FOUND FOR THIS PROSPECT!")
     return redirect(reverse_lazy("valuation_prospect_detail", args=[prospect.slug]))
 # END OF VIEWS FOR HANDLING THE LOAN APPLICATION FROM THE BASE.HTML
+
+# login_view
+# def PipelineView(request, slug):
+#     # Get the prospect object
+#     prospect = get_object_or_404(Prospect, slug=slug)
+
+#     # Check if the request is a POST request to handle the form submission
+#     if request.method == 'POST':
+
+#         # check for vehicle or land valuation report
+#         v_reports = VehicleEvaluationReport.objects.filter(vehicle__prospect=prospect)
+#         l_reports = LandEvaluationReport.objects.filter(land__prospect=prospect)
+
+        
+#         # if this prospect has a valuation report proceed
+#         if v_reports or l_reports:
+#             # submit reports to upstream
+#             for v_report in v_reports:
+#                 serializer = ApiSerializers.VehicleEvaluationReportSerializer(v_report)
+
+#                 api_url = f'{request.user.active_company.api}/vehicle-reports/'
+#                 # handle images
+
+#                 files = {
+#                     "right_hand_side_view": open(f"{settings.BASE_DIR}{serializer.data.get("right_hand_side_view")}", "rb"),
+#                     "left_hand_eside_view": open(f"{settings.BASE_DIR}{serializer.data.get("left_hand_eside_view")}", "rb"),
+#                     "engine_compartment": open(f"{settings.BASE_DIR}{serializer.data.get("engine_compartment")}", "rb"),
+#                     "upholstery": open(f"{settings.BASE_DIR}{serializer.data.get("upholstery")}", "rb"),
+#                     "vehicle_id_plate": open(f"{settings.BASE_DIR}{serializer.data.get("vehicle_id_plate")}", "rb"),
+#                 }
+#                 serializer.data.pop('right_hand_side_view', None)
+#                 serializer.data.pop('left_hand_eside_view', None)
+#                 serializer.data.pop('engine_compartment', None)
+#                 serializer.data.pop('upholstery', None)
+#                 serializer.data.pop('vehicle_id_plate', None)
+#                 # serializer.data['pk'] = v_report.prospect.pk
+
+#                 response = requests.post(api_url, data=serializer.data, files=files)
+
+#                 if response.status_code >= 200 and response.status_code <= 399:
+
+#                     api_url = f'{request.user.active_company.api}/prospects/{slug}/'
+#                     response = requests.patch(api_url, data={
+#                         "status" : 'Pipeline',
+#                         "valuation_reviewd_on" : datetime.now(),
+#                         "valuation_reviewd_by" : request.user.username,
+#                     })
+
+                    
+#                     if response.status_code >= 200 and response.status_code <= 399:
+#                         prospect.status = 'Pipeline'
+#                         prospect.valuation_reviewd_on = datetime.now()
+#                         prospect.valuation_reviewd_by = request.user
+#                         prospect.save()
+
+#             return redirect(reverse_lazy("prospect_review"))
+
+
+#         messages.add_message(request, messages.ERROR, "NO VALUATION REPORT FOUND FOR THIS PROSPECT!")
+#     return redirect(reverse_lazy("valuation_prospect_detail", args=[prospect.slug]))
