@@ -132,7 +132,7 @@ class ProspectDetailView(LoginRequiredMixin, View):
             response.raise_for_status()
 
             data = response.json()
-            print('\n\n\n Data',data)
+            print('\n Data',data)
 
             if data["valuation_submitted_by"]:
                 data["valuation_submitted_by"] = User.objects.filter(username=data["valuation_submitted_by"]).first().pk
@@ -148,7 +148,7 @@ class ProspectDetailView(LoginRequiredMixin, View):
                 print('prospect id',prospect.id)
                 print('prospect name',prospect.name)
                 serializer = ApiSerializers.ProspectSerializer(prospect, data=data, partial=True)
-                print('\n\n\n prospect serializer',serializer)
+                print('\n prospect serializer',serializer)
             else:
                 serializer = ApiSerializers.ProspectSerializer(data=data)
 
@@ -157,7 +157,7 @@ class ProspectDetailView(LoginRequiredMixin, View):
                 context['prospect'] = prospect
             else:
 
-                print("\n\n\n", serializer.errors)
+                print("\n", serializer.errors)
 
                 # fetch vechicle assets
                 
@@ -165,24 +165,26 @@ class ProspectDetailView(LoginRequiredMixin, View):
             response = requests.get(api_url)
             response.raise_for_status()
             v_data = response.json()
-            print('\n\n\n\n',v_data)
+            print('\n',v_data)
 
             for vehicle_data in v_data:
                 vehicle = VehicleAsset.objects.filter(slug = vehicle_data["slug"])
                 # print('\n\n\n\n\n',vehicle)
                 if not vehicle:
                     vehicleSerializer = ApiSerializers.VehicleAssetSerializer(data=vehicle_data)
+                    print('\n vehicleserializer',vehicleSerializer)
                     # print('\n\n\n\n\n',vehicleSerializer, '\n\n\n\n\n')
                    
                 else:
                     vehicleSerializer = ApiSerializers.VehicleAssetSerializer(vehicle.first(), data=vehicle_data, partial=True)
+                    print('\n\n vehicleserializer',vehicleSerializer)
                 
             
                 if vehicleSerializer.is_valid(raise_exception=True):
                     vehicleSerializer.save()
                         
                 else:
-                    print('\n\n\n\n\n',vehicleSerializer.errors)
+                    print('\n\n',vehicleSerializer.errors)
                     
 
             vehicle_assets = VehicleAsset.objects.filter(prospect=prospect)
