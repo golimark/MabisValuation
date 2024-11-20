@@ -828,7 +828,7 @@ def add_valuation_report_details(request, slug):
 
                 # Redirect to the 'valuation_prospect_detail' page
                 messages.add_message(request, messages.SUCCESS, "Asset Valuation submitted successfully")
-                return redirect('valuation_prospect_detail', args=[prospect.slug])
+                return redirect('valuation_prospect_detail', slug=slug)
             else:
                 messages.add_message(request, messages.ERROR, "ERROR MODIFYING RECORDS. TRY AGAIN!!")
         else:
@@ -885,11 +885,12 @@ def add_valuation_report_details(request, slug):
         else:
             context["create_vehicle_report_form"] = VehicleEvaluationReportForm(
                 prospect=prospect,
-                initial={
-                    "date_of_registration": v_reports.date_of_registration,
-                    "date_of_valuation": v_reports.date_of_valuation,
-                    "valuation_report_date": v_reports.valuation_report_date,
-                })
+                # initial={
+                #     "date_of_registration": report.date_of_registration,
+                #     "date_of_valuation": report.date_of_valuation,
+                #     "valuation_report_date": report.valuation_report_date,
+                # }
+                )
 
 
     return render(request, 'valuations/evaluation_report_form.html', context=context)
@@ -1033,77 +1034,64 @@ def printout_report(request, slug):
 
 @login_required
 def PipelineView(request, slug):
+    # Get the prospect object
     prospect = get_object_or_404(Prospect, slug=slug)
-    api_url_prospect_test = f'{request.user.active_company.api}/vehicles/?prospect={slug}'
 
-    response = requests.get(api_url_prospect_test)
-    response.raise_for_status()
-    data = response.json()
-    print('\n\n\n\n Data for prospect',data)
-    
-    
+    # Check if the request is a POST request to handle the form submission
     if request.method == 'POST':
+
+        # check for vehicle or land valuation report
         v_reports = VehicleEvaluationReport.objects.filter(vehicle__prospect=prospect)
         l_reports = LandEvaluationReport.objects.filter(land__prospect=prospect)
-        # vehicle['prospect'] = data[0]['prospect']
-        # api_url_prospect = f'{request.user.active_company.api}/prospects/{slug}/'
+
         
-        # response = requests.get(api_url_prospect)
-        # response.raise_for_status()
-        # data = response.json()
-        
+        # if this prospect has a valuation report proceed
         if v_reports or l_reports:
+            # submit reports to upstream
             for v_report in v_reports:
-                print('\n\n\n V report',v_report)
-                # prospect.id = data[0]
-                # print(prospect.id)
                 serializer = ApiSerializers.VehicleEvaluationReportSerializer(v_report)
+
                 api_url = f'{request.user.active_company.api}/vehicle-reports/'
+                # handle images
 
-                # Prepare files
                 files = {
-                    "right_hand_side_view": open(f"{settings.BASE_DIR}{serializer.data.get('right_hand_side_view')}", "rb"),
-                    "left_hand_eside_view": open(f"{settings.BASE_DIR}{serializer.data.get('left_hand_eside_view')}", "rb"),
-                    "engine_compartment": open(f"{settings.BASE_DIR}{serializer.data.get('engine_compartment')}", "rb"),
-                    "upholstery": open(f"{settings.BASE_DIR}{serializer.data.get('upholstery')}", "rb"),
-                    "vehicle_id_plate": open(f"{settings.BASE_DIR}{serializer.data.get('vehicle_id_plate')}", "rb"),
+                    "right_hand_side_view": open(f"{settings.BASE_DIR}{serializer.data.get("right_hand_side_view")}", "rb"),
+                    "left_hand_eside_view": open(f"{settings.BASE_DIR}{serializer.data.get("left_hand_eside_view")}", "rb"),
+                    "engine_compartment": open(f"{settings.BASE_DIR}{serializer.data.get("engine_compartment")}", "rb"),
+                    "upholstery": open(f"{settings.BASE_DIR}{serializer.data.get("upholstery")}", "rb"),
+                    "vehicle_id_plate": open(f"{settings.BASE_DIR}{serializer.data.get("vehicle_id_plate")}", "rb"),
                 }
-
-                # Remove file fields from data
-                file_fields = ['right_hand_side_view', 'left_hand_eside_view', 'engine_compartment', 'upholstery', 'vehicle_id_plate']
-                for field in file_fields:
-                    serializer.data.pop(field, None)
-
-                
+                serializer.data.pop('right_hand_side_view', None)
+                serializer.data.pop('left_hand_eside_view', None)
+                serializer.data.pop('engine_compartment', None)
+                serializer.data.pop('upholstery', None)
+                serializer.data.pop('vehicle_id_plate', None)
+                print(f'Ive serialized the data.')
                 
                 response = requests.post(api_url, data=serializer.data, files=files)
-                # print(response.status_code, response.text)
-                print(f"\n\n\n\n Status Code: {response.status_code}")
-                print(f"Response Text: {response.text}")  # The server's error message or details
-                print(f"Response Headers: {response.headers}")  # Headers returned by the server
-                print(f"Request URL: {response.request.url}")  # URL used for the request
-                print(f"Request Method: {response.request.method}")  # HTTP method used (GET, POST, etc.)
-                print(f"Request Headers: {response.request.headers}")  # Headers sent in the request
-                # print(f"Request Body: {response.request.body}")  # Data sent in the request body
+                print(response.text)
 
-
-                if 200 <= response.status_code <= 399:
+                if response.status_code >= 200 and response.status_code <= 399:
+                    print(f'Ive reached this stage, status is {response.status_code}')
                     api_url = f'{request.user.active_company.api}/prospects/{slug}/'
                     response = requests.patch(api_url, data={
-                        "status": "Pipeline",
-                        "valuation_reviewd_on": datetime.now(),
-                        "valuation_reviewd_by": request.user.username,
+                        "status" : 'Pipeline',
+                        "valuation_reviewd_on" : datetime.now(),
+                        "valuation_reviewd_by" : request.user.username,
                     })
 
-                    if 200 <= response.status_code <= 399:
+                    
+                    if response.status_code >= 200 and response.status_code <= 399:
                         prospect.status = 'Pipeline'
                         prospect.valuation_reviewd_on = datetime.now()
                         prospect.valuation_reviewd_by = request.user
                         prospect.save()
+                else:
+                    print("Status code is: ", response.status_code)
 
             return redirect(reverse_lazy("prospect_review"))
 
-        messages.error(request, "NO VALUATION REPORT FOUND FOR THIS PROSPECT!")
-    return redirect(reverse_lazy("valuation_prospect_detail", args=[prospect.slug]))
 
+        messages.add_message(request, messages.ERROR, "NO VALUATION REPORT FOUND FOR THIS PROSPECT!")
+    return redirect(reverse_lazy("valuation_prospect_detail", args=[prospect.slug]))
 # END OF VIEWS FOR HANDLING THE LOAN APPLICATION FROM THE BASE.HTML
