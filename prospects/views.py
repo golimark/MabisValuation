@@ -1274,6 +1274,7 @@ def retry_post(url, payload, files=None, headers=None, retries=3, delay=5):
 
 #     # For non-POST requests, redirect to valuation detail page
 #     return redirect(reverse_lazy("valuation_prospect_detail", args=[prospect.slug]))
+
 def PipelineView(request, slug):
     # Get the prospect object
     prospect = get_object_or_404(Prospect, slug=slug)
@@ -1356,7 +1357,7 @@ def PipelineView(request, slug):
                             data={
                                 "status": "Pipeline",
                                 "valuation_reviewd_on": datetime.now().isoformat(),
-                                "valuation_reviewd_by": request.user.username,
+                                "valuation_reviewd_by": request.user
                             },
                         )
 
@@ -1366,6 +1367,8 @@ def PipelineView(request, slug):
                             prospect.valuation_reviewd_on = datetime.now()
                             prospect.valuation_reviewd_by = request.user
                             prospect.save()
+                            vehicle.status = "VALUED"
+                            vehicle.save()
 
                     finally:
                         # Close all file handles
