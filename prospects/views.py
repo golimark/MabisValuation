@@ -170,12 +170,16 @@ class ProspectDetailView(LoginRequiredMixin, View):
                    
                 else:
                     vehicleSerializer = ApiSerializers.VehicleAssetSerializer(vehicle.first(), data=vehicle_data, partial=True)
-                    print('\n\n vehicleserializer',vehicleSerializer)
                 
             
                 if vehicleSerializer.is_valid(raise_exception=True):
                     vehicleSerializer.save()
                
+            users_with_permission = User.objects.filter(
+                    role__permissions__code='can_be_valuers',
+                    company=self.request.user.company
+                )
+            context["valuers"] =  users_with_permission
 
             vehicle_assets = VehicleAsset.objects.filter(prospect=prospect)
             if vehicle_assets:
@@ -198,6 +202,36 @@ class ProspectDetailView(LoginRequiredMixin, View):
         except requests.exceptions.RequestException as e:
             print('Error is this', e)
             return JsonResponse({'error': str(e)}, status=500)
+
+
+            
+    def post(self, request, *args, **kwargs):
+        # if 'valuer.id' in request.POST:
+                
+        # prospect = Prospect.objects.get(slug=kwargs['slug']).first()
+        prospect = get_object_or_404(Prospect, slug=kwargs['slug'])
+        print("\n\n\n\n prospect",prospect)
+        valuer_id = request.POST.get("valuer")
+
+        try:
+            valuer = User.objects.get(
+                id=valuer_id,
+                role__permissions__code='can_be_valuers',
+                company=request.user.company
+            )
+            # Assign the valuer to the prospect and save
+            prospect.valuer_assigned = valuer.username
+            prospect.valuer_assigned_on = timezone.now()
+            prospect.save()
+            messages.success(request, "Valuer assigned successfully.")
+            return redirect(reverse('valuation_prospect_detail', kwargs={'slug': prospect.slug}))
+        except User.DoesNotExist:
+            messages.error(request, "Selected valuer is invalid or does not have permission.")
+
+        # Redirect back to the same page after processing
+        return redirect(reverse('valuation_prospect_detail', kwargs={'slug': prospect.slug}))
+
+
 
 
 # View to display prospects with 'Pending' status
@@ -360,11 +394,9 @@ class ValuationProspectDetailView(LoginRequiredMixin, DetailView):
             if serializer.is_valid():
                 prospect = serializer.save()    
                 context['prospect'] = prospect
-            else:
 
-                print("\n\n\n", serializer.errors)
-
-                # fetch vechicle assets
+            
+            # fetch vechicle assets
                 
             api_url = f'{request.user.active_company.api}/vehicles/?prospect={slug}'
             response = requests.get(api_url)
@@ -424,26 +456,48 @@ class ValuationProspectDetailView(LoginRequiredMixin, DetailView):
             print('Error is this', e)
             return JsonResponse({'error': str(e)}, status=500)
         
-    def post(self, request, *args, **kwargs):
-        prospect = self.get_object()
+    def post(self, request, slug):
         valuer_id = request.POST.get("valuer")
 
-        try:
-            valuer = User.objects.get(
-                id=valuer_id,
-                role__permissions__code='can_be_valuers',
-                company=request.user.company
-            )
-            # Assign the valuer to the prospect and save
-            prospect.valuer_assigned = valuer
-            prospect.valuer_assigned_on = timezone.now()
-            prospect.save()
-            messages.success(request, "Valuer assigned successfully.")
-        except User.DoesNotExist:
-            messages.error(request, "Selected valuer is invalid or does not have permission.")
+        api_url = f'{request.user.active_company.api}/prospects/{slug}/'
+        response = requests.get(api_url)
+        response.raise_for_status()
+        prospect = response.json()
 
-        # Redirect back to the same page after processing
-        return redirect(reverse('valuation_prospect_detail', kwargs={'slug': prospect.slug}))
+        if prospect:
+            try:
+                valuer = User.objects.get(
+                    id=valuer_id,
+                    role__permissions__code='can_be_valuers',
+                    company=request.user.company
+                )
+                # Assign the valuer to the prospect and save
+                prospect['valuer_assigned'] = valuer.username
+                print('\n\n\n\n')
+                print('valuer',prospect['valuer_assigned'])
+                prospect['valuer_assigned_on'] = timezone.now()
+                # prospect.save()
+
+                response = requests.patch(api_url, data={
+                        "status" : "Payment Verified",
+                        "payment_verified_on" : datetime.now(),
+                        "payment_verified_by" : request.user.username,
+                        "valuer_assigned" : prospect['valuer_assigned'],
+                        "valuer_assigned_on" : timezone.now(),
+                    })
+                print('\n\n status code', response.status_code)
+                if response.status_code >= 200 and response.status_code <= 399:
+                    # was successful
+                    messages.success(request, "Valuer assigned successfully.")
+                    # return JsonResponse({'success': 'Payment verified and valuer assigned.'})
+                    return redirect(reverse('valuation_prospect_detail', args=[slug]))
+                print('Valuer assigned',prospect['valuer_assigned'])
+                
+            except User.DoesNotExist:
+                messages.error(request, "Selected valuer is invalid or does not have permission.")
+
+            # Redirect back to the same page after processing
+            return redirect(reverse('valuation_prospect_detail', args=[slug]))
 
 
 # View to display prospects with 'Valuation' status
