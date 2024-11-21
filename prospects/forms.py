@@ -176,8 +176,8 @@ class VehicleEvaluationReportForm(forms.ModelForm):
         date_fields = ['date_of_registration', 'date_of_valuation', 'valuation_report_date']
         for date_field in date_fields:
             self.fields[date_field].widget = forms.DateInput(
-                # format='%Y/%m/%d',
-                # attrs={'type': 'date', 'placeholder': 'yyyy/mm/dd'}
+                # format='%d/%m/%Y',
+                attrs={'type': 'date', 'placeholder': 'dd/mm/yyyy'}
             )
             # self.fields[date_field].input_formats = ['%d/%m/%Y']
 

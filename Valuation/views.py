@@ -95,6 +95,7 @@ class ValuationProspectDetailView(LoginRequiredMixin, DetailView):
             role__permissions__code='can_be_valuers',
             active_company=self.request.user.company
         )
+        print(users_with_permission)
         context["valuers"] =  users_with_permission
 
         context["page_name"] =  "valuation"
@@ -104,6 +105,8 @@ class ValuationProspectDetailView(LoginRequiredMixin, DetailView):
         
     def post(self, request, *args, **kwargs):
         prospect = self.get_object()
+        print(prospect, 'prospect')
+        print('\n\n\n\n')
         valuer_id = request.POST.get("valuer")
 
         try:
@@ -288,7 +291,7 @@ def prospect_in_valuation(request, slug):
             return JsonResponse({'success': 'Payment verified and valuer assigned.'})
         else:
             print("No valuer found to assign")
-            return JsonResponse({'error': 'No valuers available.'}, status=404)
+            return JsonResponse({'error': 'No  available.'}, status=404)
 
     print("Received invalid request method (not POST)")
     return JsonResponse({'error': 'Invalid request method.'}, status=405)
@@ -544,11 +547,17 @@ def printout_report(request, slug):
 # API TO FETCH DATA FROM MABIS 
 def fetch_prospects_from_mabis(request):
     # api_url = 'http://192.168.137.24:8000/api/prospects/?status=pending'
-    api_url = f'{request.user.active_company.api}/prospects/?status=pending'
+    api_url_pending = f"{request.user.active_company.api}/prospects/?status=pending"
+    api_url_payment_verified = f"{request.user.active_company.api}/prospects/?status=payment verified"
+
     try:
-        response = requests.get(api_url)
+        response = requests.get(api_url_pending)
         response.raise_for_status()
+        payment_verified_response = requests.get(api_url_payment_verified)
+        payment_verified_response.raise_for_status()
         data = response.json()
+        data.extend(payment_verified_response.json())
+
         context = {'prospects': data, "page_name": "valuation", "sub_page_name": "payment_verification"}
         return render(request, 'valuations/pending_prospect.html', context)
     except requests.exceptions.RequestException as e:

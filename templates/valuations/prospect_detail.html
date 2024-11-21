@@ -442,14 +442,14 @@
     <!-- <a href="#" id="verify-payment" class="btn btn-primary" onclick="verifyPayment();">Verify Payment</a> -->
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#paymentVerificationModal">
-        Verify Payment
+        VERIFY PAYMENT
     </button>
     <!-- Modal -->
 
     <!-- <a href="{% url 'decline' prospect.slug %}" class="btn btn-danger">Decline</a> -->
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#declineReasonModal">
-        Decline
+        DECLINE
     </button>
 
     <!-- Modal -->
@@ -457,7 +457,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="declineReasonModalLabel">Decline Reason</h5>
+                    <h5 class="modal-title" id="declineReasonModalLabel">DECLINE REASON</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -466,10 +466,10 @@
                     <form id="declineReasonForm" method="POST" action="{% url 'decline' prospect.slug %}">
                         {% csrf_token %}
                         <div class="form-group">
-                            <label for="declineReasonInput">Reason</label>
+                            <label for="declineReasonInput">REASON</label>
                             <input type="text" class="form-control" id="declineReasonInput" name="declinereason" required>
                         </div>
-                        <button type="submit" class="btn btn-danger">Submit</button>
+                        <button type="submit" class="btn btn-danger">SUBMIT</button>
                     </form>
                 </div>
             </div>
@@ -487,9 +487,9 @@
 {% if prospect.status == 'Payment Verified' %}
 
     <!-- <a href="{% url 'valuate_prospect' prospect.slug %}" class="btn btn-secondary">Submit to Valuation</a> -->
-    <a href="{% url 'set_valuation' prospect.slug %}" id="submit-button" class="btn btn-primary">Submit for Valuation</a>
-    <button type="button" data-bs-toggle="modal" data-bs-target="#assignValuerModal" class="btn btn-primary">
-        Reassign Valuer
+    <a href="{% url 'set_valuation' prospect.slug %}" id="submit-button" class="btn btn-primary">SUBMIT FOR VALUATION</a>
+    <button type="button" data-bs-toggle="modal" data-bs-target="#assignValuerModal" class="btn btn-primary" style="margin: 0 30px;">
+        REASSIGN VALUER
     </button>
 
 {% endif %}
@@ -501,7 +501,7 @@
             {%if 'can_be_supervisor' in request.user.permissions %}
                 <form action="{% url 'submit_report' prospect.slug %}" method="POST">
                     {% csrf_token %}
-                    <button type="submit" class="btn btn-warning">Submit</button>
+                    <button type="submit" class="btn btn-warning">SUBMIT</button>
                     
                 </form>
                 <a style="color: white; background-color: #0d6efd;" href="{% url 'create_valuation_report' prospect.slug %}" class="btn btn-info"><i class="fa fa-pen"></i> EDIT ASSET VALUATION</a>
@@ -523,7 +523,7 @@
         <!-- Transform to Customer Button -->
         <form action="{% url 'pipeline' prospect.slug %}" method="POST">
             {% csrf_token %}
-            <button type="submit" class="btn btn-success">Complete</button>
+            <button type="submit" class="btn btn-success">COMPLETE</button>
         </form>
 
         <a style="color: white; background-color: #0d6efd;" href="{% url 'print_valuation_report' prospect.slug %}" class="btn btn-info"><i class="fa fa-pen"></i> VIEW REPORT</a>
@@ -565,13 +565,13 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <form id="paymentVerificationForm">
+            <div class="modal-body" style="justify-content: stretch; display: grid;">
+                <form id="paymentVerificationForm justify-content-stretch">
                     <div class="form-group">
-                        <label for="paymentIdInput">Enter Payment ID</label>
-                        <input style="width: 100%;" type="number" class="form-control" id="paymentIdInput" placeholder="Payment ID" required>
+                        <label for="paymentIdInput">ENTER PAYMENT ID</label>
+                        <input style="justify-content: stretch;" type="number" class="form-control" id="paymentIdInput" placeholder="Payment ID" required>
                     </div>
-                    <button style="margin-top: 20px;" type="button" class="btn btn-primary" id="verify_payment_cta">Verify</button>
+                    <button style="margin-top: 20px;" type="button" class="btn btn-primary" id="verify_payment_cta">VERIFY</button>
                 </form>
             </div>
         </div>
@@ -589,18 +589,20 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" style="display: grid; justify-content: stretch;">
                 <form id="assignValuerForm" method="POST">
                     {% csrf_token %}
                     <div class="form-group">
-                        <label for="valuerSelect">Select Valuer</label>
-                        <select class="form-control" id="valuerSelect" name="valuer">
+                        <label for="valuerSelect">SELECT VALUER</label>
+                        <select class="form-control" id="valuerSelect" name="valuer" style="margin: 20px 0;">
+                            
                             {% for valuer in valuers %}
+                                {{valuer}}
                                 <option value="{{ valuer.id }}">{{ valuer.name }}</option>
                             {% endfor %}
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary">Assign</button>
+                    <button type="submit" class="btn btn-primary">ASSIGN</button>
                 </form>
             </div>
         </div>
