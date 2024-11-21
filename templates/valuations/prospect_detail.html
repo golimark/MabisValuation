@@ -172,7 +172,8 @@
                     <p style="margin-bottom: .5rem;">
                         <strong>Proof Of Payment:  </strong>
                         {%if prospect.proof_of_payment %}
-                        <a data-fancybox="gallery" style="color:aqua;margin-left: .5rem;" href="{{prospect.proof_of_payment.url }}">View</a>
+                        prospect.proof_of_payment
+                        <a data-fancybox="gallery" style="color:aqua;margin-left: .5rem;" href="{{prospect.proof_of_payment}}">View</a>
                         {% else %}
                         <p>Not Available</p>
                         {%endif%}
