@@ -473,8 +473,6 @@ class ValuationProspectDetailView(LoginRequiredMixin, DetailView):
                 )
                 # Assign the valuer to the prospect and save
                 prospect['valuer_assigned'] = valuer.username
-                print('\n\n\n\n')
-                print('valuer',prospect['valuer_assigned'])
                 prospect['valuer_assigned_on'] = timezone.now()
                 # prospect.save()
 
@@ -485,13 +483,13 @@ class ValuationProspectDetailView(LoginRequiredMixin, DetailView):
                         "valuer_assigned" : prospect['valuer_assigned'],
                         "valuer_assigned_on" : timezone.now(),
                     })
-                print('\n\n status code', response.status_code)
+                
                 if response.status_code >= 200 and response.status_code <= 399:
+                    print('Response is: ',response.status_code)
                     # was successful
                     messages.success(request, "Valuer assigned successfully.")
                     # return JsonResponse({'success': 'Payment verified and valuer assigned.'})
                     return redirect(reverse('valuation_prospect_detail', args=[slug]))
-                print('Valuer assigned',prospect['valuer_assigned'])
                 
             except User.DoesNotExist:
                 messages.error(request, "Selected valuer is invalid or does not have permission.")

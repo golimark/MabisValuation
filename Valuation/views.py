@@ -568,7 +568,28 @@ def fetch_prospects_from_mabis(request):
 
 def fetch_vehicle_asset_for_prospect(request):
     context = {'vehicle_data': VehicleAsset.objects.filter(), "page_name": "valuation", "sub_page_name": "asset_vehicle_list"}
-    return render(request, 'valuations/test.html', context)
+    return render(request, 'valuations/vehicle_listing.html', context)
+
+
+def vehicle_detail_view(request, slug):
+    # Fetch the vehicle by slug or return a 404 if not found
+    vehicle = get_object_or_404(VehicleAsset, slug=slug)
+    v_evaluation_reports = get_object_or_404(VehicleEvaluationReport, vehicle=vehicle.id)
+
+
+    # Context to pass to the template
+    context = {
+        'vehicle': vehicle,
+        'prospect': vehicle.prospect,
+        'v_report': v_evaluation_reports,
+        "page_name": "valuation",
+        "sub_page_name": "asset_vehicle_list",
+    }
+
+    # Render the template
+    return render(request, 'valuations/vehicle_details.html', context)
+
+
 
 
 

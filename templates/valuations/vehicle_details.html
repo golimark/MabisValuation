@@ -1,0 +1,440 @@
+{% extends 'home/base.html' %}
+
+{% block content %}
+
+    <div class="card mb-3">
+        <div class="card-header with-minimizer">
+            <p class="">BIO DATA</p>
+            <span class="card-body-minimizer">
+                <i class="fas fa-chevron-up show"></i>
+                <i class="fas fa-chevron-down hidden"></i>
+            </span>
+        </div>
+        <div class="card-body">
+        <div class="row">  <!-- Centering text -->
+            <div class="col-md-6">
+
+                <table class="table">
+                    <tr>
+                        <th><strong>Name:</strong></th><td style="color: blue; text-align: right;">{{ prospect.title }} {{ prospect.name }}</td>
+                        </tr>
+                        <tr>
+                        <th><strong>Phone Number:</strong></th><td style="color: blue; text-align: right;">{{ prospect.phone_number }}</td>
+                        </tr>
+                        <tr>
+                        <th><strong>Agent:</strong></th><td style="color: blue; text-align: right;">{{ prospect.agent }}</td>
+                        </tr>
+                        <tr>
+                        {% if prospect.alt_number%}
+                        <th><strong>Other Number:</strong></th><td style="color: blue; text-align: right;">{{ prospect.alt_number }}</td>
+                        {% endif %}
+                    </tr>
+                </table>
+
+            </div>
+            <div class="col-md-6">
+                <table class="table">
+                    <tr>
+                        <th>Age:</th><td style="color: blue; text-align: right;">{{ prospect.age }}</td>
+                        </tr>
+                        <tr>
+                        <th>Gender:</th><td style="color: blue; text-align: right;">{{ prospect.gender }}</td>
+                        </tr>
+                        <tr>
+                        <th>Team Leader:</th><td style="color: blue; text-align: right;">{{ prospect.created_by }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header with-minimizer">
+                <p class="">ASSETS</p>
+                <span class="card-body-minimizer">
+                    <i class="fas fa-chevron-up show"></i>
+                    <i class="fas fa-chevron-down hidden"></i>
+                </span>
+            </div>
+        <div class="card-body">
+            {% if v_report %}
+            
+            {% if vehicle %}
+            
+            <div class="row">  <!-- Centering text -->
+                <div class="col-md-6">
+                    <table class="table">
+                        <tr>
+                            <th><strong>Vehicle Registration Number:</strong></th><td style="color: blue; text-align: right;">{{ vehicle.license_plate }}</td>
+                        </tr>
+                        <tr>
+                            <th><strong>Car Make</strong></th><td style="color: blue; text-align: right;">{{ v_report.make }}</td>
+                        </tr>
+                        <tr>
+                            <th><strong>Car Model:</strong></th><td style="color: blue; text-align: right;">{{ v_report.model }}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    <table class="table">
+                    <tr>
+                        <th><strong>body description:</strong></th><td style="color: blue; text-align: right;">{{ v_report.body_description }}</td>
+                    </tr>
+                    <tr>
+                        <th><strong>chassis number:</strong></th><td style="color: blue; text-align: right;">{{ v_report.chassis_number }}</td>
+                    </tr>
+                    <tr>
+                        <th><strong>engine number:</strong></th><td style="color: blue; text-align: right;">{{ v_report.engine_number }}</td>
+                    </tr>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    <table class="table">
+                    <tr {% if v_report.color_by_logbook|lower != v_report.color_by_inspection|lower %} style="color: red" {% endif %}>
+                        <th><strong>colour as per logbook:</strong></th><td style="color: blue; text-align: right;">{{ v_report.color_by_logbook }}</td>
+                    </tr>
+                    <tr {% if v_report.color_by_logbook|lower != v_report.color_by_inspection|lower %} style="color: red" {% endif %}>
+                        <th><strong>colour as per inspection:</strong></th><td style="color: blue; text-align: right;">{{ v_report.color_by_inspection }}</td>
+                    </tr>
+                    <tr>
+                        <th><strong>Fuel Type:</strong></th><td style="color: blue; text-align: right;">{{ v_report.fuel_type }}</td>
+                    </tr>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    <table class="table">
+                    <tr>
+                        <th><strong>Year of manufacture:</strong></th><td style="color: blue; text-align: right;">{{ v_report.year_of_manufacture }}</td>
+                    </tr>
+                    <tr>
+                        <th><strong>date of registration:</strong></th><td style="color: blue; text-align: right;">{{ v_report.date_of_registration }}</td>
+                    </tr>
+                    <tr>
+                        <th><strong>milage:</strong></th><td style="color: blue; text-align: right;">{{ v_report.mileage }}</td>
+                    </tr>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    <table class="table">
+                    <tr>
+                        <th><strong>Power(cubic capacity):</strong></th><td style="color: blue; text-align: right;">{{ v_report.power }}</td>
+                    </tr>
+                    <tr>
+                        <th><strong>Gear box transmission:</strong></th><td style="color: blue; text-align: right;">{{ v_report.gearbox_transmission }}</td>
+                    </tr>
+                    <tr>
+                        <th><strong>Country of origin:</strong></th><td style="color: blue; text-align: right;">{{ v_report.country_of_origin }}</td>
+                    </tr>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    <table class="table">
+                    <tr>
+                        <th><strong>years since manufacture:</strong></th><td style="color: blue; text-align: right;">{{ v_report.years_since_manufacture }}</td>
+                    </tr>
+                    <tr>
+                        <th><strong>years since on uganda roads:</strong></th><td style="color: blue; text-align: right;">{{ v_report.years_since_on_uganda_roads }}</td>
+                    </tr>
+                    <tr>
+                        <th><strong>location of vehicle:</strong></th><td style="color: blue; text-align: right;">{{ vehicle.location }}</td>
+                    </tr>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    <table class="table">
+                    <tr>
+                        <th><strong>seating capacity:</strong></th><td style="color: blue; text-align: right;">{{ v_report.seating_capacity }}</td>
+                    </tr>
+                    </table>
+                </div>
+            </div>
+            
+            {% endif %}
+
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header with-minimizer">
+                <p class="">FILES</p>
+                <span class="card-body-minimizer">
+                    <i class="fas fa-chevron-up show"></i>
+                    <i class="fas fa-chevron-down hidden"></i>
+                </span>
+            </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <p style="margin-bottom: .5rem;">
+                        <strong>Proof Of Payment:  </strong>
+                        {%if prospect.proof_of_payment %}
+                        <a data-fancybox="gallery" style="color:aqua;margin-left: .5rem;" href="">View</a>
+                        <!-- http://mabistest.baifamgroup.co.ug:9090/media/prospect/proof_of_payment/bik_pHlugNM.jfif -->
+                        {% else %}
+                        <p>Not Available</p>
+                        {%endif%}
+                    </p>
+                    {% if prospect.valuer_assigned%}
+                    <p> Valuer Assigned: {{prospect.valuer_assigned}}</p>
+                    {% endif %}
+
+                    {% if vehicle_asset %}
+                    {% for vehicle in vehicle_asset %}
+                    <p style="margin-bottom: .5rem;">
+                        <strong>Log Book:</strong>
+                        {% if vehicle.logbook %}
+                        <a data-fancybox="gallery" style="color:aqua;margin-left: .5rem;" class="image-link" href="{{ vehicle.logbook.url }}">View</a>
+                        {% else %}
+                        <p>Not Available</p>
+                        {%endif%}
+                    </p>
+                    {%endfor%}
+                    {%endif%}
+
+                    {% if land_asset %}
+                    {% for land in land_asset %}
+                    <p>
+                        <strong>Land Title:</strong>
+                        {% if vehicle.logbook %}
+                        <a data-fancybox="gallery" class="image-link" href="{{ vehicle.landtitle.url }}">View</a>
+                        {% else %}
+                        <p>Not Available</p>
+                        {% endif %}
+                    </p>
+                    {%endfor%}
+                    {%endif%}
+                </div>
+                <div class="col-md-6"></div>
+            </div>
+        </div>
+    </div>
+
+    
+
+        
+            <div id="print" class="card mb-3">
+                <div class="card-header with-minimizer">
+                    <p class="">VEHICLE VALUATION FOR {{ v_report.vehicle.license_plate }}</p>
+                    <span class="card-body-minimizer">
+                        <i class="fas fa-chevron-up show"></i>
+                        <i class="fas fa-chevron-down hidden"></i>
+                    </span>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <table class="table">
+                                <tr>
+                                    <th><strong>name in logbook:</strong></th><td style="color:blue;">{{ v_report.name_in_logbook }}</td>
+                                </tr>
+                                <tr>
+                                    <th><strong>tax identification number:</strong></th><td style="color:blue;">{{ v_report.tax_identification_number }}</td>
+                                </tr>
+                                <tr>
+                                    <th><strong>chassis frame:</strong></th><td style="color:blue;">{{ v_report.chassis_frame }}</td>
+                                </tr>
+                                <tr>
+                                    <th><strong>body shell paint:</strong></th><td style="color:blue;">{{ v_report.body_shell_paint }}</td>
+                                </tr>
+                                <tr>
+                                    <th><strong>condition of seats:</strong></th><td style="color:blue;">{{ v_report.condition_of_seats }}</td>
+                                </tr>
+                                <tr>
+                                    <th><strong>engine assembly:</strong></th><td style="color:blue;">{{ v_report.engine_assembly }}</td>
+                                </tr>
+                                <tr>
+                                    <th><strong>accessories:</strong></th><td style="color:blue;">{{ v_report.accessories }}</td>
+                                </tr>
+                                <tr>
+                                    <th><strong>cooling system:</strong></th><td style="color:blue;">{{ v_report.cooling_system }}</td>
+                                </tr>
+                                <tr>
+                                    <th><strong>gearbox assembly:</strong></th><td style="color:blue;">{{ v_report.gearbox_assembly }}</td>
+                                </tr>
+                                <tr>
+                                    <th><strong>transmission system:</strong></th><td style="color:blue;">{{ v_report.transmission_system }}</td>
+                                </tr>
+                                <tr>
+                                    <th><strong>steering system:</strong></th><td style="color:blue;">{{ v_report.steering_system }}</td>
+                                </tr>
+                                {% if v_report.vehicle.prospect.status == "Review" %}
+                                <tr>
+                                    <th><strong>place of inspection:</strong></th><td style="color:blue;">{{ v_report.place_of_inspection }}</td>
+                                </tr>
+                                <tr>
+                                    <th><strong>date of valuation:</strong></th><td style="color:blue;">{{ v_report.date_of_valuation }}</td>
+                                </tr>
+                                {% endif %}
+                            </table>
+                        </div>
+                        <div class="col-md-6">
+                            <table class="table">
+                                <tr>
+                                    <th><strong>electrical system:</strong></th><td style="color:blue;">{{ v_report.electrical_system }}</td>
+                                </tr>
+                                <tr>
+                                    <th><strong>windshield:</strong></th><td style="color:blue;">{{ v_report.windshield }}</td>
+                                </tr>
+                                <tr>
+                                    <th><strong>air conditioning system:</strong></th><td style="color:blue;">{{ v_report.air_conditioning_system }}</td>
+                                </tr>
+                                <tr>
+                                    <th><strong>wheels:</strong></th><td style="color:blue;">{{ v_report.wheels }}</td>
+                                </tr>
+                                <tr>
+                                    <th><strong>tyre condition:</strong></th><td style="color:blue;">{{ v_report.tyre_condition }}</td>
+                                </tr>
+                                <tr>
+                                    <th><strong>road test:</strong></th><td style="color:blue;">{{ v_report.road_test }}</td>
+                                </tr>
+                                <tr>
+                                    <th><strong>market value:</strong></th><td style="color:blue;">{{ v_report.market_value }}</td>
+                                </tr>
+                                <tr>
+                                    <th><strong>forced sale:</strong></th><td style="color:blue;">{{ v_report.forced_sale }}</td>
+                                </tr>
+                                <tr>
+                                    <th><strong>insurance valuation:</strong></th><td style="color:blue;">{{ v_report.insurance_valuation }}</td>
+                                </tr>
+                                <tr>
+                                    <th><strong>suspension:</strong></th><td style="color:blue;">{{ v_report.suspension }}</td>
+                                </tr>
+                                <tr>
+                                    <th><strong>braking system:</strong></th><td style="color:blue;">{{ v_report.braking_system }}</td>
+                                </tr>
+                                <tr>
+                                    <th><strong>date of valuation:</strong></th><td style="color:blue;">{{ v_report.date_of_valuation }}</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="report-imgs">
+                            <div class="img-wrapper">
+                                <img src="{{v_report.front_right_hand_side_view.url}}" alt="">
+                                    <p>FRONT RIGHT HAND SIDE VIEW</p>
+                            </div>
+                            <div class="img-wrapper">
+                                <img src="{{v_report.front_left_hand_eside_view.url}}" alt="">
+                                <p> FRONT LEFT HAND SIDE VIEW</p>
+                            </div>
+                            <div class="img-wrapper">
+                                <img src="{{v_report.back_right_hand_side_view.url}}" alt="">
+                                    <p>BACK RIGHT HAND SIDE VIEW</p>
+                            </div>
+                            <div class="img-wrapper">
+                                <img src="{{v_report.back_left_hand_side_view.url}}" alt="">
+                                <p>BACK LEFT HAND SIDE VIEW</p>
+                            </div>
+                            <div class="img-wrapper">
+                                <img src="{{v_report.engine_compartment.url}}" alt="">
+                                <p>ENGINE COMPARTMENT</p>
+                            </div>
+                            <div class="img-wrapper">
+                                <img src="{{v_report.upholstery.url}}" alt="">
+                                <p>UPHOLSTERY</p>
+                            </div>
+                            <div class="img-wrapper">
+                                <img src="{{v_report.vehicle_id_plate.url}}" alt="">
+                                <p>VEHICLE PLATE</p>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 1rem;">
+                            <span>effective report summary:</span>
+                            <p style="color:blue;">{{ v_report.effective_report_summary }}</p>
+                        </div>
+                        <div style="margin-top: 1rem;">
+                            <span>limiting conditions:</span>
+                            <p style="color:blue;">{{ v_report.limiting_conditions }}</p>
+                        </div>
+                        <!-- <div style="margin-top: 1rem;">
+                            <span>recommendation:</span>
+                            <p style="color:blue;">{{ v_report.recommendation }}</p>
+                        </div> -->
+                        <div style="margin-top: 1rem;">
+                            <span>valuation:</span>
+                            <p style="color:blue;">{{ v_report.valuation }}</p>
+                        </div>
+                        <div style="margin-top: 1rem;">
+                            <span>market value description:</span>
+                            <p style="color:blue;">{{ v_report.market_value_description }}</p>
+                        </div>
+                        <div style="margin-top: 1rem;">
+                            <span>current value description:</span>
+                            <p style="color:blue;">{{ v_report.current_value_description }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card mb-3">
+                <div class="card-header with-minimizer">
+                    <p class="">VALUATION REMARKS BY VALUER</p>
+                    <span class="card-body-minimizer">
+                        <i class="fas fa-chevron-up show"></i>
+                        <i class="fas fa-chevron-down hidden"></i>
+                    </span>
+                </div>
+                <div class="card-body">
+                <div class="row">  <!-- Centering text -->
+                    <div class="col-md-9">
+                        <div style="margin-top: 1rem;" class="row">
+                            <span>VALUATION DONE BY: <strong>{{ prospect.valuer_assigned }}</strong></span>
+                            <p style="margin-top: 1rem; color:blue;">{{ v_report.recommendation }}</p>
+                        </div>
+                    </div>
+                    
+                </div>
+                </div>
+            </div>
+
+            {% if v_report.company_supervisor_remarks %} 
+            <div class="card mb-3">
+                <div class="card-header with-minimizer">
+                    <p class="">VALUATION REMARKS BY SUPERVISOR</p>
+                    <span class="card-body-minimizer">
+                        <i class="fas fa-chevron-up show"></i>
+                        <i class="fas fa-chevron-down hidden"></i>
+                    </span>
+                </div>
+                <div class="card-body">
+                <div class="row">  <!-- Centering text -->
+                    <div class="col-md-9">
+                        <div style="margin-top: 1rem;" class="row">
+                            <span>SUPERVISION DONE BY: <strong>{{ prospect.valuation_submitted_by }}</strong></span>
+                            <p style="margin-top: 1rem; color:blue;">{{ v_report.company_supervisor_remarks }}</p>
+                        </div>
+                    </div>
+                    
+                </div>
+                </div>
+            </div>
+            {%endif%}
+
+
+            {% if v_report.company_approver_remarks %} 
+            <div class="card mb-3">
+                <div class="card-header with-minimizer">
+                    <p class="">VALUATION REMARKS BY APPROVER</p>
+                    <span class="card-body-minimizer">
+                        <i class="fas fa-chevron-up show"></i>
+                        <i class="fas fa-chevron-down hidden"></i>
+                    </span>
+                </div>
+                <div class="card-body">
+                <div class="row">  <!-- Centering text -->
+                    <div class="col-md-9">
+                        <div style="margin-top: 1rem;" class="row">
+                            <span>APPROVAL DONE BY: <strong>{{ prospect.valuation_reviewd_by }}</strong></span>
+                            <p style="margin-top: 1rem; color:blue;">{{ v_report.company_approver_remarks }}</p>
+                        </div>
+                    </div>
+                    
+                </div>
+                </div>
+            </div>
+            {%endif%}
+        
+        
+{% endblock %}

@@ -7,7 +7,7 @@
 <div id="printreport" class="card mb-3">
 
     <div style="align-content: center; justify-items: center;">
-        <center><img src="{{ user.active_company.logo.url }}" alt=""></center>
+        <center><img src="{{ user.company.logo.url }}" alt=""></center>
     </div>
     <div class="card-header">
         <center>Applicant / Client : <strong>{{prospect.company}}</strong></center>
@@ -84,7 +84,7 @@
                         </tr>
                         <tr>
                             <th>No. of Seats</th>
-                            <td style="color:blue;">{{ evaluation_report.vehicle.seating_capacity }}</td>
+                            <td style="color:blue;">{{ evaluation_report.seating_capacity }}</td>
                         </tr>
                         <tr>
                             <th>Engine Assembly Condition</th>
@@ -177,12 +177,20 @@
 
                 <div class="report-imgs">
                     <div class="img-wrapper">
-                        <img src="{{evaluation_report.right_hand_side_view.url}}" alt="">
-                        <p>RIGHT HAND SIDE VIEW</p>
+                        <img src="{{evaluation_report.front_right_hand_side_view.url}}" alt="">
+                        <p>FRONT RIGHT HAND SIDE VIEW</p>
                     </div>
                     <div class="img-wrapper">
-                        <img src="{{evaluation_report.left_hand_eside_view.url}}" alt="">
-                        <p>LEFT HAND SIDE VIEW</p>
+                        <img src="{{evaluation_report.front_left_hand_eside_view.url}}" alt="">
+                        <p>FRONT LEFT HAND SIDE VIEW</p>
+                    </div>
+                    <div class="img-wrapper">
+                        <img src="{{evaluation_report.back_right_hand_side_view.url}}" alt="">
+                        <p>BACK RIGHT HAND SIDE VIEW</p>
+                    </div>
+                    <div class="img-wrapper">
+                        <img src="{{evaluation_report.back_left_hand_side_view.url}}" alt="">
+                        <p>BACK LEFT HAND SIDE VIEW</p>
                     </div>
                     <div class="img-wrapper">
                         <img src="{{evaluation_report.engine_compartment.url}}" alt="">

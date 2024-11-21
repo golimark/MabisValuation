@@ -22,7 +22,7 @@
             <td>{{ vehicle.status }}</td>
             <td>
                 <a
-                    href=""
+                    href="{% url 'vehicle_detail' vehicle.slug %}"
                     class="btn btn-success btn-sm"
                     ><i class="fa fa-eye"></i><span>Detail</span></a
                 >

@@ -135,8 +135,8 @@ class VehicleEvaluationReportForm(forms.ModelForm):
             'windshield', 'air_conditioning_system', 'wheels', 'tyre_condition', 'road_test',
             'insurance_valuation', 'forced_sale', 'market_value', 'limiting_conditions',
             'effective_report_summary', 'valuation', 'market_value_description',
-            'current_value_description', 'recommendation', 'right_hand_side_view',
-            'left_hand_eside_view', 'engine_compartment', 'upholstery', 'vehicle_id_plate', 
+            'current_value_description', 'recommendation', 'front_right_hand_side_view',
+            'front_left_hand_eside_view','back_right_hand_side_view','back_left_hand_side_view', 'engine_compartment', 'upholstery', 'vehicle_id_plate', 
             'company_supervisor_remarks', 'company_approver_remarks'
             # 'company_valuer', 'company_valuer_remarks','company_supervisor', 'company_supervisor_remarks','company_approver', 'company_approver_remarks'
         ]
@@ -160,7 +160,7 @@ class VehicleEvaluationReportForm(forms.ModelForm):
 
         # Make image fields required
         image_fields = [
-            'right_hand_side_view', 'left_hand_eside_view', 'engine_compartment',
+            'front_right_hand_side_view', 'front_left_hand_eside_view', 'back_right_hand_side_view', 'back_left_hand_side_view', 'engine_compartment',
             'upholstery', 'vehicle_id_plate'
         ]
         for field_name in image_fields:
