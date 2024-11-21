@@ -159,7 +159,7 @@ class ProspectDetailView(LoginRequiredMixin, View):
                 # Modify the proof_of_payment URL to include the port number
                 validated_data = serializer.validated_data
                 if validated_data.get('proof_of_payment'):
-                    print(validated_data['proof_of_payment'])
+                    # print(validated_data['proof_of_payment'])
                     proof_of_payment_url = urlparse(validated_data['proof_of_payment'])
                     proof_of_payment_url = proof_of_payment_url._replace(netloc=f"{proof_of_payment_url.hostname}:{port}")
                     validated_data['proof_of_payment'] = proof_of_payment_url.geturl()
@@ -225,7 +225,7 @@ class ProspectDetailView(LoginRequiredMixin, View):
                 
         # prospect = Prospect.objects.get(slug=kwargs['slug']).first()
         prospect = get_object_or_404(Prospect, slug=kwargs['slug'])
-        print("\n\n\n\n prospect",prospect)
+        # print("\n\n\n\n prospect",prospect)
         valuer_id = request.POST.get("valuer")
 
         try:
@@ -488,8 +488,8 @@ class ValuationProspectDetailView(LoginRequiredMixin, DetailView):
                 )
                 # Assign the valuer to the prospect and save
                 prospect['valuer_assigned'] = valuer.username
-                print('\n\n\n\n')
-                print('valuer',prospect['valuer_assigned'])
+                # print('\n\n\n\n')
+                # print('valuer',prospect['valuer_assigned'])
                 prospect['valuer_assigned_on'] = timezone.now()
                 # prospect.save()
 
@@ -500,13 +500,13 @@ class ValuationProspectDetailView(LoginRequiredMixin, DetailView):
                         "valuer_assigned" : prospect['valuer_assigned'],
                         "valuer_assigned_on" : timezone.now(),
                     })
-                print('\n\n status code', response.status_code)
+                # print('\n\n status code', response.status_code)
                 if response.status_code >= 200 and response.status_code <= 399:
                     # was successful
                     messages.success(request, "Valuer assigned successfully.")
                     # return JsonResponse({'success': 'Payment verified and valuer assigned.'})
                     return redirect(reverse('valuation_prospect_detail', args=[slug]))
-                print('Valuer assigned',prospect['valuer_assigned'])
+                # print('Valuer assigned',prospect['valuer_assigned'])
                 
             except User.DoesNotExist:
                 messages.error(request, "Selected valuer is invalid or does not have permission.")
@@ -727,7 +727,7 @@ def prospect_in_valuation(request, slug):
     if request.method == "POST":
         data = json.loads(request.body)
         payment_id = data.get('payment_id', None)
-        print('payment_id',payment_id)
+        # print('payment_id',payment_id)
         if not payment_id:
             return JsonResponse({'error': 'No payment ID provided.'}, status=403)
         
@@ -744,7 +744,7 @@ def prospect_in_valuation(request, slug):
         if prospect: 
             # confirm trans_id is matching
             if payment_id == prospect['proof_of_payment_id']:
-                print('I reach there.')
+                # print('I reach there.')
                 # Update prospect's status to "Payment Verified"
                 api_url = f'{request.user.active_company.api}/prospects/{slug}/'
                 # assign valuer
@@ -1441,7 +1441,7 @@ def PipelineView(request, slug):
                         # Post modified data to the external API
                         response = requests.post(api_url, data=modified_data, files=files)
 
-                        print(response.status_code, response.text)
+                        # print(response.status_code, response.text)
 
                         # Update prospect status upstream if successful
                         prospect_api_url = f'{request.user.active_company.api}/prospects/{slug}/'
