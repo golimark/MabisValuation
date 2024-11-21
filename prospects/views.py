@@ -20,6 +20,7 @@ from prospects.models import *
 from Valuation.models import *
 import requests
 from django.conf import settings
+from urllib.parse import urlparse
 
 
 from api import serializers as ApiSerializers
@@ -150,7 +151,21 @@ class ProspectDetailView(LoginRequiredMixin, View):
                 serializer = ApiSerializers.ProspectSerializer(data=data)
 
             if serializer.is_valid():
-                prospect = serializer.save()    
+                parsed_url = urlparse(request.user.active_company.api)
+                port = parsed_url.port
+
+                # Modify the proof_of_payment URL to include the port number
+            
+                # Modify the proof_of_payment URL to include the port number
+                validated_data = serializer.validated_data
+                if validated_data.get('proof_of_payment'):
+                    # print(validated_data['proof_of_payment'])
+                    proof_of_payment_url = urlparse(validated_data['proof_of_payment'])
+                    proof_of_payment_url = proof_of_payment_url._replace(netloc=f"{proof_of_payment_url.hostname}:{port}")
+                    validated_data['proof_of_payment'] = proof_of_payment_url.geturl()
+                  
+                prospect = serializer.save()
+                    
                 context['prospect'] = prospect
                 
             # fetch vechicle assets
@@ -210,7 +225,7 @@ class ProspectDetailView(LoginRequiredMixin, View):
                 
         # prospect = Prospect.objects.get(slug=kwargs['slug']).first()
         prospect = get_object_or_404(Prospect, slug=kwargs['slug'])
-        print("\n\n\n\n prospect",prospect)
+        # print("\n\n\n\n prospect",prospect)
         valuer_id = request.POST.get("valuer")
 
         try:
@@ -503,22 +518,46 @@ class ProspectValuationView(LoginRequiredMixin, ListView):
     model = Prospect
     template_name = 'valuations/prospect_list_valuation.html'
     context_object_name = 'prospects'
-    context = {}
 
     def get(self, request):
-
+        context = {}
         api_url = f'{request.user.active_company.api}/prospects/?status=valuation'
         try:
             response = requests.get(api_url)
             response.raise_for_status()
             data = response.json()
-            self.context['prospects'] = data
-        except requests.exceptions.RequestException as e:
+            context['prospects'] = data
+        except requests.exceptions.RequestException:
             messages.error(request, "Unable to fetch prospects")
 
-        self.context["page_name"] =  "valuation"
-        self.context["sub_page_name"] =  "valuation_requests"
-        return render(request, 'valuations/prospect_list_valuation.html', context=self.context)
+        valuer_assigned = request.GET.get('valuer_assigned')
+        if valuer_assigned:
+            context['prospects'] = [prospect for prospect in context['prospects'] if prospect['valuer_assigned'] == valuer_assigned]
+
+        context["page_name"] =  "valuation"
+        context["sub_page_name"] =  "valuation_requests"
+        return render(request, 'valuations/prospect_list_valuation.html', context=context)
+    
+# class ProspectValuationView(LoginRequiredMixin, ListView):
+#     model = Prospect
+#     template_name = 'valuations/prospect_list_valuation.html'
+#     context_object_name = 'prospects'
+#     context = {}
+
+#     def get(self, request):
+
+#         api_url = f'{request.user.active_company.api}/prospects/?status=valuation'
+#         try:
+#             response = requests.get(api_url)
+#             response.raise_for_status()
+#             data = response.json()
+#             self.context['prospects'] = data
+#         except requests.exceptions.RequestException as e:
+#             messages.error(request, "Unable to fetch prospects")
+
+#         self.context["page_name"] =  "valuation"
+#         self.context["sub_page_name"] =  "valuation_requests"
+#         return render(request, 'valuations/prospect_list_valuation.html', context=self.context)
 
 
 
@@ -686,7 +725,7 @@ def prospect_in_valuation(request, slug):
     if request.method == "POST":
         data = json.loads(request.body)
         payment_id = data.get('payment_id', None)
-        print('payment_id',payment_id)
+        # print('payment_id',payment_id)
         if not payment_id:
             return JsonResponse({'error': 'No payment ID provided.'}, status=403)
         
@@ -703,7 +742,7 @@ def prospect_in_valuation(request, slug):
         if prospect: 
             # confirm trans_id is matching
             if payment_id == prospect['proof_of_payment_id']:
-                print('I reach there.')
+                # print('I reach there.')
                 # Update prospect's status to "Payment Verified"
                 api_url = f'{request.user.active_company.api}/prospects/{slug}/'
                 # assign valuer
@@ -1400,7 +1439,7 @@ def PipelineView(request, slug):
                         # Post modified data to the external API
                         response = requests.post(api_url, data=modified_data, files=files)
 
-                        print(response.status_code, response.text)
+                        # print(response.status_code, response.text)
 
                         # Update prospect status upstream if successful
                         prospect_api_url = f'{request.user.active_company.api}/prospects/{slug}/'

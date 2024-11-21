@@ -170,8 +170,8 @@
                     <p style="margin-bottom: .5rem;">
                         <strong>Proof Of Payment:  </strong>
                         {%if prospect.proof_of_payment %}
-                        <a data-fancybox="gallery" style="color:aqua;margin-left: .5rem;" href="">View</a>
-                        <!-- http://mabistest.baifamgroup.co.ug:9090/media/prospect/proof_of_payment/bik_pHlugNM.jfif -->
+                        prospect.proof_of_payment
+                        <a data-fancybox="gallery" style="color:aqua;margin-left: .5rem;" href="{{prospect.proof_of_payment}}">View</a>
                         {% else %}
                         <p>Not Available</p>
                         {%endif%}
@@ -180,12 +180,13 @@
                     <p> Valuer Assigned: {{prospect.valuer_assigned}}</p>
                     {% endif %}
 
-                    {% if vehicle_asset %}
-                    {% for vehicle in vehicle_asset %}
+                    <!-- <p>here: {{vehicle.logbook}}</p> -->
+                    {% if vehicle_assets %}
+                    {% for vehicle in vehicle_assets %}
                     <p style="margin-bottom: .5rem;">
                         <strong>Log Book:</strong>
                         {% if vehicle.logbook %}
-                        <a data-fancybox="gallery" style="color:aqua;margin-left: .5rem;" class="image-link" href="{{ vehicle.logbook.url }}">View</a>
+                        <a data-fancybox="gallery" style="color:aqua;margin-left: .5rem;" class="image-link" href="{{ vehicle.logbook }}">View</a>
                         {% else %}
                         <p>Not Available</p>
                         {%endif%}

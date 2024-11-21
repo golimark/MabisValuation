@@ -63,7 +63,8 @@ class Prospect(models.Model):
     decline_reason = models.CharField(max_length=255, null=True, blank=True)
 
     # Loan details
-    proof_of_payment = models.CharField(max_length=256, null=True, blank=True)
+    proof_of_payment = models.URLField(null=True, blank=True)
+    # proof_of_payment = models.CharField(max_length=256, null=True, blank=True)
     proof_of_payment_id = models.CharField("PROOF OF PAYMENT ID", max_length=50, null=True, blank=True)
     # proof_of_payment_id = models.CharField("PROOF OF PAYMENT ID", max_length=50, null=True, blank=True, unique=True)
     status = models.CharField("STATUS", max_length=20, choices=STATUS_CHOICES, default='New', null=True, blank=True)
