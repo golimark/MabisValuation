@@ -21,8 +21,8 @@ class VehicleEvaluationReportForm(forms.ModelForm):
             'windshield', 'air_conditioning_system', 'wheels', 'tyre_condition', 'road_test',
             'insurance_valuation', 'forced_sale', 'market_value', 'limiting_conditions',
             'effective_report_summary', 'valuation', 'market_value_description',
-            'current_value_description', 'recommendation', 'right_hand_side_view',
-            'left_hand_eside_view', 'engine_compartment', 'upholstery', 'vehicle_id_plate', 
+            'current_value_description', 'recommendation', 'front_right_hand_side_view',
+            'front_left_hand_eside_view','back_right_hand_side_view','back_left_hand_side_view', 'engine_compartment', 'upholstery', 'vehicle_id_plate', 
             'company_supervisor_remarks', 'company_approver_remarks'
             # 'company_valuer', 'company_valuer_remarks','company_supervisor', 'company_supervisor_remarks','company_approver', 'company_approver_remarks'
         ]
@@ -46,7 +46,7 @@ class VehicleEvaluationReportForm(forms.ModelForm):
 
         # Make image fields required
         image_fields = [
-            'right_hand_side_view', 'left_hand_eside_view', 'engine_compartment',
+            'front_right_hand_side_view', 'front_left_hand_eside_view', 'back_right_hand_side_view', 'back_left_hand_side_view', 'engine_compartment',
             'upholstery', 'vehicle_id_plate'
         ]
         for field_name in image_fields:
@@ -62,7 +62,7 @@ class VehicleEvaluationReportForm(forms.ModelForm):
         date_fields = ['date_of_registration', 'date_of_valuation', 'valuation_report_date']
         for date_field in date_fields:
             self.fields[date_field].widget = forms.DateInput(
-                format='%d/%m/%Y',
+                # format='%d/%m/%Y',
                 attrs={'type': 'date', 'placeholder': 'dd/mm/yyyy'}
             )
             # self.fields[date_field].input_formats = ['%d/%m/%Y']
@@ -162,21 +162,4 @@ class LandEvaluationReportForm(forms.ModelForm):
 
         if prospect:
             self.fields['vehicle'].queryset = LandAsset.objects.filter(prospect=prospect)
-
-# class CarTypeForm(forms.ModelForm):
-#     class Meta:
-#         model = CarType
-#         fields = ['name']
-#         widgets = {
-#             'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter car type name'}),
-#         }
-
-# class CarModelForm(forms.ModelForm):
-#     class Meta:
-#         model = CarModel
-#         fields = ['name', 'car_type']
-#         widgets = {
-#             'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter car model name'}),
-#             'car_type': forms.Select(attrs={'class': 'form-control'}),
-#         }
 

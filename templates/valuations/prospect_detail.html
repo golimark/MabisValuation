@@ -49,7 +49,6 @@
         </div>
     </div>
 
-    {% if v_evaluation_reports %}
     <div class="card mb-3">
         <div class="card-header with-minimizer">
                 <p class="">ASSETS</p>
@@ -61,8 +60,8 @@
         <div class="card-body">
             {% if v_evaluation_reports %}
             {% for v_report in v_evaluation_reports %}
-            {% if vehicle_asset %}
-            {% for vehicle in vehicle_asset %}
+            {% if vehicle_assets %}
+            {% for vehicle in vehicle_assets %}
             <div class="row">  <!-- Centering text -->
                 <div class="col-md-6">
                     <table class="table">
@@ -156,7 +155,6 @@
             {% endif %}
         </div>
     </div>
-    {% endif %}
 
     <div class="card mb-3">
         <div class="card-header with-minimizer">
@@ -169,19 +167,16 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-6">
+                    
                     <p style="margin-bottom: .5rem;">
                         <strong>Proof Of Payment:  </strong>
                         {%if prospect.proof_of_payment %}
-                        prospect.proof_of_payment
                         <a data-fancybox="gallery" style="color:aqua;margin-left: .5rem;" href="{{prospect.proof_of_payment}}">View</a>
                         {% else %}
                         <p>Not Available</p>
                         {%endif%}
                     </p>
-                    {% if prospect.valuer_assigned%}
-                    <p> Valuer Assigned: {{prospect.valuer_assigned}}</p>
-                    {% endif %}
-
+                    
                     <!-- <p>here: {{vehicle.logbook}}</p> -->
                     {% if vehicle_assets %}
                     {% for vehicle in vehicle_assets %}
@@ -195,6 +190,11 @@
                     </p>
                     {%endfor%}
                     {%endif%}
+
+                    {% if prospect.valuer_assigned%}
+                    <p> <strong>Valuer Assigned: </strong> {{prospect.valuer_assigned}}</p>
+                    {% endif %}
+
 
                     {% if land_asset %}
                     {% for land in land_asset %}
@@ -315,12 +315,20 @@
 
                         <div class="report-imgs">
                             <div class="img-wrapper">
-                                <img src="{{v_report.right_hand_side_view.url}}" alt="">
-                                    <p>RIGHT HAND SIDE VIEW</p>
+                                <img src="{{v_report.front_right_hand_side_view.url}}" alt="">
+                                    <p>FRONT RIGHT HAND SIDE VIEW</p>
                             </div>
                             <div class="img-wrapper">
-                                <img src="{{v_report.left_hand_eside_view.url}}" alt="">
-                                <p>LEFT HAND SIDE VIEW</p>
+                                <img src="{{v_report.front_left_hand_eside_view.url}}" alt="">
+                                <p> FRONT LEFT HAND SIDE VIEW</p>
+                            </div>
+                            <div class="img-wrapper">
+                                <img src="{{v_report.back_right_hand_side_view.url}}" alt="">
+                                    <p>BACK RIGHT HAND SIDE VIEW</p>
+                            </div>
+                            <div class="img-wrapper">
+                                <img src="{{v_report.back_left_hand_side_view.url}}" alt="">
+                                <p>BACK LEFT HAND SIDE VIEW</p>
                             </div>
                             <div class="img-wrapper">
                                 <img src="{{v_report.engine_compartment.url}}" alt="">
@@ -442,7 +450,7 @@
     <!-- <a href="#" id="verify-payment" class="btn btn-primary" onclick="verifyPayment({{ prospect.pk }});">Verify Payment</a> -->
     <!-- <a href="#" id="verify-payment" class="btn btn-primary" onclick="verifyPayment();">Verify Payment</a> -->
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#paymentVerificationModal">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#paymentVerificationModal" style="margin-right: 30px;">
         VERIFY PAYMENT
     </button>
     <!-- Modal -->
@@ -561,18 +569,18 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="paymentVerificationModalLabel">Verify the Payment</h5>
+                <h5 class="modal-title" id="paymentVerificationModalLabel">VERIFY PAYMENT</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="padding: 0.5rem 1rem;border: none; outline: transparent;background-color: black;color: white; font-size: 12px;">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body" style="justify-content: stretch; display: grid;">
-                <form id="paymentVerificationForm justify-content-stretch">
+            <div class="modal-body" style="display: grid; justify-content: stretch;">
+                <form id="paymentVerificationForm">
                     <div class="form-group">
                         <label for="paymentIdInput">ENTER PAYMENT ID</label>
-                        <input style="justify-content: stretch;" type="number" class="form-control" id="paymentIdInput" placeholder="Payment ID" required>
+                        <input style="width: 100%;" type="number" class="form-control" id="paymentIdInput" placeholder="Payment ID" required>
                     </div>
-                    <button style="margin-top: 20px;" type="button" class="btn btn-primary" id="verify_payment_cta">VERIFY</button>
+                    <button style="margin-top: 20px; " type="button" class="btn btn-primary" id="verify_payment_cta" >VERIFY</button>
                 </form>
             </div>
         </div>
@@ -586,7 +594,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="assignValuerModalLabel">REASSIGN VALUER</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="padding: 0.5rem 1rem;border: none; outline: transparent;background-color: black;color: white; font-size: 12px;">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -595,15 +603,13 @@
                     {% csrf_token %}
                     <div class="form-group">
                         <label for="valuerSelect">SELECT VALUER</label>
-                        <select class="form-control" id="valuerSelect" name="valuer" style="margin: 20px 0;">
-                            
+                        <select class="form-control" id="valuerSelect" name="valuer">
                             {% for valuer in valuers %}
-                                {{valuer}}
                                 <option value="{{ valuer.id }}">{{ valuer.name }}</option>
                             {% endfor %}
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary">ASSIGN</button>
+                    <button type="submit" class="btn btn-primary" style="margin-top: 20px">ASSIGN</button>
                 </form>
             </div>
         </div>
@@ -670,17 +676,22 @@
                         body: JSON.stringify({ payment_id: userInput }),
                     })
                     .then((response) => {
-                        console.log(response);  // Log response for debugging
+                        console.log(response, 'response');  // Log response for debugging
                         if (response.ok) {
                             // alert("Payment ID verified successfully.");
                             $('#paymentVerificationModal').modal('hide');  // Close the modal
                             location.reload();  // Reload the page to reflect changes
                         } else {
-                            alert("Invalid Payment ID. Please try again");
+                            // alert("Invalid Payment ID. Please try again");
+                            return response.json().then((data) => {
+                                console.error("Error Response:", data);
+                                alert(data.error || "An unexpected error occurred.");
+                            });
                         }
                     })
                     .catch((error) => {
                         console.error("Error:", error);
+                        
                     });
                 });
             }

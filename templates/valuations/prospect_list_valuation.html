@@ -7,20 +7,24 @@
 <table class="table">
     <thead>
         <tr>
-            <th>Name</th>
-            <th>Gender</th>
-            <th>Phone Number</th>
-            <th>Status</th>
-            <th>Actions</th>
+            <th style="text-align: center;">Name</th>
+            <th style="text-align: center;">Gender</th>
+            <th style="text-align: center;">Phone Number</th>
+            <th style="text-align: center;">company</th>
+            <th style="text-align: center;">Valuer Assigned</th>
+            <th style="text-align: center;">Status</th>
+            <th style="text-align: center;">Actions</th>
         </tr>
     </thead>
-    <tbody>
+    <tbody style="text-align: center;">
         {% for prospect in prospects %} {% if prospect.status == 'Valuation' %}
-        <tr>
+        <tr style="text-align: center;" >
             <td>{{ prospect.name }}</td>
             <td>{{ prospect.gender }}</td>
             <td>{{ prospect.phone_number }}</td>
-            <td>{{ prospect.status }}</td>
+            <td style="text-align: center;">{{ prospect.company }}</td>
+            <td>{{ prospect.valuer_assigned }}</td>
+            <td style="color: blueviolet;">{{ prospect.status }}</td>
             <td>
                 <a
                     href="{% url 'prospect_detail' prospect.slug %}"

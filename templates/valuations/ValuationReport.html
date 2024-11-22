@@ -47,7 +47,7 @@
     <div id="printreport" class="card mb-3">
 
         <div style="align-content: center; justify-items: center;">
-            <center><img src="{{ user.active_company.logo.url }}" alt=""></center>
+            <center><img src="{{ user.company.logo.url }}" alt=""></center>
         </div>
 
         <div class="card-header">
@@ -62,12 +62,12 @@
 
                 <div style="display: flex; justify-content: center;">
                     <div class="img-wrapper">
-                        <img src="{{evaluation_report.right_hand_side_view.url}}" alt="">
-                        <p>RIGHT HAND SIDE VIEW</p>
+                        <img src="{{evaluation_report.front_right_hand_side_view.url}}" alt="">
+                        <p>FRONT RIGHT HAND SIDE VIEW</p>
                     </div>
                     <div class="img-wrapper">
-                        <img src="{{evaluation_report.left_hand_eside_view.url}}" alt="">
-                        <p>LEFT HAND SIDE VIEW</p>
+                        <img src="{{evaluation_report.back_left_hand_side_view.url}}" alt="">
+                        <p>BACK LEFT HAND SIDE VIEW</p>
                     </div>
                 </div>
                 <strong>PLACE OF INSPECTION: {{ evaluation_report.place_of_inspection}}</strong> <br><br>
@@ -301,18 +301,18 @@
                 <p><strong>RECOMMENDATION REMARKS BY VALUERS: <br></strong></p>
                 <p>{{evaluation_report.recommendation}}</p>
 
-                <p><strong>Yours Faithfully,<br> <i>For: </i> {{user.active_company.name}}</strong></p>
+                <p><strong>Yours Faithfully,<br> <i>For: </i> {{user.company.name}}</strong></p>
 
                 <p>PICTORIAL VIEW</p>
 
                 <div class="report-imgs">
                     <div class="img-wrapper">
-                        <img src="{{evaluation_report.right_hand_side_view.url}}" alt="">
-                        <p>RIGHT HAND SIDE VIEW</p>
+                        <img src="{{evaluation_report.front_left_hand_eside_view.url}}" alt="">
+                        <p>LEFT HAND SIDE VIEW</p>
                     </div>
                     <div class="img-wrapper">
-                        <img src="{{evaluation_report.left_hand_eside_view.url}}" alt="">
-                        <p>LEFT HAND SIDE VIEW</p>
+                        <img src="{{evaluation_report.back_right_hand_side_view.url}}" alt="">
+                        <p>RIGHT HAND SIDE VIEW</p>
                     </div>
                     <div class="img-wrapper">
                         <img src="{{evaluation_report.engine_compartment.url}}" alt="">

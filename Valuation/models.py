@@ -229,8 +229,10 @@ it for the purpose of lending against it.
 
 """)
 
-    right_hand_side_view= models.ImageField(upload_to='evaluation_report/right_hand_side_view/')
-    left_hand_eside_view= models.ImageField(upload_to='evaluation_report/left_hand_side_view/')
+    front_right_hand_side_view= models.ImageField(upload_to='evaluation_report/right_hand_side_view/')
+    front_left_hand_eside_view= models.ImageField(upload_to='evaluation_report/left_hand_side_view/')
+    back_right_hand_side_view= models.ImageField(upload_to='evaluation_report/right_hand_side_view/', null=True, blank=True)
+    back_left_hand_side_view= models.ImageField(upload_to='evaluation_report/right_hand_side_view/', null=True, blank=True)
     engine_compartment= models.ImageField(upload_to='evaluation_report/engine_compartment/')
     upholstery= models.ImageField(upload_to='evaluation_report/upholstery/')
     vehicle_id_plate= models.ImageField(upload_to='evaluation_report/vehicle_id_plate/')
