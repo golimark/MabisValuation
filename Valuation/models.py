@@ -98,7 +98,7 @@ class VehicleEvaluationReport(models.Model):
         ('IN VERY BAD SHAPE','IN VERY BAD SHAPE'),
         ('IN BAD SHAPE','IN BAD SHAPE'),
         ('IN GOOD SHAPE','IN GOOD SHAPE'),
-        ('IN FAIR SHAPE', 'IN FAIR SHAPE'),
+        ('IN FAIR SHAPE','IN FAIR SHAPE'),
         ('IN VERY GOOD SHAPE','IN VERY GOOD SHAPE'),
         ('IN EXCELLENT SHAPE','IN EXCELLENT SHAPE'),
         ('IN PERFECT SHAPE','IN PERFECT SHAPE'),
