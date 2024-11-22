@@ -1434,8 +1434,10 @@ def PipelineView(request, slug):
                     files = {}
                     try:
                         file_fields = [
-                            "right_hand_side_view",
-                            "left_hand_eside_view",
+                            "front_right_hand_side_view",
+                            "front_left_hand_eside_view",
+                            "back_right_hand_side_view",
+                            "back_left_hand_side_view",
                             "engine_compartment",
                             "upholstery",
                             "vehicle_id_plate",
