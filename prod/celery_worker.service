@@ -3,10 +3,10 @@ Description=celery worker service for MABiS
 After=network.target
 
 [Service]
-user=baifam-admin
+user=mabisbiknboss
 Group=www-data
-WorkingDirectory=/home/baifam-admin/MABiS
-ExecStart=/home/baifam-admin/MABiS/venv/bin/celery -A loanMS worker --loglevel=info
+WorkingDirectory=/home/mabisbiknboss/MabisValuation
+ExecStart=/home/mabisbiknboss/MabisValuation/venv/bin/celery -A Valuaionsystem worker --loglevel=info
 Restart=always
 
 [Install]

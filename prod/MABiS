@@ -10,18 +10,18 @@ server {
     client_max_body_size 100M;
 
     location /static/ {
-        alias /home/baifam-admin/MABiS/staticfiles/;
+        alias /home/mabisbiknboss/MabisValuation/staticfiles/;
     }
 
     location /media/ {
-        root /home/baifam-admin/MABiS;
+        root /home/mabisbiknboss/MabisValuation;
     }
 
     location / {
             proxy_set_header Host $host;
             proxy_set_header X-Real-IP $remote_addr;
             proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-            proxy_pass http://unix:/home/baifam-admin/MABiS/mabis.sock;
+            proxy_pass http://unix:/home/mabisbiknboss/MabisValuation/mabisvaluation.sock;
     }
 
     location /ws/ {

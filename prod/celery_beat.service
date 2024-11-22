@@ -1,12 +1,12 @@
 [Unit]
-Description=celery beat service for MABiS
+Description=celery beat service for MabisValuation
 After=network.target
 
 [Service]
-user=baifam-admin
+user=mabisbiknboss
 Group=www-data
-WorkingDirectory=/home/baifam-admin/MABiS
-ExecStart=/home/baifam-admin/MABiS/venv/bin/celery -A loanMS beat --loglevel=info
+WorkingDirectory=/home/mabisbiknbos/MabisValuation
+ExecStart=/home/mabisbiknboss/MabisValuation/venv/bin/celery -A Valuaionsystem beat --loglevel=info
 Restart=always
 
 [Install]

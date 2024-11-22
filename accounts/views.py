@@ -219,6 +219,7 @@ def dashboard_view(request):
         form = ActiveLoanCompanyForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
+            messages.add_message(request, messages.SUCCESS, f"Successfully changed current active loan company to {form.instance.active_company}.")
         else:
             messages.error(request, "Could not modify user details. Try again.")
 

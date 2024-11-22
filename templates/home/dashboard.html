@@ -52,7 +52,7 @@
         </div> -->
         {% if 'can_perform_admin_functions' in request.user.permissions %}
         <div class="button-group">
-            <a href="{% url 'create_company' %}" class="btn btn-success">Create Loan Company</a>
+            <a href="{% url 'create_company' %}" class="btn btn-success" style="margin-right: 30px;">Create Loan Company</a>
             <a href="{% url 'company_list' %}" class="btn btn-info">View Available Loan Companies</a>
         </div>
         {% endif %}
@@ -62,7 +62,7 @@
                 {% csrf_token %}
                 
                 <!-- Input fields with simplified styling -->
-                <input type="text" class="form-control" placeholder="Current Loan Company: {{ request.user.company }}" disabled />
+                <input type="text" class="form-control" placeholder="Current Loan Company: {{ request.user.active_company }}" disabled />
         
                 <!-- Dropdown field for selecting a new company -->
                 {{ form.as_p }}  <!-- Assuming 'company' is the field name in the form -->
