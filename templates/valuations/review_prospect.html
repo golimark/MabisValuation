@@ -1,12 +1,14 @@
 {% extends 'home/base.html' %} {% block title %}Failed Prospects{% endblock %}
 {% block content %}
-<h1>Review Prospects</h1>
+<h1>Prospects in Review</h1>
 <table class="table table-striped">
     <thead>
         <tr>
             <th>Name</th>
             <th>Gender</th>
             <th>Phone Number</th>
+            <th>Company</th>
+            <th>Valuer Assigned</th>
             <th>Status</th>
             <th>Actions</th>
         </tr>
@@ -17,12 +19,14 @@
             <td>{{ prospect.name }}</td>
             <td>{{ prospect.gender }}</td>
             <td>{{ prospect.phone_number }}</td>
+            <td>{{ prospect.company }}</td>
+            <td>{{prospect.valuer_assigned}}</td>
             <td>{{ prospect.status }}</td>
             <td>
                 <a
                     href="{% url 'valuation_prospect_detail' prospect.slug %}"
                     class="btn btn-success"
-                    ><i class="fas fa-eye"></i>View</a
+                    ><i class="fas fa-eye"></i>  View</a
                 >
             </td>
         </tr>
