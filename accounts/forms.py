@@ -56,7 +56,7 @@ class UserUpdateForm(forms.ModelForm):
 
         if user:
             self.fields['role'].queryset = Role.objects.filter(company=user.company)
-            self.fields['company'].queryset = user.company
+            self.fields['company'].initial = user.company
 
     def add_password_button(self):
         return mark_safe('<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#passwordChangeModal">Change Password</button>')
