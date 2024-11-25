@@ -678,6 +678,11 @@ class CreateCreateView(LoginRequiredMixin, View):
                     reverse('reset_password', kwargs={'uidb64': uid, 'token': token})
                 )
 
+                
+                ## construct the reset password link in production. For loro, bdm and subik.
+                # base_url_with_port = f"{request.scheme}://{request.get_host().split(':')[0]}:9191"
+                # change_password_url = base_url_with_port + reverse('reset_password', kwargs={'uidb64': uid, 'token': token})
+
                 email = EmailMessage(
                     "Account Created",
                     f"Your account has been created successfully. Please log in to continue.\n"
