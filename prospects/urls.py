@@ -37,6 +37,7 @@ urlpatterns = [
     path('valuate/<str:slug>/', views.prospect_in_valuation, name='valuate_prospect'),
     path('valuation-set/<str:slug>/', views.set_valuation, name='set_valuation'),
     path('add-valuation/<str:slug>/', views.add_valuation_report_details, name='create_valuation_report'),
+    path('add-another-valuation/<str:slug>/', views.add_another_valuation_report_details, name='create_another_valuation_report'),
     path('view-valuation/<str:slug>/', views.view_valuation_report, name='valuation_report'),
     path('submit-report/<str:slug>/', views.submit_report, name='submit_report'),
 

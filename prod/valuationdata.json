@@ -1,0 +1,368 @@
+[
+{
+    "model": "accounts.loancompany",
+    "pk": 1,
+    "fields": {
+        "name": "Subik Finance Ltd",
+        "api": "http://192.168.137.24:8000/api",
+        "api_key": null,
+        "created_at": "2024-11-18T08:18:02.903Z"
+    }
+},
+{
+    "model": "accounts.loancompany",
+    "pk": 2,
+    "fields": {
+        "name": "loro credit limited",
+        "api": "http://192.168.137.24:8000/api",
+        "api_key": null,
+        "created_at": "2024-11-18T12:18:40.628Z"
+    }
+},
+{
+    "model": "accounts.loancompany",
+    "pk": 3,
+    "fields": {
+        "name": "mabis test",
+        "api": "http://mabistest.baifamgroup.co.ug:9090/api",
+        "api_key": null,
+        "created_at": "2024-11-19T07:22:26.035Z"
+    }
+},
+{
+    "model": "accounts.loancompany",
+    "pk": 4,
+    "fields": {
+        "name": "mabis me",
+        "api": "http://192.168.20.83:8000/api",
+        "api_key": null,
+        "created_at": "2024-11-19T16:47:37.922Z"
+    }
+},
+{
+    "model": "accounts.company",
+    "pk": 1,
+    "fields": {
+        "name": "Bik and Bos",
+        "logo": "company_logo/bik.jfif",
+        "address": "Ntinda",
+        "code": "0000",
+        "slug": "bik-and-bos7d218760-0439-40c5-a1d7-604d19ce20b0",
+        "created_at": "2024-11-18T08:19:31.354Z",
+        "updated_at": "2024-11-19T06:44:33.861Z"
+    }
+},
+{
+    "model": "accounts.permission",
+    "pk": 1,
+    "fields": {
+        "name": "can be valuers",
+        "code": "can_be_valuers",
+        "description": "User can be valuers",
+        "created_at": "2024-11-18T08:33:15.047Z",
+        "updated_at": "2024-11-18T08:33:15.047Z"
+    }
+},
+{
+    "model": "accounts.permission",
+    "pk": 2,
+    "fields": {
+        "name": "Can be supervisor",
+        "code": "can_be_supervisor",
+        "description": "User Can be supervisor",
+        "created_at": "2024-11-18T08:33:24.510Z",
+        "updated_at": "2024-11-18T08:33:24.510Z"
+    }
+},
+{
+    "model": "accounts.permission",
+    "pk": 3,
+    "fields": {
+        "name": "can edit valuation details",
+        "code": "can_edit_valuation_details",
+        "description": "User can edit valuation details",
+        "created_at": "2024-11-18T08:33:59.731Z",
+        "updated_at": "2024-11-18T08:33:59.731Z"
+    }
+},
+{
+    "model": "accounts.permission",
+    "pk": 4,
+    "fields": {
+        "name": "can view valuation requests",
+        "code": "can_view_valuation_requests",
+        "description": "User can view valuation requests",
+        "created_at": "2024-11-18T08:34:24.117Z",
+        "updated_at": "2024-11-18T08:34:24.117Z"
+    }
+},
+{
+    "model": "accounts.permission",
+    "pk": 5,
+    "fields": {
+        "name": "can complete asset valuation details",
+        "code": "can_complete_asset_valuation_details",
+        "description": "User can complete asset valuation details",
+        "created_at": "2024-11-18T08:34:55.729Z",
+        "updated_at": "2024-11-18T08:34:55.729Z"
+    }
+},
+{
+    "model": "accounts.permission",
+    "pk": 6,
+    "fields": {
+        "name": "can verify payment as valuer",
+        "code": "can_verify_payment_as_valuer",
+        "description": "User can verify payment as valuer",
+        "created_at": "2024-11-18T08:36:41.859Z",
+        "updated_at": "2024-11-18T08:36:41.859Z"
+    }
+},
+{
+    "model": "accounts.permission",
+    "pk": 7,
+    "fields": {
+        "name": "can verify payement",
+        "code": "can_verify_payement",
+        "description": "User can verify payement",
+        "created_at": "2024-11-18T08:36:55.145Z",
+        "updated_at": "2024-11-18T08:36:55.145Z"
+    }
+},
+{
+    "model": "accounts.permission",
+    "pk": 8,
+    "fields": {
+        "name": "can view dashboard",
+        "code": "can_view_dashboard",
+        "description": "User can view dashboard",
+        "created_at": "2024-11-18T08:37:39.298Z",
+        "updated_at": "2024-11-18T08:37:39.298Z"
+    }
+},
+{
+    "model": "accounts.permission",
+    "pk": 9,
+    "fields": {
+        "name": "can view loan origination",
+        "code": "can_view_loan_origination",
+        "description": "User can view loan origination",
+        "created_at": "2024-11-18T08:40:17.267Z",
+        "updated_at": "2024-11-18T08:40:17.267Z"
+    }
+},
+{
+    "model": "accounts.permission",
+    "pk": 10,
+    "fields": {
+        "name": "Can perform admin functions",
+        "code": "can_perform_admin_functions",
+        "description": "User Can perform admin functions",
+        "created_at": "2024-11-19T06:16:02.334Z",
+        "updated_at": "2024-11-19T06:16:02.334Z"
+    }
+},
+{
+    "model": "accounts.role",
+    "pk": 1,
+    "fields": {
+        "name": "admin",
+        "company": 1,
+        "created_at": "2024-11-18T08:37:25.539Z",
+        "updated_at": "2024-11-19T06:16:28.396Z",
+        "slug": "admin27d54b61-fc88-40f2-be7b-811ee50cb514",
+        "permissions": [
+            10,
+            9,
+            8,
+            7,
+            6,
+            5,
+            4,
+            3,
+            2,
+            1
+        ]
+    }
+},
+{
+    "model": "accounts.role",
+    "pk": 2,
+    "fields": {
+        "name": "valuer",
+        "company": 1,
+        "created_at": "2024-11-19T06:49:55.883Z",
+        "updated_at": "2024-11-20T17:11:31.004Z",
+        "slug": "valuer35e23944-f844-4832-8031-713adb26e225",
+        "permissions": [
+            9,
+            8,
+            5,
+            4,
+            1
+        ]
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$870000$5Mkcc1gCZjOtLCeZ9Ls3Pd$+sK/B8dKNE+00A2g8k3feOgv964pS0cM2KF/MaX2VDk=",
+        "last_login": "2024-11-26T16:27:12.802Z",
+        "is_superuser": true,
+        "username": "bicadmin",
+        "first_name": "",
+        "last_name": "",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2024-11-18T07:58:24Z",
+        "email": "bicadmin@gmail.com",
+        "company": 1,
+        "active_company": 4,
+        "updated_on": "2024-11-26T16:51:32.294Z",
+        "role": 1,
+        "status": "Approved",
+        "image": "accounts/user/male_profile.jfif",
+        "slug": "3fb13cb4-653e-404e-93cc-dc5517ff05b1",
+        "created_at": "2024-11-18T07:58:25.508Z",
+        "updated_at": "2024-11-26T16:51:32.294Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 2,
+    "fields": {
+        "password": "pbkdf2_sha256$870000$SowfpX7toc0L14RA29upfL$dY/xny0+LPccMUdKaRMvV9S7D3K9UM5LLXGsvnu53/M=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "test",
+        "first_name": "test",
+        "last_name": "user",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-11-19T06:52:57.942Z",
+        "email": "jonathan.elayu@baifamgroup.co.ug",
+        "company": 1,
+        "active_company": null,
+        "updated_on": "2024-11-19T06:53:02.177Z",
+        "role": 1,
+        "status": "Approved",
+        "image": "accounts/user/male_profile_Rz5yR00.jfif",
+        "slug": "test-user-2c438c4c-f729-4d91-8f51-61da0e62186e",
+        "created_at": "2024-11-19T06:53:02.182Z",
+        "updated_at": "2024-11-19T06:53:02.182Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 3,
+    "fields": {
+        "password": "pbkdf2_sha256$870000$LcVnhM8tWTpB0GBxStUUn8$N7TcOqTvSSboCPCMN7ZRaHulFd4xjW8oeBCOqZH8pAc=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "testtest",
+        "first_name": "you",
+        "last_name": "user",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-11-19T06:55:39.617Z",
+        "email": "jonathan.elayu@baifamgroup.co.ug",
+        "company": 1,
+        "active_company": null,
+        "updated_on": "2024-11-19T06:55:42.076Z",
+        "role": 1,
+        "status": "Approved",
+        "image": "accounts/user/male_profile_Nn9G3lo.jfif",
+        "slug": "you-user-a1923de9-7036-4643-81e8-6ebb735c8e9a",
+        "created_at": "2024-11-19T06:55:42.085Z",
+        "updated_at": "2024-11-19T06:55:42.085Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 4,
+    "fields": {
+        "password": "pbkdf2_sha256$870000$IAwn6fvZ36okLGGhczjLk9$Yk9sCqRKjOjsKdoJsjssItsYaQjkpTLDrTwAHwUpTJc=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "testtesttest",
+        "first_name": "you",
+        "last_name": "user",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-11-19T06:57:25.203Z",
+        "email": "jonathan.elayu@baifamgroup.co.ug",
+        "company": 1,
+        "active_company": null,
+        "updated_on": "2024-11-19T06:57:28.449Z",
+        "role": 1,
+        "status": "Approved",
+        "image": "accounts/user/male_profile_aCYClTb.jfif",
+        "slug": "you-user-c0b82d96-9058-48a8-ad54-c66dc9042682",
+        "created_at": "2024-11-19T06:57:28.449Z",
+        "updated_at": "2024-11-19T06:57:28.449Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 5,
+    "fields": {
+        "password": "pbkdf2_sha256$870000$kKDDjW4hsFz8lakOut7Jf2$wtHE8EwhgeZTtwcBX5unkUd0drI9Jj07ASYAECGlIfU=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "macboy",
+        "first_name": "you",
+        "last_name": "user",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-11-19T07:07:47Z",
+        "email": "jonathan.elayu@baifamgroup.co.ug",
+        "company": 1,
+        "active_company": 3,
+        "updated_on": "2024-11-19T10:58:17.495Z",
+        "role": 2,
+        "status": "Approved",
+        "image": "accounts/user/male_profile_qWieWuT.jfif",
+        "slug": "you-user-6e97a996-bce3-4ee5-ac12-cf072562ace3",
+        "created_at": "2024-11-19T07:07:50.183Z",
+        "updated_at": "2024-11-19T10:58:17.495Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 6,
+    "fields": {
+        "password": "pbkdf2_sha256$870000$MP4zOnWIS2goszWXbZBlUX$GZnom9k1c8eWhFDrtpP0oW7Lth3g9bz6gPNmoyKBRa8=",
+        "last_login": "2024-11-20T17:11:39.360Z",
+        "is_superuser": false,
+        "username": "valuer",
+        "first_name": "valuer",
+        "last_name": "valuer",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-11-20T17:09:54.118Z",
+        "email": "jonathan.elayu@baifamgroup.co.ug",
+        "company": 1,
+        "active_company": 4,
+        "updated_on": "2024-11-20T17:11:56.213Z",
+        "role": 2,
+        "status": "Approved",
+        "image": "accounts/user/bik_pHlugNM.jfif",
+        "slug": "valuer-valuer-08ff027f-78d6-4103-888c-742925201a4e",
+        "created_at": "2024-11-20T17:09:54.956Z",
+        "updated_at": "2024-11-20T17:11:56.213Z",
+        "groups": [],
+        "user_permissions": []
+    }
+}
+]

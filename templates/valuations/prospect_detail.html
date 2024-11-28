@@ -521,6 +521,9 @@
         {% endif %}
         {% if prospect.status == 'Valuation' %}
         <a style="color: white; background-color: #0d6efd;" href="{% url 'create_valuation_report' prospect.slug %}" class="btn btn-info"><i class="fa fa-add"></i> ASSET VALUATION</a>
+       
+        <a style="color: white; background-color: #0d6efd;" href="{% url 'create_another_valuation_report' prospect.slug %}" class="btn btn-info"><i class="fa fa-add"></i> NEW REPORT</a>
+
       {% endif %}
 
         </div>

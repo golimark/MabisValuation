@@ -1007,6 +1007,130 @@ def add_valuation_report_details(request, slug):
 
     return render(request, 'valuations/evaluation_report_form.html', context=context)
 
+@login_required
+def add_another_valuation_report_details(request, slug):
+    api_url = f'{request.user.active_company.api}/prospects/{slug}/'
+    prospect = Prospect.objects.filter(slug=slug).first()
+    context = {
+        "page_name": "valuation",
+        'prospect': prospect,
+        "sub_page_name" : "valuation_requests",
+    } 
+
+    if request.method == 'POST':
+        prospect = Prospect.objects.filter(slug=slug).first()
+        # Vehicles
+        v_reports = VehicleEvaluationReport.objects.filter(vehicle__prospect=prospect)
+        # if not v_reports:
+        form = VehicleEvaluationReportForm(request.POST, request.FILES, prospect=prospect)
+        if form.is_valid():
+            form = form.save(commit=False)
+            form.prospect = prospect
+            # prospect.status = 'Valuation Supervisor'
+            
+            form.save()
+
+            # fields = VehicleEvaluationReport.objects.filter(vehicle__prospect=prospect).first()
+            # fields = v_reports.first()
+            # fields_data = {}
+            # Save market_value and forced_sale to the fields JSONField as specified
+            form.fields = {
+                "market_value": form.market_value,
+                "forced_sale": form.forced_sale
+            }
+            form.save()  # Now save the changes to the fields JSONField
+
+
+            # update upstream prospect status
+            response = requests.patch(api_url, data={
+                "status" : 'Valuation Supervisor',
+                "valuation_submitted_on" : datetime.now(),
+                "valuation_submitted_by" : request.user.username,
+            })
+            if response.status_code >= 200 and response.status_code <= 399:
+                prospect.status = 'Valuation Supervisor'
+                prospect.valuation_submitted_on = datetime.now()
+                prospect.valuation_submitted_by = request.user
+                prospect.save()
+
+            # Redirect to the 'valuation_prospect_detail' page
+            messages.add_message(request, messages.SUCCESS, "Asset Valuation submitted successfully")
+            return redirect('valuation_prospect_detail', slug=slug)
+        else:
+            messages.add_message(request, messages.ERROR, "ERROR MODIFYING RECORDS. TRY AGAIN!!")
+    # else:
+    #     # save edited data
+    #     submitted_report_id = request.GET.get("form_id")
+    #     if submitted_report_id:
+    #         report = VehicleEvaluationReport.objects.filter(pk=submitted_report_id)
+    #         # save updated data
+    #         if not report:
+    #             messages.add_message(request, messages.ERROR, "REPORT NOT FOUND. TRY AGAIN!")
+    #         else:
+    #             form = VehicleEvaluationReportForm(request.POST, request.FILES, instance=report.first(), prospect=prospect,
+    #                 initial={
+    #             "date_of_registration": report.first().date_of_registration,
+    #             "date_of_valuation": report.first().date_of_valuation,
+    #             "valuation_report_date": report.first().valuation_report_date,
+    #         })
+    #             if form.is_valid():
+    #                 form = form.save(commit=False)
+    #                 form.prospect = prospect
+    #                 # form.prospect.status = 'Valuation Supervisor'
+    #                 form.save()
+    #                 # prospect.status = 'Review'
+
+    #                 # update upstream prospect status
+    #                 response = requests.patch(api_url, data={
+    #                     "status" : prospect.status,
+    #                     "valuation_submitted_on" : datetime.now(),
+    #                     "valuation_submitted_by" : request.user.username,
+    #                 })
+    #                 if response.status_code >= 200 and response.status_code <= 399:
+    #                     prospect.status = prospect.status
+    #                     prospect.valuation_submitted_on = datetime.now()
+    #                     prospect.valuation_submitted_by = request.user
+
+    #                 messages.add_message(request, messages.SUCCESS, "RECORDS MODIFIED SUCCESSFULLY")
+
+    #     # redirect to details page if form id is found or not
+    #     return redirect(reverse_lazy("valuation_prospect_detail", args=[prospect.slug]))
+
+    else:
+        prospect = Prospect.objects.filter(slug=slug).first()
+
+        # v_reports = VehicleEvaluationReport.objects.filter(vehicle__prospect=prospect)
+        # if v_reports.exists():
+        #     # prospect.status = 'Valuation Supervisor' --> don't put prospect status here.
+
+        #     context["v_reports"] = [
+        #         {"form": VehicleEvaluationReportForm(
+        #             instance=report,
+        #             prospect=prospect,
+        #         initial={
+        #             "date_of_registration": report.date_of_registration,
+        #             "date_of_valuation": report.date_of_valuation,
+        #             "valuation_report_date": report.valuation_report_date,
+        #         }
+        #         ), 
+        #         "report": report,
+        #         } 
+        #         for report in v_reports
+        #         ]
+        # else:
+        context["create_vehicle_report_form"] = VehicleEvaluationReportForm(
+            prospect=prospect,
+                # initial={
+                #     "date_of_registration": v_reports.date_of_registration,
+                #     "date_of_valuation": v_reports.date_of_valuation,
+                #     "valuation_report_date": v_reports.valuation_report_date,
+                # }
+            )
+
+
+    return render(request, 'valuations/another_evaluation_report_form.html', context=context)
+
+
 
 # View for viewing the evaluation report
 @login_required
