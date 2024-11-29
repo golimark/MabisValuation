@@ -156,6 +156,7 @@
         </div>
     </div>
 
+
     <div class="card mb-3">
         <div class="card-header with-minimizer">
                 <p class="">FILES</p>
@@ -442,6 +443,12 @@
         {% endfor %}
     {%endif%}
 
+    {% if inspection_reports %}
+    {% for i_report in inspection_reports %}
+        <p>{{i_report.vehicle}}</p>
+    {%endfor%}
+    {%endif%}
+
 
 {% if prospect.status == 'Pending' %}
 <!-- Trigger the modal with a button -->
@@ -544,7 +551,20 @@
             <!-- change status to Pipeline -->
     </div>
 
+
 {%endif%}
+
+{% if prospect.status == 'Inspection' %}
+<a style="color: white; background-color: #0d6efd;" href="{% url 'create_inspection_report' prospect.slug %}" class="btn btn-info"><i class="fa fa-add"></i> INSPECTION FORM</a>
+
+{% if inspection_reports %}
+<form action="{% url 'inspection-pipeline' prospect.slug %}" method="POST">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-success">SUBMIT INSPECTION REPORT</button>
+</form>
+{%endif%}
+
+{% endif %}
 
 <!-- <div class="modal fade" id="paymentVerificationModal" tabindex="-1" role="dialog" aria-labelledby="paymentVerificationModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">

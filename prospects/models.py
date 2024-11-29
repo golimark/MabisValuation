@@ -40,6 +40,7 @@ class Prospect(models.Model):
         ('Valuation', 'Valuation'),
         ('Valuation Supervisor', 'Valuation Supervisor'),
         ('Payment Verified', 'Payment Verified'),
+        ('Inspection', 'Inspection'),
         ('Review', 'Review'),
         ('Pipeline', 'Pipeline'),
         ('Failed', 'Failed'),

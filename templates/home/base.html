@@ -159,6 +159,12 @@
                     <a href="{% url 'get_vehicle_asset_data' %}" class="submenu {% if sub_page_name == 'asset_vehicle_list' %} open active {%endif%}">
                         Vehicle Assets
                     </a>
+
+                    <a
+                        href="{% url 'prospect_inspection' %}"
+                        class="submenu {% if sub_page_name == 'inspection_requests' %} open active {%endif%}"
+                        >Inspection Requests</a
+                    >
                 </div>
                 {%endif%}
             </div>

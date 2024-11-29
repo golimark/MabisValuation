@@ -210,6 +210,45 @@ class VehicleEvaluationReportForm(forms.ModelForm):
             # self.fields['company_valuer'].disabled = True
 
 
+# class VehicleInspectionReportForm(forms.ModelForm):
+#     class Meta:
+#         model = VehicleInspectionReport
+#         exclude = ["client_name", "slug"]
+
+#         def __init__(self, *args, **kwargs):
+#             # prospect = kwargs.pop('prospect', None)
+#             super(VehicleInspectionReportForm, self).__init__(*args, **kwargs)
+
+
+#             # Set date fields with dd/mm/yyyy format
+#             date_field = ['date']
+#             self.fields[date_field].widget = forms.DateInput(
+#                 # format='%d/%m/%Y',
+#                 attrs={'type': 'date', 'placeholder': 'dd/mm/yyyy'}
+#             )
+#                 # self.fields[date_field].input_formats = ['%d/%m/%Y']
+
+class VehicleInspectionReportForm(forms.ModelForm):
+    class Meta:
+        model = VehicleInspectionReport
+        exclude = ["client_name", "slug"]
+
+    def __init__(self, *args, **kwargs):
+        # Remove 'client_name' from kwargs to avoid passing it to the parent class
+        vehicle = kwargs.pop('vehicle', None)
+        client_name = kwargs.pop('client_name', None)
+        super(VehicleInspectionReportForm, self).__init__(*args, **kwargs)
+
+
+        self.fields['vehicle'].initial = VehicleAsset.objects.filter(prospect=client_name).first()
+
+        # Set date fields with 'dd/mm/yyyy' format
+        if 'date' in self.fields:
+            self.fields['date'].widget = forms.DateInput(
+                attrs={'type': 'date', 'placeholder': 'dd/mm/yyyy'}
+            )
+
+
 
 class ValuerRemarksForm(forms.ModelForm):
     class Meta:

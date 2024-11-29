@@ -328,3 +328,41 @@ class LandEvaluationReport(models.Model):
         if not self.slug:
             self.slug = slugify(f"{self.license_plate}{uuid.uuid4()}")[:200]
         super().save(*args, **kwargs)
+
+class VehicleInspectionReport(models.Model):
+    vehicle_reg_number = models.CharField(max_length=50)
+    vehicle = models.ForeignKey(VehicleAsset, on_delete=models.CASCADE)
+    client_name = models.ForeignKey(Prospect, on_delete=models.CASCADE)
+    inspector = models.CharField(max_length=50)
+    location = models.CharField(max_length=50)
+    date = models.DateField()
+    reason_for_inspection = models.CharField()
+    ignition_status = models.CharField()
+    ignition_comment = models.TextField()
+    wind_shield_wipers_status = models.CharField()
+    wind_shield_wipers_comment = models.TextField()
+    headlights_status = models.CharField()
+    headlights_comment = models.TextField()
+    turn_signals_status = models.CharField()
+    turn_signals_comment = models.TextField()
+    brake_lights_status = models.CharField()
+    brake_lights_comment = models.TextField()
+    side_mirrors_status = models.CharField()
+    side_mirrors_comment = models.TextField()
+    horn_status = models.CharField()
+    horn_comment = models.TextField()
+    radio_status = models.CharField()
+    radio_comment = models.TextField()
+    body_condition_status = models.CharField()
+    body_condition_comment = models.TextField()
+    exterior_flashlights_status = models.CharField()
+    exterior_flashlights_comment = models.TextField()
+    windows_status = models.CharField()
+    windows_comment = models.TextField()
+    any_other_abnormalities_status = models.CharField()
+    any_other_abnormalities_comment = models.TextField()
+    remarks = models.TextField()
+
+    def __str__(self):
+        return f"Inspection Report for {self.client_name} ({self.vehicle_reg_number})"
+    

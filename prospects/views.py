@@ -452,6 +452,9 @@ class ValuationProspectDetailView(LoginRequiredMixin, DetailView):
                 # get evaluations
                 context['v_evaluation_reports'] = VehicleEvaluationReport.objects.filter(vehicle__in=vehicle_assets)
 
+                # for inspection report
+                context['inspection_reports'] = VehicleInspectionReport.objects.filter(vehicle__in=vehicle_assets)
+
 
                 # land asset
                 land_assets = LandAsset.objects.filter(prospect=prospect)
@@ -570,6 +573,31 @@ class ProspectValuationView(LoginRequiredMixin, ListView):
 #         self.context["sub_page_name"] =  "valuation_requests"
 #         return render(request, 'valuations/prospect_list_valuation.html', context=self.context)
 
+# View to display prospects with 'Valuation' status
+class InspectionView(LoginRequiredMixin, ListView):
+    model = Prospect
+    template_name = 'valuations/inspection_list.html'
+    context_object_name = 'prospects'
+
+    def get(self, request):
+        context = {}
+        api_url = f'{request.user.active_company.api}/prospects/?status=inspection'
+        try:
+            response = requests.get(api_url)
+            response.raise_for_status()
+            data = response.json()
+            print('\n\n\n data', data)
+            context['prospects'] = data
+        except requests.exceptions.RequestException:
+            messages.error(request, "Unable to fetch prospects")
+
+        # valuer_assigned = request.GET.get('valuer_assigned')
+        # if valuer_assigned:
+        #     context['prospects'] = [prospect for prospect in context['prospects'] if prospect['valuer_assigned'] == valuer_assigned]
+
+        context["page_name"] =  "valuation"
+        context["sub_page_name"] =  "inspection_requests"
+        return render(request, 'valuations/inspection_list.html', context=context)
 
 
 
@@ -1130,6 +1158,137 @@ def add_another_valuation_report_details(request, slug):
 
     return render(request, 'valuations/another_evaluation_report_form.html', context=context)
 
+@login_required
+def add_inspection_report_details(request, slug):
+
+    api_url = f'{request.user.active_company.api}/prospects/{slug}/'
+    if Prospect.objects.filter(slug=slug):
+        prospect = Prospect.objects.filter(slug=slug).first()
+    else:
+        # fetch and save prospect
+        response = requests.get(api_url)
+        response.raise_for_status()
+
+        data = response.json()
+        
+        for prospect in data:
+                prospect['prospect'] = prospect.id
+            
+        data = response.json()
+                    
+        if Prospect.objects.filter(slug = slug):
+            # update saved record to track any changes
+            prospect = Prospect.objects.filter(slug = slug).first()
+            serializer = ApiSerializers.ProspectSerializer(prospect, data=response.json(), partial=True)
+        else:
+            serializer = ApiSerializers.ProspectSerializer(data=response.json())
+
+        if serializer.is_valid():
+            prospect = serializer.save()
+
+        
+    if not prospect:
+        messages.error("Prospect not found")
+        return redirect("prospect_valuation")
+
+    context = {
+        "page_name": "valuation",
+        'prospect': prospect,
+        "sub_page_name" : "valuation_requests",
+    }
+
+    if request.method == 'POST':
+        prospect = Prospect.objects.filter(slug=slug).first()
+        print('prospect', prospect)
+        # Vehicles
+        i_reports = VehicleInspectionReport.objects.filter(vehicle__prospect=prospect)
+        if not i_reports:
+            form = VehicleInspectionReportForm(request.POST, client_name=prospect)
+            if form.is_valid():
+                form = form.save(commit=False)
+                form.client_name = prospect
+                form.save()  # Now save the changes to the fields JSONField
+
+
+                # update upstream prospect status
+                # response = requests.patch(api_url, data={
+                #     "status" : 'Valuation Supervisor',
+                #     "valuation_submitted_on" : datetime.now(),
+                #     "valuation_submitted_by" : request.user.username,
+                # })
+                # if response.status_code >= 200 and response.status_code <= 399:
+                #     prospect.status = 'Valuation Supervisor'
+                #     prospect.valuation_submitted_on = datetime.now()
+                #     prospect.valuation_submitted_by = request.user
+                #     prospect.save()
+
+                # Redirect to the 'valuation_prospect_detail' page
+                messages.add_message(request, messages.SUCCESS, "Asset Valuation submitted successfully")
+                return redirect('valuation_prospect_detail', slug=slug)
+            else:
+                messages.add_message(request, messages.ERROR, "ERROR MODIFYING RECORDS. TRY AGAIN!!")
+        else:
+            # save edited data
+            submitted_report_id = request.GET.get("form_id")
+            if submitted_report_id:
+                report = VehicleInspectionReport.objects.filter(pk=submitted_report_id)
+                # save updated data
+                if not report:
+                    messages.add_message(request, messages.ERROR, "REPORT NOT FOUND. TRY AGAIN!")
+                else:
+                    form = VehicleInspectionReportForm(request.POST,instance=report.first(), client_name=prospect)
+                    if form.is_valid():
+                        form = form.save(commit=False)
+                        form.client_name = prospect
+                        # form.prospect.status = 'Valuation Supervisor'
+                        form.save()
+                        # prospect.status = 'Review'
+
+                        # update upstream prospect status
+                        # response = requests.patch(api_url, data={
+                        #     "status" : prospect.status,
+                        #     "valuation_submitted_on" : datetime.now(),
+                        #     "valuation_submitted_by" : request.user.username,
+                        # })
+                        # if response.status_code >= 200 and response.status_code <= 399:
+                        #     prospect.status = prospect.status
+                        #     prospect.valuation_submitted_on = datetime.now()
+                        #     prospect.valuation_submitted_by = request.user
+
+                        messages.add_message(request, messages.SUCCESS, "RECORDS MODIFIED SUCCESSFULLY")
+
+            # redirect to details page if form id is found or not
+            return redirect(reverse_lazy("valuation_prospect_detail", args=[prospect.slug]))
+
+    else:
+        # prospect = Prospect.objects.filter(slug=slug).first()
+
+        # v_reports = VehicleEvaluationReport.objects.filter(vehicle__prospect=prospect)
+        # if v_reports.exists():
+        #     # prospect.status = 'Valuation Supervisor' --> don't put prospect status here.
+
+        #     context["v_reports"] = [
+        #         {"form": VehicleEvaluationReportForm(
+        #             instance=report,
+        #             prospect=prospect,
+        #         initial={
+        #             "date_of_registration": report.date_of_registration,
+        #             "date_of_valuation": report.date_of_valuation,
+        #             "valuation_report_date": report.valuation_report_date,
+        #         }
+        #         ), 
+        #         "report": report,
+        #         } 
+        #         for report in v_reports
+        #         ]
+        # else:
+        # client_name=prospect
+        context["create_inspection_report_form"] = VehicleInspectionReportForm()
+
+
+    return render(request, 'valuations/inspection_report_form.html', context=context)
+
+
 
 
 # View for viewing the evaluation report
@@ -1616,3 +1775,104 @@ def PipelineView(request, slug):
 
     # For non-POST requests, redirect to valuation detail page
     return redirect(reverse_lazy("valuation_prospect_detail", args=[prospect.slug]))
+
+def InspectionPipeline(request, slug):
+    # Get the prospect object
+    prospect = get_object_or_404(Prospect, slug=slug)
+
+    # Check if the request is a POST request to handle the form submission
+    if request.method == 'POST':
+        # Check for inspection reports
+        i_reports = VehicleInspectionReport.objects.filter(vehicle__prospect=prospect)
+
+        # If this prospect has a inspection report, proceed
+        if i_reports:
+            try:
+                for i_report in i_reports:
+                    print(i_report)
+                    # Fetch the associated vehicle data
+                    vehicle = i_report.vehicle
+                    if not vehicle:
+                        continue  # Skip if no vehicle associated
+
+
+                     # Use external API to fetch the vehicle details
+                    # vehicle_api_url = f"{request.user.active_company.api}/vehicles/"
+                    vehicle_api_url = f'{request.user.active_company.api}/vehicles/?prospect={slug}'
+                    # params = {"chassis_number": vehicle.chassis_number}
+                    response = requests.get(vehicle_api_url)
+                    response.raise_for_status()
+                    # resp_veh = response.json()
+                    
+        
+
+                    if response.status_code != 200:
+                        messages.error(request, "Failed to fetch vehicle data from the external system.")
+                        return redirect(reverse_lazy("valuation_prospect_detail", slug=slug))
+
+                    vehicle_data = response.json()
+                    print('\n\n\n\n', vehicle_data)
+                    external_vehicle_id = vehicle_data[0]['id']
+                    external_prospect_id = vehicle_data[0]['prospect']
+                    print('\n\n\n external_vehicle_id, external_prospect_id', external_vehicle_id, external_prospect_id)
+
+                    print('\n\n\n\n before reaching the if check for vehicle id and prospect id')
+
+                    if not external_vehicle_id or not external_prospect_id:
+                        messages.error(request, "Incomplete vehicle data fetched from the external system.")
+                        return redirect(reverse_lazy("valuation_prospect_detail", args=[prospect.slug]))
+                    
+                    print('\n\n\n\n after reaching the if check for vehicle id and prospect id')
+
+                    # Serialize the vehicle report
+                    serializer = ApiSerializers.VehicleInspectionReportSerializer(i_report)
+                    print('\n\n\n after serializing process')
+
+                    # Modify the data to include the correct vehicle and prospect IDs
+                    modified_data = serializer.data.copy()
+                    print('\n\n\n at modified data stage')
+                    print( f'here hreh hrere {modified_data['vehicle']},  {modified_data['prospect']}')
+                    modified_data['vehicle'] = external_vehicle_id
+                    modified_data['prospect'] = external_prospect_id
+                    print('\n\n\n vehicle_id ---- prospect_id', external_vehicle_id, external_prospect_id)
+
+                    # Prepare the API URL
+                    api_url = f'{request.user.active_company.api}/inspection-reports/'
+
+                    # Post modified data to the external API
+                    response = requests.post(api_url, data=modified_data)
+
+                    # print(response.status_code, response.text)
+
+                    # Update prospect status upstream if successful
+                    prospect_api_url = f'{request.user.active_company.api}/prospects/{slug}/'
+                    prospect_response = requests.patch(
+                        prospect_api_url,
+                        data={
+                            "status": "Pipeline",
+                        },
+                    )
+
+                    # Update local prospect status
+                    if 200 <= prospect_response.status_code <= 399:
+                        prospect.status = "Pipeline"
+                        prospect.save()
+                        vehicle.status = "VALUED"
+                        vehicle.save()
+
+                    
+
+                return redirect(reverse_lazy("prospect_review"))
+
+            except Exception as e:
+                # Log the error and show a message to the user
+                messages.add_message(request, messages.ERROR, f"Error submitting report: {str(e)}")
+                return redirect(reverse_lazy("valuation_prospect_detail", args=[prospect.slug]))
+
+        # No valuation report found
+        messages.add_message(request, messages.ERROR, "NO INSPECTION REPORT FOUND FOR THIS PROSPECT!")
+        return redirect(reverse_lazy("valuation_prospect_detail", args=[prospect.slug]))
+
+    # For non-POST requests, redirect to valuation detail page
+    return redirect(reverse_lazy("valuation_prospect_detail", args=[prospect.slug]))
+

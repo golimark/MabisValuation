@@ -29,6 +29,7 @@ urlpatterns = [
     path('pending-valuation/', ValuationProspectPendingView.as_view(), name='valuation_prospect_pending'),
     path('valuation-details/<str:slug>/', ValuationProspectDetailView.as_view(), name='valuation_prospect_detail'),
     path('valuation/', ProspectValuationView.as_view(), name='prospect_valuation'),
+    path('inspection-requests/', InspectionView.as_view(), name='prospect_inspection'),
     path('review/', ProspectReviewView.as_view(), name='prospect_review'),
     path('supervisor-review/', ProspectSupervisorReviewView.as_view(), name='prospect_supervisor_review'),
     path('decline/<str:slug>/', views.DeclineView, name='decline'),
@@ -37,10 +38,13 @@ urlpatterns = [
     path('valuate/<str:slug>/', views.prospect_in_valuation, name='valuate_prospect'),
     path('valuation-set/<str:slug>/', views.set_valuation, name='set_valuation'),
     path('add-valuation/<str:slug>/', views.add_valuation_report_details, name='create_valuation_report'),
+    path('add-inspection/<str:slug>/', views.add_inspection_report_details, name='create_inspection_report'),
     path('add-another-valuation/<str:slug>/', views.add_another_valuation_report_details, name='create_another_valuation_report'),
     path('view-valuation/<str:slug>/', views.view_valuation_report, name='valuation_report'),
     path('submit-report/<str:slug>/', views.submit_report, name='submit_report'),
 
     path('pipeline/<str:slug>/', views.PipelineView, name='pipeline'),
+
+    path('inspection/<str:slug>/', views.InspectionPipeline, name='inspection-pipeline'),
 
 ]

@@ -18,6 +18,12 @@ class VehicleEvaluationReportSerializer(serializers.ModelSerializer):
         model = VehicleEvaluationReport
         exclude = ["fields"]
 
+class VehicleInspectionReportSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = VehicleInspectionReport
+        fields = "__all__"
+
+
 class LandAssetSerializer(serializers.ModelSerializer):
     class Meta:
         model = LandAsset
