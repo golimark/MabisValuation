@@ -1811,30 +1811,22 @@ def InspectionPipeline(request, slug):
                         return redirect(reverse_lazy("valuation_prospect_detail", slug=slug))
 
                     vehicle_data = response.json()
-                    print('\n\n\n\n', vehicle_data)
                     external_vehicle_id = vehicle_data[0]['id']
                     external_prospect_id = vehicle_data[0]['prospect']
                     print('\n\n\n external_vehicle_id, external_prospect_id', external_vehicle_id, external_prospect_id)
 
-                    print('\n\n\n\n before reaching the if check for vehicle id and prospect id')
-
                     if not external_vehicle_id or not external_prospect_id:
                         messages.error(request, "Incomplete vehicle data fetched from the external system.")
                         return redirect(reverse_lazy("valuation_prospect_detail", args=[prospect.slug]))
-                    
-                    print('\n\n\n\n after reaching the if check for vehicle id and prospect id')
 
                     # Serialize the vehicle report
                     serializer = ApiSerializers.VehicleInspectionReportSerializer(i_report)
-                    print('\n\n\n after serializing process')
 
                     # Modify the data to include the correct vehicle and prospect IDs
                     modified_data = serializer.data.copy()
-                    print('\n\n\n at modified data stage')
-                    print( f'here hreh hrere {modified_data['vehicle']},  {modified_data['prospect']}')
                     modified_data['vehicle'] = external_vehicle_id
-                    modified_data['prospect'] = external_prospect_id
-                    print('\n\n\n vehicle_id ---- prospect_id', external_vehicle_id, external_prospect_id)
+                    modified_data['client_name'] = external_prospect_id
+
 
                     # Prepare the API URL
                     api_url = f'{request.user.active_company.api}/inspection-reports/'
