@@ -34,6 +34,8 @@ class VehicleAsset(models.Model):
     STATUS = [
         ('NOT VALUED', 'NOT VALUED'),
         ('VALUED', 'VALUED'),
+        ('INSPECTION REQUIRED','INSPECTION REQUIRED'),
+        ('INSPECTED', 'INSPECTED'),
         ('IN TRACKING', 'IN TRACKING'),
         ('UNPOCESSED', 'UNPOCESSED'),
         ('REPOSESSED', 'REPOSESSED'),

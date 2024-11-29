@@ -1782,7 +1782,7 @@ def InspectionPipeline(request, slug):
                     if 200 <= prospect_response.status_code <= 399:
                         prospect.status = "Pipeline"
                         prospect.save()
-                        vehicle.status = "VALUED"
+                        vehicle.status = "INSPECTED"
                         vehicle.save()
 
                     
