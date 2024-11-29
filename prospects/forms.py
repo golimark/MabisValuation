@@ -244,9 +244,9 @@ class VehicleInspectionReportForm(forms.ModelForm):
             'remarks'
         ]
 
-    def _init_(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         prospect = kwargs.pop('prospect', None)
-        super(VehicleInspectionReportForm, self)._init_(*args, **kwargs)
+        super(VehicleInspectionReportForm, self).__init__(*args, **kwargs)
 
         if prospect:
             self.fields['vehicle'].queryset = VehicleAsset.objects.filter(prospect=prospect)

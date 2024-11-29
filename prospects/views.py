@@ -450,7 +450,7 @@ class ValuationProspectDetailView(LoginRequiredMixin, DetailView):
 
 
                 # get evaluations
-                context['v_evaluation_reports'] = VehicleEvaluationReport.objects.filter(vehicle__in=vehicle_assets)
+                context['v_evaluation_reports'] = VehicleEvaluationReport.objects.filter(vehicle__in=vehicle_assets).order_by('-created_at')
 
                 # for inspection report
                 context['inspection_reports'] = VehicleInspectionReport.objects.filter(vehicle__in=vehicle_assets)
@@ -925,7 +925,7 @@ def add_valuation_report_details(request, slug):
     if request.method == 'POST':
         prospect = Prospect.objects.filter(slug=slug).first()
         # Vehicles
-        v_reports = VehicleEvaluationReport.objects.filter(vehicle__prospect=prospect)
+        v_reports = VehicleEvaluationReport.objects.filter(vehicle__prospect=prospect).order_by('-created_at')
         if not v_reports:
             form = VehicleEvaluationReportForm(request.POST, request.FILES, prospect=prospect)
             if form.is_valid():
@@ -1292,7 +1292,7 @@ def submit_report(request, slug):
     if vehicle_assets:
         context['vehicle_asset'] = vehicle_assets
         # get evaluations
-        context['v_evaluation_reports'] = VehicleEvaluationReport.objects.filter(vehicle__in=vehicle_assets)
+        context['v_evaluation_reports'] = VehicleEvaluationReport.objects.filter(vehicle__in=vehicle_assets).order_by('-created_at')
 
     # land asset
     land_assets = LandAsset.objects.filter(prospect=prospect)
@@ -1600,7 +1600,7 @@ def PipelineView(request, slug):
     # Check if the request is a POST request to handle the form submission
     if request.method == 'POST':
         # Check for vehicle or land valuation reports
-        v_reports = VehicleEvaluationReport.objects.filter(vehicle__prospect=prospect)
+        v_reports = VehicleEvaluationReport.objects.filter(vehicle__prospect=prospect).order_by('-created_at')
         l_reports = LandEvaluationReport.objects.filter(land__prospect=prospect)
 
         # If this prospect has a valuation report, proceed
