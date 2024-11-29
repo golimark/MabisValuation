@@ -330,9 +330,8 @@ class LandEvaluationReport(models.Model):
         super().save(*args, **kwargs)
 
 class VehicleInspectionReport(models.Model):
-    vehicle_reg_number = models.CharField(max_length=50)
-    vehicle = models.ForeignKey(VehicleAsset, on_delete=models.CASCADE)
-    client_name = models.ForeignKey(Prospect, on_delete=models.CASCADE)
+    vehicle = models.ForeignKey(to=VehicleAsset, on_delete=models.CASCADE)
+    prospect = models.ForeignKey(Prospect, on_delete=models.CASCADE)
     inspector = models.CharField(max_length=50)
     location = models.CharField(max_length=50)
     date = models.DateField()
@@ -363,6 +362,5 @@ class VehicleInspectionReport(models.Model):
     any_other_abnormalities_comment = models.TextField()
     remarks = models.TextField()
 
-    def __str__(self):
-        return f"Inspection Report for {self.client_name} ({self.vehicle_reg_number})"
-    
+    def _str_(self):
+        return f"Inspection Report for {self.prospect} ({self.vehicle})"    
