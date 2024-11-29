@@ -574,21 +574,28 @@ def fetch_vehicle_asset_for_prospect(request):
 def vehicle_detail_view(request, slug):
     # Fetch the vehicle by slug or return a 404 if not found
     vehicle = get_object_or_404(VehicleAsset, slug=slug)
-    v_evaluation_reports = get_object_or_404(VehicleEvaluationReport, vehicle=vehicle.id)
 
+    # Check for the existence of evaluation and inspection reports
+    v_evaluation_reports = VehicleEvaluationReport.objects.filter(vehicle=vehicle).first()
+    v_inspection_reports = VehicleInspectionReport.objects.filter(vehicle=vehicle).first()
 
-    # Context to pass to the template
+    # Initialize context with default values
     context = {
         'vehicle': vehicle,
         'prospect': vehicle.prospect,
-        'v_report': v_evaluation_reports,
         "page_name": "valuation",
         "sub_page_name": "asset_vehicle_list",
     }
 
+    # Add evaluation or inspection reports to the context if they exist
+    if v_evaluation_reports:
+        context['v_report'] = v_evaluation_reports
+
+    if v_inspection_reports:
+        context['inspection_report'] = v_inspection_reports
+
     # Render the template
     return render(request, 'valuations/vehicle_details.html', context)
-
 
 
 

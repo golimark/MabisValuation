@@ -34,6 +34,8 @@ class VehicleAsset(models.Model):
     STATUS = [
         ('NOT VALUED', 'NOT VALUED'),
         ('VALUED', 'VALUED'),
+        ('INSPECTION REQUIRED','INSPECTION REQUIRED'),
+        ('INSPECTED', 'INSPECTED'),
         ('IN TRACKING', 'IN TRACKING'),
         ('UNPOCESSED', 'UNPOCESSED'),
         ('REPOSESSED', 'REPOSESSED'),
@@ -362,5 +364,6 @@ class VehicleInspectionReport(models.Model):
     any_other_abnormalities_comment = models.TextField()
     remarks = models.TextField()
 
-    def _str_(self):
-        return f"Inspection Report for {self.prospect} ({self.vehicle})"    
+    def __str__(self):
+        return f"Inspection Report for {self.prospect} ({self.vehicle})"
+    

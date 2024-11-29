@@ -213,7 +213,7 @@
 
     
 
-        
+            {% if v_report %}
             <div id="print" class="card mb-3">
                 <div class="card-header with-minimizer">
                     <p class="">VEHICLE VALUATION FOR {{ v_report.vehicle.license_plate }}</p>
@@ -269,6 +269,7 @@
                                 {% endif %}
                             </table>
                         </div>
+                        {% if v_report %}
                         <div class="col-md-6">
                             <table class="table">
                                 <tr>
@@ -309,7 +310,8 @@
                                 </tr>
                             </table>
                         </div>
-
+                        {%endif%}
+                        {% if v_report %}
                         <div class="report-imgs">
                             <div class="img-wrapper">
                                 <img src="{{v_report.front_right_hand_side_view.url}}" alt="">
@@ -340,6 +342,7 @@
                                 <p>VEHICLE PLATE</p>
                             </div>
                         </div>
+                        {%endif%}
 
                         <div style="margin-top: 1rem;">
                             <span>effective report summary:</span>
@@ -368,6 +371,8 @@
                     </div>
                 </div>
             </div>
+            {%endif%}
+            {% if v_report %}
             <div class="card mb-3">
                 <div class="card-header with-minimizer">
                     <p class="">VALUATION REMARKS BY VALUER</p>
@@ -430,11 +435,10 @@
                             <p style="margin-top: 1rem; color:blue;">{{ v_report.company_approver_remarks }}</p>
                         </div>
                     </div>
-                    
                 </div>
                 </div>
             </div>
+            {% endif %}
             {%endif%}
-        
         
 {% endblock %}
