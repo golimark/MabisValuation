@@ -231,16 +231,27 @@ class VehicleEvaluationReportForm(forms.ModelForm):
 class VehicleInspectionReportForm(forms.ModelForm):
     class Meta:
         model = VehicleInspectionReport
-        exclude = ["client_name", "slug"]
+        exclude = ["prospect", "slug"]
+        fields = [
+            'vehicle', 'inspector', 'location', 'date', 'reason_for_inspection',
+            'ignition_status', 'ignition_comment', 'wind_shield_wipers_status', 'wind_shield_wipers_comment',
+            'headlights_status', 'headlights_comment', 'turn_signals_status', 'turn_signals_comment',
+            'brake_lights_status', 'brake_lights_comment', 'side_mirrors_status', 'side_mirrors_comment',
+            'horn_status', 'horn_comment', 'radio_status', 'radio_comment',
+            'body_condition_status', 'body_condition_comment', 'exterior_flashlights_status', 'exterior_flashlights_comment',
+            'windows_status', 'windows_comment', 'any_other_abnormalities_status', 'any_other_abnormalities_comment',
+            'remarks'
+        ]
 
     def __init__(self, *args, **kwargs):
-        # Remove 'client_name' from kwargs to avoid passing it to the parent class
-        vehicle = kwargs.pop('vehicle', None)
-        client_name = kwargs.pop('client_name', None)
+        prospect = kwargs.pop('prospect', None)
         super(VehicleInspectionReportForm, self).__init__(*args, **kwargs)
 
-
-        self.fields['vehicle'].initial = VehicleAsset.objects.filter(prospect=client_name).first()
+        if prospect:
+            print('prospect from form is', prospect)
+            self.fields['vehicle'].queryset = VehicleAsset.objects.filter(prospect=prospect)
+            self.fields['vehicle'].initial = VehicleAsset.objects.filter(prospect=prospect).first()
+            self.fields['inspector'].initial = prospect.name
 
         # Set date fields with 'dd/mm/yyyy' format
         if 'date' in self.fields:
