@@ -15,6 +15,7 @@ urlpatterns = [
     path('', ProspectListView.as_view(), name='prospect_list'),
     path('create/', ProspectCreateView.as_view(), name='prospect_create'),
     path('details/<str:slug>', ProspectDetailView.as_view(), name='prospect_detail'),
+    path('prospect-details/<str:slug>', ProspectDetailViewforNewProspects.as_view(), name='prospect_detail_new_prospects'),
     path('pending/', ProspectPendingView.as_view(), name='prospect_pending'),
     path('declined/', ProspectDeclinedView.as_view(), name='prospect_declined'),
     path('failed/', ProspectFailedView.as_view(), name='prospect_failed'),
@@ -28,7 +29,8 @@ urlpatterns = [
     # valuation menu
     path('valuations/', ValuationProspectListView.as_view(), name='valuations_prospect_list'),
     path('pending-valuation/', ValuationProspectPendingView.as_view(), name='valuation_prospect_pending'),
-    path('valuation-details/<str:slug>/', ValuationProspectDetailView.as_view(), name='valuation_prospect_detail'),
+    path('valuation-details/<str:slug>/', ValuationProspectDetailView.as_view(), name='valuation_prospect_detail'), 
+    path('valuation-prospect-details/<str:slug>/', ValuationProspectDetailViewforNewProspects.as_view(), name='valuation_prospect_detail_new_prospect'), 
     path('valuation/', ProspectValuationView.as_view(), name='prospect_valuation'),
     path('inspection-requests/', InspectionView.as_view(), name='prospect_inspection'),
     path('review/', ProspectReviewView.as_view(), name='prospect_review'),
