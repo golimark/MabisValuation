@@ -249,15 +249,18 @@ class VehicleInspectionReportForm(forms.ModelForm):
         super(VehicleInspectionReportForm, self).__init__(*args, **kwargs)
 
         if prospect:
-            self.fields['vehicle'].queryset = VehicleAsset.objects.filter(prospect=prospect)
             self.fields['vehicle'].initial = VehicleAsset.objects.filter(prospect=prospect).first()
             self.fields['inspector'].initial = prospect.name
 
         # Set date fields with 'dd/mm/yyyy' format
         if 'date' in self.fields:
-            self.fields['date'].widget = forms.DateInput(
-                attrs={'type': 'date', 'placeholder': 'dd/mm/yyyy'}
-            )
+            self.fields['date'].widget = forms.DateInput(attrs={'type': 'date', 'placeholder': 'dd/mm/yyyy'})
+
+        # Add form-control class to all fields and set rows for text fields
+        for field_name, field in self.fields.items():
+            field.widget.attrs.update({'class': 'form-control'})
+            if isinstance(field.widget, forms.Textarea):
+                field.widget.attrs.update({'rows': 2})
 
 
 class ValuerRemarksForm(forms.ModelForm):
