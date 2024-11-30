@@ -1,0 +1,48 @@
+{% extends 'home/base.html' %}
+
+{% block content %}
+{% csrf_token %}
+
+<div id="printreport">
+    <h1>Inspection Report for {{ prospect.name }}</h1>
+    <p><strong>Inspector:</strong> {{ inspection_report.inspector }}</p>
+    <p><strong>Location:</strong> {{ inspection_report.location }}</p>
+    <p><strong>Date:</strong> {{ inspection_report.date }}</p>
+    <p><strong>Reason for Inspection:</strong> {{ inspection_report.reason_for_inspection }}</p>
+
+    <h2>Inspection Details</h2>
+    <ul>
+        <li><strong>Ignition Status:</strong> {{ inspection_report.ignition_status }} - {{ inspection_report.ignition_comment }}</li>
+        <li><strong>Windshield Wipers Status:</strong> {{ inspection_report.wind_shield_wipers_status }} - {{ inspection_report.wind_shield_wipers_comment }}</li>
+        <li><strong>Headlights Status:</strong> {{ inspection_report.headlights_status }} - {{ inspection_report.headlights_comment }}</li>
+        <li><strong>Turn Signals Status:</strong> {{ inspection_report.turn_signals_status }} - {{ inspection_report.turn_signals_comment }}</li>
+        <li><strong>Brake Lights Status:</strong> {{ inspection_report.brake_lights_status }} - {{ inspection_report.brake_lights_comment }}</li>
+        <li><strong>Side Mirrors Status:</strong> {{ inspection_report.side_mirrors_status }} - {{ inspection_report.side_mirrors_comment }}</li>
+        <li><strong>Horn Status:</strong> {{ inspection_report.horn_status }} - {{ inspection_report.horn_comment }}</li>
+        <li><strong>Radio Status:</strong> {{ inspection_report.radio_status }} - {{ inspection_report.radio_comment }}</li>
+        <li><strong>Body Condition Status:</strong> {{ inspection_report.body_condition_status }} - {{ inspection_report.body_condition_comment }}</li>
+        <li><strong>Exterior Flashlights Status:</strong> {{ inspection_report.exterior_flashlights_status }} - {{ inspection_report.exterior_flashlights_comment }}</li>
+        <li><strong>Windows Status:</strong> {{ inspection_report.windows_status }} - {{ inspection_report.windows_comment }}</li>
+        <li><strong>Any Other Abnormalities Status:</strong> {{ inspection_report.any_other_abnormalities_status }} - {{ inspection_report.any_other_abnormalities_comment }}</li>
+    </ul>
+
+    <h3>Remarks</h3>
+    <p>{{ inspection_report.remarks }}</p>
+</div>
+
+<button onclick="printDiv1()"> PRINT</button>
+
+<script>
+    function printDiv1() {
+        var printContents = document.getElementById("printreport").innerHTML;
+        var originalContents = document.body.innerHTML;
+
+        document.body.innerHTML = printContents;
+
+        window.print();
+
+        document.body.innerHTML = originalContents;
+    }
+</script>
+
+{% endblock %}

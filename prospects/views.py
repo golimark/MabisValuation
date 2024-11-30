@@ -1338,6 +1338,22 @@ def print_valuation_report(request, slug):
 
     return render(request, 'valuations/EvaluationReportPrint.html', context=context)
 
+@login_required
+def print_inspection_report(request, slug):
+    # Get the prospect and related evaluation report
+    prospect = get_object_or_404(Prospect, slug=slug)
+    inspection_report = get_object_or_404(VehicleInspectionReport, prospect=prospect)
+
+    # Pass the data to a print-friendly template
+    context = {
+        "page_name": "valuation_print",
+        "prospect": prospect,
+        "inspection_report": inspection_report,
+        "user": request.user
+    }
+
+    return render(request, 'valuations/InspectionReportPrint.html', context=context)
+
 
 @login_required
 def printout_report(request, slug):

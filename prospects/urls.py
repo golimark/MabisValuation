@@ -21,6 +21,7 @@ urlpatterns = [
     path('restore_from_decline/<str:slug>', ProspectRestoreFromDecline.as_view(), name='restore_prospect_fr_decline'),
     path('restore_from_failed/<str:slug>', ProspectRestoreFromFailed.as_view(), name='restore_prospect_fr_failed'),
     path('valuation/print/<slug:slug>/', views.print_valuation_report, name='print_valuation_report'),
+    path('inspection/print/<slug:slug>/', views.print_inspection_report, name='print_inspection_report'),
     path('print/<slug:slug>', views.printout_report, name='print_report'),
 
 

@@ -555,14 +555,20 @@
 {%endif%}
 
 {% if prospect.status == 'Inspection' %}
-<a style="color: white; background-color: #0d6efd;" href="{% url 'create_inspection_report' prospect.slug %}" class="btn btn-info"><i class="fa fa-add"></i> INSPECTION FORM</a>
+<div class="d-flex justify-content-start mt-3" style="display: flex; gap: 30px;">
+    <a style="color: white; background-color: #0d6efd;" href="{% url 'create_inspection_report' prospect.slug %}" class="btn btn-info"><i class="fa fa-add"></i> INSPECTION FORM</a>
 
-{% if inspection_reports %}
-<form action="{% url 'inspection-pipeline' prospect.slug %}" method="POST">
-    {% csrf_token %}
-    <button type="submit" class="btn btn-success">SUBMIT INSPECTION REPORT</button>
-</form>
-{%endif%}
+    {% if inspection_reports %}
+    
+        <form action="{% url 'inspection-pipeline' prospect.slug %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-success">SUBMIT INSPECTION REPORT</button>
+        </form>
+
+        <a style="color: white; background-color: #0d6efd;" href="{% url 'print_inspection_report' prospect.slug %}" class="btn btn-info"><i class="fa fa-pen"></i> VIEW INSPECTION REPORT</a>
+    
+    {%endif%}
+</div>
 
 {% endif %}
 
