@@ -379,10 +379,12 @@ class ProspectDetailViewforNewProspects(LoginRequiredMixin, View):
 
             
     def post(self, request, *args, **kwargs):
+        print('\n\n\n at point of posting')
         # if 'valuer.id' in request.POST:
                 
         # prospect = Prospect.objects.get(slug=kwargs['slug']).first()
         prospect = get_object_or_404(Prospect, slug=kwargs['slug'])
+        print('\n\n prospect', prospect)
         # print("\n\n\n\n prospect",prospect)
         valuer_id = request.POST.get("valuer")
 
@@ -778,6 +780,7 @@ class ValuationProspectDetailViewforNewProspects(LoginRequiredMixin, DetailView)
             return JsonResponse({'error': str(e)}, status=500)
         
     def post(self, request, slug):
+        print('\n\n\n at point of posting')
         valuer_id = request.POST.get("valuer")
 
         api_url = f'{request.user.active_company.api}/prospects/{slug}/'
@@ -1455,9 +1458,13 @@ def add_another_valuation_report_details(request, slug):
 
 @login_required
 def add_inspection_report_details(request, slug):
+    print('\n\n\n add inspection repot detiaks caleld')
     api_url = f'{request.user.active_company.api}/prospects/{slug}/'
 
+    print('this si it', Prospect.objects.filter(slug=slug).first())
     prospect = Prospect.objects.filter(slug=slug).first()
+
+    print('\n\n\n found prospect to be', prospect)
     if not prospect:
         # fetch and save prospect
         response = requests.get(api_url)
@@ -1465,7 +1472,7 @@ def add_inspection_report_details(request, slug):
         data = response.json()
 
         if Prospect.objects.filter(slug=slug):
-            prospect = Prospect.objects.filter(slug=slug).first()
+            prospect = Prospect.objects.filter(slug=slug).first() if Prospect.objects.filter(slug=slug).first() else Prospect.objects.filter(slug=slug).first().pk
             serializer = ApiSerializers.ProspectSerializer(prospect, data=data, partial=True)
         else:
             serializer = ApiSerializers.ProspectSerializer(data=data)
@@ -1484,21 +1491,32 @@ def add_inspection_report_details(request, slug):
     }
 
     if request.method == 'POST':
+        print('at point od posting report')
         i_reports = VehicleInspectionReport.objects.filter(vehicle__prospect=prospect)
+        print('\n\n', i_reports)
+        print('got i reports')
         if not i_reports:
+            print('no i reports')
             form = VehicleInspectionReportForm(request.POST, prospect=prospect)
+            print('n\n\n form', form)
             if form.is_valid():
                 form = form.save(commit=False)
                 form.prospect = prospect
                 form.save()
+                print('successufl')
+                
                 messages.add_message(request, messages.SUCCESS, "Asset Valuation submitted successfully")
-                return redirect('valuation_prospect_detail_new_prospect', slug=slug)
+                return redirect('valuation_prospect_detail', slug=slug)
             else:
+                print('\n\n\n form errors', form.errors)
                 messages.add_message(request, messages.ERROR, "ERROR MODIFYING RECORDS. TRY AGAIN!!")
         else:
+            print('some i reports')
             submitted_report_id = request.GET.get("form_id")
+            print('\n\n\n  repot id', submitted_report_id)
             if submitted_report_id:
                 report = VehicleInspectionReport.objects.filter(pk=submitted_report_id).first()
+                print('report', report)
                 if not report:
                     messages.add_message(request, messages.ERROR, "REPORT NOT FOUND. TRY AGAIN!")
                 else:
@@ -1507,8 +1525,11 @@ def add_inspection_report_details(request, slug):
                         form = form.save(commit=False)
                         form.prospect = prospect
                         form.save()
+                        print('sucess')
                         messages.add_message(request, messages.SUCCESS, "RECORDS MODIFIED SUCCESSFULLY")
-            return redirect(reverse_lazy("valuation_prospect_detail_new_prospect", args=[prospect.slug]))
+                return redirect(reverse_lazy("valuation_prospect_detail", args=[prospect.slug]))
+            else:
+                messages.add_message(request, messages.ERROR, 'No form Id found')
 
     else:
         context["create_inspection_report_form"] = VehicleInspectionReportForm(prospect=prospect)
