@@ -136,13 +136,13 @@ class ProspectDetailView(LoginRequiredMixin, View):
             data = response.json()
             
             if data["valuation_submitted_by"]:
-                data["valuation_submitted_by"] = User.objects.filter(username=data["valuation_submitted_by"]).first().pk
+                data["valuation_submitted_by"] = User.objects.filter(username=data["valuation_submitted_by"]).first().pk()
             
             if data["valuation_reviewd_by"]:
-                data["valuation_reviewd_by"] = User.objects.filter(username=data["valuation_reviewd_by"]).first().pk
-            
+                data["valuation_reviewd_by"] = User.objects.filter(username=data["valuation_reviewd_by"]).first().pk()
                 
             if Prospect.objects.filter(slug = slug):
+               
                 # update saved record to track any changes
                 prospect = Prospect.objects.filter(slug = slug).first()
                 serializer = ApiSerializers.ProspectSerializer(prospect, data=data, partial=True)
@@ -265,6 +265,7 @@ class ProspectDetailViewforNewProspects(LoginRequiredMixin, View):
     context_object_name = 'prospect'
     lookup_value = "slug"
 
+    print('reached here myself')
     def get(self, request, slug):
         context = {}
         
@@ -275,18 +276,21 @@ class ProspectDetailViewforNewProspects(LoginRequiredMixin, View):
             response.raise_for_status()
 
             data = response.json()
+            print('\n\n got this data here', data)
             
             if data["valuation_submitted_by"]:
-                data["valuation_submitted_by"] = User.objects.filter(username=data["valuation_submitted_by"]).first()
+                data["valuation_submitted_by"] = User.objects.filter(username=data["valuation_submitted_by"]).first().pk if User.objects.filter(username=data["valuation_submitted_by"]).first() else User.objects.filter(username=data["valuation_submitted_by"]).first()
             
             if data["valuation_reviewd_by"]:
-                data["valuation_reviewd_by"] = User.objects.filter(username=data["valuation_reviewd_by"]).first()
+                data["valuation_reviewd_by"] = User.objects.filter(username=data["valuation_reviewd_by"]).first().pk if User.objects.filter(username=data["valuation_reviewd_by"]).first() else User.objects.filter(username=data["valuation_reviewd_by"]).first()
             
                 
             if Prospect.objects.filter(slug = slug):
                 # update saved record to track any changes
                 prospect = Prospect.objects.filter(slug = slug).first()
+                
                 serializer = ApiSerializers.ProspectSerializer(prospect, data=data, partial=True)
+               
                
             else:
                 serializer = ApiSerializers.ProspectSerializer(data=data)
@@ -309,6 +313,8 @@ class ProspectDetailViewforNewProspects(LoginRequiredMixin, View):
                     
                 context['prospect'] = prospect
                 
+            else:
+                print(serializer.errors)
             # fetch vechicle assets
                 
             api_url = f'{request.user.active_company.api}/vehicles/?prospect={slug}'
