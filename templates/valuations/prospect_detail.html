@@ -527,9 +527,11 @@
         {% endif %}
         {% endif %}
         {% if prospect.status == 'Valuation' %}
+        {% if not prospect.fields %}
         <a style="color: white; background-color: #0d6efd;" href="{% url 'create_valuation_report' prospect.slug %}" class="btn btn-info"><i class="fa fa-add"></i> ASSET VALUATION</a>
-       
+        {% else %}
         <a style="color: white; background-color: #0d6efd;" href="{% url 'create_another_valuation_report' prospect.slug %}" class="btn btn-info"><i class="fa fa-add"></i> NEW REPORT</a>
+        {%endif%}
 
       {% endif %}
 
