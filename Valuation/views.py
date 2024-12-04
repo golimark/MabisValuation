@@ -16,6 +16,7 @@ from django.urls import reverse
 from django.http import JsonResponse
 import json
 from accounts.models import *
+from django.db.models import Prefetch
 
 
 # START OF VIEWS FOR HANDLING THE VALUATIONS SECTION FROM THE BASE.HTML
@@ -599,10 +600,28 @@ def fetch_prospects_from_mabis(request):
 
 
 
-def fetch_vehicle_asset_for_prospect(request):
-    context = {'vehicle_data': VehicleAsset.objects.filter(), "page_name": "valuation", "sub_page_name": "asset_vehicle_list"}
-    return render(request, 'valuations/vehicle_listing.html', context)
+# def fetch_vehicle_asset_for_prospect(request):
+#     context = {'vehicle_data': VehicleAsset.objects.filter(), "page_name": "valuation", "sub_page_name": "asset_vehicle_list"}
+#     return render(request, 'valuations/vehicle_listing.html', context)
 
+
+
+
+def fetch_vehicle_asset_for_prospect(request):
+    # Fetch all VehicleAsset records and their related VehicleEvaluationReport details
+    vehicle_data = VehicleAsset.objects.prefetch_related(
+        Prefetch(
+            'vehicleevaluationreport_set',  # Reverse relation to VehicleEvaluationReport
+            queryset=VehicleEvaluationReport.objects.only('make', 'model')
+        )
+    )
+
+    context = {
+        'vehicle_data': vehicle_data,
+        "page_name": "valuation",
+        "sub_page_name": "asset_vehicle_list"
+    }
+    return render(request, 'valuations/vehicle_listing.html', context)
 
 def vehicle_detail_view(request, slug):
     # Fetch the vehicle by slug or return a 404 if not found

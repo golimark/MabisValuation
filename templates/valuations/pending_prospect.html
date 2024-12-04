@@ -20,9 +20,15 @@
             <td>{{ prospect.gender }}</td>
             <td>{{ prospect.company }}</td>
             <td>{{ prospect.phone_number }}</td>
-            <td><em>
-                {{prospect.status}}
-            </em></td>
+            {% if prospect.status in 'Declined, Failed' %}
+            <td style="font-style: italic; color: red">
+                {{ prospect.status }}
+            </td>
+            {% else %}
+            <td style="font-style: italic; color: blueviolet">
+                {{ prospect.status }}
+            </td>
+            {% endif %}
             <td>{{ prospect.asset_submitted_on }}</td>
             <td>
                 <a
