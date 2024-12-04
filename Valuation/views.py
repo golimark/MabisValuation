@@ -255,7 +255,7 @@ def prospect_in_valuation(request, slug):
         users_with_permission = User.objects.filter(
             # role__permissions__code='can_view_valuation_requests',
             role__permissions__code='can_be_valuers',
-            active_company=request.user.company
+            company=request.user.company
         )
         print(f"Users with 'can_be_valuers' permission: {[user.name for user in users_with_permission]}")
 

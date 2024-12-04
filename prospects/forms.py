@@ -126,14 +126,14 @@ class VehicleEvaluationReportForm(forms.ModelForm):
         model = VehicleEvaluationReport
         exclude = ["prospect", "slug", "created_at", "updated_at"]
         fields = [
-            'vehicle', 'name_in_logbook', 'tax_identification_number', 'date_of_registration','make', 'model', 'body_description','engine_number', 'chassis_number','mileage', 'power', 'fuel_type', 'gearbox_transmission', 'country_of_origin','year_of_manufacture',
+            'vehicle', 'name_in_logbook', 'tax_identification_number', 'date_of_registration', 'maketypes','make', 'model', 'body_description','engine_number', 'chassis_number','mileage', 'power', 'fuel_type', 'gearbox_transmission', 'country_of_origin','year_of_manufacture',
             'years_since_on_uganda_roads','color_by_logbook', 'color_by_inspection' ,'seating_capacity','place_of_inspection',
             'date_of_valuation', 'valuation_report_date',
             'chassis_frame', 'body_shell_paint', 'condition_of_seats', 'engine_assembly',
             'accessories', 'cooling_system', 'gearbox_assembly', 'transmission_system',
             'steering_system', 'suspension', 'braking_system', 'electrical_system',
             'windshield', 'air_conditioning_system', 'wheels', 'tyre_condition', 'road_test',
-            'insurance_valuation', 'forced_sale', 'market_value', 'limiting_conditions',
+            'market_value','insurance_valuation', 'forced_sale', 'limiting_conditions',
             'effective_report_summary', 'valuation', 'market_value_description',
             'current_value_description', 'recommendation', 'front_right_hand_side_view',
             'front_left_hand_eside_view','back_right_hand_side_view','back_left_hand_side_view', 'engine_compartment', 'upholstery', 'vehicle_id_plate', 
@@ -141,12 +141,24 @@ class VehicleEvaluationReportForm(forms.ModelForm):
             # 'company_valuer', 'company_valuer_remarks','company_supervisor', 'company_supervisor_remarks','company_approver', 'company_approver_remarks'
         ]
 
-    # def clean_date_field(self):
-    #     date_of_registration = self.cleaned_data['date_of_registration']
-    #     # Convert date format if needed
-    #     if date_of_registration:
-    #         return date_of_registration.strftime('%d/%m/%Y')
-    #     return date_of_registration
+        widgets = {
+            'make': forms.TextInput(attrs={
+                'class': 'form-control', 
+                'id': 'id_make',
+                'style': 'display:none;'  # Hide 'make' field initially
+            }),
+            'maketypes': forms.Select(attrs={
+                'class': 'form-control', 
+                'id': 'id_make_types',
+                'onchange': 'toggleMakeField()'  # Add JavaScript function to toggle visibility
+            }),
+        }
+
+    # def clean(self):
+    #     cleaned_data = super().clean()
+    #     tax_identification_number = cleaned_data.get('tax_identification_number')
+    #     if VehicleEvaluationReport.objects.filter(tax_identification_number=tax_identification_number).exists():
+    #         raise forms.ValidationError({"tax_identification_number": "The tax identification number provided already exists. Please provide a unique Tax Identification Number."})
 
     def __init__(self, *args, **kwargs):
         prospect = kwargs.pop('prospect', None)
@@ -154,9 +166,32 @@ class VehicleEvaluationReportForm(forms.ModelForm):
         user = kwargs.pop('user', None)
         super(VehicleEvaluationReportForm, self).__init__(*args, **kwargs)
 
+        for field_name, field in self.fields.items():
+            field.widget.attrs.update({'class': 'form-control'})
+            if field_name == 'make':  # Ensure the make field has the correct ID
+                field.widget.attrs['id'] = 'id_make'
+
+            if field_name == 'maketypes':  # Ensure the make field has the correct ID
+                field.widget.attrs['id'] = 'id_make_types'
+            
+        
+         # Check the initial value of maketypes to determine visibility of make field
+        maketype_value = self.initial.get('maketypes', self.data.get('maketypes', None))
+        if maketype_value != "other":
+            # Hide make field if maketypes is not 'other'
+            self.fields['make'].widget.attrs.update({'style': 'display:none;'})
+        else:
+            # Display make field if maketypes is 'other'
+            self.fields['make'].widget.attrs.update({'style': 'display:block;'})
+
+        # Add a class to make the maketypes field value accessible via JavaScript for dynamic changes
+        self.fields['maketypes'].widget.attrs.update({'onchange': 'toggleMakeFieldDisplay()'})
+       
         # Custom labels
         self.fields['tax_identification_number'].label = "Tax ID Number"
         self.fields['market_value'].required = True
+
+        
 
         # Make image fields required
         image_fields = [
@@ -203,8 +238,8 @@ class VehicleEvaluationReportForm(forms.ModelForm):
         if prospect:
             self.fields['vehicle'].queryset = VehicleAsset.objects.filter(prospect=prospect)
             self.fields['vehicle'].initial = VehicleAsset.objects.filter(prospect=prospect).first()
-            self.fields['make'].initial = VehicleAsset.objects.filter(prospect=prospect).first().make
-            self.fields['model'].initial = VehicleAsset.objects.filter(prospect=prospect).first().model
+            # self.fields['make'].initial = VehicleAsset.objects.filter(prospect=prospect).first().make
+            # self.fields['model'].initial = VehicleAsset.objects.filter(prospect=prospect).first().model
             self.fields['name_in_logbook'].initial = prospect.name
             # self.fields['company_valuer'].initial = prospect.valuer_assigned
             # self.fields['company_valuer'].disabled = True
