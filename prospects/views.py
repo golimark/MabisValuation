@@ -139,7 +139,7 @@ class ProspectDetailView(LoginRequiredMixin, View):
                 data["valuation_submitted_by"] = User.objects.filter(username=data["valuation_submitted_by"]).first().pk # if User.objects.filter(username=data["valuation_submitted_by"]).first() else User.objects.filter(username=data["valuation_submitted_by"]).first()
             
             if data["valuation_reviewd_by"]:
-                data["valuation_reviewd_by"] = User.objects.filter(username=data["valuation_reviewd_by"]).first().pk # if User.objects.filter(username=data["valuation_reviewd_by"]).first() else User.objects.filter(username=data["valuation_reviewd_by"]).first()
+                data["valuation_reviewd_by"] = User.objects.filter(username=data["valuation_reviewd_by"]).first().pk #if User.objects.filter(username=data["valuation_reviewd_by"]).first() else User.objects.filter(username=data["valuation_reviewd_by"]).first()
                 
             if Prospect.objects.filter(slug = slug):
                
@@ -841,12 +841,9 @@ class ProspectValuationView(LoginRequiredMixin, ListView):
         except requests.exceptions.RequestException:
             messages.error(request, "Unable to fetch prospects")
 
-        # valuer_assigned = request.GET.get('valuer_assigned')
-        # if valuer_assigned:
-        if 'can_verify_payement' in request.user.permissions:
-            context['prospects'] = [prospect for prospect in context['prospects']]
-        else:
-            context['prospects'] = [prospect for prospect in context['prospects'] if prospect['valuer_assigned'] == request.user.username]
+        valuer_assigned = request.GET.get('valuer_assigned')
+        if valuer_assigned:
+            context['prospects'] = [prospect for prospect in context['prospects'] if prospect['valuer_assigned'] == valuer_assigned]
 
         context["page_name"] =  "valuation"
         context["sub_page_name"] =  "valuation_requests"
@@ -1045,7 +1042,7 @@ from django.db.models import Count
 def get_least_assigned_valuer(company):
         users_with_permission = User.objects.filter(
             role__permissions__code='can_be_valuers',
-            company=company
+            active_company=company
         )
 
         assignments = Prospect.objects.filter(valuer_assigned__in=users_with_permission).values('valuer_assigned').annotate(count=Count('valuer_assigned')).order_by('count')        
@@ -1062,7 +1059,6 @@ def get_least_assigned_valuer(company):
 @login_required
 def prospect_in_valuation(request, slug):
     if request.method == "POST":
-        print("Received POST request for valuation assignment")
         data = json.loads(request.body)
         payment_id = data.get('payment_id', None)
         # print('payment_id',payment_id)
@@ -1091,9 +1087,7 @@ def prospect_in_valuation(request, slug):
                     role__permissions__code='can_be_valuers',
                     company=request.user.company
                 )
-                # print(f"Users with 'can_be_valuers' permission: {[user.name for user in users_with_permission]}")
-                print('users with permissions',users_with_permission)
-                users_with_permission = list(users_with_permission)
+
                 # Get all prospects with an assigned valuer
                 valuer_assignments = (
                     Prospect.objects
@@ -1105,25 +1099,22 @@ def prospect_in_valuation(request, slug):
 
                 # Check the current valuer assignment counts and find the least assigned valuer
                 valuer_assignment_dict = {assign['valuer_assigned']: assign['assign_count'] for assign in valuer_assignments}
-                print(valuer_assignment_dict)
-
                 least_assigned_valuer = None
                 for valuer in users_with_permission:
                     # If the valuer doesn't have an assignment yet, they should be first in line
-                    if valuer.name not in valuer_assignment_dict:
+                    if valuer.id not in valuer_assignment_dict:
                         least_assigned_valuer = valuer
                         break
                     # If valuer has the least assignments, choose them
-                    if least_assigned_valuer is None or valuer_assignment_dict[valuer.name] < valuer_assignment_dict[least_assigned_valuer.name]:
+                    if least_assigned_valuer is None or valuer_assignment_dict[valuer.id] < valuer_assignment_dict.get(least_assigned_valuer.id, float('inf')):
                         least_assigned_valuer = valuer
-                        print('im here2 valuer', valuer.name)
 
+                # If a least assigned valuer was found, assign them to the prospect
                 if least_assigned_valuer:
-                    print(f"Selected valuer: {least_assigned_valuer.name} (ID: {least_assigned_valuer.id})")
                     response = requests.patch(api_url, data={
                         "status" : "Payment Verified",
                         "payment_verified_on" : datetime.now(),
-                        "payment_verified_by" : request.user.name,
+                        "payment_verified_by" : request.user.username,
                         "valuer_assigned" : least_assigned_valuer.name,
                         "valuer_assigned_on" : timezone.now(),
                     })
@@ -1235,10 +1226,6 @@ def add_valuation_report_details(request, slug):
         if not v_reports:
             form = VehicleEvaluationReportForm(request.POST, request.FILES, prospect=prospect)
             if form.is_valid():
-                if VehicleEvaluationReport.objects.filter(tax_identification_number=form.cleaned_data['tax_identification_number']).exists():
-                    messages.error(request, "Tax Identification Number already exists in our database, Please provide a unique Tax Identification Number.")
-                    return redirect('valuation_prospect_detail', slug=slug)
-                
                 form = form.save(commit=False)
                 form.prospect = prospect
                 # prospect.status = 'Valuation Supervisor'
