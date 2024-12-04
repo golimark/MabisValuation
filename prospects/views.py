@@ -136,10 +136,10 @@ class ProspectDetailView(LoginRequiredMixin, View):
             data = response.json()
             
             if data["valuation_submitted_by"]:
-                data["valuation_submitted_by"] = User.objects.filter(username=data["valuation_submitted_by"]).first().pk()
+                data["valuation_submitted_by"] = User.objects.filter(username=data["valuation_submitted_by"]).first().pk # if User.objects.filter(username=data["valuation_submitted_by"]).first() else User.objects.filter(username=data["valuation_submitted_by"]).first()
             
             if data["valuation_reviewd_by"]:
-                data["valuation_reviewd_by"] = User.objects.filter(username=data["valuation_reviewd_by"]).first().pk()
+                data["valuation_reviewd_by"] = User.objects.filter(username=data["valuation_reviewd_by"]).first().pk # if User.objects.filter(username=data["valuation_reviewd_by"]).first() else User.objects.filter(username=data["valuation_reviewd_by"]).first()
                 
             if Prospect.objects.filter(slug = slug):
                
@@ -265,7 +265,6 @@ class ProspectDetailViewforNewProspects(LoginRequiredMixin, View):
     context_object_name = 'prospect'
     lookup_value = "slug"
 
-    print('reached here myself')
     def get(self, request, slug):
         context = {}
         
@@ -842,9 +841,9 @@ class ProspectValuationView(LoginRequiredMixin, ListView):
         except requests.exceptions.RequestException:
             messages.error(request, "Unable to fetch prospects")
 
-        valuer_assigned = request.GET.get('valuer_assigned')
-        if valuer_assigned:
-            context['prospects'] = [prospect for prospect in context['prospects'] if prospect['valuer_assigned'] == valuer_assigned]
+        # valuer_assigned = request.GET.get('valuer_assigned')
+        # if valuer_assigned:
+        context['prospects'] = [prospect for prospect in context['prospects'] if prospect['valuer_assigned'] == request.user.username]
 
         context["page_name"] =  "valuation"
         context["sub_page_name"] =  "valuation_requests"

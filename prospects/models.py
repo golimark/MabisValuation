@@ -94,6 +94,8 @@ class Prospect(models.Model):
     valuation_reviewd_on = models.DateTimeField(blank=True, null=True)
     valuation_reviewd_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name="valuation_reviewd_by")
 
+    fields = models.JSONField(default=dict, blank=True)
+
 
     # def clean(self):
     #     # Check if proof_of_payment_id is unique
