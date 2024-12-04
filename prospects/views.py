@@ -843,7 +843,7 @@ class ProspectValuationView(LoginRequiredMixin, ListView):
 
         # valuer_assigned = request.GET.get('valuer_assigned')
         # if valuer_assigned:
-        context['prospects'] = [prospect for prospect in context['prospects'] if prospect['valuer_assigned'] == request.user.username]
+        context['prospects'] = [prospect for prospect in context['prospects'] if 'can_verify_payement_as_valuer' in request.user.permissions or prospect['valuer_assigned'] == request.user.username]
 
         context["page_name"] =  "valuation"
         context["sub_page_name"] =  "valuation_requests"
