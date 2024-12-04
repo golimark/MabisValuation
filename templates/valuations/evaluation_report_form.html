@@ -15,6 +15,38 @@
         <div class="modal-form">
             <div class="modal-form split">
                 {% csrf_token %} {{ create_vehicle_report_form.as_p }}
+                <script>
+                    document.addEventListener("DOMContentLoaded", function() {
+                        const maketypeField = document.getElementById("id_make_types");
+                        const makeField = document.getElementById("id_make");
+                
+                        // Function to toggle the make field based on maketype value
+                        function toggleMakeField() {
+                            if (maketypeField.value.toLowerCase() === "other") {
+                                const makeLabel = document.querySelector("label[for='id_make']");
+                                if (makeLabel) {
+                                    makeLabel.style.display = "block"; // Hide the make field label
+                                }
+                                makeField.style.display = "block";
+                                makeField.value = ""; // Clear any pre-existing value if it's set to "Other"
+                            } else {
+                                makeField.style.display = "none";
+                                makeField.value = maketypeField.value; // Set the make field value to maketypes value
+                                const makeLabel = document.querySelector("label[for='id_make']");
+                                if (makeLabel) {
+                                    makeLabel.style.display = "none"; // Hide the make field label
+                                }
+                            }
+                        }
+                
+                        // Run on load in case of form reloads
+                        toggleMakeField();
+                
+                        // Listen for changes on the maketype field
+                        maketypeField.addEventListener("change", toggleMakeField);
+                    });
+                </script>
+                
             </div>
         </div>
     </div>

@@ -95,6 +95,12 @@ class VehicleAsset(models.Model):
 
 
 class VehicleEvaluationReport(models.Model):
+
+    CAR_MAKES = [
+        ('NISSAN', 'NISSAN'),
+        ('TOYOTA', 'TOYOTA'),
+        ('OTHER', 'OTHER'),
+    ]
     
     REMARKS = [
         ('IN VERY BAD SHAPE','IN VERY BAD SHAPE'),
@@ -139,6 +145,7 @@ class VehicleEvaluationReport(models.Model):
     date_of_registration = models.DateField("date of registration", null=True)
     make = models.CharField("Car Make", max_length=50, null=True, blank=True)
     model = models.CharField("Car Model", max_length=50, null=True, blank=True)
+    maketypes = models.CharField("Car Make Type", max_length=50, choices=CAR_MAKES, null=True, blank=True)
     body_description = models.CharField("body description", max_length=200,  choices=BODY_CHOICES, null=True)   
     color_by_logbook = models.CharField("colour as per logbook", max_length=30, null=True)
     fuel_type = models.CharField("Fuel Type", max_length=10, choices=FUEL_CHOICES, null=True, blank=True)    

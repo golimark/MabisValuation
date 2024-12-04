@@ -136,10 +136,10 @@ class ProspectDetailView(LoginRequiredMixin, View):
             data = response.json()
             
             if data["valuation_submitted_by"]:
-                data["valuation_submitted_by"] = User.objects.filter(username=data["valuation_submitted_by"]).first().pk()
+                data["valuation_submitted_by"] = User.objects.filter(username=data["valuation_submitted_by"]).first().pk
             
             if data["valuation_reviewd_by"]:
-                data["valuation_reviewd_by"] = User.objects.filter(username=data["valuation_reviewd_by"]).first().pk()
+                data["valuation_reviewd_by"] = User.objects.filter(username=data["valuation_reviewd_by"]).first().pk
                 
             if Prospect.objects.filter(slug = slug):
                
@@ -1227,6 +1227,10 @@ def add_valuation_report_details(request, slug):
         if not v_reports:
             form = VehicleEvaluationReportForm(request.POST, request.FILES, prospect=prospect)
             if form.is_valid():
+                if VehicleEvaluationReport.objects.filter(tax_identification_number=form.cleaned_data['tax_identification_number']).exists():
+                    messages.error(request, "Tax Identification Number already exists in our database, Please provide a unique Tax Identification Number.")
+                    return redirect('valuation_prospect_detail', slug=slug)
+                
                 form = form.save(commit=False)
                 form.prospect = prospect
                 # prospect.status = 'Valuation Supervisor'

@@ -12,7 +12,7 @@ class VehicleEvaluationReportForm(forms.ModelForm):
         model = VehicleEvaluationReport
         exclude = ["prospect", "slug", "created_at", "updated_at"]
         fields = [
-            'vehicle', 'name_in_logbook', 'tax_identification_number', 'date_of_registration','make', 'model', 'body_description','engine_number', 'chassis_number','mileage', 'power', 'fuel_type', 'gearbox_transmission', 'country_of_origin','year_of_manufacture',
+            'vehicle', 'name_in_logbook', 'tax_identification_number', 'date_of_registration', 'maketypes','make', 'model', 'body_description','engine_number', 'chassis_number','mileage', 'power', 'fuel_type', 'gearbox_transmission', 'country_of_origin','year_of_manufacture',
             'years_since_on_uganda_roads','color_by_logbook', 'color_by_inspection' ,'seating_capacity','place_of_inspection',
             'date_of_valuation', 'valuation_report_date',
             'chassis_frame', 'body_shell_paint', 'condition_of_seats', 'engine_assembly',
@@ -33,13 +33,13 @@ class VehicleEvaluationReportForm(forms.ModelForm):
     #     if date_of_registration:
     #         return date_of_registration.strftime('%d/%m/%Y')
     #     return date_of_registration
-
     def __init__(self, *args, **kwargs):
         prospect = kwargs.pop('prospect', None)
         vehicle = kwargs.pop('vehicle', None)
         user = kwargs.pop('user', None)
         super(VehicleEvaluationReportForm, self).__init__(*args, **kwargs)
 
+        
         # Custom labels
         self.fields['tax_identification_number'].label = "Tax ID Number"
         self.fields['market_value'].required = True
