@@ -1042,7 +1042,7 @@ from django.db.models import Count
 def get_least_assigned_valuer(company):
         users_with_permission = User.objects.filter(
             role__permissions__code='can_be_valuers',
-            active_company=company
+            company=company
         )
 
         assignments = Prospect.objects.filter(valuer_assigned__in=users_with_permission).values('valuer_assigned').annotate(count=Count('valuer_assigned')).order_by('count')        
@@ -1059,6 +1059,7 @@ def get_least_assigned_valuer(company):
 @login_required
 def prospect_in_valuation(request, slug):
     if request.method == "POST":
+        print("Received POST request for valuation assignment")
         data = json.loads(request.body)
         payment_id = data.get('payment_id', None)
         # print('payment_id',payment_id)
@@ -1087,7 +1088,9 @@ def prospect_in_valuation(request, slug):
                     role__permissions__code='can_be_valuers',
                     company=request.user.company
                 )
-
+                # print(f"Users with 'can_be_valuers' permission: {[user.name for user in users_with_permission]}")
+                print('users with permissions',users_with_permission)
+                users_with_permission = list(users_with_permission)
                 # Get all prospects with an assigned valuer
                 valuer_assignments = (
                     Prospect.objects
@@ -1099,22 +1102,25 @@ def prospect_in_valuation(request, slug):
 
                 # Check the current valuer assignment counts and find the least assigned valuer
                 valuer_assignment_dict = {assign['valuer_assigned']: assign['assign_count'] for assign in valuer_assignments}
+                print(valuer_assignment_dict)
+
                 least_assigned_valuer = None
                 for valuer in users_with_permission:
                     # If the valuer doesn't have an assignment yet, they should be first in line
-                    if valuer.id not in valuer_assignment_dict:
+                    if valuer.name not in valuer_assignment_dict:
                         least_assigned_valuer = valuer
                         break
                     # If valuer has the least assignments, choose them
-                    if least_assigned_valuer is None or valuer_assignment_dict[valuer.id] < valuer_assignment_dict.get(least_assigned_valuer.id, float('inf')):
+                    if least_assigned_valuer is None or valuer_assignment_dict[valuer.name] < valuer_assignment_dict[least_assigned_valuer.name]:
                         least_assigned_valuer = valuer
+                        print('im here2 valuer', valuer.name)
 
-                # If a least assigned valuer was found, assign them to the prospect
                 if least_assigned_valuer:
+                    print(f"Selected valuer: {least_assigned_valuer.name} (ID: {least_assigned_valuer.id})")
                     response = requests.patch(api_url, data={
                         "status" : "Payment Verified",
                         "payment_verified_on" : datetime.now(),
-                        "payment_verified_by" : request.user.username,
+                        "payment_verified_by" : request.user.name,
                         "valuer_assigned" : least_assigned_valuer.name,
                         "valuer_assigned_on" : timezone.now(),
                     })
