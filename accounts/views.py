@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
+import requests
 from .forms import *
 from django.contrib import messages
 # from .models import CompanyUser
@@ -755,4 +756,7 @@ class LoanCompanyToggleView(LoginRequiredMixin, View):
 
 #         self.context['company_form'] = company_form
 #         return render(request, self.template_name, context=self.context)
+
+
+    
 

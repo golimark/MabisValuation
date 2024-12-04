@@ -51,9 +51,12 @@
             </form>
         </div> -->
         {% if 'can_perform_admin_functions' in request.user.permissions %}
-        <div class="button-group">
+        <div class="button-group" style="display: flex; justify-content: space-between;">
             <a href="{% url 'create_company' %}" class="btn btn-success" style="margin-right: 30px;">Create Loan Company</a>
             <a href="{% url 'company_list' %}" class="btn btn-info">View Available Loan Companies</a>
+            <div>
+                <a href="{% url 'jobs_to_do' %}" class="btn btn-success" style="margin-right: 30px;">Fetch jobs</a>
+            </div>
         </div>
         {% endif %}
         

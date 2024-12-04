@@ -94,9 +94,7 @@ class Prospect(models.Model):
     valuation_reviewd_on = models.DateTimeField(blank=True, null=True)
     valuation_reviewd_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name="valuation_reviewd_by")
 
-    fields = models.JSONField(default=dict, blank=True)
-
-    prospect_data_fields = models.JSONField(default=dict, null=True, blank=True)
+    fields = models.JSONField(default=dict, null=True, blank=True)
 
 
 
@@ -114,13 +112,6 @@ class Prospect(models.Model):
             self.title = "MS."
         elif self.gender == "MALE":
             self.title = "MR."
-
-        # Prepare data for prospect_data_fields
-        self.prospect_data_fields = {
-            "company_name": self.company.name if self.company else None,
-            "team_leader": self.created_by.name if self.created_by else None,
-            "agent_name": self.agent.name if self.agent else None,
-        }
 
         # to cater for api
 
