@@ -265,7 +265,6 @@ class ProspectDetailViewforNewProspects(LoginRequiredMixin, View):
     context_object_name = 'prospect'
     lookup_value = "slug"
 
-    print('reached here myself')
     def get(self, request, slug):
         context = {}
         
