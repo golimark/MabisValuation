@@ -1273,6 +1273,7 @@ def add_valuation_report_details(request, slug):
                 return redirect('valuation_prospect_detail', slug=slug)
             else:
                 messages.add_message(request, messages.ERROR, "ERROR MODIFYING RECORDS. TRY AGAIN!!")
+                return redirect('valuation_prospect_detail', slug=slug)
         else:
             # save edited data
             submitted_report_id = request.GET.get("form_id")
@@ -1335,14 +1336,7 @@ def add_valuation_report_details(request, slug):
         else:
             context["create_vehicle_report_form"] = VehicleEvaluationReportForm(
                 prospect=prospect,
-                # initial={
-                #     "date_of_registration": v_reports.date_of_registration,
-                #     "date_of_valuation": v_reports.date_of_valuation,
-                #     "valuation_report_date": v_reports.valuation_report_date,
-                # }
                 )
-
-
     return render(request, 'valuations/evaluation_report_form.html', context=context)
 
 @login_required
