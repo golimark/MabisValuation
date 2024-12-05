@@ -1,15 +1,17 @@
-{% extends 'home/base.html' %} {% block content %}
-<h1>Prospects Pending Payments Verification</h1>
+{% extends 'home/base.html' %} {% block title %}Prospects{% endblock %}
 
-<table class="table table-striped">
+<!-- new block -->
+{% block content%}
+<h1>Valuation Jobs</h1>
+<table class="table">
     <thead>
         <tr>
             <th>Name</th>
             <th>Gender</th>
-            <th>Company</th>
             <th>Phone Number</th>
+            <th>Company</th>
             <th>Status</th>
-            <th>Updated On</th>
+            <th>Submitted Date</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -18,8 +20,9 @@
         <tr>
             <td>{{ prospect.name }}</td>
             <td>{{ prospect.gender }}</td>
-            <td>{{ prospect.company }}</td>
             <td>{{ prospect.phone_number }}</td>
+            <td>{{ prospect.company }}</td>
+
             {% if prospect.status in 'Declined, Failed' %}
             <td style="font-style: italic; color: red">
                 {{ prospect.status }}
@@ -34,8 +37,9 @@
                 <a
                     href="{% url 'prospect_detail' prospect.slug %}"
                     class="btn btn-success btn-sm"
-                    ><i class="fa fa-eye"></i><span>Detail</span></a
+                    ><i class="fas fa-eye"></i> View</a
                 >
+                <!-- <a href="#" class="btn btn-warning" data-toggle="modal" data-target="#valuationModal" data-prospect="{{ prospect.id }}">Submit to Valuation</a> -->
             </td>
         </tr>
         {% endfor %}

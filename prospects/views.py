@@ -841,9 +841,13 @@ class ProspectValuationView(LoginRequiredMixin, ListView):
         except requests.exceptions.RequestException:
             messages.error(request, "Unable to fetch prospects")
 
-        valuer_assigned = request.GET.get('valuer_assigned')
-        if valuer_assigned:
-            context['prospects'] = [prospect for prospect in context['prospects'] if prospect['valuer_assigned'] == valuer_assigned]
+
+        # valuer_assigned = request.GET.get('valuer_assigned')
+        # if valuer_assigned:
+        if 'can_verify_payment_as_valuer' in request.user.permissions:
+            context['prospects'] = [prospect for prospect in context['prospects']]
+        else:
+            context['prospects'] = [prospect for prospect in context['prospects'] if prospect['valuer_assigned'].lower() == request.user.username.lower()]
 
         context["page_name"] =  "valuation"
         context["sub_page_name"] =  "valuation_requests"

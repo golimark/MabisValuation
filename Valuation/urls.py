@@ -23,6 +23,7 @@ urlpatterns = [
     # fetch data 
     path('prospects', views.fetch_prospects_from_mabis, name='get_data_from_mabis'),
     path('vehicles', views.fetch_vehicle_asset_for_prospect, name='get_vehicle_asset_data'),
+    path('jobs', views.get_all_prospect_data, name='jobs_to_do'),
     path('vehicle/<slug:slug>/', views.vehicle_detail_view, name='vehicle_detail'),
 
 ]

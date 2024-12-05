@@ -16,6 +16,7 @@ from django.urls import reverse
 from django.http import JsonResponse
 import json
 from accounts.models import *
+from django.db.models import Prefetch
 
 
 # START OF VIEWS FOR HANDLING THE VALUATIONS SECTION FROM THE BASE.HTML
@@ -543,6 +544,39 @@ def printout_report(request, slug):
     return render(request, 'valuations/ValuationReport.html', context)
 
 
+def get_all_prospect_data(request):
+    companies = LoanCompany.objects.all()
+    data = []  # Initialize an empty list to hold all prospects
+
+    for company in companies:
+        api_url_for_pending_prospects = f'{company.api}/prospects/?status=pending'
+        api_url_for_payment_verified_prospects = f'{company.api}/prospects/?status=payment verified'
+
+        try:
+            print(f"Fetching data for company: {company.name}")
+            
+            # Fetch pending prospects
+            pending_response = requests.get(api_url_for_pending_prospects)
+            pending_response.raise_for_status()  # Raise an exception for HTTP errors
+            pending_data = pending_response.json()
+
+            # Fetch payment-verified prospects
+            payment_verified_response = requests.get(api_url_for_payment_verified_prospects)
+            payment_verified_response.raise_for_status()  # Raise an exception for HTTP errors
+            payment_verified_data = payment_verified_response.json()
+
+            # Append the fetched data to the main list
+            data.extend(pending_data)
+            data.extend(payment_verified_data)
+        
+        except requests.exceptions.RequestException as e:
+            print(f"Error fetching data for {company.name}: {e}")
+            # Optionally, log or append error information for debugging
+
+    # Render the data into the template
+    context = {'prospects': data, "page_name": "valuation", "sub_page_name": ""}
+    return render(request, 'prospects/all_prospect_jobs.html', context)
+
 
 # API TO FETCH DATA FROM MABIS 
 def fetch_prospects_from_mabis(request):
@@ -566,10 +600,28 @@ def fetch_prospects_from_mabis(request):
 
 
 
-def fetch_vehicle_asset_for_prospect(request):
-    context = {'vehicle_data': VehicleAsset.objects.filter(), "page_name": "valuation", "sub_page_name": "asset_vehicle_list"}
-    return render(request, 'valuations/vehicle_listing.html', context)
+# def fetch_vehicle_asset_for_prospect(request):
+#     context = {'vehicle_data': VehicleAsset.objects.filter(), "page_name": "valuation", "sub_page_name": "asset_vehicle_list"}
+#     return render(request, 'valuations/vehicle_listing.html', context)
 
+
+
+
+def fetch_vehicle_asset_for_prospect(request):
+    # Fetch all VehicleAsset records and their related VehicleEvaluationReport details
+    vehicle_data = VehicleAsset.objects.prefetch_related(
+        Prefetch(
+            'vehicleevaluationreport_set',  # Reverse relation to VehicleEvaluationReport
+            queryset=VehicleEvaluationReport.objects.only('make', 'model')
+        )
+    )
+
+    context = {
+        'vehicle_data': vehicle_data,
+        "page_name": "valuation",
+        "sub_page_name": "asset_vehicle_list"
+    }
+    return render(request, 'valuations/vehicle_listing.html', context)
 
 def vehicle_detail_view(request, slug):
     # Fetch the vehicle by slug or return a 404 if not found
