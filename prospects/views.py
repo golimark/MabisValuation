@@ -1,4 +1,5 @@
 from datetime import datetime
+from django.core.mail import EmailMessage
 from time import sleep
 from django.http.response import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
@@ -838,15 +839,21 @@ class ProspectValuationView(LoginRequiredMixin, ListView):
             response.raise_for_status()
             data = response.json()
             context['prospects'] = data
+
+            if 'can_verify_payment' in request.user.permissions:
+                context['prospects'] = [prospect for prospect in context['prospects']]
+            else:
+                context['prospects'] = [prospect for prospect in context['prospects'] if (prospect['valuer_assigned'] == request.user.username or prospect['valuer_assigned'] == (request.user.first_name + ' ' + request.user.last_name))]
+
         except requests.exceptions.RequestException:
             messages.error(request, "Unable to fetch prospects")
 
         # valuer_assigned = request.GET.get('valuer_assigned')
         # if valuer_assigned:
-        if 'can_verify_payement' in request.user.permissions:
-            context['prospects'] = [prospect for prospect in context['prospects']]
-        else:
-            context['prospects'] = [prospect for prospect in context['prospects'] if prospect['valuer_assigned'] == request.user.username]
+        # if 'can_verify_payement' in request.user.permissions:
+        #     context['prospects'] = [prospect for prospect in context['prospects']]
+        # else:
+        #     context['prospects'] = [prospect for prospect in data if (prospect['valuer_assigned'] == request.user.username or prospect['valuer_assigned'] == (request.user.first_name + ' ' + request.user.last_name))]
 
         context["page_name"] =  "valuation"
         context["sub_page_name"] =  "valuation_requests"
@@ -1160,7 +1167,6 @@ def prospect_in_valuation(request, slug):
 #         self.fields['relation_officer'].queryset = queryset
 
 
-
 @login_required
 def set_valuation(request, slug):
     api_url = f'{request.user.active_company.api}/prospects/{slug}/'
@@ -1172,6 +1178,44 @@ def set_valuation(request, slug):
     })
     if response.status_code >= 200 and response.status_code <= 399:
         # was successful
+        #set prospect status on local
+        prospect = Prospect.objects.filter(slug=slug).first()
+        prospect.status = 'Valuation'
+        prospect.save()
+
+        vehicle = VehicleAsset.objects.filter(prospect=prospect).first()
+        valuer_assigned = prospect.valuer_assigned
+        
+        if valuer_assigned:
+            # Split the valuer_assigned into first_name and last_name if it contains a space
+            name_parts = valuer_assigned.split(" ")
+            
+            # Use Q objects to filter by username or full name
+            if len(name_parts) == 2:  # If it's "FirstName LastName"
+                user = User.objects.filter(
+                    Q(username=valuer_assigned) |
+                    Q(first_name=name_parts[0], last_name=name_parts[1])
+                ).first()
+            else:  # If it's just the username
+                user = User.objects.filter(username=valuer_assigned).first()
+
+            if user:
+                # Send the email if a user is found
+                email = EmailMessage(
+                    "Received Prospect {} for Valuation.".format(prospect).upper(),
+                    f"You have been assigned a prospect for valuation. Please log in to continue.\n\n"
+                    f"Prospect: {str(prospect).upper()} - {prospect.phone_number}\n"
+                    f"Vehicle: {str(vehicle).upper()}\n"
+                    f"Valuer: {str(valuer_assigned).upper()}\n",
+                    settings.DEFAULT_FROM_EMAIL,
+                    [user.email],
+                )
+                email.send(fail_silently=False)
+                messages.success(request, "Prospect: {} assigned to valuer: {} successfully and email sent for notification.".format(prospect, valuer_assigned).upper())
+            else:
+                # Handle the case where no matching user is found
+                messages.error(request, "No matching user found for the assigned valuer.")
+            return redirect(reverse_lazy("prospect_valuation"))
         return redirect('prospect_valuation')
     else:
         return redirect(reverse_lazy("prospect_detail", args=[slug]))
@@ -1235,8 +1279,19 @@ def add_valuation_report_details(request, slug):
         if not v_reports:
             form = VehicleEvaluationReportForm(request.POST, request.FILES, prospect=prospect)
             if form.is_valid():
+
+                # check if the tax_identification_number is numeric
+                if not str(form.cleaned_data['tax_identification_number']).isdigit():
+                    messages.error(request, "Tax Identification Number should only contain numeric values.")
+                    return redirect('valuation_prospect_detail', slug=slug)
+
                 if VehicleEvaluationReport.objects.filter(tax_identification_number=form.cleaned_data['tax_identification_number']).exists():
                     messages.error(request, "Tax Identification Number already exists in our database, Please provide a unique Tax Identification Number.")
+                    return redirect('valuation_prospect_detail', slug=slug)
+                
+                # check if the length of power exeeds 5 characters
+                if len(str(form.cleaned_data['power'])) > 5:
+                    messages.error(request, "Power value supplied can not exceed 5 digits in length. Please try again.")
                     return redirect('valuation_prospect_detail', slug=slug)
                 
                 form = form.save(commit=False)
@@ -1267,6 +1322,20 @@ def add_valuation_report_details(request, slug):
                     prospect.valuation_submitted_on = datetime.now()
                     prospect.valuation_submitted_by = request.user
                     prospect.save()
+
+                    # supervisor = User.objects.filter(Q(role__permission__code=('can_be_supervisor')) | Q(role__permission__code=('can_perform_admin_functions'))).first()
+                    supervisor = User.objects.filter(role__permissions__code=('can_be_supervisor' and 'can_verify_payment')).first()
+                    if supervisor:
+                        email = EmailMessage(
+                            'New Prospect Valuation Supervision Request for prospect {}.'.format(prospect.name),
+                            f'Hi {supervisor.first_name} {supervisor.last_name},\n\n'
+                            f'You have a new Prospect Valuation Supervision Request. Below are the details.\n\n'
+                            f'Prospect: {prospect.name}\n'
+                            f'Phone: {prospect.phone_number}\n',
+                            settings.DEFAULT_FROM_EMAIL,
+                            [supervisor.email],
+                        )
+                        email.send(fail_silently=False)
 
                 # Redirect to the 'valuation_prospect_detail' page
                 messages.add_message(request, messages.SUCCESS, "Asset Valuation submitted successfully")
