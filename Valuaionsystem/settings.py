@@ -202,3 +202,13 @@ CHANNEL_LAYERS = {
        "BACKEND": "channels.layers.InMemoryChannelLayer",
     },
 }
+
+
+
+# CELERY CONF
+CELERY_TIMEZONE = 'Africa/Kampala'
+CELERY_TASK_TRACK_STARTED = True
+# CELERY_TASK_TIME_LIMIT = 30 * 60
+
+CELERY_BROKER_URL = 'amqp://guest:guest@localhost:5672/'
+CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
