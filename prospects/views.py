@@ -1,10 +1,13 @@
 from datetime import datetime
+from django.core.mail import EmailMessage
 from time import sleep
 from django.http.response import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView
 from django.views.generic.edit import UpdateView
+
+from prospects.tasks import send_email_task
 from .models import *
 from django.contrib.auth.decorators import login_required
 from .forms import *
@@ -196,7 +199,7 @@ class ProspectDetailView(LoginRequiredMixin, View):
                     if validated_data.get('logbook'):
                     # print(validated_data['proof_of_payment'])
                         logbook_url = urlparse(validated_data['logbook'])
-                        logbook_url = logbook_url._replace(netloc=f"{logbook_url.hostname}:{port}")
+                        # logbook_url = logbook_url._replace(netloc=f"{logbook_url.hostname}:{port}")
                         validated_data['logbook'] = logbook_url.geturl()
                     
                     vehicleSerializer.save()
@@ -417,7 +420,7 @@ class ProspectPendingView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         # Filter the queryset to only include prospects with 'Pending' status
-        return Prospect.objects.filter(Q(status='Pending')|Q(status='Payment Verified')).order_by('-updated_at').filter(agent__company=self.request.user.company)
+        return Prospect.objects.filter(Q(status='Pending')|Q(status='Payment Verified')).order_by('-updated_at').filter(company=self.request.user.company)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -838,16 +841,22 @@ class ProspectValuationView(LoginRequiredMixin, ListView):
             response.raise_for_status()
             data = response.json()
             context['prospects'] = data
+
+            if 'can_verify_payment' in request.user.permissions:
+                context['prospects'] = [prospect for prospect in context['prospects']]
+            else:
+                context['prospects'] = [prospect for prospect in context['prospects'] if (prospect['valuer_assigned'] == request.user.username or prospect['valuer_assigned'] == (request.user.first_name + ' ' + request.user.last_name))]
+
         except requests.exceptions.RequestException:
             messages.error(request, "Unable to fetch prospects")
 
 
         # valuer_assigned = request.GET.get('valuer_assigned')
         # if valuer_assigned:
-        if 'can_verify_payment_as_valuer' in request.user.permissions:
+        if 'can_verify_payement' in request.user.permissions:
             context['prospects'] = [prospect for prospect in context['prospects']]
         else:
-            context['prospects'] = [prospect for prospect in context['prospects'] if prospect['valuer_assigned'].lower() == request.user.username.lower()]
+            context['prospects'] = [prospect for prospect in data if (prospect['valuer_assigned'] == request.user.username or prospect['valuer_assigned'] == (request.user.first_name + ' ' + request.user.last_name))]
 
         context["page_name"] =  "valuation"
         context["sub_page_name"] =  "valuation_requests"
@@ -943,34 +952,48 @@ class ProspectSupervisorReviewView(LoginRequiredMixin, ListView):
 
 @login_required
 def DeclineView(request, slug):
+    # Retrieve the prospect and API URL
+    api_url = f'{request.user.active_company.api}/prospects/{slug}/'
     prospect = get_object_or_404(Prospect, slug=slug)
 
     if request.method == 'POST':
+        # Get the decline reason from the request
         decline_reason = request.POST.get('declinereason', '')
-        if decline_reason:
-            prospect.status = 'Declined'
-            prospect.decline_reason = f"Valuation-{decline_reason}"
-            prospect.save()
-            messages.success(request, 'Prospect declined successfully.')
-        else:
+        
+        if not decline_reason:
             messages.error(request, 'Decline reason is required.')
             return redirect(reverse('valuation_prospect_detail', kwargs={'slug': prospect.slug}))
 
-        context = {
-            "page_name": "valuation",
-            'prospect': prospect,
-            "sub_page_name": "declined_valuation_prospects"
-        }
+        try:
+            # Update the prospect status in the upstream system
+            prospect_response = requests.patch(
+                api_url,
+                data={
+                    "status": "Declined",
+                    "decline_reason": decline_reason,
+                },
+            )
 
-        return render(request, 'prospects/prospect_list.html', context=context)
+            # Update the local prospect status if upstream update was successful
+            if 200 <= prospect_response.status_code <= 399:
+                prospect.status = "Declined"
+                prospect.decline_reason = f"Valuation-{decline_reason}"
+                prospect.save()
+                messages.success(request, 'Prospect declined successfully.')
+                return redirect('prospect_pending')
 
+        except requests.RequestException as e:
+            # Handle exceptions from the API call
+            messages.error(request, f"An error occurred while updating the prospect: {str(e)}")
+        
+    # Render the decline form
     context = {
         "page_name": "valuation",
         'prospect': prospect,
         "sub_page_name": "declined_valuation_prospects"
     }
+    return render(request, 'prospects/decline_form.html', context)
 
-    return render(request, 'prospects/decline_form.html', context=context)
 
 
 # def DeclineView(request, slug):
@@ -1155,7 +1178,6 @@ def prospect_in_valuation(request, slug):
 #         self.fields['relation_officer'].queryset = queryset
 
 
-
 @login_required
 def set_valuation(request, slug):
     api_url = f'{request.user.active_company.api}/prospects/{slug}/'
@@ -1167,6 +1189,40 @@ def set_valuation(request, slug):
     })
     if response.status_code >= 200 and response.status_code <= 399:
         # was successful
+        #set prospect status on local
+        prospect = Prospect.objects.filter(slug=slug).first()
+        prospect.status = 'Valuation'
+        prospect.save()
+
+        vehicle = VehicleAsset.objects.filter(prospect=prospect).first()
+        valuer_assigned = prospect.valuer_assigned
+        
+        if valuer_assigned:
+            # Split the valuer_assigned into first_name and last_name if it contains a space
+            name_parts = valuer_assigned.split(" ")
+            
+            # Use Q objects to filter by username or full name
+            if len(name_parts) == 2:  # If it's "FirstName LastName"
+                user = User.objects.filter(
+                    Q(username=valuer_assigned) |
+                    Q(first_name=name_parts[0], last_name=name_parts[1])
+                ).first()
+            else:  # If it's just the username
+                user = User.objects.filter(username=valuer_assigned).first()
+
+            if user:
+                # Send the email if a user is found
+               
+                subject =  "Received Prospect {} for Valuation.".format(prospect).upper()
+                email = user.email
+                message = f"You have been assigned a prospect for valuation. Please log in to continue.\n\nProspect: {str(prospect).upper()} - {prospect.phone_number}\nVehicle: {str(vehicle).upper()}\nValuer: {str(valuer_assigned).upper()}\n"
+
+                send_email_task(subject, email, message)
+                messages.success(request, "Prospect: {} assigned to valuer: {} successfully and email sent for notification.".format(prospect, valuer_assigned).upper())
+            else:
+                # Handle the case where no matching user is found
+                messages.error(request, "No matching user found for the assigned valuer.")
+            return redirect(reverse_lazy("prospect_valuation"))
         return redirect('prospect_valuation')
     else:
         return redirect(reverse_lazy("prospect_detail", args=[slug]))
@@ -1230,6 +1286,21 @@ def add_valuation_report_details(request, slug):
         if not v_reports:
             form = VehicleEvaluationReportForm(request.POST, request.FILES, prospect=prospect)
             if form.is_valid():
+
+                # check if the tax_identification_number is numeric
+                if not str(form.cleaned_data['tax_identification_number']).isdigit() or len(str(form.cleaned_data['tax_identification_number'])) != 10:
+                    messages.error(request, "Tax Identification Number should only contain 10 numeric values.")
+                    return redirect('valuation_prospect_detail', slug=slug)
+
+                if VehicleEvaluationReport.objects.filter(tax_identification_number=form.cleaned_data['tax_identification_number']).exists():
+                    messages.error(request, "Tax Identification Number already exists in our database, Please provide a unique Tax Identification Number.")
+                    return redirect('valuation_prospect_detail', slug=slug)
+                
+                # check if the length of power exeeds 5 characters
+                if len(str(form.cleaned_data['power'])) > 5:
+                    messages.error(request, "Power value supplied can not exceed 5 digits in length. Please try again.")
+                    return redirect('valuation_prospect_detail', slug=slug)
+                
                 form = form.save(commit=False)
                 form.prospect = prospect
                 # prospect.status = 'Valuation Supervisor'
@@ -1259,11 +1330,22 @@ def add_valuation_report_details(request, slug):
                     prospect.valuation_submitted_by = request.user
                     prospect.save()
 
+                    # supervisor = User.objects.filter(Q(role__permission__code=('can_be_supervisor')) | Q(role__permission__code=('can_perform_admin_functions'))).first()
+                    supervisor = User.objects.filter(role__permissions__code=('can_be_supervisor' and 'can_verify_payment')).first()
+                    if supervisor:
+                        subject = 'New Prospect Valuation Supervision Request for prospect {}.'.format(prospect.name)
+                        email = supervisor.email
+                        message =  f'Hi {supervisor},\n\nYou have a new Prospect Valuation Supervision Request. Below are the details.\n\nProspect: {prospect.name}\nPhone: {prospect.phone_number}\n'
+                        
+                        send_email_task(subject, email, message)
+                        
+
                 # Redirect to the 'valuation_prospect_detail' page
                 messages.add_message(request, messages.SUCCESS, "Asset Valuation submitted successfully")
                 return redirect('valuation_prospect_detail', slug=slug)
             else:
                 messages.add_message(request, messages.ERROR, "ERROR MODIFYING RECORDS. TRY AGAIN!!")
+                return redirect('valuation_prospect_detail', slug=slug)
         else:
             # save edited data
             submitted_report_id = request.GET.get("form_id")
@@ -1326,14 +1408,7 @@ def add_valuation_report_details(request, slug):
         else:
             context["create_vehicle_report_form"] = VehicleEvaluationReportForm(
                 prospect=prospect,
-                # initial={
-                #     "date_of_registration": v_reports.date_of_registration,
-                #     "date_of_valuation": v_reports.date_of_valuation,
-                #     "valuation_report_date": v_reports.valuation_report_date,
-                # }
                 )
-
-
     return render(request, 'valuations/evaluation_report_form.html', context=context)
 
 @login_required
