@@ -420,7 +420,7 @@ class ProspectPendingView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         # Filter the queryset to only include prospects with 'Pending' status
-        return Prospect.objects.filter(Q(status='Pending')|Q(status='Payment Verified')).order_by('-updated_at').filter(agent__company=self.request.user.company)
+        return Prospect.objects.filter(Q(status='Pending')|Q(status='Payment Verified')).order_by('-updated_at').filter(company=self.request.user.company)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -951,34 +951,48 @@ class ProspectSupervisorReviewView(LoginRequiredMixin, ListView):
 
 @login_required
 def DeclineView(request, slug):
+    # Retrieve the prospect and API URL
+    api_url = f'{request.user.active_company.api}/prospects/{slug}/'
     prospect = get_object_or_404(Prospect, slug=slug)
 
     if request.method == 'POST':
+        # Get the decline reason from the request
         decline_reason = request.POST.get('declinereason', '')
-        if decline_reason:
-            prospect.status = 'Declined'
-            prospect.decline_reason = f"Valuation-{decline_reason}"
-            prospect.save()
-            messages.success(request, 'Prospect declined successfully.')
-        else:
+        
+        if not decline_reason:
             messages.error(request, 'Decline reason is required.')
             return redirect(reverse('valuation_prospect_detail', kwargs={'slug': prospect.slug}))
 
-        context = {
-            "page_name": "valuation",
-            'prospect': prospect,
-            "sub_page_name": "declined_valuation_prospects"
-        }
+        try:
+            # Update the prospect status in the upstream system
+            prospect_response = requests.patch(
+                api_url,
+                data={
+                    "status": "Declined",
+                    "decline_reason": decline_reason,
+                },
+            )
 
-        return render(request, 'prospects/prospect_list.html', context=context)
+            # Update the local prospect status if upstream update was successful
+            if 200 <= prospect_response.status_code <= 399:
+                prospect.status = "Declined"
+                prospect.decline_reason = f"Valuation-{decline_reason}"
+                prospect.save()
+                messages.success(request, 'Prospect declined successfully.')
+                return redirect('prospect_pending')
 
+        except requests.RequestException as e:
+            # Handle exceptions from the API call
+            messages.error(request, f"An error occurred while updating the prospect: {str(e)}")
+        
+    # Render the decline form
     context = {
         "page_name": "valuation",
         'prospect': prospect,
         "sub_page_name": "declined_valuation_prospects"
     }
+    return render(request, 'prospects/decline_form.html', context)
 
-    return render(request, 'prospects/decline_form.html', context=context)
 
 
 # def DeclineView(request, slug):
