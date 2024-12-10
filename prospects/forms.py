@@ -285,7 +285,7 @@ class VehicleInspectionReportForm(forms.ModelForm):
 
         if prospect:
             self.fields['vehicle'].initial = VehicleAsset.objects.filter(prospect=prospect).first()
-            self.fields['inspector'].initial = prospect.name
+            # self.fields['inspector'].initial = prospect.name
 
         # Set date fields with 'dd/mm/yyyy' format
         if 'date' in self.fields:
