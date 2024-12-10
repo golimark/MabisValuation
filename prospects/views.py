@@ -161,7 +161,7 @@ class ProspectDetailView(LoginRequiredMixin, View):
                 if validated_data.get('proof_of_payment'):
                     # print(validated_data['proof_of_payment'])
                     proof_of_payment_url = urlparse(validated_data['proof_of_payment'])
-                    proof_of_payment_url = proof_of_payment_url._replace(netloc=f"{proof_of_payment_url.hostname}:{port}")
+                    # proof_of_payment_url = proof_of_payment_url._replace(netloc=f"{proof_of_payment_url.hostname}:{port}")
                     validated_data['proof_of_payment'] = proof_of_payment_url.geturl()
                   
                 prospect = serializer.save()
