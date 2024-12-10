@@ -971,7 +971,7 @@ def DeclineView(request, slug):
                 data={
                     "status": "Declined",
                     "decline_reason": decline_reason,
-                    "proof_of_payment_id": None,
+                    "proof_of_payment_id": "",
                 },
             )
 
