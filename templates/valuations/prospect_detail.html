@@ -170,13 +170,17 @@
                 <div class="col-md-6">
                     
                     <p style="margin-bottom: .5rem;">
-                        <strong>Proof Of Payment:  </strong>
-                        {%if prospect.proof_of_payment %}
-                        <a data-fancybox="gallery" style="color:aqua;margin-left: .5rem;" href="{{prospect.proof_of_payment}}">View</a>
+                        <strong>Proof Of Payment:</strong>
+                        {% if prospect.proof_of_payment %}
+                            <a data-fancybox="gallery" style="color:aqua;margin-left: .5rem;" 
+                               class="document-view-link" 
+                               href="{{ prospect.proof_of_payment }}" 
+                               data-doc="proof_of_payment" target="_blank">View</a>
                         {% else %}
-                        <p>Not Available</p>
-                        {%endif%}
+                            <p>Not Available</p>
+                        {% endif %}
                     </p>
+                    
                     
                     <!-- <p>here: {{vehicle.logbook}}</p> -->
                     {% if vehicle_assets %}
@@ -184,10 +188,13 @@
                     <p style="margin-bottom: .5rem;">
                         <strong>Log Book:</strong>
                         {% if vehicle.logbook %}
-                        <a data-fancybox="gallery" style="color:aqua;margin-left: .5rem;" class="image-link" href="{{ vehicle.logbook }}">View</a>
+                            <a data-fancybox="gallery" style="color:aqua;margin-left: .5rem;" 
+                               class="document-view-link" 
+                               href="{{ vehicle.logbook }}" 
+                               data-doc="logbook_{{ forloop.counter }}" target="_blank">View</a>
                         {% else %}
-                        <p>Not Available</p>
-                        {%endif%}
+                            <p>Not Available</p>
+                        {% endif %}
                     </p>
                     {%endfor%}
                     {%endif%}
@@ -457,16 +464,18 @@
     <!-- <a href="#" id="verify-payment" class="btn btn-primary" onclick="verifyPayment({{ prospect.pk }});">Verify Payment</a> -->
     <!-- <a href="#" id="verify-payment" class="btn btn-primary" onclick="verifyPayment();">Verify Payment</a> -->
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#paymentVerificationModal" style="margin-right: 30px;">
-        VERIFY PAYMENT
-    </button>
-    <!-- Modal -->
-
-    <!-- <a href="{% url 'decline' prospect.slug %}" class="btn btn-danger">Decline</a> -->
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#declineReasonModal">
-        DECLINE
-    </button>
+    <div style="display: flex; gap: 30px;">
+        <button type="button" class="btn btn-primary action-buttons" data-toggle="modal" data-target="#paymentVerificationModal" style="margin-right: 30px; display: none;">
+            VERIFY PAYMENT
+        </button>
+        <!-- Modal -->
+    
+        <!-- <a href="{% url 'decline' prospect.slug %}" class="btn btn-danger">Decline</a> -->
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-danger action-buttons" style="display: none;" data-toggle="modal" data-target="#declineReasonModal">
+            DECLINE
+        </button>
+    </div>
 
     <!-- Modal -->
     <div class="modal fade" id="declineReasonModal" tabindex="-1" role="dialog" aria-labelledby="declineReasonModalLabel" aria-hidden="true">
@@ -728,5 +737,35 @@
             }
         });
     </script>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const viewLinks = document.querySelectorAll('.document-view-link');
+        const actionButtons = document.querySelectorAll('.action-buttons');
+        const alertDocuments = document.querySelector('.alert-to-view-documents');
+        const clickedDocs = new Set();
+
+        // Iterate over all view links
+        viewLinks.forEach(link => {
+            link.addEventListener('click', function () {
+                this.style.color = 'green'; // Indicate the link has been clicked
+                clickedDocs.add(this.getAttribute('data-doc') || this.href); // Track clicked links
+
+                // Check if all required documents have been clicked
+                if (clickedDocs.size === viewLinks.length) {
+                    // Show the buttons once all documents are viewed
+                    actionButtons.forEach(button => {
+                        button.style.display = 'block';
+                    });
+                    // Hide the alert (if it exists)
+                    if (alertDocuments) {
+                        alertDocuments.style.display = 'none';
+                    }
+                }
+            });
+        });
+    });
+</script>
         
 {% endblock %}
