@@ -236,6 +236,7 @@ class ProspectDetailView(LoginRequiredMixin, View):
             
     def post(self, request, *args, **kwargs):
         # if 'valuer.id' in request.POST:
+        # prospect = self.get_object()
                 
         # prospect = Prospect.objects.get(slug=kwargs['slug']).first()
         prospect = get_object_or_404(Prospect, slug=kwargs['slug'])
@@ -249,7 +250,8 @@ class ProspectDetailView(LoginRequiredMixin, View):
                 company=request.user.company
             )
             # Assign the valuer to the prospect and save
-            prospect.valuer_assigned = valuer.username
+            prospect.valuer_assigned = valuer.name
+            prospect.save()
             prospect.valuer_assigned_on = timezone.now()
             prospect.save()
             messages.success(request, "Valuer assigned successfully.")
@@ -1129,23 +1131,24 @@ def prospect_in_valuation(request, slug):
 
                 # Check the current valuer assignment counts and find the least assigned valuer
 
-                valuer_assignment_dict = {}
                 
+
                 valuer_assignment_dict = {assign['valuer_assigned']: assign['assign_count'] for assign in valuer_assignments}
                 print('\n\nvaluer_assignment_dict\n\n\n', valuer_assignment_dict)
 
                 least_assigned_valuer = None
                 for valuer in users_with_permission:
                     # If the valuer doesn't have an assignment yet, they should be first in line
-                    if valuer.pk not in valuer_assignment_dict:
+                    if valuer.name not in valuer_assignment_dict:
                         least_assigned_valuer = valuer
                         break
                     # If valuer has the least assignments, choose them
-                    if least_assigned_valuer is None or valuer_assignment_dict[valuer.pk] < valuer_assignment_dict.get(least_assigned_valuer.pk):
+                    if least_assigned_valuer is None or valuer_assignment_dict[valuer.name] < valuer_assignment_dict[least_assigned_valuer.name]:
                         least_assigned_valuer = valuer
 
                 # If a least assigned valuer was found, assign them to the prospect
                 if least_assigned_valuer:
+                    print(f"Selected valuer: {least_assigned_valuer.name} (ID: {least_assigned_valuer.id})")
                     response = requests.patch(api_url, data={
                         "status" : "Payment Verified",
                         "payment_verified_on" : datetime.now(),
