@@ -1116,6 +1116,8 @@ def prospect_in_valuation(request, slug):
                     company=request.user.company
                 )
 
+                print('\n\n\nusers_with_permission\n\n\n', users_with_permission)
+
                 # Get all prospects with an assigned valuer
                 valuer_assignments = (
                     Prospect.objects
@@ -1128,6 +1130,7 @@ def prospect_in_valuation(request, slug):
                 # Check the current valuer assignment counts and find the least assigned valuer
                 valuer_assignment_dict = {assign['valuer_assigned']: assign['assign_count'] for assign in valuer_assignments}
                 print('\n\nvaluer_assignment_dict\n\n\n', valuer_assignment_dict)
+
                 least_assigned_valuer = None
                 for valuer in users_with_permission:
                     # If the valuer doesn't have an assignment yet, they should be first in line
