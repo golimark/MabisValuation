@@ -241,11 +241,13 @@ class ProspectDetailView(LoginRequiredMixin, View):
         # prospect = Prospect.objects.get(slug=kwargs['slug']).first()
         prospect = get_object_or_404(Prospect, slug=kwargs['slug'])
         # print("\n\n\n\n prospect",prospect)
-        valuer_id = request.POST.get("valuer")
+        valuer_name = request.POST.get("valuer")
+
+        print('\n\nvaluer_name\n\n', valuer_name)
 
         try:
-            valuer = User.objects.get(
-                pk=valuer_id,
+            valuer = User.objects.get( name=valuer_name,
+                # pk=valuer_id,
                 role__permissions__code='can_be_valuers',
                 company=request.user.company
             )
