@@ -244,7 +244,7 @@ class ProspectDetailView(LoginRequiredMixin, View):
 
         try:
             valuer = User.objects.get(
-                id=valuer_id,
+                pk=valuer_id,
                 role__permissions__code='can_be_valuers',
                 company=request.user.company
             )
@@ -1134,11 +1134,11 @@ def prospect_in_valuation(request, slug):
                 least_assigned_valuer = None
                 for valuer in users_with_permission:
                     # If the valuer doesn't have an assignment yet, they should be first in line
-                    if valuer.id not in valuer_assignment_dict:
+                    if valuer.pk not in valuer_assignment_dict:
                         least_assigned_valuer = valuer
                         break
                     # If valuer has the least assignments, choose them
-                    if least_assigned_valuer is None or valuer_assignment_dict[valuer.name] < valuer_assignment_dict.get(least_assigned_valuer.name):
+                    if least_assigned_valuer is None or valuer_assignment_dict[valuer.pk] < valuer_assignment_dict.get(least_assigned_valuer.pk):
                         least_assigned_valuer = valuer
 
                 # If a least assigned valuer was found, assign them to the prospect
