@@ -1128,6 +1128,9 @@ def prospect_in_valuation(request, slug):
                 )
 
                 # Check the current valuer assignment counts and find the least assigned valuer
+
+                valuer_assignment_dict = {}
+                
                 valuer_assignment_dict = {assign['valuer_assigned']: assign['assign_count'] for assign in valuer_assignments}
                 print('\n\nvaluer_assignment_dict\n\n\n', valuer_assignment_dict)
 
