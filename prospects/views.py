@@ -1127,6 +1127,7 @@ def prospect_in_valuation(request, slug):
 
                 # Check the current valuer assignment counts and find the least assigned valuer
                 valuer_assignment_dict = {assign['valuer_assigned']: assign['assign_count'] for assign in valuer_assignments}
+                print('\n\nvaluer_assignment_dict\n\n\n', valuer_assignment_dict)
                 least_assigned_valuer = None
                 for valuer in users_with_permission:
                     # If the valuer doesn't have an assignment yet, they should be first in line
@@ -1134,7 +1135,7 @@ def prospect_in_valuation(request, slug):
                         least_assigned_valuer = valuer
                         break
                     # If valuer has the least assignments, choose them
-                    if least_assigned_valuer is None or valuer_assignment_dict[valuer.id] < valuer_assignment_dict.get(least_assigned_valuer.id, float('inf')):
+                    if least_assigned_valuer is None or valuer_assignment_dict[valuer.name] < valuer_assignment_dict.get(least_assigned_valuer.name):
                         least_assigned_valuer = valuer
 
                 # If a least assigned valuer was found, assign them to the prospect
