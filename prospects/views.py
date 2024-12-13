@@ -235,27 +235,26 @@ class ProspectDetailView(LoginRequiredMixin, View):
 
             
     def post(self, request, *args, **kwargs):
-        # if 'valuer.id' in request.POST:
-        # prospect = self.get_object()
-                
-        # prospect = Prospect.objects.get(slug=kwargs['slug']).first()
         prospect = get_object_or_404(Prospect, slug=kwargs['slug'])
-        # print("\n\n\n\n prospect",prospect)
-        valuer_name = request.POST.get("valuer")
-
-        print('\n\nvaluer_name\n\n', valuer_name)
+        valuer_id = request.POST.get("valuer")
 
         try:
-            valuer = User.objects.get( name=valuer_name,
-                # pk=valuer_id,
+            valuer = User.objects.get(
+                pk=valuer_id,
                 role__permissions__code='can_be_valuers',
                 company=request.user.company
             )
-            # Assign the valuer to the prospect and save
+            print('\n\nvaluer.name before \n\n', valuer.name)
+            # Explicitly concatenate first and last name to avoid property issues
+            valuer_name = f"{valuer.first_name} {valuer.last_name}"
+
+            print('\n\nvaluer.name after \n\n', valuer.name)
+
+            # Assign the valuer's name to the prospect field
             prospect.valuer_assigned = valuer.name
-            prospect.save()
             prospect.valuer_assigned_on = timezone.now()
             prospect.save()
+
             messages.success(request, "Valuer assigned successfully.")
             return redirect(reverse('valuation_prospect_detail', kwargs={'slug': prospect.slug}))
         except User.DoesNotExist:
@@ -263,7 +262,6 @@ class ProspectDetailView(LoginRequiredMixin, View):
 
         # Redirect back to the same page after processing
         return redirect(reverse('valuation_prospect_detail', kwargs={'slug': prospect.slug}))
-
 
 # view for displaying details for a prospect
 class ProspectDetailViewforNewProspects(LoginRequiredMixin, View):
