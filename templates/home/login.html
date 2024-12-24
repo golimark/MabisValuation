@@ -1,7 +1,7 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login to MABiS</title>
@@ -9,13 +9,27 @@
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
         rel="stylesheet"
     />
+    <link rel="icon" href="{% static 'assets/app-icons/1.jfif' %}" />
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
         rel="stylesheet"
     />
+
+    <link rel="icon" href="{% static 'assets/app-icons/1.jfif' %}" />
+
+
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap1.css' %}">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{% static 'assets/css/adminlte.css' %}">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+    
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Times New Roman', Times, serif;
             background-color: #d2d6de;
             display: flex;
             justify-content: center;
@@ -24,12 +38,20 @@
             margin: 0;
         }
 
+        .form-center {
+            margin-inline:auto;
+
+        }
+
+
         .login-container {
             background-color: #fff;
             padding: 20px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 28vw;
+            width: 100%;
+            max-width: 400px;
             text-align: center;
+            border-radius: 8px;
         }
 
         .login-title {
@@ -39,7 +61,6 @@
 
         .header-div {
             text-align: center;
-            width: 28vw;
             font-size: 24px;
             padding: 20px;
             font-weight: bold;
@@ -55,6 +76,7 @@
         .same-row {
             display: flex;
             justify-content: space-between;
+            
         }
 
         .form-group {
@@ -71,7 +93,7 @@
         }
 
         button {
-            width: 120px;
+            width: 50%;
             padding: 10px;
             background-color: #367fa9;
             color: #fff;
@@ -80,38 +102,72 @@
         }
 
         button:hover {
-            background-color: #367fa9;
+            background-color: #306a91;
         }
 
         a {
             color: #367fa9;
             text-decoration: none;
         }
+
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .header-div {
+                font-size: 20px;
+                padding: 15px;
+            }
+
+            button {
+                font-size: 14px;
+            }
+
+            .form-group input {
+                font-size: 14px;
+            }
+
+            .same-row {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .same-row a {
+                margin-bottom: 10px;
+            }
+            .form-center{
+                margin-left:auto;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <div>
-    {% if messages %}
+    <div class="container">
+        
+
+        {% if messages %}
+    <center><ul class="messages">
         {% for message in messages %}
-            {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <strong>{{ message }}</strong>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong>{{ message }}</strong>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            {% endif %}
+            <!-- <li class="{{ message.tags }}">{{ message }}</li> -->
+            <div id="custom-alert" style="display: flex; align-items: center; justify-content: center; text-align: left; color: #e93c3c; background-color: #f8d7da; border: 1px solid #f5c2c7; border-radius: 5px; width: fit-content; padding: 10px 20px; margin: 10px auto;">
+                <span style="margin-right: 10px; color: #e93c3c; font-size: 18px;">
+                    <i class="fa fa-exclamation-circle" aria-hidden="true"></i> <!-- Ensure you load Font Awesome -->
+                </span>
+                <strong class="{{ message.tags }}" role="alert">{{ message }}</strong>
+                <button type="button" id="close-alert-btn" style="padding-left: 15px; background: none; border: none; font-size: 18px; color: #e93c3c; cursor: pointer;" data-bs-dismiss="alert" aria-label="Close">
+                    &times;
+                </button>
+            </div>
         {% endfor %}
+    </ul></center>
     {% endif %}
+
         <div class="header-div">
             LOGIN TO MAB<span style="color: red; text-transform: lowercase">i</span>S
         </div>
-
-        <div class="login-container">
+        <div class="login-container form-center">
             <p class="login-title">Sign in to start your session</p>
 
             <form id="login-form" method="post" action="{% url 'login' %}">
@@ -131,13 +187,22 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="font-dark" for="auth-code"><u>Optional:</u> Two-Factor Authentication if enabled</label>
-                    <input type="text" id="auth-code" name="auth_code" placeholder="Security Code from Google Authenticator">
+                    <label class="font-dark" for="auth-code"><u>Optional:</u> Two-Factor Authentication</label>
+                    <input type="text" id="auth-code" name="auth_code" placeholder="Security Code">
                 </div>
             </form>
+            <!-- <p class="text-center margin">New here? <a href="">Click here to Register.</a></p> -->
         </div>
+
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        document.getElementById('close-alert-btn').addEventListener('click', function () {
+            const alertBox = document.getElementById('custom-alert');
+            alertBox.style.display = 'none'; // Hide the alert box
+        });
+    </script>
 </body>
 </html>
