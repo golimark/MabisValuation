@@ -42,3 +42,23 @@
 #     lookup_field = 'slug'
 #     pagination_class = CustomPagination
 #     queryset = models.LandEvaluationReport.objects.all()
+
+
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
+from accounts.models import User
+from .serializers import UserSerializer
+from django.db.models import Q
+from rest_framework.viewsets import ReadOnlyModelViewSet
+
+class UserViewSet(ReadOnlyModelViewSet):  # Use ReadOnlyModelViewSet for GET-only views
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    
+# class ProspectViews(viewsets.ModelViewSet):
+#     serializer_class = serializers.ProspectSerializer
+#     lookup_field = 'slug'
+#     pagination_class = CustomPagination
+#     filter_backends = [CustomStatusFilter]
+#     queryset = Prospect.objects.filter(Q(status='Pending') | Q(status='Valuation') | Q(status='Valuation Supervisor') | Q(status='Inspection') | Q(status='Payment Verified') | Q(status='Review'))
