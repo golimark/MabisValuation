@@ -249,7 +249,7 @@ class ProspectDetailView(LoginRequiredMixin, View):
                 company=request.user.company
             )
             # Assign the valuer to the prospect and save
-            prospect.valuer_assigned = valuer.username
+            prospect.valuer_assigned = valuer.name
             prospect.valuer_assigned_on = timezone.now()
             prospect.save()
             messages.success(request, "Valuer assigned successfully.")
