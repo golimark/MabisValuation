@@ -236,6 +236,7 @@ class ProspectDetailView(LoginRequiredMixin, View):
             
     def post(self, request, *args, **kwargs):
         prospect = get_object_or_404(Prospect, slug=kwargs['slug'])
+        api_url = f'{request.user.active_company.api}/vehicles/?prospect={self.slug}'
         valuer_id = request.POST.get("valuer")
 
         try:
@@ -1308,7 +1309,7 @@ def add_valuation_report_details(request, slug):
                     return redirect('valuation_prospect_detail', slug=slug)
                 
                 # check if the length of power exeeds 5 characters
-                if len(str(form.cleaned_data['power'])) > 5:
+                if len(str(form.cleaned_data['power'])) >= 5:
                     messages.error(request, "Power value supplied can not exceed 5 digits in length. Please try again.")
                     return redirect('valuation_prospect_detail', slug=slug)
                 
