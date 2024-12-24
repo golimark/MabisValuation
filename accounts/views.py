@@ -205,6 +205,7 @@ from datetime import datetime, timedelta
 
 @login_required
 def dashboard_view(request):
+    loan_companies = LoanCompany.objects.all()
 
     if not ("can_perform_admin_functions" in request.user.permissions or "can_view_dashboard" in request.user.permissions):
         if "can_complete_asset_valuation_details" in request.user.permissions:
@@ -232,6 +233,7 @@ def dashboard_view(request):
 
     context_data = {
         "page_name": "dashboard",
+        'loan_companies': loan_companies,
         "total_principal_released": 0,
         "total_principal_released_this_year": 0,
         "total_principal_released_this_month": 0,

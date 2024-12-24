@@ -235,23 +235,26 @@ class ProspectDetailView(LoginRequiredMixin, View):
 
             
     def post(self, request, *args, **kwargs):
-        # if 'valuer.id' in request.POST:
-                
-        # prospect = Prospect.objects.get(slug=kwargs['slug']).first()
         prospect = get_object_or_404(Prospect, slug=kwargs['slug'])
-        # print("\n\n\n\n prospect",prospect)
         valuer_id = request.POST.get("valuer")
 
         try:
             valuer = User.objects.get(
-                id=valuer_id,
+                pk=valuer_id,
                 role__permissions__code='can_be_valuers',
                 company=request.user.company
             )
-            # Assign the valuer to the prospect and save
+            print('\n\nvaluer.name before \n\n', valuer.name)
+            # Explicitly concatenate first and last name to avoid property issues
+            valuer_name = f"{valuer.first_name} {valuer.last_name}"
+
+            print('\n\nvaluer.name after \n\n', valuer.name)
+
+            # Assign the valuer's name to the prospect field
             prospect.valuer_assigned = valuer.name
             prospect.valuer_assigned_on = timezone.now()
             prospect.save()
+
             messages.success(request, "Valuer assigned successfully.")
             return redirect(reverse('valuation_prospect_detail', kwargs={'slug': prospect.slug}))
         except User.DoesNotExist:
@@ -259,7 +262,6 @@ class ProspectDetailView(LoginRequiredMixin, View):
 
         # Redirect back to the same page after processing
         return redirect(reverse('valuation_prospect_detail', kwargs={'slug': prospect.slug}))
-
 
 # view for displaying details for a prospect
 class ProspectDetailViewforNewProspects(LoginRequiredMixin, View):
@@ -1116,6 +1118,8 @@ def prospect_in_valuation(request, slug):
                     company=request.user.company
                 )
 
+                print('\n\n\nusers_with_permission\n\n\n', users_with_permission)
+
                 # Get all prospects with an assigned valuer
                 valuer_assignments = (
                     Prospect.objects
@@ -1126,19 +1130,25 @@ def prospect_in_valuation(request, slug):
                 )
 
                 # Check the current valuer assignment counts and find the least assigned valuer
+
+                
+
                 valuer_assignment_dict = {assign['valuer_assigned']: assign['assign_count'] for assign in valuer_assignments}
+                print('\n\nvaluer_assignment_dict\n\n\n', valuer_assignment_dict)
+
                 least_assigned_valuer = None
                 for valuer in users_with_permission:
                     # If the valuer doesn't have an assignment yet, they should be first in line
-                    if valuer.id not in valuer_assignment_dict:
+                    if valuer.name not in valuer_assignment_dict:
                         least_assigned_valuer = valuer
                         break
                     # If valuer has the least assignments, choose them
-                    if least_assigned_valuer is None or valuer_assignment_dict[valuer.id] < valuer_assignment_dict.get(least_assigned_valuer.id, float('inf')):
+                    if least_assigned_valuer is None or valuer_assignment_dict[valuer.name] < valuer_assignment_dict[least_assigned_valuer.name]:
                         least_assigned_valuer = valuer
 
                 # If a least assigned valuer was found, assign them to the prospect
                 if least_assigned_valuer:
+                    print(f"Selected valuer: {least_assigned_valuer.name} (ID: {least_assigned_valuer.id})")
                     response = requests.patch(api_url, data={
                         "status" : "Payment Verified",
                         "payment_verified_on" : datetime.now(),
