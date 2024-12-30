@@ -163,7 +163,11 @@ class ProspectDetailView(LoginRequiredMixin, View):
                 validated_data = serializer.validated_data
                 if validated_data.get('proof_of_payment'):
                     # print(validated_data['proof_of_payment'])
-                    proof_of_payment_url = urlparse(validated_data['proof_of_payment'])
+                    if port:
+                        proof_of_payment_url = urlparse(validated_data['proof_of_payment'])
+                        proof_of_payment_url = proof_of_payment_url._replace(netloc=f"{proof_of_payment_url.hostname}:{port}")
+                    else:
+                        proof_of_payment_url = urlparse(validated_data['proof_of_payment'])
                     # proof_of_payment_url = proof_of_payment_url._replace(netloc=f"{proof_of_payment_url.hostname}:{port}")
                     validated_data['proof_of_payment'] = proof_of_payment_url.geturl()
                   
@@ -198,7 +202,11 @@ class ProspectDetailView(LoginRequiredMixin, View):
                     validated_data = vehicleSerializer.validated_data
                     if validated_data.get('logbook'):
                     # print(validated_data['proof_of_payment'])
-                        logbook_url = urlparse(validated_data['logbook'])
+                        if port:
+                            logbook_url = urlparse(validated_data['logbook'])
+                            logbook_url = logbook_url._replace(netloc=f"{logbook_url.hostname}:{port}")
+                        else:
+                            logbook_url = urlparse(validated_data['logbook'])
                         # logbook_url = logbook_url._replace(netloc=f"{logbook_url.hostname}:{port}")
                         validated_data['logbook'] = logbook_url.geturl()
                     
