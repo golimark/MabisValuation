@@ -580,24 +580,28 @@ def get_all_prospect_data(request):
 
 # API TO FETCH DATA FROM MABIS 
 def fetch_prospects_from_mabis(request):
-    # api_url = 'http://192.168.137.24:8000/api/prospects/?status=pending'
-    api_url_pending = f"{request.user.active_company.api}/prospects/?status=pending"
-    api_url_payment_verified = f"{request.user.active_company.api}/prospects/?status=payment verified"
+    if request.user.active_company:
 
-    try:
-        response = requests.get(api_url_pending)
-        response.raise_for_status()
-        payment_verified_response = requests.get(api_url_payment_verified)
-        payment_verified_response.raise_for_status()
-        data = response.json()
-        data.extend(payment_verified_response.json())
+        # api_url = 'http://192.168.137.24:8000/api/prospects/?status=pending'
+        api_url_pending = f"{request.user.active_company.api}/prospects/?status=pending"
+        api_url_payment_verified = f"{request.user.active_company.api}/prospects/?status=payment verified"
 
-        context = {'prospects': data, "page_name": "valuation", "sub_page_name": "payment_verification"}
-        return render(request, 'valuations/pending_prospect.html', context)
-    except requests.exceptions.RequestException as e:
-        print('Error is this', e)
-        return JsonResponse({'error': str(e)}, status=500)
+        try:
+            response = requests.get(api_url_pending)
+            response.raise_for_status()
+            payment_verified_response = requests.get(api_url_payment_verified)
+            payment_verified_response.raise_for_status()
+            data = response.json()
+            data.extend(payment_verified_response.json())
 
+            context = {'prospects': data, "page_name": "valuation", "sub_page_name": "payment_verification"}
+            return render(request, 'valuations/pending_prospect.html', context)
+        except requests.exceptions.RequestException as e:
+            print('Error is this', e)
+            return JsonResponse({'error': str(e)}, status=500)
+    else:
+        messages.error(request, "Please select a loan company to work with before you proceed.")
+        return redirect('dashboard')
 
 
 # def fetch_vehicle_asset_for_prospect(request):
