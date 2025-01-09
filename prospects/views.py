@@ -1407,7 +1407,8 @@ def add_valuation_report_details(request, slug):
                         prospect.save()
 
                         # supervisor = User.objects.filter(Q(role__permission__code=('can_be_supervisor')) | Q(role__permission__code=('can_perform_admin_functions'))).first()
-                        supervisor = User.objects.filter(role__permissions__code=('can_be_supervisor' and 'can_verify_payment')).first()
+                        # supervisor = User.objects.filter(role__permissions__code=('can_be_supervisor' and 'can_verify_payment')).first()
+                        supervisor = User.objects.filter(role__permissions__code='supervisor_permission_code').first()
                         if supervisor:
                             subject = 'New Prospect Valuation Supervision Request for prospect {}.'.format(prospect.name)
                             email = supervisor.email
