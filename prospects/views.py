@@ -1397,12 +1397,12 @@ def add_valuation_report_details(request, slug):
                     # update upstream prospect status
                     response = requests.patch(api_url, data={
                         "status" : 'Valuation Supervisor',
-                        "valuation_submitted_on" : datetime.now(),
+                        "valuation_submitted_on" : datetime.datetime.now(),
                         "valuation_submitted_by" : request.user.username,
                     })
                     if response.status_code >= 200 and response.status_code <= 399:
                         prospect.status = 'Valuation Supervisor'
-                        prospect.valuation_submitted_on = datetime.now()
+                        prospect.valuation_submitted_on = datetime.datetime.now()
                         prospect.valuation_submitted_by = request.user
                         prospect.save()
 
