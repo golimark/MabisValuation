@@ -6,6 +6,7 @@
     <thead>
         <tr>
             <th>Prospect</th>
+            <th>Company</th>
             <th>Vehicle Model</th>
             <th>Vehicle Make</th>
             <th>Registration Number</th>
@@ -17,6 +18,7 @@
         {% for vehicle in vehicle_data %}
         <tr>
             <td>{{ vehicle.prospect }}</td>
+            <td>{{ vehicle.prospect.company }}</td>
             {% if vehicle.vehicleevaluationreport_set.exists %}
                 {% with report=vehicle.vehicleevaluationreport_set.first %}
                     <td>{{ report.model }}</td>
