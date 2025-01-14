@@ -60,12 +60,12 @@ class VehicleEvaluationReportForm(forms.ModelForm):
 
         # Set date fields with dd/mm/yyyy format
         date_fields = ['date_of_registration', 'date_of_valuation', 'valuation_report_date']
-        
+
         for date_field in date_fields:
             if self.fields[date_field] == 'date_of_valuation':
                 self.fields[date_field].widget = forms.DateTimeInput(
                 # format='%d/%m/%Y',
-                attrs={'type': 'date', 'placeholder': 'dd/mm/yyyy'}
+                attrs={'type': 'datetime-local', 'placeholder': 'dd/mm/yyyy'}
                 )
             else:
                 self.fields[date_field].widget = forms.DateInput(
