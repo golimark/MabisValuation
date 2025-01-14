@@ -59,20 +59,20 @@ class VehicleEvaluationReportForm(forms.ModelForm):
                 field.widget.attrs.update({'id': f'id_v_{field_name}', 'data-attribute': field_name})
 
         # Set date fields with dd/mm/yyyy format
-        date_fields = ['date_of_registration', 'date_of_valuation', 'valuation_report_date']
-
+        date_fields = ['date_of_registration', 'valuation_report_date']
         for date_field in date_fields:
-            if self.fields[date_field] == 'date_of_valuation':
-                self.fields[date_field].widget = forms.DateTimeInput(
+            self.fields[date_field].widget = forms.DateInput(
                 # format='%d/%m/%Y',
-                attrs={'type': 'datetime-local', 'placeholder': 'dd/mm/yyyy'}
-                )
-            else:
-                self.fields[date_field].widget = forms.DateInput(
-                    # format='%d/%m/%Y',
-                    attrs={'type': 'date', 'placeholder': 'dd/mm/yyyy'}
-                )
-                # self.fields[date_field].input_formats = ['%d/%m/%Y']
+                attrs={'type': 'date', 'placeholder': 'dd/mm/yyyy'}
+            )
+            # self.fields[date_field].input_formats = ['%d/%m/%Y']
+
+        date_time_field = ['date_of_valuation']
+        for date_time in date_time_field:
+            self.fields[date_time].widget = forms.DateTimeInput(attrs={
+                'type': 'datetime-local',
+                'class': 'form-control',
+            })
 
 
         if prospect.status == 'Valuation':
