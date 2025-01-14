@@ -27,6 +27,13 @@ class VehicleEvaluationReportForm(forms.ModelForm):
             # 'company_valuer', 'company_valuer_remarks','company_supervisor', 'company_supervisor_remarks','company_approver', 'company_approver_remarks'
         ]
 
+        widgets = {
+            'date_of_valuation': forms.DateTimeInput(attrs={
+                'type': 'datetime-local',
+                'class': 'form-control',
+            }),
+        }
+
     # def clean_date_field(self):
     #     date_of_registration = self.cleaned_data['date_of_registration']
     #     # Convert date format if needed
@@ -58,9 +65,6 @@ class VehicleEvaluationReportForm(forms.ModelForm):
             if field_name in ['insurance_valuation', 'forced_sale', 'market_value']:
                 field.widget.attrs.update({'id': f'id_v_{field_name}', 'data-attribute': field_name})
             
-            if field_name == 'date_of_valuation':
-                field.widget.attrs.update({'type': 'datetime-local'})
-
         # Set date fields with dd/mm/yyyy format
         date_fields = ['date_of_registration', 'valuation_report_date']
         for date_field in date_fields:
@@ -69,13 +73,6 @@ class VehicleEvaluationReportForm(forms.ModelForm):
                 attrs={'type': 'date', 'placeholder': 'dd/mm/yyyy'}
             )
             # self.fields[date_field].input_formats = ['%d/%m/%Y']
-
-        date_time_field = ['date_of_valuation']
-        for date_time in date_time_field:
-            self.fields[date_time].widget = forms.DateTimeInput(attrs={
-                'type': 'datetime-local',
-                # 'class': 'form-control',
-            })
 
 
         if prospect.status == 'Valuation':
