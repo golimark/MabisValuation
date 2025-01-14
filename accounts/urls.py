@@ -29,6 +29,8 @@ urlpatterns = [
     path("company/toggle/", LoanCompanyToggleView.as_view(), name="company_toggle"),
     path('user/<str:slug>/change-password/', change_password, name='change_password'),
     path('reset-password/<str:uidb64>/<str:token>/', reset_password_view, name='reset_password'),
+    path('user/reset-your-password/', change_own_password, name='reset_your_password'),
+
 
 
 
