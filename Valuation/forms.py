@@ -71,7 +71,7 @@ class VehicleEvaluationReportForm(forms.ModelForm):
         for date_time in date_time_field:
             self.fields[date_time].widget = forms.DateTimeInput(attrs={
                 'type': 'datetime-local',
-                'class': 'form-control',
+                # 'class': 'form-control',
             })
 
 
