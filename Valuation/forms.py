@@ -57,6 +57,9 @@ class VehicleEvaluationReportForm(forms.ModelForm):
             field.widget.attrs.update({'class': 'form-control'})
             if field_name in ['insurance_valuation', 'forced_sale', 'market_value']:
                 field.widget.attrs.update({'id': f'id_v_{field_name}', 'data-attribute': field_name})
+            
+            if field_name == 'date_of_valuation':
+                field.widget.attrs.update({'type': 'datetime-local'})
 
         # Set date fields with dd/mm/yyyy format
         date_fields = ['date_of_registration', 'valuation_report_date']
