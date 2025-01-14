@@ -29,7 +29,6 @@ class VehicleEvaluationReportForm(forms.ModelForm):
 
         widgets = {
             'date_of_valuation': forms.DateTimeInput(attrs={
-                'type': 'datetime-local',
                 'class': 'form-control',
             }),
         }
