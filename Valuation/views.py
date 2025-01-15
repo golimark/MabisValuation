@@ -543,7 +543,7 @@ def printout_report(request, slug):
 
     return render(request, 'valuations/ValuationReport.html', context)
 
-
+@login_required
 def get_all_prospect_data(request):
     companies = LoanCompany.objects.all()
     data = []  # Initialize an empty list to hold all prospects
@@ -579,6 +579,7 @@ def get_all_prospect_data(request):
 
 
 # API TO FETCH DATA FROM MABIS 
+@login_required
 def fetch_prospects_from_mabis(request):
     if request.user.active_company:
 
@@ -610,7 +611,7 @@ def fetch_prospects_from_mabis(request):
 
 
 
-
+@login_required
 def fetch_vehicle_asset_for_prospect(request):
     # Fetch all VehicleAsset records and their related VehicleEvaluationReport details
     vehicle_data = VehicleAsset.objects.prefetch_related(
@@ -626,7 +627,7 @@ def fetch_vehicle_asset_for_prospect(request):
         "sub_page_name": "asset_vehicle_list"
     }
     return render(request, 'valuations/vehicle_listing.html', context)
-
+@login_required
 def vehicle_detail_view(request, slug):
     # Fetch the vehicle by slug or return a 404 if not found
     vehicle = get_object_or_404(VehicleAsset, slug=slug)
