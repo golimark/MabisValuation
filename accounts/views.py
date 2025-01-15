@@ -401,12 +401,12 @@ class RelationOfficerEditView(LoginRequiredMixin, View):
 # admin view
 class AdminDashboardView(LoginRequiredMixin, View):
     def get(self, request):
-        return render(request, 'admin/front_side_admin_side.html')
+        return render(request, 'admin/front_side_admin_side.html', {'page_name': 'dashboard'})
 
 
 class RolesListView(LoginRequiredMixin, View):
     template_name = "admin/roles/list.html"
-    context = {}
+    context = {'page_name': 'dashboard'}
 
     def get(self, request):
         # only show roles in users active company
@@ -417,7 +417,7 @@ class RolesListView(LoginRequiredMixin, View):
 
 class RolesDetailView(LoginRequiredMixin, View):
     template_name = "admin/roles/details.html"
-    context = {}
+    context = {'page_name': 'dashboard'}
 
     def get(self, request, slug):
         role = Role.objects.filter(slug=slug)
@@ -480,7 +480,7 @@ class RolesDetailView(LoginRequiredMixin, View):
 
 class RolesCreateView(LoginRequiredMixin, View):
     template_name = "admin/roles/create.html"
-    context = {}
+    context = {'page_name': 'dashboard'}
 
     def get(self, request):
         self.context["form"] = RoleForm()
@@ -532,7 +532,7 @@ class RolesCreateView(LoginRequiredMixin, View):
 
 class CreateListView(LoginRequiredMixin, View):
     template_name="admin/users/list.html"
-    context = {}
+    context = {'page_name': 'dashboard'}
 
     def get(self, request):
         self.context["users"] = User.objects.filter(company=request.user.company)
@@ -543,7 +543,7 @@ class CreateListView(LoginRequiredMixin, View):
 # # Option 1 
 # class CreateDetailView(LoginRequiredMixin, View):
 #     template_name = "admin/users/details.html"
-#     context = {}
+#     context = {'page_name': 'dashboard'}
 
 #     def get(self, request, slug):
 #         user = User.objects.filter(slug=slug)
@@ -586,7 +586,7 @@ class CreateListView(LoginRequiredMixin, View):
 
 class CreateDetailView(LoginRequiredMixin, View):
     template_name = "admin/users/details.html"
-    context = {}
+    context = {'page_name': 'dashboard'}
 
     def get(self, request, slug):
         user = User.objects.filter(slug=slug).first()
@@ -636,7 +636,7 @@ class CreateDetailView(LoginRequiredMixin, View):
 
 # class CreateCreateView(LoginRequiredMixin, View):
 #     template_name="admin/users/create.html"
-#     context = {}
+#     context = {'page_name': 'dashboard'}
 
 #     def get(self, request):
 #         self.context["form"] = UserCreateForm(user=request.user)
@@ -677,7 +677,7 @@ class CreateDetailView(LoginRequiredMixin, View):
 #         return render(request, self.template_name, context=self.context)
 class CreateCreateView(LoginRequiredMixin, View):
     template_name = "admin/users/create.html"
-    context = {}
+    context = {'page_name': 'dashboard'}
 
     def get(self, request):
         self.context["form"] = UserCreateForm(user=request.user)
@@ -732,7 +732,7 @@ def loan_collection(request):
 
 class LoanCompanyToggleView(LoginRequiredMixin, View):
     template_name = "home/change_company.html"
-    context = {}
+    context = {'page_name': 'dashboard'}
 
     def get(self, request):
         form = ActiveLoanCompanyForm()

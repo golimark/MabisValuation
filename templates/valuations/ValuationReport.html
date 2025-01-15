@@ -47,16 +47,16 @@
     <div id="printreport" class="card mb-3">
 
         <div style="align-content: center; justify-items: center;">
-            <center><img src="{{ user.company.logo.url }}" alt=""></center>
+            <center><img src="{{ user.company.logo.url }}" alt="" width="500px"></center>
         </div>
 
         <div class="card-header">
             <center> <strong>MOTOR VEHICLE VALUATION REPORT</strong> <br><br> <br> Applicant / Client :
-                <strong>{{prospect.company}}</strong>
+                <strong>{{prospect.company|upper}}</strong>
 
                 <p>(herein after referred to as the Lending Institution)</p> <br>
 
-                C/o: {{prospect.title}} {{ prospect.name }} <br> <br>
+                C/o: {{prospect.title|upper}} {{ prospect.name|upper}} <br> <br>
 
                 Date of Valuation: {{ evaluation_report.date_of_valuation }} <br><br>
 
@@ -70,16 +70,16 @@
                         <p>BACK LEFT HAND SIDE VIEW</p>
                     </div>
                 </div>
-                <strong>PLACE OF INSPECTION: {{ evaluation_report.place_of_inspection}}</strong> <br><br>
+                <strong>PLACE OF INSPECTION: {{ evaluation_report.place_of_inspection|upper}}</strong> <br><br>
                 <strong>VALUATION REPORT DATE: {{ evaluation_report.valuation_report_date}}</strong> <br><br>
 
 
                 <p style="text-align:justify;"><strong>Effective Report Summary:
                     </strong>{{evaluation_report.effective_report_summary}}</p>
-                <br>
+                
                 <p style="text-align:justify;"><strong>Limiting Conditions:
                     </strong>{{evaluation_report.limiting_conditions}}</p>
-                <br>
+                
                 <p style="text-align:justify;"><strong>Valuation: </strong>{{evaluation_report.valuation}}</p>
                 <br>
                 <p style="text-align:justify;"><strong>Market Valuation Description:
@@ -90,7 +90,7 @@
                     <thead style="background-color: #f2f2f2;">
                         <tr>
                             <th style="border: 1px solid; padding: 8px; background-color: #e0e0e0;">Name</th>
-                            <td style="border: 1px solid; padding: 8px;">{{evaluation_report.name_in_logbook}}</td>
+                            <td style="border: 1px solid; padding: 8px;">{{evaluation_report.name_in_logbook|upper}}</td>
                         </tr>
                     </thead>
                     <tbody style="background-color: #f2f2f2;">

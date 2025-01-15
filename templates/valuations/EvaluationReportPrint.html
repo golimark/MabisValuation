@@ -7,7 +7,7 @@
 <div id="printreport" class="card mb-3">
 
     <div style="align-content: center; justify-items: center;">
-        <center><img src="{{ user.company.logo.url }}" alt=""></center>
+        <center><img src="{{ user.company.logo.url }}" alt="" ></center>
     </div>
     <div class="card-header">
         <center>Applicant / Client : <strong>{{prospect.company}}</strong></center>
@@ -212,8 +212,7 @@
         {%endif%}
     </div>
 </div>
-<button><a href="{% url 'print_report' prospect.slug %}"> PRINT</a></button>
-
+<a href="{% url 'print_report' prospect.slug %}" target="_blank" class="btn btn-success">PRINT</a>
 <script>
     function printDiv1() {
         var printContents = document.getElementById("printreport").innerHTML;
