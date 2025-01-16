@@ -574,7 +574,7 @@ class ValuationProspectPendingView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         # Filter the queryset to only include prospects with 'Pending' status
-        return Prospect.objects.filter(status='Pending').order_by('created_at').filter(agent__company=self.request.user.company)
+        return Prospect.objects.filter(status='Pending').order_by('created_at').filter(agent__company=self.request.user.active_company)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
