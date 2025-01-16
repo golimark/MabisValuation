@@ -778,5 +778,45 @@ class LoanCompanyToggleView(LoginRequiredMixin, View):
 #         return render(request, self.template_name, context=self.context)
 
 
+
+
+def forgot_my_password_reset(request):
+    form = ForgetPasswordForm()
+    if request.method == "POST":
+        form = ForgetPasswordForm(request.POST)
+        if form.is_valid():
+            email = request.POST.get("email")
+            if email:
+                user = User.objects.filter(email=email).first()
+                if user:
+                    if user.email:
+                        # Generate token and encoded user ID
+                        token_generator = PasswordResetTokenGenerator()
+                        token = token_generator.make_token(user)
+                        uid = urlsafe_base64_encode(force_bytes(user.pk))
+
+                        # Construct the reset password link
+                        change_password_url = request.build_absolute_uri(
+                            reverse('reset_password', kwargs={'uidb64': uid, 'token': token})
+                        )
+
+                        subject = "PASSWORD RESET LINK"
+                        message = f"Your Password reset link has been successfully generated. \nUsername: {user.username}\nClick the following link to reset your password.\nPASSWORD RESET LINK: {change_password_url}"
+                        email = user.email
+
+                        send_email_task(subject, email, message)
+                        messages.success(request, "Password reset link sent to your email.")
+                        return redirect("login")
+                    else:
+                        messages.error(request, "User email is not valid.")
+                else:
+                    messages.error(request, "User not found.")
+            else:
+                messages.error(request, "Please provide an email address.")
+        else:
+            messages.error(request, "Invalid form submission.")
+    
+    return render(request, 'home/forgot_password_reset.html', {'form': form})
+
     
 

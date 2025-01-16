@@ -169,3 +169,9 @@ class CompanyForm(forms.ModelForm):
             'logo': forms.ClearableFileInput(attrs={'class': 'form-control'}),
             'address': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter company address'}),
         }
+
+
+
+
+class ForgetPasswordForm(forms.Form):
+    email = forms.EmailField(label="Enter your email", required=True, widget=forms.EmailInput(attrs={'class': 'form-control'}))
