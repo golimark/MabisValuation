@@ -40,9 +40,19 @@
             <a class="link" href="{% url 'prospect_valuation' %}"
                 >Valuation Requests</a
             >
+            <a class="link" href="{% url 'prospect_supervisor_review' %}"
+                >Supervisor Review</a
+            >
             {% if 'can_complete_asset_valuation_details' in request.user.permissions %}
             <a class="link" href="{% url 'prospect_review' %}">Review</a>
             {% endif %}
+
+            <a class="link" href="{% url 'get_vehicle_asset_data' %}"
+                >Vehicle Assets</a
+            >
+            <a class="link" href="{% url 'prospect_inspection' %}"
+                >Inspection Requests</a
+            >
         </div>
     </div>
     {%endif%}
