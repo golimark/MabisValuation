@@ -1,0 +1,871 @@
+[
+  {
+      "model": "accounts.permission",
+      "pk": 1,
+      "fields": {
+          "name": "Can Create Agent",
+          "code": "can_create_agent",
+          "description": "User Can Create Agent",
+          "created_at": "2024-10-29T17:02:45.918Z",
+          "updated_at": "2024-10-29T17:02:45.918Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 2,
+      "fields": {
+          "name": "Can Create Collection Officer",
+          "code": "can_create_collection_officer",
+          "description": "User Can Create Collection Officer",
+          "created_at": "2024-10-29T17:02:50.647Z",
+          "updated_at": "2024-10-29T17:02:50.647Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 3,
+      "fields": {
+          "name": "Can Create Company User",
+          "code": "can_create_company_user",
+          "description": "User Can Create Company User",
+          "created_at": "2024-10-29T17:02:55.247Z",
+          "updated_at": "2024-10-29T17:02:55.247Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 4,
+      "fields": {
+          "name": "Can Create Prospect",
+          "code": "can_create_prospect",
+          "description": "User Can Create Prospect",
+          "created_at": "2024-10-29T17:02:59.059Z",
+          "updated_at": "2024-10-29T17:02:59.059Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 5,
+      "fields": {
+          "name": "Can Delete Agent",
+          "code": "can_delete_agent",
+          "description": "User Can Delete Agent",
+          "created_at": "2024-10-29T17:03:02.929Z",
+          "updated_at": "2024-10-29T17:03:02.929Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 6,
+      "fields": {
+          "name": "Can Delete Collection Officer",
+          "code": "can_delete_collection_officer",
+          "description": "User Can Delete Collection Officer",
+          "created_at": "2024-10-29T17:03:15.096Z",
+          "updated_at": "2024-10-29T17:03:15.096Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 7,
+      "fields": {
+          "name": "Can disburse loan",
+          "code": "can_disburse_loan",
+          "description": "User Can disburse loan",
+          "created_at": "2024-10-29T17:03:27.986Z",
+          "updated_at": "2024-10-29T17:03:27.986Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 8,
+      "fields": {
+          "name": "Can make loan approval",
+          "code": "can_make_loan_approval",
+          "description": "User Can make loan approval",
+          "created_at": "2024-10-29T17:03:33.718Z",
+          "updated_at": "2024-10-29T17:03:33.718Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 9,
+      "fields": {
+          "name": "Can make operation manager recommandation",
+          "code": "can_make_operation_manager_recommandation",
+          "description": "User Can make operation manager recommandation",
+          "created_at": "2024-10-29T17:03:40.031Z",
+          "updated_at": "2024-10-29T17:03:40.031Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 10,
+      "fields": {
+          "name": "Can make sale manager recommandation",
+          "code": "can_make_sale_manager_recommandation",
+          "description": "User Can make sale manager recommandation",
+          "created_at": "2024-10-29T17:03:48.596Z",
+          "updated_at": "2024-10-29T17:03:48.596Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 11,
+      "fields": {
+          "name": "Can Update Agent",
+          "code": "can_update_agent",
+          "description": "User Can Update Agent",
+          "created_at": "2024-10-29T17:03:54.957Z",
+          "updated_at": "2024-10-29T17:03:54.957Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 12,
+      "fields": {
+          "name": "Can Update Collection Officer",
+          "code": "can_update_collection_officer",
+          "description": "User Can Update Collection Officer",
+          "created_at": "2024-10-29T17:04:00.386Z",
+          "updated_at": "2024-10-29T17:04:00.386Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 14,
+      "fields": {
+          "name": "Can View Prospects",
+          "code": "can_view_prospects",
+          "description": "User Can View Prospects",
+          "created_at": "2024-10-29T17:04:20.715Z",
+          "updated_at": "2024-10-29T17:04:20.715Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 15,
+      "fields": {
+          "name": "Can create payment",
+          "code": "can_create_payment",
+          "description": "User Can create payment",
+          "created_at": "2024-10-29T17:04:31.885Z",
+          "updated_at": "2024-10-29T17:04:31.885Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 16,
+      "fields": {
+          "name": "Can create payment as RO",
+          "code": "can_create_payment_as_ro",
+          "description": "User Can create payment as RO",
+          "created_at": "2024-10-29T17:04:40.577Z",
+          "updated_at": "2024-10-29T17:04:40.577Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 17,
+      "fields": {
+          "name": "Can Verify Payement",
+          "code": "can_verify_payement",
+          "description": "verify payment",
+          "created_at": "2024-10-29T17:07:27.869Z",
+          "updated_at": "2024-10-29T17:07:27.869Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 18,
+      "fields": {
+          "name": "Can Edit Payement",
+          "code": "can_edit_payement",
+          "description": "edit payments",
+          "created_at": "2024-10-29T17:07:42.808Z",
+          "updated_at": "2024-10-29T17:07:42.808Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 19,
+      "fields": {
+          "name": "Can Create Payment",
+          "code": "can_create_payment",
+          "description": "make payment",
+          "created_at": "2024-10-29T17:07:56.120Z",
+          "updated_at": "2024-10-29T17:07:56.120Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 20,
+      "fields": {
+          "name": "Can edit loan account",
+          "code": "can_edit_loan_account",
+          "description": "User Can edit loan account",
+          "created_at": "2024-10-29T17:54:00.742Z",
+          "updated_at": "2024-10-29T17:54:00.742Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 21,
+      "fields": {
+          "name": "Can Decline Prospect",
+          "code": "can_decline_prospect",
+          "description": "Can Decline Prospect",
+          "created_at": "2024-10-30T12:13:03.369Z",
+          "updated_at": "2024-10-30T12:13:03.369Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 22,
+      "fields": {
+          "name": "Can Verify payment as Valuer",
+          "code": "can_verify_payment_as_valuer",
+          "description": "Can Verify payment as Valuer",
+          "created_at": "2024-10-30T12:13:49.416Z",
+          "updated_at": "2024-10-30T12:13:49.416Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 23,
+      "fields": {
+          "name": "Can Edit Valuation Details",
+          "code": "can_edit_valuation_details",
+          "description": "Can Edit  Valuation Details",
+          "created_at": "2024-10-30T12:14:17.353Z",
+          "updated_at": "2024-10-30T12:54:45.138Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 24,
+      "fields": {
+          "name": "Can Complete Asset Valuation Details",
+          "code": "can_complete_asset_valuation_details",
+          "description": "Can Complete Asset Valuation Details",
+          "created_at": "2024-10-30T12:15:02.609Z",
+          "updated_at": "2024-10-30T12:15:02.609Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 25,
+      "fields": {
+          "name": "Can View Valuation Requests",
+          "code": "can_view_valuation_requests",
+          "description": "Can View Valuation Requests",
+          "created_at": "2024-10-30T12:15:29.809Z",
+          "updated_at": "2024-10-30T12:15:29.809Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 26,
+      "fields": {
+          "name": "Can Review Signed Documents",
+          "code": "can_review_signed_documents",
+          "description": "Can Review Signed Documents",
+          "created_at": "2024-10-30T12:21:27.668Z",
+          "updated_at": "2024-10-30T12:21:27.668Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 27,
+      "fields": {
+          "name": "Can Edit Loan Fees",
+          "code": "can_edit_loan_fees",
+          "description": "Can Edit Loan Fees",
+          "created_at": "2024-10-30T12:21:59.928Z",
+          "updated_at": "2024-10-30T12:21:59.928Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 28,
+      "fields": {
+          "name": "Can Create Loan Fees",
+          "code": "can_create_loan_fees",
+          "description": "Can Create Loan Fees",
+          "created_at": "2024-10-30T12:22:26.166Z",
+          "updated_at": "2024-10-30T12:22:26.166Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 29,
+      "fields": {
+          "name": "Can Create Loan Products",
+          "code": "can_create_loan_products",
+          "description": "Can Create Loan Products",
+          "created_at": "2024-10-30T12:22:47.018Z",
+          "updated_at": "2024-10-30T12:22:47.018Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 30,
+      "fields": {
+          "name": "Can Edit Loan Products",
+          "code": "can_edit_loan_products",
+          "description": "Can Edit Loan Products",
+          "created_at": "2024-10-30T12:23:24.728Z",
+          "updated_at": "2024-10-30T12:23:24.729Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 31,
+      "fields": {
+          "name": "Can Delete Loan Products",
+          "code": "can_delete_loan_products",
+          "description": "Can Delete Loan Products",
+          "created_at": "2024-10-30T12:23:44.436Z",
+          "updated_at": "2024-10-30T12:23:44.436Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 34,
+      "fields": {
+          "name": "Can Create Loan Collection Products",
+          "code": "can_create_loan_collection_products",
+          "description": "Can Create Loan Collection Products",
+          "created_at": "2024-10-30T12:24:52.605Z",
+          "updated_at": "2024-10-30T12:24:52.605Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 35,
+      "fields": {
+          "name": "Can Edit Loan Collection Products",
+          "code": "can_edit_loan_collection_products",
+          "description": "Can Edit Loan Collection Products",
+          "created_at": "2024-10-30T12:25:13.204Z",
+          "updated_at": "2024-10-30T12:25:13.205Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 36,
+      "fields": {
+          "name": "Can View Loan Products",
+          "code": "can_view_loan_products",
+          "description": "Can View Loan Products",
+          "created_at": "2024-10-30T12:29:40.003Z",
+          "updated_at": "2024-10-30T12:29:40.003Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 37,
+      "fields": {
+          "name": "Can View Loan Collection Products",
+          "code": "can_view_loan_collection_products",
+          "description": "Can View Loan Collection Products",
+          "created_at": "2024-10-30T12:29:54.733Z",
+          "updated_at": "2024-10-30T12:29:54.733Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 38,
+      "fields": {
+          "name": "Can complete prospect details",
+          "code": "can_complete_prospect_details",
+          "description": "Can complete prospect details",
+          "created_at": "2024-10-30T13:31:56.915Z",
+          "updated_at": "2024-10-30T13:31:56.915Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 39,
+      "fields": {
+          "name": "Can Delete Prospect",
+          "code": "can_delete_prospect",
+          "description": "Can Delete Prospect",
+          "created_at": "2024-10-30T13:33:30.725Z",
+          "updated_at": "2024-10-30T13:33:30.725Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 40,
+      "fields": {
+          "name": "Can View Agent",
+          "code": "can_view_agent",
+          "description": "Can View Agent",
+          "created_at": "2024-10-30T13:34:51.246Z",
+          "updated_at": "2024-10-30T13:34:51.246Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 41,
+      "fields": {
+          "name": "Can make loan application",
+          "code": "can_make_loan_application",
+          "description": "Can make loan application",
+          "created_at": "2024-10-30T13:37:49.831Z",
+          "updated_at": "2024-10-31T08:04:04.733Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 42,
+      "fields": {
+          "name": "Can do offer review",
+          "code": "can_do_offer_review",
+          "description": "Can do offer review",
+          "created_at": "2024-10-30T13:45:08.382Z",
+          "updated_at": "2024-10-30T13:45:08.382Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 43,
+      "fields": {
+          "name": "Can do Loan Perfection",
+          "code": "can_do_loan_perfections",
+          "description": "Can do Loan Perfection",
+          "created_at": "2024-10-30T13:45:43.079Z",
+          "updated_at": "2024-10-30T13:45:43.079Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 44,
+      "fields": {
+          "name": "Can do disbursement review",
+          "code": "can_do_disbursement_review",
+          "description": "Can do disbursement review",
+          "created_at": "2024-10-30T13:46:57.921Z",
+          "updated_at": "2024-10-30T13:46:57.921Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 45,
+      "fields": {
+          "name": "Can do loan Disbursement",
+          "code": "can_do_loan_disbursement",
+          "description": "Can do loan Disbursement",
+          "created_at": "2024-10-30T13:47:28.731Z",
+          "updated_at": "2024-10-30T13:47:28.731Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 46,
+      "fields": {
+          "name": "Can view loan Collections",
+          "code": "can_view_loan_collections",
+          "description": "Can view loan Collections",
+          "created_at": "2024-10-30T13:47:48.093Z",
+          "updated_at": "2024-10-30T13:47:48.093Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 48,
+      "fields": {
+          "name": "Can View Pipeline",
+          "code": "can_view_pipeline",
+          "description": "Can View Pipeline",
+          "created_at": "2024-10-31T07:55:36.133Z",
+          "updated_at": "2024-10-31T07:55:44.315Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 49,
+      "fields": {
+          "name": "Can view failed applications",
+          "code": "can_view_failed_applications",
+          "description": "User Can view failed applications",
+          "created_at": "2024-10-31T08:04:18.981Z",
+          "updated_at": "2024-10-31T08:04:29.620Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 50,
+      "fields": {
+          "name": "Can view queried applications",
+          "code": "can_view_queried_applications",
+          "description": "User Can view queried applications",
+          "created_at": "2024-10-31T08:27:49Z",
+          "updated_at": "2024-10-31T08:27:55.675Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 51,
+      "fields": {
+          "name": "Can review loan approvals",
+          "code": "can_review_loan_approvals",
+          "description": "User Can review loan approvals",
+          "created_at": "2024-10-31T09:02:50.503Z",
+          "updated_at": "2024-10-31T09:02:50.503Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 52,
+      "fields": {
+          "name": "Can view approved loans",
+          "code": "can_view_approved_loans",
+          "description": "User Can view approved loans",
+          "created_at": "2024-10-31T09:05:15.974Z",
+          "updated_at": "2024-10-31T09:05:15.974Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 53,
+      "fields": {
+          "name": "Can review loan documents",
+          "code": "can_review_loan_documents",
+          "description": "User Can review loan documents",
+          "created_at": "2024-10-31T09:05:41.175Z",
+          "updated_at": "2024-10-31T09:05:41.175Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 54,
+      "fields": {
+          "name": "Can review signed loan documents",
+          "code": "can_review_signed_loan_documents",
+          "description": "User Can review signed loan documents",
+          "created_at": "2024-10-31T09:06:13.806Z",
+          "updated_at": "2024-10-31T09:06:13.806Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 55,
+      "fields": {
+          "name": "Can view declined loan offers",
+          "code": "can_view_declined_loan_offers",
+          "description": "User Can view declined loan offers",
+          "created_at": "2024-10-31T09:06:50.187Z",
+          "updated_at": "2024-10-31T09:06:50.187Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 56,
+      "fields": {
+          "name": "can view loan origination",
+          "code": "can_view_loan_origination",
+          "description": "User can view loan origination",
+          "created_at": "2024-10-31T10:16:35.464Z",
+          "updated_at": "2024-10-31T10:16:43.683Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 57,
+      "fields": {
+          "name": "Can perform credit manager functions",
+          "code": "can_perform_credit_manager_functions",
+          "description": "User Can perform credit manager functions",
+          "created_at": "2024-11-01T10:13:38.078Z",
+          "updated_at": "2024-11-01T10:13:38.079Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 58,
+      "fields": {
+          "name": "Can perform legal team functions",
+          "code": "can_perform_legal_team_functions",
+          "description": "User Can perform legal team functions",
+          "created_at": "2024-11-01T10:14:25.074Z",
+          "updated_at": "2024-11-01T10:14:25.074Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 59,
+      "fields": {
+          "name": "Can view all application data",
+          "code": "can_view_all_application_data",
+          "description": "User Can view all application data",
+          "created_at": "2024-11-01T12:19:46.263Z",
+          "updated_at": "2024-11-01T12:19:46.263Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 60,
+      "fields": {
+          "name": "Can View Dashboard",
+          "code": "can_view_dashboard",
+          "description": "User Can View Dashboard",
+          "created_at": "2024-11-01T12:20:32.677Z",
+          "updated_at": "2024-11-01T12:20:32.677Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 62,
+      "fields": {
+          "name": "Can change user password",
+          "code": "can_change_user_password",
+          "description": "User Can change user password",
+          "created_at": "2024-11-01T12:40:43.452Z",
+          "updated_at": "2024-11-01T12:40:43.452Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 63,
+      "fields": {
+          "name": "can do disbursement review as credit",
+          "code": "can_do_disbursement_review_as_credit",
+          "description": "User can do disbursement review as credit",
+          "created_at": "2024-11-02T07:02:20.527Z",
+          "updated_at": "2024-11-02T07:02:20.527Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 64,
+      "fields": {
+          "name": "can do disbursement review as ops",
+          "code": "can_do_disbursement_review_as_ops",
+          "description": "User can do disbursement review as ops",
+          "created_at": "2024-11-02T07:02:25.090Z",
+          "updated_at": "2024-11-02T07:02:25.090Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 65,
+      "fields": {
+          "name": "can do disbursement review as legal team",
+          "code": "can_do_disbursement_review_as_legal_team",
+          "description": "User can do disbursement review as legal team",
+          "created_at": "2024-11-02T07:02:33.932Z",
+          "updated_at": "2024-11-02T07:02:33.932Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 66,
+      "fields": {
+          "name": "can do disbursement review as finance",
+          "code": "can_do_disbursement_review_as_finance",
+          "description": "User can do disbursement review as finance team",
+          "created_at": "2024-11-02T07:02:40.634Z",
+          "updated_at": "2024-11-04T07:15:06.754Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 67,
+      "fields": {
+          "name": "Can Perform Admin Functions",
+          "code": "can_perform_admin_functions",
+          "description": "User Can Perform Admin Functions",
+          "created_at": "2024-11-02T11:30:35.153Z",
+          "updated_at": "2024-11-02T11:30:35.153Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 68,
+      "fields": {
+          "name": "can approve agent",
+          "code": "can_approve_agent",
+          "description": "User can approve agent",
+          "created_at": "2024-11-06T14:08:29.868Z",
+          "updated_at": "2024-11-06T14:08:29.868Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 69,
+      "fields": {
+          "name": "can decline agent",
+          "code": "can_decline_agent",
+          "description": "User can decline agent",
+          "created_at": "2024-11-06T14:08:37.906Z",
+          "updated_at": "2024-11-06T14:08:37.906Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 70,
+      "fields": {
+          "name": "can switch companies",
+          "code": "can_switch_companies",
+          "description": "User can switch companies",
+          "created_at": "2024-11-06T14:09:00.081Z",
+          "updated_at": "2024-11-06T14:09:00.081Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 71,
+      "fields": {
+          "name": "Can be valuers",
+          "code": "can_be_valuers",
+          "description": "User Can be valuers",
+          "created_at": "2024-11-07T13:14:30.431Z",
+          "updated_at": "2024-11-07T13:14:30.431Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 72,
+      "fields": {
+          "name": "Can be supervisor",
+          "code": "can_be_supervisor",
+          "description": "User Can be supervisor",
+          "created_at": "2024-11-07T13:14:45.448Z",
+          "updated_at": "2024-11-07T13:14:45.448Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 73,
+      "fields": {
+          "name": "can do disbursement",
+          "code": "can_do_disbursement",
+          "description": "User can do disbursement",
+          "created_at": "2024-11-26T20:29:47.118Z",
+          "updated_at": "2024-11-26T20:29:47.118Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 74,
+      "fields": {
+          "name": "cannot view market and forced sale",
+          "code": "cannot_view_market_and_forced_sale",
+          "description": "User cannot view market and forced sale",
+          "created_at": "2024-11-29T10:39:52.273Z",
+          "updated_at": "2024-11-29T10:39:52.273Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 75,
+      "fields": {
+          "name": "can initiate expectional request",
+          "code": "can_initiate_expectional_request",
+          "description": "User can initiate expectional request",
+          "created_at": "2024-11-29T10:40:16.402Z",
+          "updated_at": "2024-11-29T10:40:16.402Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 76,
+      "fields": {
+          "name": "can initiate expectional request as general sale manager",
+          "code": "can_initiate_expectional_request_as_general_sale_manager",
+          "description": "User can initiate expectional request as general sale manager",
+          "created_at": "2024-11-29T10:40:40.982Z",
+          "updated_at": "2024-11-29T10:40:40.982Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 77,
+      "fields": {
+          "name": "can initiate expectional request as sm",
+          "code": "can_initiate_expectional_request_as_sm",
+          "description": "User can initiate expectional request as sm",
+          "created_at": "2024-11-29T10:41:03.715Z",
+          "updated_at": "2024-11-29T10:41:03.715Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 78,
+      "fields": {
+          "name": "can view agent as team leader",
+          "code": "can_view_agent_as_team_leader",
+          "description": "User can view agent as team leader",
+          "created_at": "2024-11-29T10:41:58.664Z",
+          "updated_at": "2024-11-29T10:41:58.664Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 79,
+      "fields": {
+          "name": "can review exception request as credit manager",
+          "code": "can_review_exception_request_as_credit_manager",
+          "description": "User can review exception request as credit manager",
+          "created_at": "2024-11-29T10:42:56.067Z",
+          "updated_at": "2024-11-29T10:42:56.067Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 80,
+      "fields": {
+          "name": "can review exception request as collection manager",
+          "code": "can_review_exception_request_as_collection_manager",
+          "description": "User can review exception request as collection manager",
+          "created_at": "2024-11-29T10:43:26.370Z",
+          "updated_at": "2024-11-29T10:43:26.370Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 81,
+      "fields": {
+          "name": "can review exception request as general sale manager",
+          "code": "can_review_exception_request_as_general_sale_manager",
+          "description": "User can review exception request as general sale manager",
+          "created_at": "2024-11-29T10:44:19.627Z",
+          "updated_at": "2024-11-29T10:44:19.627Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 82,
+      "fields": {
+          "name": "can approval exception request",
+          "code": "can_approval_exception_request",
+          "description": "User can approval exception request",
+          "created_at": "2024-11-29T10:45:17.551Z",
+          "updated_at": "2024-11-29T10:45:17.551Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 83,
+      "fields": {
+          "name": "can review exception request as sales manager",
+          "code": "can_review_exception_request_as_sales_manager",
+          "description": "User can review exception request as sales manager",
+          "created_at": "2024-11-29T10:45:44.623Z",
+          "updated_at": "2024-11-29T10:45:44.623Z"
+      }
+  },
+  {
+      "model": "accounts.permission",
+      "pk": 84,
+      "fields": {
+          "name": "can review exception request as co",
+          "code": "can_review_exception_request_as_co",
+          "description": "User can review exception request as co",
+          "created_at": "2024-11-29T10:46:22.769Z",
+          "updated_at": "2024-11-29T10:46:22.769Z"
+      }
+  }
+]

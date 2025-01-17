@@ -578,12 +578,6 @@ def get_all_prospect_data(request):
     return render(request, 'prospects/all_prospect_jobs.html', context)
 
 
-<<<<<<< HEAD
-# API TO FETCH DATA FROM MABIS
-=======
-# API TO FETCH DATA FROM MABIS 
->>>>>>> dfc9d907956952cc04177ad69728349351100e8b
-@login_required
 def fetch_prospects_from_mabis(request):
     if request.user.active_company:
         context = {'prospects': [], "page_name": "valuation", "sub_page_name": "payment_verification"}
