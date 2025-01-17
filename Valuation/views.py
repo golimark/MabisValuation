@@ -103,7 +103,7 @@ class ValuationProspectDetailView(LoginRequiredMixin, DetailView):
         context["sub_page_name"] =  "valuation_review"
 
         return context
-        
+
     def post(self, request, *args, **kwargs):
         prospect = self.get_object()
         print(prospect, 'prospect')
@@ -216,7 +216,7 @@ def get_least_assigned_valuer(company):
             active_company=company
         )
 
-        assignments = Prospect.objects.filter(valuer_assigned__in=users_with_permission).values('valuer_assigned').annotate(count=Count('valuer_assigned')).order_by('count')        
+        assignments = Prospect.objects.filter(valuer_assigned__in=users_with_permission).values('valuer_assigned').annotate(count=Count('valuer_assigned')).order_by('count')
 
         if assignments:
             # Get the valuer with the least assignments
@@ -248,7 +248,7 @@ def prospect_in_valuation(request, slug):
         prospect.status = "Payment Verified"
         prospect.payment_verified_on = datetime.now()
         prospect.payment_verified_by = request.user
-    
+
         prospect.save()
         print(f"Prospect status updated to Payment Verified for {prospect.name}")
 
@@ -372,7 +372,7 @@ def set_valuation_supervisor(request, slug):
 #                 form = form.save(commit=False)
 #                 form.prospect = prospect
 #                 # prospect.status = 'Valuation Supervisor'
-                
+
 #                 form.save()
 
 #                 # fields = VehicleEvaluationReport.objects.filter(vehicle__prospect=prospect).first()
@@ -425,7 +425,7 @@ def set_valuation_supervisor(request, slug):
 #         #
 #         # Vehicles
 #         v_reports = VehicleEvaluationReport.objects.filter(vehicle__prospect=prospect)
-        
+
 #         if v_reports:
 #             # prospect.status = 'Valuation Supervisor' --> don't put prospect status here.
 #             context["v_reports"] = [{"form": VehicleEvaluationReportForm(instance=report, prospect=prospect), "report": report, } for report in v_reports]
@@ -554,7 +554,7 @@ def get_all_prospect_data(request):
 
         try:
             print(f"Fetching data for company: {company.name}")
-            
+
             # Fetch pending prospects
             pending_response = requests.get(api_url_for_pending_prospects)
             pending_response.raise_for_status()  # Raise an exception for HTTP errors
@@ -568,7 +568,7 @@ def get_all_prospect_data(request):
             # Append the fetched data to the main list
             data.extend(pending_data)
             data.extend(payment_verified_data)
-        
+
         except requests.exceptions.RequestException as e:
             print(f"Error fetching data for {company.name}: {e}")
             # Optionally, log or append error information for debugging
@@ -578,10 +578,11 @@ def get_all_prospect_data(request):
     return render(request, 'prospects/all_prospect_jobs.html', context)
 
 
-# API TO FETCH DATA FROM MABIS 
+# API TO FETCH DATA FROM MABIS
+@login_required
 def fetch_prospects_from_mabis(request):
     if request.user.active_company:
-
+        context = {'prospects': [], "page_name": "valuation", "sub_page_name": "payment_verification"}
         # api_url = 'http://192.168.137.24:8000/api/prospects/?status=pending'
         api_url_pending = f"{request.user.active_company.api}/prospects/?status=pending"
         api_url_payment_verified = f"{request.user.active_company.api}/prospects/?status=payment verified"
@@ -594,11 +595,10 @@ def fetch_prospects_from_mabis(request):
             data = response.json()
             data.extend(payment_verified_response.json())
 
-            context = {'prospects': data, "page_name": "valuation", "sub_page_name": "payment_verification"}
+            context['prospects']= data
             return render(request, 'valuations/pending_prospect.html', context)
         except requests.exceptions.RequestException as e:
-            print('Error is this', e)
-            return JsonResponse({'error': str(e)}, status=500)
+            return render(request, 'valuations/pending_prospect.html', context)
     else:
         messages.error(request, "Please select a loan company to work with before you proceed.")
         return redirect('dashboard')

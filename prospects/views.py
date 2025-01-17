@@ -130,7 +130,7 @@ class ProspectDetailView(LoginRequiredMixin, View):
     def get(self, request, slug):
         if request.user.active_company:
             context = {}
-            
+
             # fetch prospect
             try:
                 api_url = f'{request.user.active_company.api}/prospects/{slug}'
@@ -138,19 +138,19 @@ class ProspectDetailView(LoginRequiredMixin, View):
                 response.raise_for_status()
 
                 data = response.json()
-                
+
                 if data["valuation_submitted_by"]:
                     data["valuation_submitted_by"] = User.objects.filter(username=data["valuation_submitted_by"]).first().pk # if User.objects.filter(username=data["valuation_submitted_by"]).first() else User.objects.filter(username=data["valuation_submitted_by"]).first()
-                
+
                 if data["valuation_reviewd_by"]:
                     data["valuation_reviewd_by"] = User.objects.filter(username=data["valuation_reviewd_by"]).first().pk #if User.objects.filter(username=data["valuation_reviewd_by"]).first() else User.objects.filter(username=data["valuation_reviewd_by"]).first()
-                    
+
                 if Prospect.objects.filter(slug = slug):
-                
+
                     # update saved record to track any changes
                     prospect = Prospect.objects.filter(slug = slug).first()
                     serializer = ApiSerializers.ProspectSerializer(prospect, data=data, partial=True)
-                
+
                 else:
                     serializer = ApiSerializers.ProspectSerializer(data=data)
 
@@ -159,7 +159,7 @@ class ProspectDetailView(LoginRequiredMixin, View):
                     port = parsed_url.port
 
                     # Modify the proof_of_payment URL to include the port number
-                
+
                     # Modify the proof_of_payment URL to include the port number
                     validated_data = serializer.validated_data
                     if validated_data.get('proof_of_payment'):
@@ -171,30 +171,30 @@ class ProspectDetailView(LoginRequiredMixin, View):
                             proof_of_payment_url = urlparse(validated_data['proof_of_payment'])
                         # proof_of_payment_url = proof_of_payment_url._replace(netloc=f"{proof_of_payment_url.hostname}:{port}")
                         validated_data['proof_of_payment'] = proof_of_payment_url.geturl()
-                    
+
                     prospect = serializer.save()
-                        
+
                     context['prospect'] = prospect
-                    
+
                 # fetch vechicle assets
-                    
+
                 api_url = f'{request.user.active_company.api}/vehicles/?prospect={slug}'
                 response = requests.get(api_url)
                 response.raise_for_status()
                 v_data = response.json()
                 for vehicle in v_data:
                     vehicle['prospect'] = prospect.id
-                
+
                 for vehicle_data in v_data:
                     vehicle = VehicleAsset.objects.filter(slug = vehicle_data["slug"])
-                    
+
                     if not vehicle:
                         vehicleSerializer = ApiSerializers.VehicleAssetSerializer(data=vehicle_data)
-                    
+
                     else:
                         vehicleSerializer = ApiSerializers.VehicleAssetSerializer(vehicle.first(), data=vehicle_data, partial=True)
-                    
-                
+
+
                     if vehicleSerializer.is_valid(raise_exception=True):
                         # first handle modifying the url to have  port number
                         parsed_url = urlparse(request.user.active_company.api)
@@ -210,9 +210,9 @@ class ProspectDetailView(LoginRequiredMixin, View):
                                 logbook_url = urlparse(validated_data['logbook'])
                             # logbook_url = logbook_url._replace(netloc=f"{logbook_url.hostname}:{port}")
                             validated_data['logbook'] = logbook_url.geturl()
-                        
+
                         vehicleSerializer.save()
-                
+
                 users_with_permission = User.objects.filter(
                         role__permissions__code='can_be_valuers',
                         company=self.request.user.company
@@ -233,10 +233,10 @@ class ProspectDetailView(LoginRequiredMixin, View):
 
                 context["page_name"] =  "valuation"
                 context["sub_page_name"] =  "valuation_requests"
-            
+
                 return render(request, self.template_name, context=context)
 
-                    
+
             except requests.exceptions.RequestException as e:
                 print('Error is this', e)
                 return JsonResponse({'error': str(e)}, status=500)
@@ -245,7 +245,7 @@ class ProspectDetailView(LoginRequiredMixin, View):
             return redirect('dashboard')
 
 
-            
+
     def post(self, request, *args, **kwargs):
         if request.user.active_company:
             prospect = get_object_or_404(Prospect, slug=kwargs['slug'])
@@ -290,7 +290,7 @@ class ProspectDetailViewforNewProspects(LoginRequiredMixin, View):
     def get(self, request, slug):
         if request.user.active_company:
             context = {}
-            
+
             # fetch prospect
             try:
                 api_url = f'{request.user.active_company.api}/prospects/{slug}'
@@ -299,21 +299,21 @@ class ProspectDetailViewforNewProspects(LoginRequiredMixin, View):
 
                 data = response.json()
                 print('\n\n got this data here', data)
-                
+
                 if data["valuation_submitted_by"]:
                     data["valuation_submitted_by"] = User.objects.filter(username=data["valuation_submitted_by"]).first().pk if User.objects.filter(username=data["valuation_submitted_by"]).first() else User.objects.filter(username=data["valuation_submitted_by"]).first()
-                
+
                 if data["valuation_reviewd_by"]:
                     data["valuation_reviewd_by"] = User.objects.filter(username=data["valuation_reviewd_by"]).first().pk if User.objects.filter(username=data["valuation_reviewd_by"]).first() else User.objects.filter(username=data["valuation_reviewd_by"]).first()
-                
-                    
+
+
                 if Prospect.objects.filter(slug = slug):
                     # update saved record to track any changes
                     prospect = Prospect.objects.filter(slug = slug).first()
-                    
+
                     serializer = ApiSerializers.ProspectSerializer(prospect, data=data, partial=True)
-                
-                
+
+
                 else:
                     serializer = ApiSerializers.ProspectSerializer(data=data)
 
@@ -322,7 +322,7 @@ class ProspectDetailViewforNewProspects(LoginRequiredMixin, View):
                     port = parsed_url.port
 
                     # Modify the proof_of_payment URL to include the port number
-                
+
                     # Modify the proof_of_payment URL to include the port number
                     validated_data = serializer.validated_data
                     if validated_data.get('proof_of_payment'):
@@ -330,32 +330,32 @@ class ProspectDetailViewforNewProspects(LoginRequiredMixin, View):
                         proof_of_payment_url = urlparse(validated_data['proof_of_payment'])
                         proof_of_payment_url = proof_of_payment_url._replace(netloc=f"{proof_of_payment_url.hostname}:{port}")
                         validated_data['proof_of_payment'] = proof_of_payment_url.geturl()
-                    
+
                     prospect = serializer.save()
-                        
+
                     context['prospect'] = prospect
-                    
+
                 else:
                     print(serializer.errors)
                 # fetch vechicle assets
-                    
+
                 api_url = f'{request.user.active_company.api}/vehicles/?prospect={slug}'
                 response = requests.get(api_url)
                 response.raise_for_status()
                 v_data = response.json()
                 for vehicle in v_data:
                     vehicle['prospect'] = prospect.id
-                
+
                 for vehicle_data in v_data:
                     vehicle = VehicleAsset.objects.filter(slug = vehicle_data["slug"])
-                    
+
                     if not vehicle:
                         vehicleSerializer = ApiSerializers.VehicleAssetSerializer(data=vehicle_data)
-                    
+
                     else:
                         vehicleSerializer = ApiSerializers.VehicleAssetSerializer(vehicle.first(), data=vehicle_data, partial=True)
-                    
-                
+
+
                     if vehicleSerializer.is_valid(raise_exception=True):
                         # first handle modifying the url to have  port number
                         parsed_url = urlparse(request.user.active_company.api)
@@ -367,9 +367,9 @@ class ProspectDetailViewforNewProspects(LoginRequiredMixin, View):
                             logbook_url = urlparse(validated_data['logbook'])
                             logbook_url = logbook_url._replace(netloc=f"{logbook_url.hostname}:{port}")
                             validated_data['logbook'] = logbook_url.geturl()
-                        
+
                         vehicleSerializer.save()
-                
+
                 users_with_permission = User.objects.filter(
                         role__permissions__code='can_be_valuers',
                         company=self.request.user.company
@@ -390,10 +390,10 @@ class ProspectDetailViewforNewProspects(LoginRequiredMixin, View):
 
                 context["page_name"] =  "valuation"
                 context["sub_page_name"] =  "valuation_requests"
-            
+
                 return render(request, self.template_name, context=context)
 
-                    
+
             except requests.exceptions.RequestException as e:
                 print('Error is this', e)
                 return JsonResponse({'error': str(e)}, status=500)
@@ -401,13 +401,13 @@ class ProspectDetailViewforNewProspects(LoginRequiredMixin, View):
             messages.error(request, "Please select a loan company to work with before you proceed.")
             return redirect('dashboard')
 
-            
+
     def post(self, request, *args, **kwargs):
         if request.user.active_company:
 
             # print('\n\n\n at point of posting')
             # if 'valuer.id' in request.POST:
-                    
+
             # prospect = Prospect.objects.get(slug=kwargs['slug']).first()
             prospect = get_object_or_404(Prospect, slug=kwargs['slug'])
             print('\n\n prospect', prospect)
@@ -535,7 +535,7 @@ class ValuationProspectListView(LoginRequiredMixin, View):
             # api_url = 'http://192.168.20.83:8000/api/prospects/?status=valuation'
             api_url = f'{request.user.active_company.api}/prospects/?status=valuation'
 
-            
+
             try:
                 response = requests.get(api_url)
                 response.raise_for_status()
@@ -550,7 +550,7 @@ class ValuationProspectListView(LoginRequiredMixin, View):
         else:
             messages.error(request, "Please select a loan company to work with before you proceed.")
             return redirect('dashboard')
-        
+
 # view for showing prospects with 'Pending' status to enable access to customized buttons
 class ValuationProspectPendingView(LoginRequiredMixin, ListView):
     model = Prospect
@@ -578,7 +578,7 @@ class ValuationProspectDetailView(LoginRequiredMixin, DetailView):
         if request.user.active_company:
 
             context = {}
-            
+
             # fetch prospect
             try:
                 api_url = f'{request.user.active_company.api}/prospects/{slug}'
@@ -586,14 +586,14 @@ class ValuationProspectDetailView(LoginRequiredMixin, DetailView):
                 response.raise_for_status()
 
                 data = response.json()
-                
+
                 if data["valuation_submitted_by"]:
                     data["valuation_submitted_by"] = User.objects.filter(username=data["valuation_submitted_by"]).first().pk if User.objects.filter(username=data["valuation_submitted_by"]).first() else User.objects.filter(username=data["valuation_submitted_by"]).first()
-                
+
                 if data["valuation_reviewd_by"]:
                     data["valuation_reviewd_by"] = User.objects.filter(username=data["valuation_reviewd_by"]).first().pk if User.objects.filter(username=data["valuation_reviewd_by"]).first() else User.objects.filter(username=data["valuation_reviewd_by"]).first()
-                
-                    
+
+
                 if Prospect.objects.filter(slug = slug):
                     # update saved record to track any changes
                     prospect = Prospect.objects.filter(slug = slug).first()
@@ -602,12 +602,12 @@ class ValuationProspectDetailView(LoginRequiredMixin, DetailView):
                     serializer = ApiSerializers.ProspectSerializer(data=data)
 
                 if serializer.is_valid():
-                    prospect = serializer.save()    
+                    prospect = serializer.save()
                     context['prospect'] = prospect
 
-                
+
                 # fetch vechicle assets
-                    
+
                 api_url = f'{request.user.active_company.api}/vehicles/?prospect={slug}'
                 response = requests.get(api_url)
                 response.raise_for_status()
@@ -617,7 +617,7 @@ class ValuationProspectDetailView(LoginRequiredMixin, DetailView):
                     vehicle['prospect'] = prospect.id
 
                 for vehicle_data in v_data:
-                    
+
                     vehicle = VehicleAsset.objects.filter(slug = vehicle_data["slug"])
                     if not vehicle:
                         vehicleSerializer = ApiSerializers.VehicleAssetSerializer(data=vehicle_data)
@@ -661,20 +661,20 @@ class ValuationProspectDetailView(LoginRequiredMixin, DetailView):
 
                 context["page_name"] =  "valuation"
                 context["sub_page_name"] =  "valuation_review"
-            
+
                 return render(request, self.template_name, context=context)
 
-                    
+
             except requests.exceptions.RequestException as e:
                 print('Error is this', e)
                 return JsonResponse({'error': str(e)}, status=500)
         else:
             messages.error(request, "Please select a loan company to work with before you proceed.")
             return redirect('dashboard')
-        
+
     def post(self, request, slug):
         if request.user.active_company:
-            
+
             valuer_id = request.POST.get("valuer")
 
             api_url = f'{request.user.active_company.api}/prospects/{slug}/'
@@ -701,14 +701,14 @@ class ValuationProspectDetailView(LoginRequiredMixin, DetailView):
                             "valuer_assigned" : prospect['valuer_assigned'],
                             "valuer_assigned_on" : timezone.now(),
                         })
-                    
+
                     if response.status_code >= 200 and response.status_code <= 399:
                         print('Response is: ',response.status_code)
                         # was successful
                         messages.success(request, "Valuer assigned successfully.")
                         # return JsonResponse({'success': 'Payment verified and valuer assigned.'})
                         return redirect(reverse('valuation_prospect_detail', args=[slug]))
-                    
+
                 except User.DoesNotExist:
                     messages.error(request, "Selected valuer is invalid or does not have permission.")
 
@@ -732,7 +732,7 @@ class ValuationProspectDetailViewforNewProspects(LoginRequiredMixin, DetailView)
         if request.user.active_company:
 
             context = {}
-            
+
             # fetch prospect
             try:
                 api_url = f'{request.user.active_company.api}/prospects/{slug}'
@@ -740,14 +740,14 @@ class ValuationProspectDetailViewforNewProspects(LoginRequiredMixin, DetailView)
                 response.raise_for_status()
 
                 data = response.json()
-                
+
                 if data["valuation_submitted_by"]:
                     data["valuation_submitted_by"] = User.objects.filter(username=data["valuation_submitted_by"]).first()
-                
+
                 if data["valuation_reviewd_by"]:
                     data["valuation_reviewd_by"] = User.objects.filter(username=data["valuation_reviewd_by"]).first()
-                
-                    
+
+
                 if Prospect.objects.filter(slug = slug):
                     # update saved record to track any changes
                     prospect = Prospect.objects.filter(slug = slug).first()
@@ -756,12 +756,12 @@ class ValuationProspectDetailViewforNewProspects(LoginRequiredMixin, DetailView)
                     serializer = ApiSerializers.ProspectSerializer(data=data)
 
                 if serializer.is_valid():
-                    prospect = serializer.save()    
+                    prospect = serializer.save()
                     context['prospect'] = prospect
 
-                
+
                 # fetch vechicle assets
-                    
+
                 api_url = f'{request.user.active_company.api}/vehicles/?prospect={slug}'
                 response = requests.get(api_url)
                 response.raise_for_status()
@@ -771,7 +771,7 @@ class ValuationProspectDetailViewforNewProspects(LoginRequiredMixin, DetailView)
                     vehicle['prospect'] = prospect.id
 
                 for vehicle_data in v_data:
-                    
+
                     vehicle = VehicleAsset.objects.filter(slug = vehicle_data["slug"])
                     if not vehicle:
                         vehicleSerializer = ApiSerializers.VehicleAssetSerializer(data=vehicle_data)
@@ -815,17 +815,17 @@ class ValuationProspectDetailViewforNewProspects(LoginRequiredMixin, DetailView)
 
                 context["page_name"] =  "valuation"
                 context["sub_page_name"] =  "valuation_review"
-            
+
                 return render(request, self.template_name, context=context)
 
-                    
+
             except requests.exceptions.RequestException as e:
                 print('Error is this', e)
                 return JsonResponse({'error': str(e)}, status=500)
         else:
             messages.error(request, "Please select a loan company to work with before you proceed.")
             return redirect('dashboard')
-        
+
     def post(self, request, slug):
         if request.user.active_company:
             # print('\n\n\n at point of posting')
@@ -855,14 +855,14 @@ class ValuationProspectDetailViewforNewProspects(LoginRequiredMixin, DetailView)
                             "valuer_assigned" : prospect['valuer_assigned'],
                             "valuer_assigned_on" : timezone.now(),
                         })
-                    
+
                     if response.status_code >= 200 and response.status_code <= 399:
                         print('Response is: ',response.status_code)
                         # was successful
                         messages.success(request, "Valuer assigned successfully.")
                         # return JsonResponse({'success': 'Payment verified and valuer assigned.'})
                         return redirect(reverse('valuation_prospect_detail_new_prospect', args=[slug]))
-                    
+
                 except User.DoesNotExist:
                     messages.error(request, "Selected valuer is invalid or does not have permission.")
 
@@ -896,24 +896,24 @@ class ProspectValuationView(LoginRequiredMixin, ListView):
                 else:
                     context['prospects'] = [prospect for prospect in context['prospects'] if (prospect['valuer_assigned'] == request.user.username or prospect['valuer_assigned'] == (request.user.first_name + ' ' + request.user.last_name))]
 
+                # valuer_assigned = request.GET.get('valuer_assigned')
+                # if valuer_assigned:
+                if 'can_verify_payment' in request.user.permissions:
+                    context['prospects'] = [prospect for prospect in context['prospects']]
+                else:
+                    context['prospects'] = [prospect for prospect in data if (prospect['valuer_assigned'] == request.user.username or prospect['valuer_assigned'] == (request.user.first_name + ' ' + request.user.last_name))]
+
             except requests.exceptions.RequestException:
                 messages.error(request, "Unable to fetch prospects")
-
-
-            # valuer_assigned = request.GET.get('valuer_assigned')
-            # if valuer_assigned:
-            if 'can_verify_payment' in request.user.permissions:
-                context['prospects'] = [prospect for prospect in context['prospects']]
-            else:
-                context['prospects'] = [prospect for prospect in data if (prospect['valuer_assigned'] == request.user.username or prospect['valuer_assigned'] == (request.user.first_name + ' ' + request.user.last_name))]
 
             context["page_name"] =  "valuation"
             context["sub_page_name"] =  "valuation_requests"
             return render(request, 'valuations/prospect_list_valuation.html', context=context)
+
         else:
             messages.error(request, "Please select a loan company to work with before you proceed.")
             return redirect('dashboard')
-    
+
 # class ProspectValuationView(LoginRequiredMixin, ListView):
 #     model = Prospect
 #     template_name = 'valuations/prospect_list_valuation.html'
@@ -1016,7 +1016,7 @@ def DeclineView(request, slug):
         if request.method == 'POST':
             # Get the decline reason from the request
             decline_reason = request.POST.get('declinereason', '')
-            
+
             if not decline_reason:
                 messages.error(request, 'Decline reason is required.')
                 return redirect(reverse('valuation_prospect_detail', kwargs={'slug': prospect.slug}))
@@ -1043,7 +1043,7 @@ def DeclineView(request, slug):
             except requests.RequestException as e:
                 # Handle exceptions from the API call
                 messages.error(request, f"An error occurred while updating the prospect: {str(e)}")
-            
+
         # Render the decline form
         context = {
             "page_name": "valuation",
@@ -1074,15 +1074,15 @@ def DeclineView(request, slug):
 #     if request.method == "POST":
 #         data = json.loads(request.body)
 #         payment_id = data.get('payment_id')
-        
+
 #         if not payment_id:
 #             return JsonResponse({'error': 'No payment ID provided.'}, status=403)
 
 #         prospect = Prospect.objects.filter(slug=slug, proof_of_payment_id=payment_id).first()
-        
+
 #         if not prospect:
 #             return JsonResponse({'error': 'Invalid payment ID.'}, status=403)
-        
+
 #         # Update prospect's status and assign valuer
 #         prospect.status = "Payment Verified"
 #         prospect.payment_verified_on = timezone.now()
@@ -1103,7 +1103,7 @@ def DeclineView(request, slug):
 #         else:
 #             # If no assignments, return the first valuer
 #             valuer = users_with_permission.first()
-        
+
 #         # Assign the valuer to the prospect
 #         prospect.valuer_assigned = valuer
 #         prospect.valuer_assigned_on = timezone.now()
@@ -1132,7 +1132,7 @@ def get_least_assigned_valuer(company):
             active_company=company
         )
 
-        assignments = Prospect.objects.filter(valuer_assigned__in=users_with_permission).values('valuer_assigned').annotate(count=Count('valuer_assigned')).order_by('count')        
+        assignments = Prospect.objects.filter(valuer_assigned__in=users_with_permission).values('valuer_assigned').annotate(count=Count('valuer_assigned')).order_by('count')
 
         if assignments:
             # Get the valuer with the least assignments
@@ -1152,7 +1152,7 @@ def prospect_in_valuation(request, slug):
             # print('payment_id',payment_id)
             if not payment_id:
                 return JsonResponse({'error': 'No payment ID provided.'}, status=403)
-            
+
             api_url = f'{request.user.active_company.api}/prospects/{slug}/'
             try:
                 response = requests.get(api_url)
@@ -1163,7 +1163,7 @@ def prospect_in_valuation(request, slug):
 
             # Retrieve the single prospect to verify and assign
 
-            if prospect: 
+            if prospect:
                 # confirm trans_id is matching
                 if payment_id == prospect['proof_of_payment_id']:
                     # print('I reach there.')
@@ -1175,9 +1175,6 @@ def prospect_in_valuation(request, slug):
                         role__permissions__code='can_be_valuers',
                         company=request.user.company
                     )
-
-                    print('\n\n\nusers_with_permission\n\n\n', users_with_permission)
-
                     # Get all prospects with an assigned valuer
                     valuer_assignments = (
                         Prospect.objects
@@ -1188,11 +1185,7 @@ def prospect_in_valuation(request, slug):
                     )
 
                     # Check the current valuer assignment counts and find the least assigned valuer
-
-                    
-
                     valuer_assignment_dict = {assign['valuer_assigned']: assign['assign_count'] for assign in valuer_assignments}
-                    print('\n\nvaluer_assignment_dict\n\n\n', valuer_assignment_dict)
 
                     least_assigned_valuer = None
                     for valuer in users_with_permission:
@@ -1206,7 +1199,6 @@ def prospect_in_valuation(request, slug):
 
                     # If a least assigned valuer was found, assign them to the prospect
                     if least_assigned_valuer:
-                        print(f"Selected valuer: {least_assigned_valuer.name} (ID: {least_assigned_valuer.id})")
                         response = requests.patch(api_url, data={
                             "status" : "Payment Verified",
                             "payment_verified_on" : datetime.now(),
@@ -1221,7 +1213,7 @@ def prospect_in_valuation(request, slug):
                             return JsonResponse({'error': 'Unable to update prospect data'}, status=403)
                     else:
                         return JsonResponse({'error': 'No valuers available.'}, status=404)
-                    
+
 
             # Retrieve all users with 'can_be_valuers' permission in the user's active company
 
@@ -1254,7 +1246,7 @@ def prospect_in_valuation(request, slug):
 def set_valuation(request, slug):
     if request.user.active_company:
         api_url = f'{request.user.active_company.api}/prospects/{slug}/'
-        
+
         response = requests.patch(api_url, data={
             "submitted_for_valuation_by" : request.user.username,
             "submitted_for_valuation_on" : datetime.now(),
@@ -1269,11 +1261,11 @@ def set_valuation(request, slug):
 
             vehicle = VehicleAsset.objects.filter(prospect=prospect).first()
             valuer_assigned = prospect.valuer_assigned
-            
+
             if valuer_assigned:
                 # Split the valuer_assigned into first_name and last_name if it contains a space
                 name_parts = valuer_assigned.split(" ")
-                
+
                 # Use Q objects to filter by username or full name
                 if len(name_parts) == 2:  # If it's "FirstName LastName"
                     user = User.objects.filter(
@@ -1285,7 +1277,7 @@ def set_valuation(request, slug):
 
                 if user:
                     # Send the email if a user is found
-                
+
                     subject =  "Received Prospect {} for Valuation.".format(prospect).upper()
                     email = user.email
                     message = f"You have been assigned a prospect for valuation. Please log in to continue.\n\nProspect: {str(prospect).upper()} - {prospect.phone_number}\nVehicle: {str(vehicle).upper()}\nValuer: {str(valuer_assigned).upper()}\n"
@@ -1317,23 +1309,23 @@ def add_valuation_report_details(request, slug):
             response.raise_for_status()
 
             data = response.json()
-            
+
             for prospect in data:
                     prospect['prospect'] = prospect.id
-                
+
             if data["valuation_submitted_by"]:
                 data["valuation_submitted_by"] = User.objects.filter(username=data["valuation_submitted_by"]).first().pk
-            
+
             if data["valuation_reviewd_by"]:
                 data["valuation_reviewd_by"] = User.objects.filter(username=data["valuation_reviewd_by"]).first().pk
 
             data = response.json()
             if data["valuation_submitted_by"]:
                 data["valuation_submitted_by"] = User.objects.filter(username=data["valuation_submitted_by"]).first().pk
-            
+
             if data["valuation_reviewd_by"]:
                 data["valuation_reviewd_by"] = User.objects.filter(username=data["valuation_reviewd_by"]).first().pk
-                
+
             if Prospect.objects.filter(slug = slug):
                 # update saved record to track any changes
                 prospect = Prospect.objects.filter(slug = slug).first()
@@ -1344,7 +1336,7 @@ def add_valuation_report_details(request, slug):
             if serializer.is_valid():
                 prospect = serializer.save()
 
-            
+
         if not prospect:
             messages.error("Prospect not found")
             return redirect("prospect_valuation")
@@ -1371,16 +1363,16 @@ def add_valuation_report_details(request, slug):
                     if VehicleEvaluationReport.objects.filter(tax_identification_number=form.cleaned_data['tax_identification_number']).exists():
                         messages.error(request, "Tax Identification Number already exists in our database, Please provide a unique Tax Identification Number.")
                         return redirect('valuation_prospect_detail', slug=slug)
-                    
+
                     # check if the length of power exeeds 5 characters
                     if len(str(form.cleaned_data['power'])) >= 5:
                         messages.error(request, "Power value supplied can not exceed 5 digits in length. Please try again.")
                         return redirect('valuation_prospect_detail', slug=slug)
-                    
+
                     form = form.save(commit=False)
                     form.prospect = prospect
                     # prospect.status = 'Valuation Supervisor'
-                    
+
                     form.save()
 
                     # fields = VehicleEvaluationReport.objects.filter(vehicle__prospect=prospect).first()
@@ -1412,9 +1404,9 @@ def add_valuation_report_details(request, slug):
                             subject = 'New Prospect Valuation Supervision Request for prospect {}.'.format(prospect.name)
                             email = supervisor.email
                             message =  f'Hi {supervisor},\n\nYou have a new Prospect Valuation Supervision Request. Below are the details.\n\nProspect: {prospect.name}\nPhone: {prospect.phone_number}\n'
-                            
+
                             send_email_task(subject, email, message)
-                            
+
 
                     # Redirect to the 'valuation_prospect_detail' page
                     messages.add_message(request, messages.SUCCESS, "Asset Valuation submitted successfully")
@@ -1476,9 +1468,9 @@ def add_valuation_report_details(request, slug):
                         "date_of_valuation": report.date_of_valuation,
                         "valuation_report_date": report.valuation_report_date,
                     }
-                    ), 
+                    ),
                     "report": report,
-                    } 
+                    }
                     for report in v_reports
                     ]
             else:
@@ -1489,7 +1481,7 @@ def add_valuation_report_details(request, slug):
     else:
         messages.error(request, "Please select a loan company to work with before you proceed.")
         return redirect('dashboard')
-    
+
 
 @login_required
 def add_another_valuation_report_details(request, slug):
@@ -1501,7 +1493,7 @@ def add_another_valuation_report_details(request, slug):
             "page_name": "valuation",
             'prospect': prospect,
             "sub_page_name" : "valuation_requests",
-        } 
+        }
 
         if request.method == 'POST':
             prospect = Prospect.objects.filter(slug=slug).first()
@@ -1513,7 +1505,7 @@ def add_another_valuation_report_details(request, slug):
                 form = form.save(commit=False)
                 form.prospect = prospect
                 # prospect.status = 'Valuation Supervisor'
-                
+
                 form.save()
 
                 # fields = VehicleEvaluationReport.objects.filter(vehicle__prospect=prospect).first()
@@ -1598,9 +1590,9 @@ def add_another_valuation_report_details(request, slug):
             #             "date_of_valuation": report.date_of_valuation,
             #             "valuation_report_date": report.valuation_report_date,
             #         }
-            #         ), 
+            #         ),
             #         "report": report,
-            #         } 
+            #         }
             #         for report in v_reports
             #         ]
             # else:
@@ -1668,7 +1660,7 @@ def add_inspection_report_details(request, slug):
                     form.prospect = prospect
                     form.save()
                     print('successufl')
-                    
+
                     messages.add_message(request, messages.SUCCESS, "Asset Valuation submitted successfully")
                     return redirect('valuation_prospect_detail', slug=slug)
                 else:
@@ -1750,10 +1742,10 @@ def submit_report(request, slug):
             data = response.json()
             if data["valuation_submitted_by"]:
                 data["valuation_submitted_by"] = User.objects.filter(username=data["valuation_submitted_by"]).first().pk
-            
+
             if data["valuation_reviewd_by"]:
                 data["valuation_reviewd_by"] = User.objects.filter(username=data["valuation_reviewd_by"]).first().pk
-                
+
             if Prospect.objects.filter(slug = slug):
                 # update saved record to track any changes
                 prospect = Prospect.objects.filter(slug = slug).first()
@@ -1869,18 +1861,18 @@ def printout_report(request, slug):
 #     response.raise_for_status()
 #     data = response.json()
 #     print('\n\n\n\n Data for prospect',data)
-    
-    
+
+
 #     if request.method == 'POST':
 #         v_reports = VehicleEvaluationReport.objects.filter(vehicle__prospect=prospect)
 #         l_reports = LandEvaluationReport.objects.filter(land__prospect=prospect)
 #         # vehicle['prospect'] = data[0]['prospect']
 #         # api_url_prospect = f'{request.user.active_company.api}/prospects/{slug}/'
-        
+
 #         # response = requests.get(api_url_prospect)
 #         # response.raise_for_status()
 #         # data = response.json()
-        
+
 #         if v_reports or l_reports:
 #             for v_report in v_reports:
 #                 print('\n\n\n V report',v_report)
@@ -1903,8 +1895,8 @@ def printout_report(request, slug):
 #                 for field in file_fields:
 #                     serializer.data.pop(field, None)
 
-                
-                
+
+
 #                 response = requests.post(api_url, data=serializer.data, files=files)
 #                 # print(response.status_code, response.text)
 #                 print(f"\n\n\n\n Status Code: {response.status_code}")
@@ -1950,7 +1942,7 @@ def printout_report(request, slug):
 #         v_reports = VehicleEvaluationReport.objects.filter(vehicle__prospect=prospect)
 #         l_reports = LandEvaluationReport.objects.filter(land__prospect=prospect)
 
-        
+
 #         # if this prospect has a valuation report proceed
 #         if v_reports or l_reports:
 #             # submit reports to upstream
@@ -1985,7 +1977,7 @@ def printout_report(request, slug):
 #                         "valuation_reviewd_by" : request.user.username,
 #                     })
 
-                    
+
 #                     if response.status_code >= 200 and response.status_code <= 399:
 #                         prospect.status = 'Pipeline'
 #                         prospect.valuation_reviewd_on = datetime.now()
@@ -2122,8 +2114,8 @@ def PipelineView(request, slug):
                         response = requests.get(vehicle_api_url)
                         response.raise_for_status()
                         # resp_veh = response.json()
-                        
-            
+
+
 
                         if response.status_code != 200:
                             messages.error(request, "Failed to fetch vehicle data from the external system.")
@@ -2242,8 +2234,8 @@ def InspectionPipeline(request, slug):
                         response = requests.get(vehicle_api_url)
                         response.raise_for_status()
                         # resp_veh = response.json()
-                        
-            
+
+
 
                         if response.status_code != 200:
                             messages.error(request, "Failed to fetch vehicle data from the external system.")
@@ -2291,7 +2283,7 @@ def InspectionPipeline(request, slug):
                             vehicle.status = "INSPECTED"
                             vehicle.save()
 
-                        
+
 
                     return redirect(reverse_lazy("prospect_review"))
 

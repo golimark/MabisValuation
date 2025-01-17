@@ -716,7 +716,7 @@
                         body: JSON.stringify({ payment_id: userInput }),
                     })
                     .then((response) => {
-                        console.log(response, 'response');  // Log response for debugging
+					console.log(response)
                         if (response.ok) {
                             // alert("Payment ID verified successfully.");
                             $('#paymentVerificationModal').modal('hide');  // Close the modal
