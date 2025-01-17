@@ -123,6 +123,8 @@ class VehicleEvaluationReport(models.Model):
         ('MINI-VAN', 'MINI-VAN'),
         ('SEDAN', 'SEDAN'),
         ('COUPE', 'COUPE'),
+        ('PICK UP DOUBLE CABIN', 'PICK UP DOUBLE CABIN'),
+        ('PICK UP SINGLE CABIN', 'PICK UP SINGLE CABIN'),
     ]
     FUEL_CHOICES = [
         ('DIESEL', 'DIESEL'),
