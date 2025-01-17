@@ -250,7 +250,7 @@ class ProspectDetailView(LoginRequiredMixin, View):
         if request.user.active_company:
             prospect = get_object_or_404(Prospect, slug=kwargs['slug'])
             # api_url = f'{request.user.active_company.api}/vehicles/?prospect={self.slug}'
-            
+
             valuer_id = request.POST.get("valuer")
 
             try:
@@ -285,7 +285,7 @@ class ProspectDetailView(LoginRequiredMixin, View):
                         return JsonResponse({'error': 'Unable to update prospect data'}, status=403)
                 else:
                     return JsonResponse({'error': 'No valuers available.'}, status=404)
-                
+
             except User.DoesNotExist:
                 messages.error(request, "Selected valuer is invalid or does not have permission.")
 
@@ -990,6 +990,21 @@ class ProspectReviewView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         # Filter the queryset to only include prospects with 'Failed' status
+
+        # slug on upstream is updated on every slug
+        # fetch data and update slug
+        for prospect in prospects:
+            try:
+                api_url = f"{self.request.user.active_company.api}/prospects/?proof_of_payment_id={prospect.proof_of_payment_id}"
+                response = requests.get(api_url)
+                response.raise_for_status()
+                data = response.json()
+                updated_slug = data.get("slug")
+                prospect.slug = updated_slug
+                prospect.save()
+            except requests.exceptions.RequestException as e:
+                pass
+
         return Prospect.objects.filter(status='Review').order_by('created_at')
 
     def get_context_data(self, **kwargs):

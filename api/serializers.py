@@ -7,8 +7,8 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = [
-            'id', 'username', 'email', 'first_name', 'last_name', 
-            'status', 'image', 'slug', 'created_at', 'updated_at', 
+            'id', 'username', 'email', 'first_name', 'last_name',
+            'status', 'image', 'slug', 'created_at', 'updated_at',
             'company', 'active_company', 'role', 'permissions', 'name'
         ]
 
@@ -16,7 +16,8 @@ class UserSerializer(serializers.ModelSerializer):
 class ProspectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Prospect
-        fields = "__all__"
+        # fields = "__all__"
+        exclude = ("agent", "created_by")
 
 class VehicleAssetSerializer(serializers.ModelSerializer):
     class Meta:
