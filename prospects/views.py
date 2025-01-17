@@ -250,9 +250,11 @@ class ProspectDetailView(LoginRequiredMixin, View):
         if request.user.active_company:
             prospect = get_object_or_404(Prospect, slug=kwargs['slug'])
             # api_url = f'{request.user.active_company.api}/vehicles/?prospect={self.slug}'
+            
             valuer_id = request.POST.get("valuer")
 
             try:
+                api_url = f'{request.user.active_company.api}/prospects/{prospect.slug}/'
                 valuer = User.objects.get(
                     pk=valuer_id,
                     role__permissions__code='can_be_valuers',
@@ -264,13 +266,26 @@ class ProspectDetailView(LoginRequiredMixin, View):
 
                 print('\n\nvaluer.name after \n\n', valuer.name)
 
-                # Assign the valuer's name to the prospect field
-                prospect.valuer_assigned = valuer.name
-                prospect.valuer_assigned_on = timezone.now()
-                prospect.save()
+                if valuer:
+                    print(f"Selected valuer: {valuer.name} (ID: {valuer.id})")
+                    response = requests.patch(api_url, data={
+                        "valuer_assigned" : valuer.name,
+                        "valuer_assigned_on" : timezone.now(),
+                    })
+                    if response.status_code >= 200 and response.status_code <= 399:
+                        # was successful
+                        # Assign the valuer's name to the prospect field
+                        prospect.valuer_assigned = valuer.name
+                        prospect.valuer_assigned_on = timezone.now()
+                        prospect.save()
 
-                messages.success(request, "Valuer assigned successfully.")
-                return redirect(reverse('valuation_prospect_detail', kwargs={'slug': prospect.slug}))
+                        messages.success(request, "Valuer assigned successfully.")
+                        return redirect(reverse('valuation_prospect_detail', kwargs={'slug': prospect.slug}))
+                    else:
+                        return JsonResponse({'error': 'Unable to update prospect data'}, status=403)
+                else:
+                    return JsonResponse({'error': 'No valuers available.'}, status=404)
+                
             except User.DoesNotExist:
                 messages.error(request, "Selected valuer is invalid or does not have permission.")
 
@@ -559,7 +574,7 @@ class ValuationProspectPendingView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         # Filter the queryset to only include prospects with 'Pending' status
-        return Prospect.objects.filter(status='Pending').order_by('created_at').filter(agent__company=self.request.user.company)
+        return Prospect.objects.filter(status='Pending').order_by('created_at').filter(company=self.request.user.company)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

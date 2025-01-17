@@ -39,6 +39,28 @@
         th {
             background-color: #e0e0e0;
         }
+
+        .new-page-paragraph {
+                page-break-before: always; /* Force paragraph to start on a new page */
+                /* margin-top: 20px; */
+        }
+
+        @media print {
+            @page {
+                /* margin: 10mm; Adjust as needed */
+            }
+
+            body {
+                counter-reset: page; /* Reset the page counter */
+            }
+
+
+            /* Force page breaks if necessary */
+            .page-break {
+                page-break-before: always;
+            }
+        }
+
     </style>
 </head>
 
@@ -47,18 +69,18 @@
     <div id="printreport" class="card mb-3">
 
         <div style="align-content: center; justify-items: center;">
-            <center><img src="{{ user.company.logo.url }}" alt=""></center>
+            <center><img src="{{ user.company.logo.url }}" alt="" width="500px"></center>
         </div>
 
         <div class="card-header">
             <center> <strong>MOTOR VEHICLE VALUATION REPORT</strong> <br><br> <br> Applicant / Client :
-                <strong>{{prospect.company}}</strong>
+                <strong>{{prospect.company|upper}}</strong>
 
                 <p>(herein after referred to as the Lending Institution)</p> <br>
 
-                C/o: {{prospect.title}} {{ prospect.name }} <br> <br>
+                C/o: {{prospect.title|upper}} {{ prospect.name|upper}} <br> <br>
 
-                Date of Valuation: {{ evaluation_report.date_of_valuation }} <br><br>
+                Date of Valuation: {{ evaluation_report.date_of_valuation }}. <br><br><br><br>
 
                 <div style="display: flex; justify-content: center;">
                     <div class="img-wrapper">
@@ -70,27 +92,28 @@
                         <p>BACK LEFT HAND SIDE VIEW</p>
                     </div>
                 </div>
-                <strong>PLACE OF INSPECTION: {{ evaluation_report.place_of_inspection}}</strong> <br><br>
-                <strong>VALUATION REPORT DATE: {{ evaluation_report.valuation_report_date}}</strong> <br><br>
+                <br><br>
+                <strong>PLACE OF INSPECTION:</strong> {{ evaluation_report.place_of_inspection|upper}} <br><br>
+                <strong>VALUATION REPORT DATE:</strong> {{ evaluation_report.valuation_report_date}} <br><br>
 
 
-                <p style="text-align:justify;"><strong>Effective Report Summary:
+                <p class="new-page-paragraph page-break" style="text-align:justify;"><strong>Effective Report Summary:
                     </strong>{{evaluation_report.effective_report_summary}}</p>
-                <br>
+                
                 <p style="text-align:justify;"><strong>Limiting Conditions:
                     </strong>{{evaluation_report.limiting_conditions}}</p>
-                <br>
+                
                 <p style="text-align:justify;"><strong>Valuation: </strong>{{evaluation_report.valuation}}</p>
                 <br>
                 <p style="text-align:justify;"><strong>Market Valuation Description:
                     </strong>{{evaluation_report.market_value_description}}</p>
-                <br>
+                <br> <br>
                 <p><strong>REGISTERED OWNER AS PER THE CAR LOGBOOK PROVIDED AT VALUATION:</strong></p>
                 <table style="width: 100%; border-collapse: collapse; text-align: left; table-layout: fixed;">
                     <thead style="background-color: #f2f2f2;">
                         <tr>
                             <th style="border: 1px solid; padding: 8px; background-color: #e0e0e0;">Name</th>
-                            <td style="border: 1px solid; padding: 8px;">{{evaluation_report.name_in_logbook}}</td>
+                            <td style="border: 1px solid; padding: 8px;">{{evaluation_report.name_in_logbook|upper}}</td>
                         </tr>
                     </thead>
                     <tbody style="background-color: #f2f2f2;">
@@ -104,7 +127,7 @@
                 </table>
 
                 <br>
-                <p><strong>VEHICLE DETAILS</strong></p>
+                <p class="page-break"><strong>VEHICLE DETAILS</strong></p>
                 <div class="col-md-6">
 
                     <table>
@@ -297,13 +320,13 @@
                         <th>Insurance Valuation</th>
                         <td style="color:blue;">{{evaluation_report.insurance_valuation}}</td>
                     </tr>
-                </table>
+                </table> <br>
                 <p><strong>RECOMMENDATION REMARKS BY VALUERS: <br></strong></p>
                 <p>{{evaluation_report.recommendation}}</p>
 
                 <p><strong>Yours Faithfully,<br> <i>For: </i> {{user.company.name}}</strong></p>
 
-                <p>PICTORIAL VIEW</p>
+                <p class="page-break">PICTORIAL VIEW</p>
 
                 <div class="report-imgs">
                     <div class="img-wrapper">
@@ -322,10 +345,10 @@
                         <img src="{{evaluation_report.upholstery.url}}" alt="">
                         <p>UPHOLSTERY</p>
                     </div>
-                    <div class="img-wrapper" style="width:100%;">
-                        <img src="{{evaluation_report.vehicle_id_plate.url}}" alt="">
-                        <p>VEHICLE PLATE</p>
-                    </div>
+                </div>
+                <div class="img-wrapper" style="width:50%; text-align: center; justify-content: center; align-items: center;">
+                    <img src="{{evaluation_report.vehicle_id_plate.url}}" alt="">
+                    <p>VEHICLE PLATE</p>
                 </div>
                 <p><strong>END</strong></p>
             </center>

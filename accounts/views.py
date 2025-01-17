@@ -5,6 +5,8 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 import requests
+
+from prospects.tasks import send_email_task
 from .forms import *
 from django.contrib import messages
 # from .models import CompanyUser
@@ -20,6 +22,11 @@ from django.conf import settings
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.utils.http import urlsafe_base64_encode
 from django.utils.encoding import force_bytes
+from django.contrib.auth.tokens import PasswordResetTokenGenerator
+from django.utils.http import urlsafe_base64_decode
+from django.contrib.auth.forms import SetPasswordForm
+
+
 # user
 def change_password(request, slug):
     user = User.objects.filter(slug=slug).first()
@@ -39,9 +46,24 @@ def change_password(request, slug):
         form = PasswordChangeForm()
     return render(request, 'home/change_password.html', {'form': form})
 
-from django.contrib.auth.tokens import PasswordResetTokenGenerator
-from django.utils.http import urlsafe_base64_decode
-from django.contrib.auth.forms import SetPasswordForm
+@login_required
+def change_own_password(request):
+    user = request.user
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.POST)
+        if form.is_valid():
+            new_password = form.cleaned_data['new_password']
+            user.set_password(new_password)
+            user.save()
+            messages.success(request, f"{user}'s Password updated successfully.")
+            return redirect('dashboard')
+        else:
+            # Form errors, including the "Passwords do not match" error, are preserved in the form instance
+            messages.error(request, "Could not update user. Try again.")
+            return redirect(request.path)
+    else:
+        form = PasswordChangeForm()
+    return render(request, 'home/change_password.html', {'form': form})
 
 # def reset_password_view(request, uidb64, token):
 #     try:
@@ -379,12 +401,12 @@ class RelationOfficerEditView(LoginRequiredMixin, View):
 # admin view
 class AdminDashboardView(LoginRequiredMixin, View):
     def get(self, request):
-        return render(request, 'admin/front_side_admin_side.html')
+        return render(request, 'admin/front_side_admin_side.html', {'page_name': 'dashboard'})
 
 
 class RolesListView(LoginRequiredMixin, View):
     template_name = "admin/roles/list.html"
-    context = {}
+    context = {'page_name': 'dashboard'}
 
     def get(self, request):
         # only show roles in users active company
@@ -395,7 +417,7 @@ class RolesListView(LoginRequiredMixin, View):
 
 class RolesDetailView(LoginRequiredMixin, View):
     template_name = "admin/roles/details.html"
-    context = {}
+    context = {'page_name': 'dashboard'}
 
     def get(self, request, slug):
         role = Role.objects.filter(slug=slug)
@@ -458,7 +480,7 @@ class RolesDetailView(LoginRequiredMixin, View):
 
 class RolesCreateView(LoginRequiredMixin, View):
     template_name = "admin/roles/create.html"
-    context = {}
+    context = {'page_name': 'dashboard'}
 
     def get(self, request):
         self.context["form"] = RoleForm()
@@ -510,7 +532,7 @@ class RolesCreateView(LoginRequiredMixin, View):
 
 class CreateListView(LoginRequiredMixin, View):
     template_name="admin/users/list.html"
-    context = {}
+    context = {'page_name': 'dashboard'}
 
     def get(self, request):
         self.context["users"] = User.objects.filter(company=request.user.company)
@@ -521,7 +543,7 @@ class CreateListView(LoginRequiredMixin, View):
 # # Option 1 
 # class CreateDetailView(LoginRequiredMixin, View):
 #     template_name = "admin/users/details.html"
-#     context = {}
+#     context = {'page_name': 'dashboard'}
 
 #     def get(self, request, slug):
 #         user = User.objects.filter(slug=slug)
@@ -564,7 +586,7 @@ class CreateListView(LoginRequiredMixin, View):
 
 class CreateDetailView(LoginRequiredMixin, View):
     template_name = "admin/users/details.html"
-    context = {}
+    context = {'page_name': 'dashboard'}
 
     def get(self, request, slug):
         user = User.objects.filter(slug=slug).first()
@@ -614,7 +636,7 @@ class CreateDetailView(LoginRequiredMixin, View):
 
 # class CreateCreateView(LoginRequiredMixin, View):
 #     template_name="admin/users/create.html"
-#     context = {}
+#     context = {'page_name': 'dashboard'}
 
 #     def get(self, request):
 #         self.context["form"] = UserCreateForm(user=request.user)
@@ -655,7 +677,7 @@ class CreateDetailView(LoginRequiredMixin, View):
 #         return render(request, self.template_name, context=self.context)
 class CreateCreateView(LoginRequiredMixin, View):
     template_name = "admin/users/create.html"
-    context = {}
+    context = {'page_name': 'dashboard'}
 
     def get(self, request):
         self.context["form"] = UserCreateForm(user=request.user)
@@ -686,15 +708,11 @@ class CreateCreateView(LoginRequiredMixin, View):
                 base_url_with_port = f"{request.scheme}://{request.get_host().split(':')[0]}:9393"
                 change_password_url = base_url_with_port + reverse('reset_password', kwargs={'uidb64': uid, 'token': token})
 
-                email = EmailMessage(
-                    "Account Created",
-                    f"Your account has been created successfully. Please log in to continue.\n"
-                    f"Username: {user.username}\n"
-                    f"To set your password, click the following link:\n{change_password_url}",
-                    settings.DEFAULT_FROM_EMAIL,
-                    [user.email],
-                )
-                email.send(fail_silently=False)
+                subject = "Account Created"
+                message = f"Your account has been created successfully. Please log in to continue.\nUsername: {user.username}\nTo set your password, click the following link:\n{change_password_url}"
+                email = user.email
+
+                send_email_task(subject, email, message)
 
             messages.success(request, f"Successfully created user {user.username}")
             return redirect(reverse_lazy("users_list"))
@@ -714,7 +732,7 @@ def loan_collection(request):
 
 class LoanCompanyToggleView(LoginRequiredMixin, View):
     template_name = "home/change_company.html"
-    context = {}
+    context = {'page_name': 'dashboard'}
 
     def get(self, request):
         form = ActiveLoanCompanyForm()
@@ -759,6 +777,46 @@ class LoanCompanyToggleView(LoginRequiredMixin, View):
 #         self.context['company_form'] = company_form
 #         return render(request, self.template_name, context=self.context)
 
+
+
+
+def forgot_my_password_reset(request):
+    form = ForgetPasswordForm()
+    if request.method == "POST":
+        form = ForgetPasswordForm(request.POST)
+        if form.is_valid():
+            email = request.POST.get("email")
+            if email:
+                user = User.objects.filter(email=email).first()
+                if user:
+                    if user.email:
+                        # Generate token and encoded user ID
+                        token_generator = PasswordResetTokenGenerator()
+                        token = token_generator.make_token(user)
+                        uid = urlsafe_base64_encode(force_bytes(user.pk))
+
+                        # Construct the reset password link
+                        change_password_url = request.build_absolute_uri(
+                            reverse('reset_password', kwargs={'uidb64': uid, 'token': token})
+                        )
+
+                        subject = "PASSWORD RESET LINK"
+                        message = f"Your Password reset link has been successfully generated. \nUsername: {user.username}\nClick the following link to reset your password.\nPASSWORD RESET LINK: {change_password_url}"
+                        email = user.email
+
+                        send_email_task(subject, email, message)
+                        messages.success(request, "Password reset link sent to your email.")
+                        return redirect("login")
+                    else:
+                        messages.error(request, "User email is not valid.")
+                else:
+                    messages.error(request, "User not found.")
+            else:
+                messages.error(request, "Please provide an email address.")
+        else:
+            messages.error(request, "Invalid form submission.")
+    
+    return render(request, 'home/forgot_password_reset.html', {'form': form})
 
     
 

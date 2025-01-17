@@ -29,6 +29,8 @@ class VehicleAsset(models.Model):
         ('MINI-VAN', 'MINI-VAN'),
         ('SEDAN', 'SEDAN'),
         ('COUPE', 'COUPE'),
+        ('PICK UP DOUBLE CABIN', 'PICK UP DOUBLE CABIN'),
+        ('PICK UP SINGLE CABIN', 'PICK UP SINGLE CABIN'),
     ]
 
     STATUS = [
@@ -53,14 +55,14 @@ class VehicleAsset(models.Model):
     make = models.CharField("Car Make", max_length=50, null=True, blank=True)
     model = models.CharField("Car Model", max_length=50, null=True, blank=True)
     # body_description = models.CharField("body description", max_length=200,  choices=BODY_CHOICES)
-    
+
     # engine_number = models.CharField("engine number", max_length=50)
     # color_by_logbook = models.CharField("colour as per logbook", max_length=30)
     # color_by_inspection = models.CharField("colour as per inspection", max_length=30)
     # fuel_type = models.CharField("Fuel Type", max_length=10, choices=FUEL_CHOICES, null=True, blank=True)
     # year_of_manufacture = models.IntegerField("Year of manufacture",choices=[(i, i) for i in range(1900, 2023)], null=True)
     location = models.CharField("location of vehicle", max_length=255)
-    
+
     status = models.CharField("Status", choices=STATUS, default="NOT VALUED")
 
     # fields to use by system
@@ -73,7 +75,7 @@ class VehicleAsset(models.Model):
         if self.year_of_manufacture:
             return date.today().year - self.year_of_manufacture
         return None
-    
+
     # def clean(self):
     #     # Validate that if 'make' is 'OTHER', 'custom_make' must be filled in.
     #     if self.make == 'OTHER' and not self.custom_make:
@@ -82,7 +84,7 @@ class VehicleAsset(models.Model):
     # def save(self, *args, **kwargs):
     #     self.full_clean()  # Ensure 'clean' is called on save
     #     super().save(*args, **kwargs)
-        
+
     def save(self, *args, **kwargs):
         self.full_clean()  # Runs all validations defined in `clean`
         if not self.slug:
@@ -101,7 +103,7 @@ class VehicleEvaluationReport(models.Model):
         ('TOYOTA', 'TOYOTA'),
         ('OTHER', 'OTHER'),
     ]
-    
+
     REMARKS = [
         ('IN VERY BAD SHAPE','IN VERY BAD SHAPE'),
         ('IN BAD SHAPE','IN BAD SHAPE'),
@@ -127,14 +129,14 @@ class VehicleEvaluationReport(models.Model):
         ('PETROL', 'PETROL'),
         ('ELECTRIC', 'ELECTRIC'),
         ]
-    
+
     GEARBOX_CHOICES = [
         ('AUTOMATIC', 'AUTOMATIC'),
         ('MANUAL', 'MANUAL'),
         ('HYBRID', 'HYBRID'),
         ('ELECTRIC', 'ELECTRIC'),
     ]
-    
+
     vehicle = models.ForeignKey(to=VehicleAsset, on_delete=models.SET_NULL, null=True, blank=True)
     prospect = models.ForeignKey(Prospect, on_delete=models.CASCADE)
 
@@ -146,9 +148,9 @@ class VehicleEvaluationReport(models.Model):
     make = models.CharField("Car Make", max_length=50, null=True, blank=True)
     model = models.CharField("Car Model", max_length=50, null=True, blank=True)
     maketypes = models.CharField("Car Make Type", max_length=50, choices=CAR_MAKES, null=True, blank=True)
-    body_description = models.CharField("body description", max_length=200,  choices=BODY_CHOICES, null=True)   
+    body_description = models.CharField("body description", max_length=200,  choices=BODY_CHOICES, null=True)
     color_by_logbook = models.CharField("colour as per logbook", max_length=30, null=True)
-    fuel_type = models.CharField("Fuel Type", max_length=10, choices=FUEL_CHOICES, null=True, blank=True)    
+    fuel_type = models.CharField("Fuel Type", max_length=10, choices=FUEL_CHOICES, null=True, blank=True)
     mileage = models.IntegerField("milage", null=True)
     power = models.IntegerField("Power(cubic capacity)", null=True, blank=True)  # You can specify units like horsepower or kilowatts in the form
     gearbox_transmission = models.CharField("Gear box transmission", max_length=50, choices=GEARBOX_CHOICES, null=True)
@@ -248,7 +250,7 @@ it for the purpose of lending against it.
     vehicle_id_plate= models.ImageField(upload_to='evaluation_report/vehicle_id_plate/')
 
     #VALUATION REMARKS
-    #VALUER 
+    #VALUER
     company_valuer = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='company_valuer')
     company_valuer_remarks = models.TextField(null=True, blank=True)
 
@@ -256,7 +258,7 @@ it for the purpose of lending against it.
     company_supervisor = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='company_supervisor')
     company_supervisor_remarks = models.TextField(null=True, blank=True)
 
-    #APPROVER 
+    #APPROVER
     company_approver = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='company_approver')
     company_approver_remarks = models.TextField(null=True, blank=True)
 
@@ -269,7 +271,7 @@ it for the purpose of lending against it.
     updated_at = models.DateTimeField(auto_now=True)
 
 
-    
+
     def clean(self):
         # Ensure date_of_registration is not earlier than year_of_manufacture
         if self.date_of_registration and self.year_of_manufacture:
@@ -305,7 +307,7 @@ it for the purpose of lending against it.
         if self.year_of_manufacture:
             return date.today().year - self.year_of_manufacture
         return None
-    
+
     def __str__(self):
         return f"Evaluation Report for {self.prospect.name} ({self.vehicle.license_plate})"
 
@@ -373,4 +375,3 @@ class VehicleInspectionReport(models.Model):
 
     def __str__(self):
         return f"Inspection Report for {self.prospect} ({self.vehicle})"
-    
