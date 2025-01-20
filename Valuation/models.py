@@ -7,32 +7,39 @@ from datetime import date
 from django.core.exceptions import ValidationError
 from django.utils.text import slugify
 import uuid
-from prospects.models import *
+from prospects.models import Prospect
+
+
+CAR_MAKES = [
+    ('NISSAN', 'NISSAN'),
+    ('TOYOTA', 'TOYOTA'),
+    ('OTHER', 'OTHER'),
+]
+
+BODY_CHOICES = [
+    ('SALOON', 'SALOON'),
+    ('SUV', 'SUV'),
+    ('STATION WAGON', 'STATION WAGON'),
+    ('MINI-VAN', 'MINI-VAN'),
+    ('SEDAN', 'SEDAN'),
+    ('COUPE', 'COUPE'),
+    ('PICK UP DOUBLE CABIN', 'PICK UP DOUBLE CABIN'),
+    ('PICK UP SINGLE CABIN', 'PICK UP SINGLE CABIN'),
+]
+FUEL_CHOICES = [
+    ('DIESEL', 'DIESEL'),
+    ('PETROL', 'PETROL'),
+    ('ELECTRIC', 'ELECTRIC'),
+]
+
+GEARBOX_CHOICES = [
+    ('AUTOMATIC', 'AUTOMATIC'),
+    ('MANUAL', 'MANUAL'),
+    ('HYBRID', 'HYBRID'),
+    ('ELECTRIC', 'ELECTRIC'),
+]
 
 class VehicleAsset(models.Model):
-    CAR_MAKES = [
-        ('NISSAN', 'NISSAN'),
-        ('TOYOTA', 'TOYOTA'),
-        ('OTHER', 'OTHER'),
-    ]
-
-    FUEL_CHOICES = [
-        ('DIESEL', 'DIESEL'),
-        ('PETROL', 'PETROL'),
-        ('ELECTRIC', 'ELECTRIC'),
-    ]
-
-    BODY_CHOICES = [
-        ('SALOON', 'SALOON'),
-        ('SUV', 'SUV'),
-        ('STATION WAGON', 'STATION WAGON'),
-        ('MINI-VAN', 'MINI-VAN'),
-        ('SEDAN', 'SEDAN'),
-        ('COUPE', 'COUPE'),
-        ('PICK UP DOUBLE CABIN', 'PICK UP DOUBLE CABIN'),
-        ('PICK UP SINGLE CABIN', 'PICK UP SINGLE CABIN'),
-    ]
-
     STATUS = [
         ('NOT VALUED', 'NOT VALUED'),
         ('VALUED', 'VALUED'),
@@ -54,13 +61,6 @@ class VehicleAsset(models.Model):
     maketypes = models.CharField("Car Make Type", max_length=50, choices=CAR_MAKES, null=True, blank=True)
     make = models.CharField("Car Make", max_length=50, null=True, blank=True)
     model = models.CharField("Car Model", max_length=50, null=True, blank=True)
-    # body_description = models.CharField("body description", max_length=200,  choices=BODY_CHOICES)
-
-    # engine_number = models.CharField("engine number", max_length=50)
-    # color_by_logbook = models.CharField("colour as per logbook", max_length=30)
-    # color_by_inspection = models.CharField("colour as per inspection", max_length=30)
-    # fuel_type = models.CharField("Fuel Type", max_length=10, choices=FUEL_CHOICES, null=True, blank=True)
-    # year_of_manufacture = models.IntegerField("Year of manufacture",choices=[(i, i) for i in range(1900, 2023)], null=True)
     location = models.CharField("location of vehicle", max_length=255)
 
     status = models.CharField("Status", choices=STATUS, default="NOT VALUED")
@@ -97,13 +97,6 @@ class VehicleAsset(models.Model):
 
 
 class VehicleEvaluationReport(models.Model):
-
-    CAR_MAKES = [
-        ('NISSAN', 'NISSAN'),
-        ('TOYOTA', 'TOYOTA'),
-        ('OTHER', 'OTHER'),
-    ]
-
     REMARKS = [
         ('IN VERY BAD SHAPE','IN VERY BAD SHAPE'),
         ('IN BAD SHAPE','IN BAD SHAPE'),
@@ -114,29 +107,6 @@ class VehicleEvaluationReport(models.Model):
         ('IN PERFECT SHAPE','IN PERFECT SHAPE'),
         ('IN NEW CONDITION','IN NEW CONDITION'),
         ('IN SHOWROOM CONDITION','IN SHOWROOM CONDITION'),
-    ]
-
-    BODY_CHOICES = [
-        ('SALOON', 'SALOON'),
-        ('SUV', 'SUV'),
-        ('STATION WAGON', 'STATION WAGON'),
-        ('MINI-VAN', 'MINI-VAN'),
-        ('SEDAN', 'SEDAN'),
-        ('COUPE', 'COUPE'),
-        ('PICK UP DOUBLE CABIN', 'PICK UP DOUBLE CABIN'),
-        ('PICK UP SINGLE CABIN', 'PICK UP SINGLE CABIN'),
-    ]
-    FUEL_CHOICES = [
-        ('DIESEL', 'DIESEL'),
-        ('PETROL', 'PETROL'),
-        ('ELECTRIC', 'ELECTRIC'),
-        ]
-
-    GEARBOX_CHOICES = [
-        ('AUTOMATIC', 'AUTOMATIC'),
-        ('MANUAL', 'MANUAL'),
-        ('HYBRID', 'HYBRID'),
-        ('ELECTRIC', 'ELECTRIC'),
     ]
 
     vehicle = models.ForeignKey(to=VehicleAsset, on_delete=models.SET_NULL, null=True, blank=True)
@@ -159,7 +129,7 @@ class VehicleEvaluationReport(models.Model):
     engine_number = models.CharField("engine number", max_length=50, null=True)
     chassis_number = models.CharField("chassis number", max_length=50, null=True)
     country_of_origin = models.CharField("Country of origin", max_length=50, null=True)
-    year_of_manufacture = models.IntegerField("Year of manufacture",choices=[(i, i) for i in range(1998, 2023)], null=True)
+    year_of_manufacture = models.IntegerField("Year of manufacture",choices=[(i, i) for i in range(1998, date.today().year)], null=True)
     # years_since_manufacture = models.IntegerField("years since manufacture", null=True, blank=True)
     years_since_on_uganda_roads = models.IntegerField("years since on uganda roads", null=True)
     seating_capacity = models.IntegerField(null=True, blank=True, default=0)

@@ -121,7 +121,7 @@ class Prospect(models.Model):
                 self.valuation_submitted_by = user
             else:
                 self.valuation_submitted_by = None
-                
+
 
         if isinstance(self.valuation_reviewd_by, str):
             user = User.objects.filter(name=self.self.valuation_reviewd_by)
@@ -140,16 +140,3 @@ class Prospect(models.Model):
 
     def __str__(self):
         return self.name
-
-REMARKS = [
-    ('IN VERY BAD SHAPE','IN VERY BAD SHAPE'),
-    ('IN BAD SHAPE','IN BAD SHAPE'),
-    ('IN FAIR SHAPE', 'IN FAIR SHAPE'),
-    ('IN GOOD SHAPE','IN GOOD SHAPE'),
-    ('IN VERY GOOD SHAPE','IN VERY GOOD SHAPE'),
-    ('IN EXCELLENT SHAPE','IN EXCELLENT SHAPE'),
-    ('IN PERFECT SHAPE','IN PERFECT SHAPE'),
-    ('IN NEW CONDITION','IN NEW CONDITION'),
-    ('IN SHOWROOM CONDITION','IN SHOWROOM CONDITION'),
-]
-

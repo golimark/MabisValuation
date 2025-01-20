@@ -990,21 +990,6 @@ class ProspectReviewView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         # Filter the queryset to only include prospects with 'Failed' status
-
-        # slug on upstream is updated on every slug
-        # fetch data and update slug
-        for prospect in prospects:
-            try:
-                api_url = f"{self.request.user.active_company.api}/prospects/?proof_of_payment_id={prospect.proof_of_payment_id}"
-                response = requests.get(api_url)
-                response.raise_for_status()
-                data = response.json()
-                updated_slug = data.get("slug")
-                prospect.slug = updated_slug
-                prospect.save()
-            except requests.exceptions.RequestException as e:
-                pass
-
         return Prospect.objects.filter(status='Review').order_by('created_at')
 
     def get_context_data(self, **kwargs):
@@ -2191,6 +2176,9 @@ def PipelineView(request, slug):
 
                             # Post modified data to the external API
                             response = requests.post(api_url, data=modified_data, files=files)
+                            if not (response.status_code >= 200 and response.status_code <= 299):
+                                messages.add_message(request, messages.ERROR, f"Error submitting report")
+                                return redirect(reverse_lazy("valuation_prospect_detail", args=[prospect.slug]))
 
                             # print(response.status_code, response.text)
 
