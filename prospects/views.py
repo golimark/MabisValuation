@@ -2178,12 +2178,14 @@ def PipelineView(request, slug):
                                 # successful
                                 response = requests.patch(f"{api_url}{v_report.slug}/", data=modified_data, files=files)
                                 if not (response.status_code >= 200 and response.status_code <= 299):
+                                    print(response.json())
                                     messages.add_message(request, messages.ERROR, f"Error submitting report")
                                     return redirect(reverse_lazy("valuation_prospect_detail", args=[prospect.slug]))
                             else:
                                 # Post modified data to the external API
                                 response = requests.post(api_url, data=modified_data, files=files)
                                 if not (response.status_code >= 200 and response.status_code <= 299):
+                                    print(response.json())
                                     messages.add_message(request, messages.ERROR, "Error submitting report")
                                     return redirect(reverse_lazy("valuation_prospect_detail", args=[prospect.slug]))
 
