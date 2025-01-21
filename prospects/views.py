@@ -2175,10 +2175,10 @@ def PipelineView(request, slug):
                                     modified_data.pop(field, None)
 
                             # checck if report exists,
-                            response = requests.get(f"{api_url}{v_report.slug}")
+                            response = requests.get(f"{api_url}{v_report.slug}/")
                             if response.status_code >= 200 and response.status_code <= 299:
                                 # successful
-                                response = requests.patch(f"{api_url}{v_report.slug}", data=modified_data, files=files)
+                                response = requests.patch(f"{api_url}{v_report.slug}/", data=modified_data, files=files)
                                 if not (response.status_code >= 200 and response.status_code <= 299):
                                     messages.add_message(request, messages.ERROR, f"Error submitting report")
                                     return redirect(reverse_lazy("valuation_prospect_detail", args=[prospect.slug]))
