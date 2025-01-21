@@ -129,7 +129,7 @@ class VehicleEvaluationReport(models.Model):
     engine_number = models.CharField("engine number", max_length=50, null=True)
     chassis_number = models.CharField("chassis number", max_length=50, null=True)
     country_of_origin = models.CharField("Country of origin", max_length=50, null=True)
-    year_of_manufacture = models.IntegerField("Year of manufacture",choices=[(i, i) for i in range(1998, date.today().year)], null=True)
+    year_of_manufacture = models.IntegerField("Year of manufacture",choices=[(i, i) for i in range(1997, date.today().year)], null=True)
     # years_since_manufacture = models.IntegerField("years since manufacture", null=True, blank=True)
     years_since_on_uganda_roads = models.IntegerField("years since on uganda roads", null=True)
     seating_capacity = models.IntegerField(null=True, blank=True, default=0)

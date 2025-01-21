@@ -990,7 +990,7 @@ class ProspectReviewView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         # Filter the queryset to only include prospects with 'Failed' status
-        return Prospect.objects.filter(status='Review').order_by('created_at')
+        return Prospect.objects.filter(status='Review', company=self.request.user.active_company.name).order_by('created_at')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -2174,11 +2174,19 @@ def PipelineView(request, slug):
                                     files[field] = open(f"{settings.BASE_DIR}{file_path}", "rb")
                                     modified_data.pop(field, None)
 
-                            # Post modified data to the external API
-                            response = requests.post(api_url, data=modified_data, files=files)
-                            if not (response.status_code >= 200 and response.status_code <= 299):
-                                messages.add_message(request, messages.ERROR, f"Error submitting report")
-                                return redirect(reverse_lazy("valuation_prospect_detail", args=[prospect.slug]))
+                            # checck if report exists,
+                            response = requests.get(f"{api_url}?slug={v_report.slug}")
+                            if response.status_code >= 200 and response.status_code <= 299:
+                                # successful
+                                response = requests.patch(f"{api_url}?slug={v_report.slug}", data=modified_data, files=files)
+                                if not (response.status_code >= 200 and response.status_code <= 299):
+                                    messages.add_message(request, messages.ERROR, f"Error submitting report")
+                            else:
+                                # Post modified data to the external API
+                                response = requests.post(api_url, data=modified_data, files=files)
+                                if not (response.status_code >= 200 and response.status_code <= 299):
+                                    messages.add_message(request, messages.ERROR, "Error submitting report")
+                                    return redirect(reverse_lazy("valuation_prospect_detail", args=[prospect.slug]))
 
                             # print(response.status_code, response.text)
 
