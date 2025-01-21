@@ -149,7 +149,7 @@ class ProspectDetailView(LoginRequiredMixin, View):
                     # update saved record to track any changes
                     prospect = Prospect.objects.filter(slug = slug).first()
                     serializer = ApiSerializers.ProspectSerializer(prospect, data=data, partial=True)
-
+                    context['prospect'] = prospect
                 else:
                     serializer = ApiSerializers.ProspectSerializer(data=data)
 
@@ -175,64 +175,64 @@ class ProspectDetailView(LoginRequiredMixin, View):
 
                     context['prospect'] = prospect
 
-                    # fetch vechicle assets
-                    api_url = f'{request.user.active_company.api}/vehicles/?prospect={slug}'
-                    response = requests.get(api_url)
-                    response.raise_for_status()
-                    v_data = response.json()
-                    for vehicle in v_data:
-                        vehicle['prospect'] = prospect.id
+                # fetch vechicle assets
+                api_url = f'{request.user.active_company.api}/vehicles/?prospect={slug}'
+                response = requests.get(api_url)
+                response.raise_for_status()
+                v_data = response.json()
+                for vehicle in v_data:
+                    vehicle['prospect'] = context['prospect'].id
 
-                    for vehicle_data in v_data:
-                        vehicle = VehicleAsset.objects.filter(slug = vehicle_data["slug"])
+                for vehicle_data in v_data:
+                    vehicle = VehicleAsset.objects.filter(slug = vehicle_data["slug"])
 
-                        if not vehicle:
-                            vehicleSerializer = ApiSerializers.VehicleAssetSerializer(data=vehicle_data)
+                    if not vehicle:
+                        vehicleSerializer = ApiSerializers.VehicleAssetSerializer(data=vehicle_data)
 
-                        else:
-                            vehicleSerializer = ApiSerializers.VehicleAssetSerializer(vehicle.first(), data=vehicle_data, partial=True)
-
-
-                        if vehicleSerializer.is_valid(raise_exception=True):
-                            # first handle modifying the url to have  port number
-                            parsed_url = urlparse(request.user.active_company.api)
-                            port = parsed_url.port
-
-                            validated_data = vehicleSerializer.validated_data
-                            if validated_data.get('logbook'):
-                            # print(validated_data['proof_of_payment'])
-                                if port:
-                                    logbook_url = urlparse(validated_data['logbook'])
-                                    logbook_url = logbook_url._replace(netloc=f"{logbook_url.hostname}:{port}")
-                                else:
-                                    logbook_url = urlparse(validated_data['logbook'])
-                                # logbook_url = logbook_url._replace(netloc=f"{logbook_url.hostname}:{port}")
-                                validated_data['logbook'] = logbook_url.geturl()
-
-                            vehicleSerializer.save()
-
-                    users_with_permission = User.objects.filter(
-                            role__permissions__code='can_be_valuers',
-                            company=self.request.user.company
-                        )
-                    context["valuers"] =  users_with_permission
-
-                    vehicle_assets = VehicleAsset.objects.filter(prospect=prospect)
-                    if vehicle_assets:
-                        context['vehicle_asset_form'] = VehicleAssetForm(instance=vehicle_assets.first())
                     else:
-                        context['vehicle_asset_form'] = VehicleAssetForm()
+                        vehicleSerializer = ApiSerializers.VehicleAssetSerializer(vehicle.first(), data=vehicle_data, partial=True)
 
-                    context['vehicle_assets'] = vehicle_assets
 
-                    # implement for land assets
+                    if vehicleSerializer.is_valid(raise_exception=True):
+                        # first handle modifying the url to have  port number
+                        parsed_url = urlparse(request.user.active_company.api)
+                        port = parsed_url.port
 
-                    # forms for modal
+                        validated_data = vehicleSerializer.validated_data
+                        if validated_data.get('logbook'):
+                        # print(validated_data['proof_of_payment'])
+                            if port:
+                                logbook_url = urlparse(validated_data['logbook'])
+                                logbook_url = logbook_url._replace(netloc=f"{logbook_url.hostname}:{port}")
+                            else:
+                                logbook_url = urlparse(validated_data['logbook'])
+                            # logbook_url = logbook_url._replace(netloc=f"{logbook_url.hostname}:{port}")
+                            validated_data['logbook'] = logbook_url.geturl()
 
-                    context["page_name"] =  "valuation"
-                    context["sub_page_name"] =  "valuation_requests"
+                        vehicleSerializer.save()
 
-                    return render(request, self.template_name, context=context)
+                users_with_permission = User.objects.filter(
+                        role__permissions__code='can_be_valuers',
+                        company=self.request.user.company
+                    )
+                context["valuers"] =  users_with_permission
+
+                vehicle_assets = VehicleAsset.objects.filter(prospect=context['prospect'])
+                if vehicle_assets:
+                    context['vehicle_asset_form'] = VehicleAssetForm(instance=vehicle_assets.first())
+                else:
+                    context['vehicle_asset_form'] = VehicleAssetForm()
+
+                context['vehicle_assets'] = vehicle_assets
+
+                # implement for land assets
+
+                # forms for modal
+
+                context["page_name"] =  "valuation"
+                context["sub_page_name"] =  "valuation_requests"
+
+                return render(request, self.template_name, context=context)
 
 
             except requests.exceptions.RequestException as e:
