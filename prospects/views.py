@@ -988,6 +988,8 @@ class ProspectReviewView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         # Filter the queryset to only include prospects with 'Failed' status
+
+        print(self.request.user.active_company.name)
         return Prospect.objects.filter(status='Review', company__icontains=self.request.user.active_company.name).order_by('created_at')
 
     def get_context_data(self, **kwargs):
