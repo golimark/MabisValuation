@@ -616,6 +616,8 @@ def fetch_prospects_from_mabis(request):
 @login_required
 def fetch_vehicle_asset_for_prospect(request):
     # Fetch all VehicleAsset records and their related VehicleEvaluationReport details
+    print(request.user.active_company)
+    print(request.user.active_company.name)
     vehicle_data = VehicleAsset.objects.filter(prospect__company=request.user.active_company.name).prefetch_related(
         Prefetch(
             'vehicleevaluationreport_set',  # Reverse relation to VehicleEvaluationReport
