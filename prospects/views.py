@@ -175,6 +175,8 @@ class ProspectDetailView(LoginRequiredMixin, View):
 
                     context['prospect'] = prospect
 
+                if not prospect:
+
                 # fetch vechicle assets
                 api_url = f'{request.user.active_company.api}/vehicles/?prospect={slug}'
                 response = requests.get(api_url)
