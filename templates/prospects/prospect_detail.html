@@ -57,13 +57,13 @@
 
 </div>
 
+{% if v_evaluation_reports %}
+{% for v_report in v_evaluation_reports %}
+{% if vehicle_asset %}
+{% for vehicle in vehicle_asset %}
 <div class="card mb-3">
     <div class="card-header">ASSETS</div>
     <div class="card-body">
-        {% if v_evaluation_reports %}
-        {% for v_report in v_evaluation_reports %}
-        {% if vehicle_asset %}
-        {% for vehicle in vehicle_asset %}
         <div class="row"> <!-- Centering text -->
             <div class="col-md-6">
                 <table class="table">
@@ -172,13 +172,12 @@
                 </table>
             </div>
         </div>
-        {% endfor %}
-        {% endif %}
-        {% endfor %}
-        {% endif %}
     </div>
-
 </div>
+{% endfor %}
+{% endif %}
+{% endfor %}
+{% endif %}
 <div class="card mb-3">
     <div class="card-header">FILES</div>
     <div class="card-body">

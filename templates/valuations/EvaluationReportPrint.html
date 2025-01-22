@@ -7,7 +7,9 @@
 <div id="printreport" class="card mb-3">
 
     <div style="align-content: center; justify-items: center;">
+        {% if user.company.logo %}
         <center><img src="{{ user.company.logo.url }}" alt="" ></center>
+        {% endif %}
     </div>
     <div class="card-header">
         <center>Applicant / Client : <strong>{{prospect.company}}</strong></center>
@@ -212,7 +214,7 @@
         {%endif%}
     </div>
 </div>
-<a href="{% url 'print_report' prospect.slug %}" target="_blank" class="btn btn-success">PRINT</a>
+<a href="{% url 'print_report' prospect.slug %}?report_id={{evaluation_report.id}}" target="_blank" class="btn btn-success">PRINT</a>
 <script>
     function printDiv1() {
         var printContents = document.getElementById("printreport").innerHTML;
