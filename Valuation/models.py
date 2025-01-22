@@ -51,6 +51,7 @@ CAR_MAKES = [
     ('TESLA', 'TESLA'),
     ('TOYOTA', 'TOYOTA'),
     ('VOLKSWAGEN', 'VOLKSWAGEN'),
+    ('SINO TRUCK HOWO', 'SINO TRUCK HOWO'),
     ('VOLVO', 'VOLVO'),
     ('OTHER', 'OTHER'),  # Placeholder for custom entries
 ]
@@ -62,6 +63,8 @@ BODY_CHOICES = [
     ('MINI-VAN', 'MINI-VAN'),
     ('SEDAN', 'SEDAN'),
     ('COUPE', 'COUPE'),
+    ('HATCH BACK', 'HATCH BACK'),
+    ('TRUCK', 'TRUCK'),
     ('PICK UP DOUBLE CABIN', 'PICK UP DOUBLE CABIN'),
     ('PICK UP SINGLE CABIN', 'PICK UP SINGLE CABIN'),
 ]
@@ -93,10 +96,16 @@ class VehicleAsset(models.Model):
         ('DISPOSED_OFF', 'DISPOSED_OFF'),
     ]
 
+    VEHICLE_TYPE_OPTIONS = [
+        ('REGISTERED', 'REGISTERED'), 
+        ('NOT REGISTERED', 'NOT REGISTERED')
+    ]
+
     prospect = models.ForeignKey(to=Prospect, on_delete=models.SET_NULL, null=True, blank=True)
     logbook = models.CharField(max_length=256, null=True, blank=True)
 
     license_plate = models.CharField("Vehicle Registration Number", max_length=20)
+    vehicle_type = models.CharField('Vehicle Type',max_length=50,  choices=VEHICLE_TYPE_OPTIONS, null=True, blank=True)
     maketypes = models.CharField("Car Make Type", max_length=50, choices=CAR_MAKES, null=True, blank=True)
     make = models.CharField("Car Make", max_length=50, null=True, blank=True)
     model = models.CharField("Car Model", max_length=50, null=True, blank=True)
