@@ -350,7 +350,6 @@ document.addEventListener("DOMContentLoaded", function () {
             if (data.error) {
               console.error(data.error);
             } else {
-              console.log(data);
               // Update the min and max amount spans
               document.getElementById("min_amount").textContent =
                 data.min_principal_amount;
@@ -623,7 +622,9 @@ document.addEventListener("DOMContentLoaded", function () {
 // }
 
 document.addEventListener("DOMContentLoaded", function () {
-  const opAmount = document.getElementById("id_sales_manager_recommended_amount");
+  const opAmount = document.getElementById(
+    "id_sales_manager_recommended_amount",
+  );
   if (opAmount != null) {
     opAmount.addEventListener("input", function (e) {
       // Remove commas and non-numeric characters
@@ -1016,7 +1017,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // remove commas
     v = v.split(",").join("");
     if (isNaN(v)) {
-      return
+      return;
     }
     let value = parseInt(v);
 
@@ -1033,91 +1034,95 @@ document.addEventListener("DOMContentLoaded", () => {
     elem.innerHTML = `${value.toLocaleString("en-US")} - ${words}`;
   });
 
-  const exceptional_approval = document.querySelector("#exceptional_approval")
-  const other_reason = document.querySelector("#other_reason")
+  const exceptional_approval = document.querySelector("#exceptional_approval");
+  const other_reason = document.querySelector("#other_reason");
   if (exceptional_approval != null) {
-    const expectional_request_basis = document.querySelector("#expectional_request_basis")
+    const expectional_request_basis = document.querySelector(
+      "#expectional_request_basis",
+    );
     if (expectional_request_basis != null) {
       exceptional_approval.addEventListener("change", (e) => {
         if (e.target.checked == true) {
-          expectional_request_basis.style.display = "grid"
+          expectional_request_basis.style.display = "grid";
         }
-      })
+      });
 
-      
       other_reason.addEventListener("change", (e) => {
         if (e.target.checked == true) {
-          console.log(expectional_request_basis)
-          expectional_request_basis.style.display = "none"
+          console.log(expectional_request_basis);
+          expectional_request_basis.style.display = "none";
         }
-      })
-  
+      });
     }
   }
 
   // uploaded content preview
-  
-  document.querySelectorAll("input[type='file'], input[type='image']").forEach(elem => elem.addEventListener("change", (e) => {
-    const fileInput = e.target;
 
-    // create preview area
-    e.target.parentNode.style.display = "grid"
-    e.target.parentNode.style.gap = "1rem"
+  document
+    .querySelectorAll("input[type='file'], input[type='image']")
+    .forEach((elem) =>
+      elem.addEventListener("change", (e) => {
+        const fileInput = e.target;
 
-    
-    const previewContainer = document.createElement("div")
-    previewContainer.style.display = "grid"
-    previewContainer.style.gap = "1rem"
-    e.target.parentNode.appendChild(previewContainer)
+        // create preview area
+        e.target.parentNode.style.display = "grid";
+        e.target.parentNode.style.gap = "1rem";
 
-    // Clear previous preview
-    previewContainer.innerHTML = '';
+        const previewContainer = document.createElement("div");
+        previewContainer.className = "previewContainer";
+        previewContainer.style.display = "grid";
+        previewContainer.style.gap = "1rem";
+        e.target.parentNode.appendChild(previewContainer);
 
-    // Check if a file was selected
-    if (fileInput.files && fileInput.files[0]) {
-      const file = fileInput.files[0];
-      const fileName = file.name;
-      const fileType = file.type;
+        // Clear previous preview
+        previewContainer.innerHTML = "";
 
-      if (fileType.startsWith('image/')) {
-          // If the file is an image, preview it
-          const reader = new FileReader();
-          reader.onload = function (e) {
-              const img = document.createElement('img');
+        // Check if a file was selected
+        if (fileInput.files && fileInput.files[0]) {
+          const file = fileInput.files[0];
+          const fileName = file.name;
+          const fileType = file.type;
+
+          if (fileType.startsWith("image/")) {
+            // If the file is an image, preview it
+            const reader = new FileReader();
+            reader.onload = function (e) {
+              const img = document.createElement("img");
               img.src = e.target.result;
-              img.style.maxWidth = '100%';
-              img.style.height = '250px';
+              img.style.maxWidth = "100%";
+              img.style.height = "250px";
               previewContainer.appendChild(img);
-          };
-          reader.readAsDataURL(file);
-      } else if (fileType === 'application/pdf') {
-          // If the file is a PDF, provide a link to view it
-          const pdfLink = document.createElement('a');
-          pdfLink.href = URL.createObjectURL(file);
-          pdfLink.target = '_blank';
-          pdfLink.innerHTML = `<p style="font-size: 12px; display: grid;grid-auto-flow: column; gap: .25rem;justify-content:flex-start;"><span style="color: blue;">View PDF:</span> <span> ${fileName}</span></p>`;
-          previewContainer.appendChild(pdfLink);
-      } else if (
-          fileType === 'application/msword' ||
-          fileType === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' ||
-          fileType === 'text/plain'
-      ) {
-          // If the file is a Word document or text file, show its name
-          const docLink = document.createElement('a');
-          docLink.href = URL.createObjectURL(file);
-          docLink.target = '_blank';
-          docLink.innerHTML = `<p style="font-size: 12px; display: grid;grid-auto-flow: column; gap: .25rem;justify-content:flex-start;"><span style="color: blue;">View Document:</span> <span> ${fileName}</span></p>`;
-          previewContainer.appendChild(docLink);
-      } else {
-          // For unsupported file types, show a message
-          previewContainer.textContent = `File type not supported for preview: ${fileName}`;
-      }
-    } else {
-        // If no file was selected
-        previewContainer.textContent = 'No file selected.';
-    }
-  }))
-
+            };
+            reader.readAsDataURL(file);
+          } else if (fileType === "application/pdf") {
+            // If the file is a PDF, provide a link to view it
+            const pdfLink = document.createElement("a");
+            pdfLink.href = URL.createObjectURL(file);
+            pdfLink.target = "_blank";
+            pdfLink.innerHTML = `<p style="font-size: 12px; display: grid;grid-auto-flow: column; gap: .25rem;justify-content:flex-start;"><span style="color: blue;">View PDF:</span> <span> ${fileName}</span></p>`;
+            previewContainer.appendChild(pdfLink);
+          } else if (
+            fileType === "application/msword" ||
+            fileType ===
+              "application/vnd.openxmlformats-officedocument.wordprocessingml.document" ||
+            fileType === "text/plain"
+          ) {
+            // If the file is a Word document or text file, show its name
+            const docLink = document.createElement("a");
+            docLink.href = URL.createObjectURL(file);
+            docLink.target = "_blank";
+            docLink.innerHTML = `<p style="font-size: 12px; display: grid;grid-auto-flow: column; gap: .25rem;justify-content:flex-start;"><span style="color: blue;">View Document:</span> <span> ${fileName}</span></p>`;
+            previewContainer.appendChild(docLink);
+          } else {
+            // For unsupported file types, show a message
+            previewContainer.textContent = `File type not supported for preview: ${fileName}`;
+          }
+        } else {
+          // If no file was selected
+          previewContainer.textContent = "No file selected.";
+        }
+      }),
+    );
 });
 
 // customizations for mobile view
@@ -1139,49 +1144,51 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.querySelectorAll("img").forEach((img) => {
     img.addEventListener("click", () => {
-      let zoomer = document.querySelector(".img-zoomer")
+      let zoomer = document.querySelector(".img-zoomer");
       zoomer.querySelector("img").src = img.src;
       zoomer.classList.add("show");
-      zoomer.querySelector(".close-cta").addEventListener("click", () => {  zoomer.classList.remove("show")})
+      zoomer.querySelector(".close-cta").addEventListener("click", () => {
+        zoomer.classList.remove("show");
+      });
     });
-  })
+  });
 });
 
-
-
-
-
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
   const makeField = document.getElementById("id_make");
   const customMakeWrapper = document.getElementById("customMakeWrapper");
   const customMakeField = document.getElementById("id_custom_make");
 
   if (makeField != null) {
-      makeField.addEventListener("change", function() {
-          if (makeField.value.toLowerCase() === "other") {
-              customMakeWrapper.style.display = 'block'
-          } else {
-              customMakeWrapper.style.display = 'none'
-          }
-          // Show custom make input if "OTHER" is selected
-      });
+    makeField.addEventListener("change", function () {
+      if (makeField.value.toLowerCase() === "other") {
+        customMakeWrapper.style.display = "block";
+      } else {
+        customMakeWrapper.style.display = "none";
+      }
+      // Show custom make input if "OTHER" is selected
+    });
   }
 
   if (customMakeField != null) {
-      customMakeField.addEventListener("keyup", () => {
-          makeField.value = customMakeField.value
-      })
+    customMakeField.addEventListener("keyup", () => {
+      makeField.value = customMakeField.value;
+    });
   }
 
   // On form submission, if "OTHER" is selected, set makeField value to customMakeField value
   // what for are we adding the event listener to?
   // lets be specific
   if (document.querySelector("form")) {
-    document.querySelector("form").addEventListener("submit", function(event) {
-        if (makeField != null && customMakeField != null && makeField.value === "OTHER" && customMakeField.value.trim() !== "") {
-            makeField.value = customMakeField.value;  // Replace make value with custom input
-            console.log("makeField.value:", makeField.value);
-        }
+    document.querySelector("form").addEventListener("submit", function (event) {
+      if (
+        makeField != null &&
+        customMakeField != null &&
+        makeField.value === "OTHER" &&
+        customMakeField.value.trim() !== ""
+      ) {
+        makeField.value = customMakeField.value; // Replace make value with custom input
+      }
     });
   }
 });

@@ -988,8 +988,6 @@ class ProspectReviewView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         # Filter the queryset to only include prospects with 'Failed' status
-
-        print(self.request.user.active_company.name)
         return Prospect.objects.filter(status='Review', company__icontains=self.request.user.active_company.name).order_by('created_at')
 
     def get_context_data(self, **kwargs):
@@ -1371,7 +1369,7 @@ def add_valuation_report_details(request, slug):
                 if form.is_valid():
 
                     # check if the tax_identification_number is numeric
-                    if not str(form.cleaned_data['tax_identification_number']).isdigit() or len(str(form.cleaned_data['tax_identification_number'])) != 10:
+                    if not len(str(form.cleaned_data['tax_identification_number'])) != 10:
                         messages.error(request, "Tax Identification Number should only contain 10 numeric values.")
                         return redirect('valuation_prospect_detail', slug=slug)
 
@@ -1400,32 +1398,33 @@ def add_valuation_report_details(request, slug):
                     }
                     form.save()  # Now save the changes to the fields JSONField
 
+                    if len(VehicleAsset.objects.filter(prospect=prospect)) == len(VehicleEvaluationReport.objects.filter(vehicle__prospect=prospect)):
+                        # update upstream prospect status
+                        response = requests.patch(api_url, data={
+                            "status" : 'Valuation Supervisor',
+                            "valuation_submitted_on" : datetime.now(),
+                            "valuation_submitted_by" : request.user.username,
+                        })
+                        if response.status_code >= 200 and response.status_code <= 399:
+                            prospect.status = 'Valuation Supervisor'
+                            prospect.valuation_submitted_on = datetime.now()
+                            prospect.valuation_submitted_by = request.user
+                            prospect.save()
 
-                    # update upstream prospect status
-                    response = requests.patch(api_url, data={
-                        "status" : 'Valuation Supervisor',
-                        "valuation_submitted_on" : datetime.now(),
-                        "valuation_submitted_by" : request.user.username,
-                    })
-                    if response.status_code >= 200 and response.status_code <= 399:
-                        prospect.status = 'Valuation Supervisor'
-                        prospect.valuation_submitted_on = datetime.now()
-                        prospect.valuation_submitted_by = request.user
-                        prospect.save()
+                            # supervisor = User.objects.filter(Q(role__permission__code=('can_be_supervisor')) | Q(role__permission__code=('can_perform_admin_functions'))).first()
+                            supervisor = User.objects.filter(role__permissions__code=('can_be_supervisor' and 'can_verify_payment')).first()
+                            if supervisor:
+                                subject = 'New Prospect Valuation Supervision Request for prospect {}.'.format(prospect.name)
+                                email = supervisor.email
+                                message =  f'Hi {supervisor},\n\nYou have a new Prospect Valuation Supervision Request. Below are the details.\n\nProspect: {prospect.name}\nPhone: {prospect.phone_number}\n'
 
-                        # supervisor = User.objects.filter(Q(role__permission__code=('can_be_supervisor')) | Q(role__permission__code=('can_perform_admin_functions'))).first()
-                        supervisor = User.objects.filter(role__permissions__code=('can_be_supervisor' and 'can_verify_payment')).first()
-                        if supervisor:
-                            subject = 'New Prospect Valuation Supervision Request for prospect {}.'.format(prospect.name)
-                            email = supervisor.email
-                            message =  f'Hi {supervisor},\n\nYou have a new Prospect Valuation Supervision Request. Below are the details.\n\nProspect: {prospect.name}\nPhone: {prospect.phone_number}\n'
-
-                            send_email_task(subject, email, message)
-
-
-                    # Redirect to the 'valuation_prospect_detail' page
-                    messages.add_message(request, messages.SUCCESS, "Asset Valuation submitted successfully")
-                    return redirect('valuation_prospect_detail', slug=slug)
+                                send_email_task(subject, email, message)
+                        # Redirect to the 'valuation_prospect_detail' page
+                        messages.add_message(request, messages.SUCCESS, "Asset Valuation submitted successfully")
+                        return redirect('valuation_prospect_detail', slug=slug)
+                    else:
+                        messages.add_message(request, messages.SUCCESS, "Asset Valuation submitted successfully. Valuation Pending for other assets.")
+                        return redirect('valuation_prospect_detail', slug=slug)
                 else:
                     messages.add_message(request, messages.ERROR, "ERROR MODIFYING RECORDS. TRY AGAIN!!")
                     return redirect('valuation_prospect_detail', slug=slug)
@@ -1473,7 +1472,6 @@ def add_valuation_report_details(request, slug):
             v_reports = VehicleEvaluationReport.objects.filter(vehicle__prospect=prospect)
             if v_reports.exists():
                 # prospect.status = 'Valuation Supervisor' --> don't put prospect status here.
-
                 context["v_reports"] = [
                     {"form": VehicleEvaluationReportForm(
                         instance=report,
@@ -1486,7 +1484,7 @@ def add_valuation_report_details(request, slug):
                     ),
                     "report": report,
                     }
-                    for report in v_reports
+                    for report in v_reports.filter(pk=request.GET.get("report_id"))
                     ]
             else:
                 context["create_vehicle_report_form"] = VehicleEvaluationReportForm(
@@ -1534,21 +1532,33 @@ def add_another_valuation_report_details(request, slug):
                 form.save()  # Now save the changes to the fields JSONField
 
 
-                # update upstream prospect status
-                response = requests.patch(api_url, data={
-                    "status" : 'Valuation Supervisor',
-                    "valuation_submitted_on" : datetime.now(),
-                    "valuation_submitted_by" : request.user.username,
-                })
-                if response.status_code >= 200 and response.status_code <= 399:
-                    prospect.status = 'Valuation Supervisor'
-                    prospect.valuation_submitted_on = datetime.now()
-                    prospect.valuation_submitted_by = request.user
-                    prospect.save()
+                if len(VehicleAsset.objects.filter(prospect=prospect)) == len(VehicleEvaluationReport.objects.filter(vehicle__prospect=prospect)):
+                    # update upstream prospect status
+                    response = requests.patch(api_url, data={
+                        "status" : 'Valuation Supervisor',
+                        "valuation_submitted_on" : datetime.now(),
+                        "valuation_submitted_by" : request.user.username,
+                    })
+                    if response.status_code >= 200 and response.status_code <= 399:
+                        prospect.status = 'Valuation Supervisor'
+                        prospect.valuation_submitted_on = datetime.now()
+                        prospect.valuation_submitted_by = request.user
+                        prospect.save()
 
-                # Redirect to the 'valuation_prospect_detail' page
-                messages.add_message(request, messages.SUCCESS, "Asset Valuation submitted successfully")
-                return redirect('valuation_prospect_detail', slug=slug)
+                        # supervisor = User.objects.filter(Q(role__permission__code=('can_be_supervisor')) | Q(role__permission__code=('can_perform_admin_functions'))).first()
+                        supervisor = User.objects.filter(role__permissions__code=('can_be_supervisor' and 'can_verify_payment')).first()
+                        if supervisor:
+                            subject = 'New Prospect Valuation Supervision Request for prospect {}.'.format(prospect.name)
+                            email = supervisor.email
+                            message =  f'Hi {supervisor},\n\nYou have a new Prospect Valuation Supervision Request. Below are the details.\n\nProspect: {prospect.name}\nPhone: {prospect.phone_number}\n'
+
+                            send_email_task(subject, email, message)
+                    # Redirect to the 'valuation_prospect_detail' page
+                    messages.add_message(request, messages.SUCCESS, "Asset Valuation submitted successfully")
+                    return redirect('valuation_prospect_detail', slug=slug)
+                else:
+                    messages.add_message(request, messages.SUCCESS, "Asset Valuation submitted successfully. Valuation Pending for other assets.")
+                    return redirect('valuation_prospect_detail', slug=slug)
             else:
                 messages.add_message(request, messages.ERROR, "ERROR MODIFYING RECORDS. TRY AGAIN!!")
         # else:
@@ -1818,7 +1828,7 @@ def submit_report(request, slug):
 def print_valuation_report(request, slug):
     # Get the prospect and related evaluation report
     prospect = get_object_or_404(Prospect, slug=slug)
-    evaluation_report = get_object_or_404(VehicleEvaluationReport, prospect=prospect)
+    evaluation_report = get_object_or_404(VehicleEvaluationReport, prospect=prospect, pk=request.GET.get("report_id"))
 
     # Pass the data to a print-friendly template
     context = {
@@ -1850,7 +1860,7 @@ def print_inspection_report(request, slug):
 @login_required
 def printout_report(request, slug):
     prospect = get_object_or_404(Prospect, slug=slug)
-    evaluation_report = get_object_or_404(VehicleEvaluationReport, prospect=prospect)
+    evaluation_report = get_object_or_404(VehicleEvaluationReport, prospect=prospect, pk=request.GET.get("report_id"))
 
     # Pass the data to a print-friendly template
     context = {

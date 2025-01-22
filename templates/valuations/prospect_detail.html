@@ -49,6 +49,10 @@
         </div>
     </div>
 
+    {% if v_evaluation_reports %}
+    {% for v_report in v_evaluation_reports %}
+    {% if vehicle_assets %}
+    {% for vehicle in vehicle_assets %}
     <div class="card mb-3">
         <div class="card-header with-minimizer">
                 <p class="">ASSETS</p>
@@ -58,10 +62,6 @@
                 </span>
             </div>
         <div class="card-body">
-            {% if v_evaluation_reports %}
-            {% for v_report in v_evaluation_reports %}
-            {% if vehicle_assets %}
-            {% for vehicle in vehicle_assets %}
             <div class="row">  <!-- Centering text -->
                 <div class="col-md-6">
                     <table class="table">
@@ -149,12 +149,12 @@
                     </table>
                 </div>
             </div>
-            {% endfor %}
-            {% endif %}
-            {% endfor %}
-            {% endif %}
         </div>
     </div>
+    {% endfor %}
+    {% endif %}
+    {% endfor %}
+    {% endif %}
 
 
     <div class="card mb-3">
@@ -168,29 +168,29 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-6">
-                    
+
                     <p style="margin-bottom: .5rem;">
                         <strong>Proof Of Payment:</strong>
                         {% if prospect.proof_of_payment %}
-                            <a data-fancybox="gallery" style="color:aqua;margin-left: .5rem;" 
-                               class="document-view-link" 
-                               href="{{ prospect.proof_of_payment }}" 
+                            <a data-fancybox="gallery" style="color:aqua;margin-left: .5rem;"
+                               class="document-view-link"
+                               href="{{ prospect.proof_of_payment }}"
                                data-doc="proof_of_payment" target="_blank">View</a>
                         {% else %}
                             <p>Not Available</p>
                         {% endif %}
                     </p>
-                    
-                    
+
+
                     <!-- <p>here: {{vehicle.logbook}}</p> -->
                     {% if vehicle_assets %}
                     {% for vehicle in vehicle_assets %}
                     <p style="margin-bottom: .5rem;">
                         <strong>Log Book:</strong>
                         {% if vehicle.logbook %}
-                            <a data-fancybox="gallery" style="color:aqua;margin-left: .5rem;" 
-                               class="document-view-link" 
-                               href="{{ vehicle.logbook }}" 
+                            <a data-fancybox="gallery" style="color:aqua;margin-left: .5rem;"
+                               class="document-view-link"
+                               href="{{ vehicle.logbook }}"
                                data-doc="logbook_{{ forloop.counter }}" target="_blank">View</a>
                         {% else %}
                             <p>Not Available</p>
@@ -223,7 +223,6 @@
     </div>
 
     {% if v_evaluation_reports %}
-
         {% for v_report in v_evaluation_reports %}
             <div id="print" class="card mb-3">
                 <div class="card-header with-minimizer">
@@ -395,12 +394,12 @@
                             <p style="margin-top: 1rem; color:blue;">{{ v_report.recommendation }}</p>
                         </div>
                     </div>
-                    
+
                 </div>
                 </div>
             </div>
 
-            {% if v_report.company_supervisor_remarks %} 
+            {% if v_report.company_supervisor_remarks %}
             <div class="card mb-3">
                 <div class="card-header with-minimizer">
                     <p class="">VALUATION REMARKS BY SUPERVISOR</p>
@@ -417,14 +416,14 @@
                             <p style="margin-top: 1rem; color:blue;">{{ v_report.company_supervisor_remarks }}</p>
                         </div>
                     </div>
-                    
+
                 </div>
                 </div>
             </div>
             {%endif%}
 
 
-            {% if v_report.company_approver_remarks %} 
+            {% if v_report.company_approver_remarks %}
             <div class="card mb-3">
                 <div class="card-header with-minimizer">
                     <p class="">VALUATION REMARKS BY APPROVER</p>
@@ -441,12 +440,12 @@
                             <p style="margin-top: 1rem; color:blue;">{{ v_report.company_approver_remarks }}</p>
                         </div>
                     </div>
-                    
+
                 </div>
                 </div>
             </div>
             {%endif%}
-        
+
         {% endfor %}
     {%endif%}
 
@@ -469,7 +468,7 @@
             VERIFY PAYMENT
         </button>
         <!-- Modal -->
-    
+
         <!-- <a href="{% url 'decline' prospect.slug %}" class="btn btn-danger">Decline</a> -->
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-danger action-buttons" style="display: none;" data-toggle="modal" data-target="#declineReasonModal">
@@ -522,27 +521,40 @@
 
         <div class="d-flex justify-content-start mt-3" style="display: flex; gap: 30px;">
         {% if v_evaluation_reports %}
-        {% if prospect.status == 'Valuation Supervisor' %}
-            {%if 'can_be_supervisor' in request.user.permissions %}
-                <form action="{% url 'submit_report' prospect.slug %}" method="POST">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-warning">SUBMIT</button>
-                    
-                </form>
-                <a style="color: white; background-color: #0d6efd;" href="{% url 'create_valuation_report' prospect.slug %}" class="btn btn-info"><i class="fa fa-pen"></i> EDIT ASSET VALUATION</a>
-                <!-- <a href="{% url 'submit_report' prospect.slug %}" class="btn btn-warning">Submit Report</a> -->
-                <!-- <a href="javascript:void(0);" class="btn btn-info" onclick="printDiv()">Print</a> -->
-            {%endif%}
-        {% endif %}
+            {% if prospect.status == 'Valuation Supervisor' %}
+                {%if 'can_be_supervisor' in request.user.permissions %}
+                    {% if v_evaluation_reports|length > 0 and vehicle_assets|length >= v_evaluation_reports|length %}
+                        <form action="{% url 'submit_report' prospect.slug %}" method="POST">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-warning">SUBMIT</button>
+                        </form>
+                    {%endif%}
+                    {% for report in v_evaluation_reports %}
+                        <a style="color: white; background-color: #0d6efd;" href="{% url 'create_valuation_report' prospect.slug %}?report_id={{report.id}}" class="btn btn-info"><i class="fa fa-pen" style="margin-inline-end: 1rem;"></i>EDIT ASSET VALUATION FOR {{ report.vehicle.license_plate }}</a>
+                    {% endfor %}
+                    <!-- <a href="{% url 'submit_report' prospect.slug %}" class="btn btn-warning">Submit Report</a> -->
+                    <!-- <a href="javascript:void(0);" class="btn btn-info" onclick="printDiv()">Print</a> -->
+                {%endif%}
+            {% endif %}
         {% endif %}
         {% if prospect.status == 'Valuation' %}
-        {% if not prospect.fields %}
-        <a style="color: white; background-color: #0d6efd;" href="{% url 'create_valuation_report' prospect.slug %}" class="btn btn-info"><i class="fa fa-add"></i> ASSET VALUATION</a>
-        {% else %}
-        <a style="color: white; background-color: #0d6efd;" href="{% url 'create_another_valuation_report' prospect.slug %}" class="btn btn-info"><i class="fa fa-add"></i> NEW REPORT</a>
-        {%endif%}
+            {% if v_evaluation_reports|length == 0 %}
+                {% if not prospect.fields %}
+                    <a style="color: white; background-color: #0d6efd;" href="{% url 'create_valuation_report' prospect.slug %}?" class="btn btn-info"><i class="fa fa-add"></i> ASSET VALUATION</a>
+                {% else %}
+                    <a style="color: white; background-color: #0d6efd;" href="{% url 'create_another_valuation_report' prospect.slug %}" class="btn btn-info"><i class="fa fa-add"></i> NEW REPORT</a>
+                {%endif%}
+            {% else %}
+                {% for report in v_evaluation_reports %}
+                <a style="color: white; background-color: #0d6efd;" href="{% url 'create_valuation_report' prospect.slug %}?report_id={{report.id}}" class="btn btn-info"><i class="fa fa-pen" style="margin-inline-end: 1rem;"></i>EDIT ASSET VALUATION FOR {{ report.vehicle.license_plate }}</a>
+                {% endfor %}
+            {%endif%}
 
-      {% endif %}
+
+            {% if v_evaluation_reports|length > 0 and vehicle_assets|length > v_evaluation_reports|length %}
+                <a style="color: white; background-color: #0d6efd;" href="{% url 'create_another_valuation_report' prospect.slug %}" class="btn btn-info"><i class="fa fa-add"></i> NEW REPORT</a>
+            {%endif%}
+        {% endif %}
 
         </div>
 
@@ -556,10 +568,11 @@
             <button type="submit" class="btn btn-success">COMPLETE</button>
         </form>
 
-        <a style="color: white; background-color: #0d6efd;" href="{% url 'print_valuation_report' prospect.slug %}" class="btn btn-info"><i class="fa fa-pen"></i> VIEW REPORT</a>
 
-        <a style="color: white; background-color: #0d6efd;" href="{% url 'create_valuation_report' prospect.slug %}" class="btn btn-info"><i class="fa fa-pen"></i> EDIT ASSET VALUATION</a>
-            <!-- change status to Pipeline -->
+        {% for report in v_evaluation_reports %}
+            <a style="color: white; background-color: #0d6efd;" href="{% url 'print_valuation_report' prospect.slug %}?report_id={{report.id}}" class="btn btn-info"><i class="fa fa-print" style="margin-inline-end: 1rem;"></i> VIEW REPORT FOR {{ report.vehicle.license_plate }}</a>
+            <a style="color: white; background-color: #0d6efd;" href="{% url 'create_valuation_report' prospect.slug %}?report_id={{report.id}}" class="btn btn-info"><i class="fa fa-pen" style="margin-inline-end: 1rem;"></i>EDIT ASSET VALUATION FOR {{ report.vehicle.license_plate }}</a>
+        {% endfor %}
     </div>
 
 
@@ -570,14 +583,14 @@
     <a style="color: white; background-color: #0d6efd;" href="{% url 'create_inspection_report' prospect.slug %}" class="btn btn-info"><i class="fa fa-add"></i> INSPECTION FORM</a>
 
     {% if inspection_reports %}
-    
+
         <form action="{% url 'inspection-pipeline' prospect.slug %}" method="POST">
             {% csrf_token %}
             <button type="submit" class="btn btn-success">SUBMIT INSPECTION REPORT</button>
         </form>
 
         <a style="color: white; background-color: #0d6efd;" href="{% url 'print_inspection_report' prospect.slug %}" class="btn btn-info"><i class="fa fa-pen"></i> VIEW INSPECTION REPORT</a>
-    
+
     {%endif%}
 </div>
 
@@ -697,16 +710,16 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const verifyPaymentCta = document.querySelector("#verify_payment_cta");
-        
+
             if (verifyPaymentCta) {
                 verifyPaymentCta.addEventListener("click", () => {
                     const userInput = document.getElementById("paymentIdInput").value;
-        
+
                     if (!userInput) {
                         alert("Please enter a Payment ID.");
                         return;
                     }
-        
+
                     fetch("{% url 'valuate_prospect' prospect.slug %}", {
                         method: "POST",
                         headers: {
@@ -731,7 +744,7 @@
                     })
                     .catch((error) => {
                         console.error("Error:", error);
-                        
+
                     });
                 });
             }
@@ -767,5 +780,5 @@
         });
     });
 </script>
-        
+
 {% endblock %}
