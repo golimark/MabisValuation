@@ -1369,8 +1369,8 @@ def add_valuation_report_details(request, slug):
                 if form.is_valid():
 
                     # check if the tax_identification_number is numeric
-                    if not len(str(form.cleaned_data['tax_identification_number'])) != 10:
-                        messages.error(request, "Tax Identification Number should only contain 10 numeric values.")
+                    if not len(str(form.cleaned_data['tax_identification_number'])) > 10:
+                        messages.error(request, "Tax Identification Number should contain 10 or more numeric values.")
                         return redirect('valuation_prospect_detail', slug=slug)
 
                     if VehicleEvaluationReport.objects.filter(tax_identification_number=form.cleaned_data['tax_identification_number']).exists():
