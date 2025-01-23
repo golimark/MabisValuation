@@ -169,19 +169,23 @@
             <div class="row">
                 <div class="col-md-6">
 
+                    {% for proof in prospect.proof_of_payment %}
                     <p style="margin-bottom: .5rem;">
-                        <strong>Proof Of Payment:</strong>
-                        {% if prospect.proof_of_payment %}
-                            <a data-fancybox="gallery" style="color:aqua;margin-left: .5rem;"
-                               class="document-view-link"
-                               href="{{ prospect.proof_of_payment }}"
-                               data-doc="proof_of_payment" target="_blank">View</a>
-                        {% else %}
-                            <p>Not Available</p>
-                        {% endif %}
+                        <strong>Proof Of Payment: </strong>
+                        <a data-fancybox="gallery" style="color:aqua;margin-left: .5rem;"
+                                href="{{ proof.proof_of_payment }}" target="__blank">View</a>
                     </p>
+                    {%endfor%}
 
+                    {% if not prospect.proof_of_payment %}
+                    <p style="margin-bottom: .5rem;">
+                        <strong>Proof Of Payment: </strong>
+                        <p>Not Available</p>
+                    </p>
+                    {% endif %}
 
+                </div>
+                <div class="col-md-6">
                     <!-- <p>here: {{vehicle.logbook}}</p> -->
                     {% if vehicle_assets %}
                     {% for vehicle in vehicle_assets %}
@@ -199,10 +203,6 @@
                     {%endfor%}
                     {%endif%}
 
-                    {% if prospect.valuer_assigned%}
-                    <p> <strong>Valuer Assigned: </strong> {{prospect.valuer_assigned}}</p>
-                    {% endif %}
-
 
                     {% if land_asset %}
                     {% for land in land_asset %}
@@ -217,10 +217,28 @@
                     {%endfor%}
                     {%endif%}
                 </div>
-                <div class="col-md-6"></div>
             </div>
         </div>
     </div>
+
+    {% if prospect.valuer_assigned%}
+    <div class="card mb-3">
+        <div class="card-header with-minimizer">
+                <p class="">VALUATION DETAILS</p>
+                <span class="card-body-minimizer">
+                    <i class="fas fa-chevron-up show"></i>
+                    <i class="fas fa-chevron-down hidden"></i>
+                </span>
+            </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <p> <strong>Valuer Assigned: </strong> {{prospect.valuer_assigned}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
 
     {% if v_evaluation_reports %}
         {% for v_report in v_evaluation_reports %}
@@ -628,11 +646,13 @@
                 </button>
             </div>
             <div class="modal-body" style="display: grid; justify-content: stretch;">
-                <form id="paymentVerificationForm">
-                    <div class="form-group">
-                        <label for="paymentIdInput">ENTER PAYMENT ID</label>
-                        <input style="width: 100%;" type="number" class="form-control" id="paymentIdInput" placeholder="Payment ID" required>
+                <form id="paymentVerificationForm" style="display: grid; gap: 1rem;">
+                    {% for proof in prospect.proof_of_payment %}
+                    <div class="form-group" style="display: grid; gap: 1rem;">
+                        <label for="paymentIdInput-{{forloop.counter}}">ENTER PAYMENT ID</label>
+                        <input style="width: 100%;" type="number" class="form-control payment-id-verification-field" id="paymentIdInput-{{forloop.counter}}" placeholder="Payment ID" required>
                     </div>
+                    {% endfor %}
                     <button style="margin-top: 20px; " type="button" class="btn btn-primary" id="verify_payment_cta" >VERIFY</button>
                 </form>
             </div>
@@ -713,12 +733,12 @@
 
             if (verifyPaymentCta) {
                 verifyPaymentCta.addEventListener("click", () => {
-                    const userInput = document.getElementById("paymentIdInput").value;
 
-                    if (!userInput) {
-                        alert("Please enter a Payment ID.");
-                        return;
-                    }
+                    let payment_ids = []
+                    document.querySelectorAll(".payment-id-verification-field").forEach(elem => {
+                        if (elem.value == "") {alert("Enter all payment IDs in order to proceed.")}
+                        payment_ids.push(elem.value)
+                    })
 
                     fetch("{% url 'valuate_prospect' prospect.slug %}", {
                         method: "POST",
@@ -726,7 +746,7 @@
                             "Content-Type": "application/json",
                             "X-CSRFToken": document.querySelector("[name=csrfmiddlewaretoken]").value,
                         },
-                        body: JSON.stringify({ payment_id: userInput }),
+                        body: JSON.stringify({ payment_ids: payment_ids }),
                     })
                     .then((response) => {
 					console.log(response)

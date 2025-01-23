@@ -29,6 +29,12 @@ def validate_phone_number(value):
         )
 
 
+class ProofofPayment(models.Model):
+    prospect = models.ForeignKey("Prospect", on_delete=models.CASCADE, null=True, blank=True, related_name='Prospect')
+    proof_of_payment = models.CharField(max_length=256, null=True, blank=True)
+    proof_of_payment_id = models.CharField("PROOF OF PAYMENT ID", max_length=50, null=True, blank=True)
+
+
 class Prospect(models.Model):
     GENDER_CHOICES = [
         ('MALE', 'MALE'),
@@ -64,9 +70,8 @@ class Prospect(models.Model):
     decline_reason = models.CharField(max_length=255, null=True, blank=True)
 
     # Loan details
-    proof_of_payment = models.URLField(null=True, blank=True)
-    # proof_of_payment = models.CharField(max_length=256, null=True, blank=True)
-    proof_of_payment_id = models.CharField("PROOF OF PAYMENT ID", max_length=50, null=True, blank=True)
+    proof_of_payment_old = models.ImageField("PROOF OF PAYMENT", upload_to='prospect/proof_of_payment/', null=True, blank=True)
+    proof_of_payment_id_old = models.CharField("PROOF OF PAYMENT ID", max_length=50, null=True, blank=True)
     # proof_of_payment_id = models.CharField("PROOF OF PAYMENT ID", max_length=50, null=True, blank=True, unique=True)
     status = models.CharField("STATUS", max_length=20, choices=STATUS_CHOICES, default='New', null=True, blank=True)
     slug = models.SlugField("Safe Url", unique=True, blank=True, null=True, max_length=200)
@@ -137,6 +142,10 @@ class Prospect(models.Model):
         if self.date_of_birth:
             return date.today().year - self.date_of_birth.year
         return "Not Set"
+
+    @property
+    def proof_of_payment(self):
+        return ProofofPayment.objects.filter(prospect=self)
 
     def __str__(self):
         return self.name

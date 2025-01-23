@@ -229,6 +229,38 @@ class ProspectDetailView(LoginRequiredMixin, View):
 
                 # forms for modal
 
+                # get proof of payment
+                api_url = f'{request.user.active_company.api}/proof-of-payment/?prospect={slug}'
+                response = requests.get(api_url)
+                response.raise_for_status()
+                proof_of_payments = response.json()
+
+                for proof in proof_of_payments:
+                    proof['prospect'] = context['prospect'].id
+
+                    existing_proof = ProofofPayment.objects.filter(proof_of_payment_id = proof["proof_of_payment_id"])
+                    if existing_proof:
+                        proofOfPaymentSerializer = ApiSerializers.VehicleAssetSerializer(existing_proof.first(), data=proof, partial=True)
+                    else:
+                        proofOfPaymentSerializer = ApiSerializers.ProofofPaymentSerializer(data=proof)
+
+                    if proofOfPaymentSerializer.is_valid(raise_exception=True):
+                        # first handle modifying the url to have  port number
+                        parsed_url = urlparse(request.user.active_company.api)
+                        port = parsed_url.port
+
+                        validated_data = proofOfPaymentSerializer.validated_data
+                        if validated_data.get('proof_of_payment'):
+                            if port:
+                                proof_of_payment_url = urlparse(validated_data['proof_of_payment'])
+                                proof_of_payment_url = proof_of_payment_url._replace(netloc=f"{proof_of_payment_url.hostname}:{port}")
+                            else:
+                                proof_of_payment_url = urlparse(validated_data['proof_of_payment'])
+
+                            validated_data['proof_of_payment'] = proof_of_payment_url.geturl()
+
+                        proofOfPaymentSerializer.save()
+
                 context["page_name"] =  "valuation"
                 context["sub_page_name"] =  "valuation_requests"
 
@@ -544,7 +576,6 @@ class ValuationProspectListView(LoginRequiredMixin, View):
 
     def get(self, request):
         if request.user.active_company:
-
             # api_url = 'http://192.168.20.83:8000/api/prospects/?status=valuation'
             api_url = f'{request.user.active_company.api}/prospects/?status=valuation'
 
@@ -1161,75 +1192,74 @@ def prospect_in_valuation(request, slug):
     if request.user.active_company:
         if request.method == "POST":
             data = json.loads(request.body)
-            payment_id = data.get('payment_id', None)
-            # print('payment_id',payment_id)
-            if not payment_id:
+            payment_ids = data.get('payment_ids', None)
+            if not payment_ids:
                 return JsonResponse({'error': 'No payment ID provided.'}, status=403)
 
+            api_url = f'{request.user.active_company.api}/proof-of-payment/?prospect={slug}'
+            response = requests.get(api_url)
+            response.raise_for_status()
+            proof_of_payments = response.json()
+
+            match_status = []
+            for proof in proof_of_payments:
+                matching = False
+                for payment_id in payment_ids:
+                    matching = proof.get("proof_of_payment_id") == payment_id
+                    if matching:
+                        break
+                match_status.append(matching)
+
+            if not all(match_status):
+                return JsonResponse({'error': 'Unable to update prospect data. Confirm Payment ID'}, status=400)
+
+            prospect = Prospect.objects.filter(slug=slug).first()
+            # Update prospect's status to "Payment Verified"
             api_url = f'{request.user.active_company.api}/prospects/{slug}/'
-            try:
-                response = requests.get(api_url)
-                response.raise_for_status()
-                prospect = response.json()
-            except:
-                return JsonResponse({'error': 'Invalid payment ID.'}, status=403)
+            # assign valuer
+            users_with_permission = User.objects.filter(
+                # role__permissions__code='can_view_valuation_requests',
+                role__permissions__code='can_be_valuers',
+                company=request.user.company
+            )
+            # Get all prospects with an assigned valuer
+            valuer_assignments = (
+                Prospect.objects
+                .exclude(valuer_assigned=None)  # Exclude unassigned prospects
+                .values('valuer_assigned')  # Group by each valuer
+                .annotate(assign_count=Count('valuer_assigned'))  # Count their assignments
+                .order_by('assign_count')  # Sort by the count in ascending order
+            )
 
-            # Retrieve the single prospect to verify and assign
+            # Check the current valuer assignment counts and find the least assigned valuer
+            valuer_assignment_dict = {assign['valuer_assigned']: assign['assign_count'] for assign in valuer_assignments}
 
-            if prospect:
-                # confirm trans_id is matching
-                if payment_id == prospect['proof_of_payment_id']:
-                    # print('I reach there.')
-                    # Update prospect's status to "Payment Verified"
-                    api_url = f'{request.user.active_company.api}/prospects/{slug}/'
-                    # assign valuer
-                    users_with_permission = User.objects.filter(
-                        # role__permissions__code='can_view_valuation_requests',
-                        role__permissions__code='can_be_valuers',
-                        company=request.user.company
-                    )
-                    # Get all prospects with an assigned valuer
-                    valuer_assignments = (
-                        Prospect.objects
-                        .exclude(valuer_assigned=None)  # Exclude unassigned prospects
-                        .values('valuer_assigned')  # Group by each valuer
-                        .annotate(assign_count=Count('valuer_assigned'))  # Count their assignments
-                        .order_by('assign_count')  # Sort by the count in ascending order
-                    )
+            least_assigned_valuer = None
+            for valuer in users_with_permission:
+                # If the valuer doesn't have an assignment yet, they should be first in line
+                if valuer.name not in valuer_assignment_dict:
+                    least_assigned_valuer = valuer
+                    break
+                # If valuer has the least assignments, choose them
+                if least_assigned_valuer is None or valuer_assignment_dict[valuer.name] < valuer_assignment_dict[least_assigned_valuer.name]:
+                    least_assigned_valuer = valuer
 
-                    # Check the current valuer assignment counts and find the least assigned valuer
-                    valuer_assignment_dict = {assign['valuer_assigned']: assign['assign_count'] for assign in valuer_assignments}
-
-                    least_assigned_valuer = None
-                    for valuer in users_with_permission:
-                        # If the valuer doesn't have an assignment yet, they should be first in line
-                        if valuer.name not in valuer_assignment_dict:
-                            least_assigned_valuer = valuer
-                            break
-                        # If valuer has the least assignments, choose them
-                        if least_assigned_valuer is None or valuer_assignment_dict[valuer.name] < valuer_assignment_dict[least_assigned_valuer.name]:
-                            least_assigned_valuer = valuer
-
-                    # If a least assigned valuer was found, assign them to the prospect
-                    if least_assigned_valuer:
-                        response = requests.patch(api_url, data={
-                            "status" : "Payment Verified",
-                            "payment_verified_on" : datetime.now(),
-                            "payment_verified_by" : request.user.username,
-                            "valuer_assigned" : least_assigned_valuer.name,
-                            "valuer_assigned_on" : timezone.now(),
-                        })
-                        if response.status_code >= 200 and response.status_code <= 399:
-                            # was successful
-                            return JsonResponse({'success': 'Payment verified and valuer assigned.'})
-                        else:
-                            return JsonResponse({'error': 'Unable to update prospect data'}, status=403)
-                    else:
-                        return JsonResponse({'error': 'No valuers available.'}, status=404)
-
-
-            # Retrieve all users with 'can_be_valuers' permission in the user's active company
-
+            # If a least assigned valuer was found, assign them to the prospect
+            if least_assigned_valuer:
+                response = requests.patch(api_url, data={
+                    "status" : "Payment Verified",
+                    "payment_verified_on" : datetime.now(),
+                    "payment_verified_by" : request.user.username,
+                    "valuer_assigned" : least_assigned_valuer.name,
+                    "valuer_assigned_on" : timezone.now(),
+                })
+                if response.status_code >= 200 and response.status_code <= 399:
+                    # was successful
+                    return JsonResponse({'success': 'Payment verified and valuer assigned.'})
+                else:
+                    return JsonResponse({'error': 'Unable to update prospect data'}, status=403)
+            else:
+                return JsonResponse({'error': 'No valuers available.'}, status=404)
         return JsonResponse({'error': 'Invalid request method.'}, status=405)
     else:
         messages.error(request, "Please select a loan company to work with before you proceed.")

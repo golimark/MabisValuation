@@ -44,3 +44,8 @@ class LandEvaluationReportSerializer(serializers.ModelSerializer):
     class Meta:
         model = LandEvaluationReport
         exclude = ["fields"]
+
+class ProofofPaymentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProofofPayment
+        fields = "__all__"
