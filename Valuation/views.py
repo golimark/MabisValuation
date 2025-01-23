@@ -616,7 +616,7 @@ def fetch_vehicle_asset_for_prospect(request):
     vehicle_data = VehicleAsset.objects.filter(prospect__company__icontains=request.user.active_company.name).prefetch_related(
         Prefetch(
             'vehicleevaluationreport_set',  # Reverse relation to VehicleEvaluationReport
-            queryset=VehicleEvaluationReport.objects.only('make', 'model')
+            queryset=VehicleEvaluationReport.objects.only('make', 'model', 'date_of_valuation')
         )
     )
 

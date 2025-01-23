@@ -133,6 +133,11 @@
                         class="submenu {% if sub_page_name == 'payment_verification' %} open active {%endif%}"
                         >Payment Verification</a
                     >
+                    <a
+                        href="{% url 'prospect_declined' %}"
+                        class="submenu {% if sub_page_name == 'declined_valuation_prospects' %} open active {%endif%}"
+                        >Decline Valuation</a
+                    >
                     {%endif%}
                     {% if 'can_be_valuers' in request.user.permissions %}
                     <a
@@ -141,6 +146,11 @@
                         >Valuation Requests</a
                     >
                     {%endif%}
+                    <a
+                        href="{% url 'draft_list' %}"
+                        class="submenu {% if sub_page_name == 'draft_listing_report' %} open active {%endif%}"
+                        >Draft Reports</a
+                    >
                     {% if 'can_be_supervisor' in request.user.permissions %}
                     <a
                         href="{% url 'prospect_supervisor_review' %}"

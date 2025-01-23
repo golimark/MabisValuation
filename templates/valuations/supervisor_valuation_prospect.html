@@ -12,8 +12,8 @@
             <th>Company</th>
             <th>Phone Number</th>
             <th>Status</th>
-            <!-- <th>Valuer</th>
-            <th>Submitted On</th> -->
+            <th>Valuer Assigned</th>
+            <th>Submitted On</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -25,8 +25,8 @@
             <td>{{prospect.company}}</td>
             <td>{{ prospect.phone_number }}</td>
             <td>{{ prospect.status }}</td>
-            <!-- <td>{{ prospect.submitted_for_valuation_by }}</td>
-            <td>{{ prospect.submitted_for_valuation_on }}</td> -->
+            <td>{{ prospect.valuer_assigned }}</td>
+            <td>{{ prospect.updated_at }}</td>
             <td>
                 <a
                     href="{% url 'valuation_prospect_detail' prospect.slug %}"

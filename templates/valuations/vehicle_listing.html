@@ -11,6 +11,7 @@
             <th>Vehicle Make</th>
             <th>Registration Number</th>
             <th>Status</th>
+            <th>Valuation Date</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -30,6 +31,13 @@
             {% endif %}
             <td>{{ vehicle.license_plate }}</td>
             <td>{{ vehicle.status }}</td>
+            {% if vehicle.vehicleevaluationreport_set.exists %}
+                {% with report=vehicle.vehicleevaluationreport_set.first %}
+                    <td>{{ report.date_of_valuation }}</td>
+                {% endwith %}
+            {% else %}
+                <td>None</td>
+            {% endif %}
             <td>
                 <a href="{% url 'vehicle_detail' vehicle.slug %}" class="btn btn-success btn-sm">
                     <i class="fa fa-eye"></i><span> Detail</span>

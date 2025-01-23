@@ -59,10 +59,12 @@ CAR_MAKES = [
 BODY_CHOICES = [
     ('SALOON', 'SALOON'),
     ('SUV', 'SUV'),
+    ('VAN', 'VAN'),
     ('STATION WAGON', 'STATION WAGON'),
     ('MINI-VAN', 'MINI-VAN'),
     ('SEDAN', 'SEDAN'),
     ('COUPE', 'COUPE'),
+    ('CROSS-OVERS', 'CROSS-OVERS'),
     ('HATCH BACK', 'HATCH BACK'),
     ('TRUCK', 'TRUCK'),
     ('PICK UP DOUBLE CABIN', 'PICK UP DOUBLE CABIN'),
@@ -286,6 +288,7 @@ it for the purpose of lending against it.
     # valuation_location = models.CharField(max_length=255)
     # valuation_company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name='valuation_reports')
 
+    is_draft = models.BooleanField(default=False, null=True, blank=True)  # Default to True for drafts
     slug = models.SlugField("Safe Url", unique=True, blank=True, null=True, max_length=200)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
