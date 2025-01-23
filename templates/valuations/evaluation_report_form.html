@@ -57,10 +57,19 @@
     <div class="d-flex">
         <button type="submit" id="save_draft" name="save_draft" class="btn btn-warning me-4">SAVE AS DRAFT</button>
         <button type="submit" name="submit" class="btn btn-primary">SUBMIT VALUATION DETAILS</button>
+    </div>
+    <script>
+        document.querySelector("#save_draft").addEventListener("click", e => {
+            document.querySelector("#EvaluationReportForm").querySelectorAll("input, select, textarea").forEach(input => {
+                input.required = false;
+            });
+            document.querySelector("#EvaluationReportForm").submit();
+        })
+    </script>
 
     </div>
 </form>
-<script>
+<!-- <script>
     document.querySelector("#save_draft").addEventListener("click", e => {
         e.preventDefault();
         var EvaluationReportForm = document.getElementById("EvaluationReportForm");
@@ -70,7 +79,7 @@
         EvaluationReportForm.submit();
         
     })
-</script>
+</script> -->
 {% else %}
 
 <!-- render from for editing exiting report -->
