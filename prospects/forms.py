@@ -154,6 +154,12 @@ class VehicleEvaluationReportForm(forms.ModelForm):
             }),
         }
 
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+        if commit:
+            instance.save()
+        return instance
+    
     # def clean(self):
     #     cleaned_data = super().clean()
     #     tax_identification_number = cleaned_data.get('tax_identification_number')

@@ -577,6 +577,9 @@ def get_all_prospect_data(request):
     context = {'prospects': data, "page_name": "valuation", "sub_page_name": ""}
     return render(request, 'prospects/all_prospect_jobs.html', context)
 
+
+# API TO FETCH DATA FROM MABIS
+@login_required
 def fetch_prospects_from_mabis(request):
     if request.user.active_company:
         context = {'prospects': [], "page_name": "valuation", "sub_page_name": "payment_verification"}
@@ -613,7 +616,7 @@ def fetch_vehicle_asset_for_prospect(request):
     vehicle_data = VehicleAsset.objects.filter(prospect__company__icontains=request.user.active_company.name).prefetch_related(
         Prefetch(
             'vehicleevaluationreport_set',  # Reverse relation to VehicleEvaluationReport
-            queryset=VehicleEvaluationReport.objects.only('make', 'model')
+            queryset=VehicleEvaluationReport.objects.only('make', 'model', 'date_of_valuation')
         )
     )
 

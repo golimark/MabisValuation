@@ -24,6 +24,9 @@ urlpatterns = [
     path('valuation/print/<slug:slug>/', views.print_valuation_report, name='print_valuation_report'),
     path('inspection/print/<slug:slug>/', views.print_inspection_report, name='print_inspection_report'),
     path('print/<slug:slug>', views.printout_report, name='print_report'),
+    path('drafts-reports/', views.drafts_list, name='draft_list'), 
+    path('drafts-report/<str:slug>/editing/', views.edit_draft, name='draft_editing'), 
+    path('drafts-report/<str:slug>/delete/', views.delete_draft, name='delete_draft'), 
 
 
     # valuation menu

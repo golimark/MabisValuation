@@ -3,7 +3,7 @@
 {% block title %}EvaluationReport{% endblock %}
 <!--  -->
 {% block content %} {% if not v_reports %}
-<form method="post" enctype="multipart/form-data">
+<form method="post" enctype="multipart/form-data" id="EvaluationReportForm">
     <div class="modal-form-area">
         <div class="modal-form-heading">
             <span class="form-title">PLEASE ENTER VALUATION DETAILS</span>
@@ -50,16 +50,27 @@
             </div>
         </div>
     </div>
-    {% if prospect.status == 'Valuation' %} 
     
-    {% endif %}
-
-    <!-- <a href="" id="submit-button" class="btn btn-primary">ADD REMARKS</a> -->
-
-    <button type="submit" class="btn btn-primary">
+    <!-- <button type="submit" class="btn btn-primary">
         SUBMIT VALUATION DETAILS
-    </button>
+    </button> -->
+    <div class="d-flex">
+        <button type="submit" id="save_draft" name="save_draft" class="btn btn-warning me-4">SAVE AS DRAFT</button>
+        <button type="submit" name="submit" class="btn btn-primary">SUBMIT VALUATION DETAILS</button>
+
+    </div>
 </form>
+<script>
+    document.querySelector("#save_draft").addEventListener("click", e => {
+        e.preventDefault();
+        var EvaluationReportForm = document.getElementById("EvaluationReportForm");
+        EvaluationReportForm.querySelectorAll("input, select, textarea").forEach(input => {
+            input.required = false;
+        })
+        EvaluationReportForm.submit();
+        
+    })
+</script>
 {% else %}
 
 <!-- render from for editing exiting report -->

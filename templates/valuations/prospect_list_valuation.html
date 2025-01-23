@@ -4,27 +4,29 @@
 {% block content %}
 <h1>VALUATION REQUESTS</h1>
 <!-- <a href="{% url 'prospect_create' %}" class="btn btn-primary">Add Prospect</a> -->
-<table class="table">
+<table class="table table-striped">
     <thead>
         <tr>
-            <th style="text-align: center;">Name</th>
+            <th style="text-align: start;">Name</th>
             <th style="text-align: center;">Gender</th>
             <th style="text-align: center;">Phone Number</th>
             <th style="text-align: center;">company</th>
             <th style="text-align: center;">Valuer Assigned</th>
             <th style="text-align: center;">Status</th>
+            <th style="text-align: center;">Updated At</th>
             <th style="text-align: center;">Actions</th>
         </tr>
     </thead>
     <tbody style="text-align: center;">
         {% for prospect in prospects %} {% if prospect.status == 'Valuation' %}
         <tr style="text-align: center;" >
-            <td>{{ prospect.name }}</td>
+            <td style="text-align: start;">{{ prospect.name }}</td>
             <td>{{ prospect.gender }}</td>
             <td>{{ prospect.phone_number }}</td>
             <td style="text-align: center;">{{ prospect.company }}</td>
             <td>{{ prospect.valuer_assigned }}</td>
             <td style="color: blueviolet;">{{ prospect.status }}</td>
+            <td> {{ prospect.submitted_for_valuation_on }}</td>
             <td>
                 <a
                     href="{% url 'prospect_detail' prospect.slug %}"

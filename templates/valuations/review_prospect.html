@@ -10,6 +10,7 @@
             <th>Company</th>
             <th style="text-align: center;">Valuer Assigned</th>
             <th>Status</th>
+            <th>Updated At</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -22,6 +23,7 @@
             <td>{{ prospect.company }}</td>
             <td style="text-align: center;">{{prospect.valuer_assigned}}</td>
             <td>{{ prospect.status }}</td>
+            <td>{{ prospect.updated_at }}</td>
             <td>
                 <a
                     href="{% url 'valuation_prospect_detail' prospect.slug %}"

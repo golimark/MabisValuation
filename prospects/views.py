@@ -514,11 +514,11 @@ class ProspectDeclinedView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         # Filter the queryset to only include prospects with 'Declined' status
-        return Prospect.objects.filter(status='Declined').order_by('updated_at').filter(agent__company=self.request.user.company)
+        return Prospect.objects.filter(status='Declined').order_by('updated_at')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["page_name"] =  "prospects"
+        context["page_name"] =  "valuation"
         context["sub_page_name"] =  "declined_valuation_prospects"
         return context
 
@@ -1341,6 +1341,11 @@ def set_valuation(request, slug):
 # View for adding evaluation report details for a particular prospect
 @login_required
 def add_valuation_report_details(request, slug):
+    if slug:
+        instance = VehicleEvaluationReport.objects.filter(slug=slug).first()
+    else:
+        instance = None
+
     if request.user.active_company:
 
         api_url = f'{request.user.active_company.api}/prospects/{slug}/'
@@ -1395,69 +1400,79 @@ def add_valuation_report_details(request, slug):
             # Vehicles
             v_reports = VehicleEvaluationReport.objects.filter(vehicle__prospect=prospect).order_by('-created_at')
             if not v_reports:
-                form = VehicleEvaluationReportForm(request.POST, request.FILES, prospect=prospect)
-                if form.is_valid():
+                form = VehicleEvaluationReportForm(request.POST, request.FILES, prospect=prospect, instance=instance)
+                
+                if 'save_draft' in request.POST:  # Save as draft
+                    if form.is_valid():
+                        form = form.save(commit=False)
+                        form.prospect = prospect
+                        form.is_draft = True
+                        form.save()
+                        messages.success(request, "Draft saved successfully.")
+                        return redirect('draft_list')  # Redirect to drafts list or confirmation
+                elif 'submit' in request.POST:  # Final submission
+                    if form.is_valid():
 
-                    # check if the tax_identification_number is numeric
-                    if not len(str(form.cleaned_data['tax_identification_number'])) != 10:
-                        messages.error(request, "Tax Identification Number should only contain 10 numeric values.")
-                        return redirect('valuation_prospect_detail', slug=slug)
+                        # check if the tax_identification_number is numeric
+                        # if not len(str(form.cleaned_data['tax_identification_number'])) > 10:
+                        #     messages.error(request, "Tax Identification Number should contain 10 or more numeric values.")
+                        #     return redirect('valuation_prospect_detail', slug=slug)
 
-                    if VehicleEvaluationReport.objects.filter(tax_identification_number=form.cleaned_data['tax_identification_number']).exists():
-                        messages.error(request, "Tax Identification Number already exists in our database, Please provide a unique Tax Identification Number.")
-                        return redirect('valuation_prospect_detail', slug=slug)
+                        if VehicleEvaluationReport.objects.filter(tax_identification_number=form.cleaned_data['tax_identification_number']).exists():
+                            messages.error(request, "Tax Identification Number already exists in our database, Please provide a unique Tax Identification Number.")
+                            return redirect('valuation_prospect_detail', slug=slug)
 
-                    # check if the length of power exeeds 5 characters
-                    if len(str(form.cleaned_data['power'])) >= 5:
-                        messages.error(request, "Power value supplied can not exceed 5 digits in length. Please try again.")
-                        return redirect('valuation_prospect_detail', slug=slug)
+                        # check if the length of power exeeds 5 characters
+                        if len(str(form.cleaned_data['power'])) >= 5:
+                            messages.error(request, "Power value supplied can not exceed 5 digits in length. Please try again.")
+                            return redirect('valuation_prospect_detail', slug=slug)
 
-                    form = form.save(commit=False)
-                    form.prospect = prospect
-                    # prospect.status = 'Valuation Supervisor'
+                        form = form.save(commit=False)
+                        form.prospect = prospect
+                        # prospect.status = 'Valuation Supervisor'
+                        form.save()
 
-                    form.save()
+                        # fields = VehicleEvaluationReport.objects.filter(vehicle__prospect=prospect).first()
+                        # fields = v_reports.first()
+                        # fields_data = {}
+                        # Save market_value and forced_sale to the fields JSONField as specified
+                        form.fields = {
+                            "market_value": form.market_value,
+                            "forced_sale": form.forced_sale
+                        }
+                        form.is_draft = False
+                        form.save()  # Now save the changes to the fields JSONField
 
-                    # fields = VehicleEvaluationReport.objects.filter(vehicle__prospect=prospect).first()
-                    # fields = v_reports.first()
-                    # fields_data = {}
-                    # Save market_value and forced_sale to the fields JSONField as specified
-                    form.fields = {
-                        "market_value": form.market_value,
-                        "forced_sale": form.forced_sale
-                    }
-                    form.save()  # Now save the changes to the fields JSONField
+                        if len(VehicleAsset.objects.filter(prospect=prospect)) == len(VehicleEvaluationReport.objects.filter(vehicle__prospect=prospect)):
+                            # update upstream prospect status
+                            response = requests.patch(api_url, data={
+                                "status" : 'Valuation Supervisor',
+                                "valuation_submitted_on" : datetime.now(),
+                                "valuation_submitted_by" : request.user.username,
+                            })
+                            if response.status_code >= 200 and response.status_code <= 399:
+                                prospect.status = 'Valuation Supervisor'
+                                prospect.valuation_submitted_on = datetime.now()
+                                prospect.valuation_submitted_by = request.user
+                                prospect.save()
 
-                    if len(VehicleAsset.objects.filter(prospect=prospect)) == len(VehicleEvaluationReport.objects.filter(vehicle__prospect=prospect)):
-                        # update upstream prospect status
-                        response = requests.patch(api_url, data={
-                            "status" : 'Valuation Supervisor',
-                            "valuation_submitted_on" : datetime.now(),
-                            "valuation_submitted_by" : request.user.username,
-                        })
-                        if response.status_code >= 200 and response.status_code <= 399:
-                            prospect.status = 'Valuation Supervisor'
-                            prospect.valuation_submitted_on = datetime.now()
-                            prospect.valuation_submitted_by = request.user
-                            prospect.save()
+                                # supervisor = User.objects.filter(Q(role__permission__code=('can_be_supervisor')) | Q(role__permission__code=('can_perform_admin_functions'))).first()
+                                supervisor = User.objects.filter(role__permissions__code=('can_be_supervisor' and 'can_verify_payment')).first()
+                                if supervisor:
+                                    subject = 'New Prospect Valuation Supervision Request for prospect {}.'.format(prospect.name)
+                                    email = supervisor.email
+                                    message =  f'Hi {supervisor},\n\nYou have a new Prospect Valuation Supervision Request. Below are the details.\n\nProspect: {prospect.name}\nPhone: {prospect.phone_number}\n'
 
-                            # supervisor = User.objects.filter(Q(role__permission__code=('can_be_supervisor')) | Q(role__permission__code=('can_perform_admin_functions'))).first()
-                            supervisor = User.objects.filter(role__permissions__code=('can_be_supervisor' and 'can_verify_payment')).first()
-                            if supervisor:
-                                subject = 'New Prospect Valuation Supervision Request for prospect {}.'.format(prospect.name)
-                                email = supervisor.email
-                                message =  f'Hi {supervisor},\n\nYou have a new Prospect Valuation Supervision Request. Below are the details.\n\nProspect: {prospect.name}\nPhone: {prospect.phone_number}\n'
-
-                                send_email_task(subject, email, message)
-                        # Redirect to the 'valuation_prospect_detail' page
-                        messages.add_message(request, messages.SUCCESS, "Asset Valuation submitted successfully")
-                        return redirect('valuation_prospect_detail', slug=slug)
+                                    send_email_task(subject, email, message)
+                            # Redirect to the 'valuation_prospect_detail' page
+                            messages.add_message(request, messages.SUCCESS, "Asset Valuation submitted successfully")
+                            return redirect('valuation_prospect_detail', slug=slug)
+                        else:
+                            messages.add_message(request, messages.SUCCESS, "Asset Valuation submitted successfully. Valuation Pending for other assets.")
+                            return redirect('valuation_prospect_detail', slug=slug)
                     else:
-                        messages.add_message(request, messages.SUCCESS, "Asset Valuation submitted successfully. Valuation Pending for other assets.")
+                        messages.add_message(request, messages.ERROR, "ERROR MODIFYING RECORDS. TRY AGAIN!!")
                         return redirect('valuation_prospect_detail', slug=slug)
-                else:
-                    messages.add_message(request, messages.ERROR, "ERROR MODIFYING RECORDS. TRY AGAIN!!")
-                    return redirect('valuation_prospect_detail', slug=slug)
             else:
                 # save edited data
                 submitted_report_id = request.GET.get("form_id")
@@ -1524,6 +1539,69 @@ def add_valuation_report_details(request, slug):
     else:
         messages.error(request, "Please select a loan company to work with before you proceed.")
         return redirect('dashboard')
+
+
+
+def save_draft(request, pk=None):
+    if pk:
+        instance = VehicleEvaluationReport.objects.get(pk=pk)
+    else:
+        instance = None
+
+    if request.method == 'POST':
+        form = VehicleEvaluationReportForm(request.POST, instance=instance)
+        if 'save_draft' in request.POST:  # Save as draft
+            if form.is_valid():
+                form.instance.is_draft = True
+                form.save()
+                return redirect('draft_list')  # Redirect to drafts list or confirmation
+        elif 'submit' in request.POST:  # Final submission
+            if form.is_valid():
+                form.instance.is_draft = False
+                form.save()
+                return redirect('success')  # Redirect to success page
+    else:
+        form = VehicleEvaluationReportForm(instance=instance)
+
+    return render(request, 'valuations/evaluation_report_form.html', {'form': form})
+
+def drafts_list(request):
+    drafts = VehicleEvaluationReport.objects.filter(is_draft=True).order_by('-updated_at')
+    context = {
+        "drafts": drafts,
+        "page_name": "valuation", 
+        "sub_page_name": "draft_listing_report"
+    }
+    return render(request, 'valuations/draft_list.html', context=context)
+
+
+def edit_draft(request, slug):
+    # Get the draft object or return a 404 if not found
+    draft = get_object_or_404(VehicleEvaluationReport, slug=slug)
+    
+    if request.method == 'POST':
+        form = VehicleEvaluationReportForm(request.POST, instance=draft, prospect=draft.vehicle.prospect)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Draft updated successfully!")
+            return redirect('drafts_list')  # Redirect to drafts list after saving
+    else:
+        form = VehicleEvaluationReportForm(instance=draft, prospect=draft.vehicle.prospect)  # Pre-fill the form with the draft's data
+
+    return render(request, 'valuations/evaluation_report_form.html', {'form': form, 'v_report': draft})
+
+
+def delete_draft(request, slug):
+    # Get the draft object or return a 404 if not found
+    draft = get_object_or_404(VehicleEvaluationReport, slug=slug)
+    
+    if request.method == 'POST':
+        draft.delete()
+        messages.success(request, "Draft deleted successfully!")
+        return redirect('draft_list')  # Redirect after deletion
+
+    # You no longer need a dedicated template; this view will return to the main page.
+    return redirect('draft_list')
 
 
 @login_required
