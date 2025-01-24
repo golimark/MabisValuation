@@ -229,6 +229,10 @@ class ProspectDetailView(LoginRequiredMixin, View):
 
                 # forms for modal
 
+                # delete existing to tracking mabis updates
+                for proof in ProofofPayment.objects.filter(prospect = context['prospect']):
+                    proof.delete()
+
                 # get proof of payment
                 api_url = f'{request.user.active_company.api}/proof-of-payment/?prospect={slug}'
                 response = requests.get(api_url)
@@ -238,11 +242,7 @@ class ProspectDetailView(LoginRequiredMixin, View):
                 for proof in proof_of_payments:
                     proof['prospect'] = context['prospect'].id
 
-                    existing_proof = ProofofPayment.objects.filter(proof_of_payment_id = proof["proof_of_payment_id"])
-                    if existing_proof:
-                        proofOfPaymentSerializer = ApiSerializers.VehicleAssetSerializer(existing_proof.first(), data=proof, partial=True)
-                    else:
-                        proofOfPaymentSerializer = ApiSerializers.ProofofPaymentSerializer(data=proof)
+                    proofOfPaymentSerializer = ApiSerializers.ProofofPaymentSerializer(data=proof)
 
                     if proofOfPaymentSerializer.is_valid(raise_exception=True):
                         # first handle modifying the url to have  port number
