@@ -264,6 +264,7 @@ class ProspectDetailView(LoginRequiredMixin, View):
                 # delete records that are not on mabis
                 print(proof_ids)
                 for proof in ProofofPayment.objects.filter(Q(proof_of_payment_id__in = proof_ids)):
+                    print("deleting")
                     proof.delete()
 
                 context["page_name"] =  "valuation"
