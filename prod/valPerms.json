@@ -1,0 +1,134 @@
+[
+{
+    "model": "accounts.permission",
+    "pk": 1,
+    "fields": {
+        "name": "can be valuers",
+        "code": "can_be_valuers",
+        "description": "User can be valuers",
+        "created_at": "2024-11-21T07:06:15.023Z",
+        "updated_at": "2024-11-21T07:06:15.023Z"
+    }
+},
+{
+    "model": "accounts.permission",
+    "pk": 2,
+    "fields": {
+        "name": "can be supervisor",
+        "code": "can_be_supervisor",
+        "description": "User can be supervisor",
+        "created_at": "2024-11-21T07:06:28.064Z",
+        "updated_at": "2024-11-21T07:06:28.064Z"
+    }
+},
+{
+    "model": "accounts.permission",
+    "pk": 3,
+    "fields": {
+        "name": "Can View Valuation Requests",
+        "code": "can_view_valuation_requests",
+        "description": "User Can View Valuation Requests",
+        "created_at": "2024-11-21T07:06:34.892Z",
+        "updated_at": "2024-11-21T07:06:34.892Z"
+    }
+},
+{
+    "model": "accounts.permission",
+    "pk": 4,
+    "fields": {
+        "name": "can view loan origination",
+        "code": "can_view_loan_origination",
+        "description": "User can view loan origination",
+        "created_at": "2024-11-21T07:06:41.736Z",
+        "updated_at": "2024-11-21T07:06:41.737Z"
+    }
+},
+{
+    "model": "accounts.permission",
+    "pk": 5,
+    "fields": {
+        "name": "can switch companies",
+        "code": "can_switch_companies",
+        "description": "User can switch companies",
+        "created_at": "2024-11-21T07:06:48.827Z",
+        "updated_at": "2024-11-21T07:06:48.827Z"
+    }
+},
+{
+    "model": "accounts.permission",
+    "pk": 6,
+    "fields": {
+        "name": "Can Verify payment",
+        "code": "can_verify_payment",
+        "description": "User Can Verify payment as Valuer",
+        "created_at": "2024-11-21T07:06:55.952Z",
+        "updated_at": "2024-12-06T17:08:11.405Z"
+    }
+},
+{
+    "model": "accounts.permission",
+    "pk": 7,
+    "fields": {
+        "name": "can perform admin functions",
+        "code": "can_perform_admin_functions",
+        "description": "User can perform admin functions",
+        "created_at": "2024-11-21T07:07:26.373Z",
+        "updated_at": "2024-11-21T07:07:26.373Z"
+    }
+},
+{
+    "model": "accounts.permission",
+    "pk": 8,
+    "fields": {
+        "name": "can verify payment",
+        "code": "can_verify_payment",
+        "description": "User can verify payment",
+        "created_at": "2024-11-21T07:07:42.114Z",
+        "updated_at": "2024-11-21T07:07:42.114Z"
+    }
+},
+{
+    "model": "accounts.permission",
+    "pk": 9,
+    "fields": {
+        "name": "can view dashboard",
+        "code": "can_view_dashboard",
+        "description": "User can view dashboard",
+        "created_at": "2024-11-21T07:07:55.376Z",
+        "updated_at": "2024-11-21T07:07:55.376Z"
+    }
+},
+{
+    "model": "accounts.permission",
+    "pk": 10,
+    "fields": {
+        "name": "Can Edit Valuation Details",
+        "code": "can_edit_valuation_details",
+        "description": "User Can Edit Valuation Details",
+        "created_at": "2024-11-21T07:08:13.968Z",
+        "updated_at": "2024-11-21T07:08:13.968Z"
+    }
+},
+{
+    "model": "accounts.permission",
+    "pk": 11,
+    "fields": {
+        "name": "Can Complete Asset Valuation Details",
+        "code": "can_complete_asset_valuation_details",
+        "description": "User Can Complete Asset Valuation Details",
+        "created_at": "2024-11-21T07:08:27.259Z",
+        "updated_at": "2024-11-21T07:08:27.259Z"
+    }
+},
+{
+    "model": "accounts.permission",
+    "pk": 12,
+    "fields": {
+        "name": "Can Verify payment as Valuer",
+        "code": "can_verify_payment_as_valuer",
+        "description": "User Can Verify payment as Valuer",
+        "created_at": "2024-12-09T18:48:38.342Z",
+        "updated_at": "2024-12-09T18:48:38.342Z"
+    }
+}
+]
