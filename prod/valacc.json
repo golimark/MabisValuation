@@ -1,0 +1,322 @@
+[
+{
+    "model": "accounts.loancompany",
+    "pk": 1,
+    "fields": {
+        "name": "LORO CREDIT FINANCE",
+        "api": "http://mabis.lorocredit.co.ug:9292/api",
+        "api_key": null,
+        "created_at": "2024-11-21T07:11:58.772Z"
+    }
+},
+{
+    "model": "accounts.loancompany",
+    "pk": 2,
+    "fields": {
+        "name": "BLUE DIAMOND MICROFINANCE",
+        "api": "http://mabis.bluediamond.co.ug:9191/api",
+        "api_key": null,
+        "created_at": "2024-11-21T07:12:16.283Z"
+    }
+},
+{
+    "model": "accounts.loancompany",
+    "pk": 3,
+    "fields": {
+        "name": "MarkG",
+        "api": "http://192.168.20.111:8000/api",
+        "api_key": null,
+        "created_at": "2024-11-21T07:12:30.574Z"
+    }
+},
+{
+    "model": "accounts.loancompany",
+    "pk": 4,
+    "fields": {
+        "name": "MABISTEST",
+        "api": "http://192.168.20.210/api",
+        "api_key": null,
+        "created_at": "2024-11-22T10:29:48.810Z"
+    }
+},
+{
+    "model": "accounts.loancompany",
+    "pk": 5,
+    "fields": {
+        "name": "My server",
+        "api": "http://0.0.0.0:8000/api",
+        "api_key": null,
+        "created_at": "2024-11-29T11:34:56.436Z"
+    }
+},
+{
+    "model": "accounts.company",
+    "pk": 1,
+    "fields": {
+        "name": "BIK AND BOS",
+        "logo": "company_logo/bik_Fcx3iAO.png",
+        "address": "Kampala",
+        "code": "0000",
+        "slug": "bik-and-bosdab8fdde-e198-48f7-8ce3-2f4083f110c2",
+        "created_at": "2024-11-21T07:09:20.850Z",
+        "updated_at": "2024-11-21T07:09:30.118Z"
+    }
+},
+{
+    "model": "accounts.permission",
+    "pk": 1,
+    "fields": {
+        "name": "can be valuers",
+        "code": "can_be_valuers",
+        "description": "User can be valuers",
+        "created_at": "2024-11-21T07:06:15.023Z",
+        "updated_at": "2024-11-21T07:06:15.023Z"
+    }
+},
+{
+    "model": "accounts.permission",
+    "pk": 2,
+    "fields": {
+        "name": "can be supervisor",
+        "code": "can_be_supervisor",
+        "description": "User can be supervisor",
+        "created_at": "2024-11-21T07:06:28.064Z",
+        "updated_at": "2024-11-21T07:06:28.064Z"
+    }
+},
+{
+    "model": "accounts.permission",
+    "pk": 3,
+    "fields": {
+        "name": "Can View Valuation Requests",
+        "code": "can_view_valuation_requests",
+        "description": "User Can View Valuation Requests",
+        "created_at": "2024-11-21T07:06:34.892Z",
+        "updated_at": "2024-11-21T07:06:34.892Z"
+    }
+},
+{
+    "model": "accounts.permission",
+    "pk": 4,
+    "fields": {
+        "name": "can view loan origination",
+        "code": "can_view_loan_origination",
+        "description": "User can view loan origination",
+        "created_at": "2024-11-21T07:06:41.736Z",
+        "updated_at": "2024-11-21T07:06:41.737Z"
+    }
+},
+{
+    "model": "accounts.permission",
+    "pk": 5,
+    "fields": {
+        "name": "can switch companies",
+        "code": "can_switch_companies",
+        "description": "User can switch companies",
+        "created_at": "2024-11-21T07:06:48.827Z",
+        "updated_at": "2024-11-21T07:06:48.827Z"
+    }
+},
+{
+    "model": "accounts.permission",
+    "pk": 6,
+    "fields": {
+        "name": "Can Verify payment",
+        "code": "can_verify_payment",
+        "description": "User Can Verify payment as Valuer",
+        "created_at": "2024-11-21T07:06:55.952Z",
+        "updated_at": "2024-12-06T17:08:11.405Z"
+    }
+},
+{
+    "model": "accounts.permission",
+    "pk": 7,
+    "fields": {
+        "name": "can perform admin functions",
+        "code": "can_perform_admin_functions",
+        "description": "User can perform admin functions",
+        "created_at": "2024-11-21T07:07:26.373Z",
+        "updated_at": "2024-11-21T07:07:26.373Z"
+    }
+},
+{
+    "model": "accounts.permission",
+    "pk": 8,
+    "fields": {
+        "name": "can verify payment",
+        "code": "can_verify_payment",
+        "description": "User can verify payment",
+        "created_at": "2024-11-21T07:07:42.114Z",
+        "updated_at": "2024-11-21T07:07:42.114Z"
+    }
+},
+{
+    "model": "accounts.permission",
+    "pk": 9,
+    "fields": {
+        "name": "can view dashboard",
+        "code": "can_view_dashboard",
+        "description": "User can view dashboard",
+        "created_at": "2024-11-21T07:07:55.376Z",
+        "updated_at": "2024-11-21T07:07:55.376Z"
+    }
+},
+{
+    "model": "accounts.permission",
+    "pk": 10,
+    "fields": {
+        "name": "Can Edit Valuation Details",
+        "code": "can_edit_valuation_details",
+        "description": "User Can Edit Valuation Details",
+        "created_at": "2024-11-21T07:08:13.968Z",
+        "updated_at": "2024-11-21T07:08:13.968Z"
+    }
+},
+{
+    "model": "accounts.permission",
+    "pk": 11,
+    "fields": {
+        "name": "Can Complete Asset Valuation Details",
+        "code": "can_complete_asset_valuation_details",
+        "description": "User Can Complete Asset Valuation Details",
+        "created_at": "2024-11-21T07:08:27.259Z",
+        "updated_at": "2024-11-21T07:08:27.259Z"
+    }
+},
+{
+    "model": "accounts.permission",
+    "pk": 12,
+    "fields": {
+        "name": "Can Verify payment as Valuer",
+        "code": "can_verify_payment_as_valuer",
+        "description": "User Can Verify payment as Valuer",
+        "created_at": "2024-12-09T18:48:38.342Z",
+        "updated_at": "2024-12-09T18:48:38.342Z"
+    }
+},
+{
+    "model": "accounts.role",
+    "pk": 1,
+    "fields": {
+        "name": "ADMIN",
+        "company": 1,
+        "created_at": "2024-11-21T07:09:46.063Z",
+        "updated_at": "2024-12-09T18:48:59.326Z",
+        "slug": "admin59b59dbe-cec9-4bd1-9927-ec19a9a3cb70",
+        "permissions": [
+            12,
+            6,
+            11,
+            10,
+            9,
+            8,
+            7,
+            5,
+            4,
+            3,
+            2,
+            1
+        ]
+    }
+},
+{
+    "model": "accounts.role",
+    "pk": 2,
+    "fields": {
+        "name": "VALUER",
+        "company": 1,
+        "created_at": "2024-11-21T07:10:58.730Z",
+        "updated_at": "2024-11-21T07:22:40.707Z",
+        "slug": "valuer6ab748b5-3c7d-407a-b792-64cf1fd6840a",
+        "permissions": [
+            10,
+            9,
+            5,
+            4,
+            3,
+            1
+        ]
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$870000$pQlXW20qc9mUbztJfTjlvW$RVX8VWFtRwZXRB38fa/j6Tx7kb5PJyv5VWT1UqmlJzc=",
+        "last_login": "2025-01-24T06:05:04.343Z",
+        "is_superuser": true,
+        "username": "mark",
+        "first_name": "",
+        "last_name": "",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2024-11-21T07:05:37Z",
+        "email": "mark.wasswa@baifamgroup.co.ug",
+        "company": 1,
+        "active_company": 5,
+        "updated_on": "2025-01-22T17:51:26.469Z",
+        "role": 1,
+        "status": "Approved",
+        "image": "accounts/user/man_xXU8pwC.jpg",
+        "slug": "c4648d76-36a6-4339-b173-5fe5cd7daf1a",
+        "created_at": "2024-11-21T07:05:38.867Z",
+        "updated_at": "2025-01-22T17:51:26.469Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 2,
+    "fields": {
+        "password": "pbkdf2_sha256$870000$Xz3Z5s5ql1Lhm6bNwFvR7w$sY3ctbqhf6Kf0SCf65aXc50c21gf5ClaLWdkt+kZ4Yo=",
+        "last_login": "2024-12-13T07:28:43.966Z",
+        "is_superuser": false,
+        "username": "vak",
+        "first_name": "VAK",
+        "last_name": "EST",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-11-21T07:23:38.991Z",
+        "email": "mark.wasswa@baifamgroup.co.ug",
+        "company": 1,
+        "active_company": 5,
+        "updated_on": "2024-12-06T16:58:40.639Z",
+        "role": 2,
+        "status": "Approved",
+        "image": "accounts/user/man_14JA9uu.jpg",
+        "slug": "vak-est-c4c05e53-4314-4350-89c0-f84cb4d86a38",
+        "created_at": "2024-11-21T07:23:39.562Z",
+        "updated_at": "2024-12-06T16:58:40.639Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 3,
+    "fields": {
+        "password": "pbkdf2_sha256$870000$izD9ajPOHApYkLcoyvEKXV$dAE9NthQ7nzzJniBGbrgnKEHeMmBgWwQ1CEX1lhhHSQ=",
+        "last_login": "2024-12-12T15:47:08.015Z",
+        "is_superuser": false,
+        "username": "kanny",
+        "first_name": "KANNY",
+        "last_name": "MILLY",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-12-04T08:02:12.299Z",
+        "email": "mark.wasswa@baifamgroup.co.ug",
+        "company": 1,
+        "active_company": 5,
+        "updated_on": "2024-12-09T19:41:35.559Z",
+        "role": 2,
+        "status": "Approved",
+        "image": "accounts/user/man_cK5SkyC.jpg",
+        "slug": "kanny-milly-96055c50-d51b-4134-88a0-e0ce0fa856bc",
+        "created_at": "2024-12-04T08:02:12.869Z",
+        "updated_at": "2024-12-09T19:41:35.559Z",
+        "groups": [],
+        "user_permissions": []
+    }
+}
+]
