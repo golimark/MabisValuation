@@ -53,7 +53,8 @@
                 <td>{{ draft.model }}</td> 
                 <td>{{ draft.created_at|date:"Y-m-d H:i" }}</td>
                 <td>
-                    <a href="{% url 'create_valuation_report' draft.slug %}" class="btn">Edit</a>
+                    <!-- <a href="{% url 'create_valuation_report' draft.vehicle.prospect.slug %}" class="btn">Edit</a> -->
+                    <a href="{% url 'draft_editing' draft.slug %}" class="btn">Edit</a>
 
                     <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-draft-id="{{ draft.slug }}" data-url="{% url 'delete_draft' draft.slug %}">
                         DELETE

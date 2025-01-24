@@ -6,7 +6,7 @@
 <form method="post" enctype="multipart/form-data" id="EvaluationReportForm">
     <div class="modal-form-area">
         <div class="modal-form-heading">
-            <span class="form-title">PLEASE ENTER VALUATION DETAILS</span>
+            <span class="form-title">PLEASE ENTER VALUATION DETAILS.</span>
             <span class="form-part-minimizer">
                 <i class="fas fa-chevron-up show"></i>
                 <i class="fas fa-chevron-down hidden"></i>
@@ -14,39 +14,7 @@
         </div>
         <div class="modal-form">
             <div class="modal-form split">
-                {% csrf_token %} {{ create_vehicle_report_form.as_p }}
-                <script>
-                    document.addEventListener("DOMContentLoaded", function() {
-                        const maketypeField = document.getElementById("id_make_types");
-                        const makeField = document.getElementById("id_make");
-                
-                        // Function to toggle the make field based on maketype value
-                        function toggleMakeField() {
-                            if (maketypeField.value.toLowerCase() === "other") {
-                                const makeLabel = document.querySelector("label[for='id_make']");
-                                if (makeLabel) {
-                                    makeLabel.style.display = "block"; // Hide the make field label
-                                }
-                                makeField.style.display = "block";
-                                makeField.value = ""; // Clear any pre-existing value if it's set to "Other"
-                            } else {
-                                makeField.style.display = "none";
-                                makeField.value = maketypeField.value; // Set the make field value to maketypes value
-                                const makeLabel = document.querySelector("label[for='id_make']");
-                                if (makeLabel) {
-                                    makeLabel.style.display = "none"; // Hide the make field label
-                                }
-                            }
-                        }
-                
-                        // Run on load in case of form reloads
-                        toggleMakeField();
-                
-                        // Listen for changes on the maketype field
-                        maketypeField.addEventListener("change", toggleMakeField);
-                    });
-                </script>
-                
+                {% csrf_token %} {{ create_vehicle_report_form.as_p }} 
             </div>
         </div>
     </div>
@@ -58,28 +26,59 @@
         <button type="submit" id="save_draft" name="save_draft" class="btn btn-warning me-4">SAVE AS DRAFT</button>
         <button type="submit" name="submit" class="btn btn-primary">SUBMIT VALUATION DETAILS</button>
     </div>
-    <script>
-        document.querySelector("#save_draft").addEventListener("click", e => {
-            document.querySelector("#EvaluationReportForm").querySelectorAll("input, select, textarea").forEach(input => {
-                input.required = false;
-            });
-            document.querySelector("#EvaluationReportForm").submit();
-        })
-    </script>
-
     </div>
 </form>
-<!-- <script>
+
+<script>
     document.querySelector("#save_draft").addEventListener("click", e => {
-        e.preventDefault();
-        var EvaluationReportForm = document.getElementById("EvaluationReportForm");
-        EvaluationReportForm.querySelectorAll("input, select, textarea").forEach(input => {
-            input.required = false;
-        })
-        EvaluationReportForm.submit();
+        // e.preventDefault();
+        const form = document.querySelector("#EvaluationReportForm");
         
-    })
-</script> -->
+        if (form) { // Ensure form exists
+            form.querySelectorAll("input, select, textarea").forEach(input => {
+                input.required = false;
+            });
+            console.log('Fields made not required. Submitting form...');
+            form.submit();
+            console.log('Form submitted.');
+        } else {
+            console.error("Form not found");
+        }
+    });
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const maketypeField = document.getElementById("id_make_types");
+        const makeField = document.getElementById("id_make");
+
+        // Function to toggle the make field based on maketype value
+        function toggleMakeField() {
+            if (maketypeField.value.toLowerCase() === "other") {
+                const makeLabel = document.querySelector("label[for='id_make']");
+                if (makeLabel) {
+                    makeLabel.style.display = "block"; // Hide the make field label
+                }
+                makeField.style.display = "block";
+                makeField.value = ""; // Clear any pre-existing value if it's set to "Other"
+            } else {
+                makeField.style.display = "none";
+                makeField.value = maketypeField.value; // Set the make field value to maketypes value
+                const makeLabel = document.querySelector("label[for='id_make']");
+                if (makeLabel) {
+                    makeLabel.style.display = "none"; // Hide the make field label
+                }
+            }
+        }
+
+        // Run on load in case of form reloads
+        toggleMakeField();
+
+        // Listen for changes on the maketype field
+        maketypeField.addEventListener("change", toggleMakeField);
+    });
+</script>
+
 {% else %}
 
 <!-- render from for editing exiting report -->

@@ -1,0 +1,122 @@
+{% extends 'home/base.html' %} {% load static %}
+<!--  -->
+{% block title %}EvaluationReport{% endblock %}
+<!--  -->
+{% block content %} {% if not v_reports %}
+<form method="post" enctype="multipart/form-data" id="EvaluationReportForm">
+    <div class="modal-form-area">
+        <div class="modal-form-heading">
+            <span class="form-title">PLEASE ENTER VALUATION DETAILS..</span>
+            <span class="form-part-minimizer">
+                <i class="fas fa-chevron-up show"></i>
+                <i class="fas fa-chevron-down hidden"></i>
+            </span>
+        </div>
+        <div class="modal-form">
+            <div class="modal-form split">
+                {% csrf_token %} {{ form.as_p }}
+            </div>
+        </div>
+    </div>
+    
+    <!-- <button type="submit" class="btn btn-primary">
+        SUBMIT VALUATION DETAILS
+    </button> -->
+    <div class="d-flex">
+        <button type="submit" id="save_draft" name="save_draft" class="btn btn-warning me-4">SAVE AS DRAFT</button>
+        <button type="submit" name="submit_draft" class="btn btn-primary">SUBMIT VALUATION DETAILS</button>
+    </div>
+    </div>
+</form>
+
+<script>
+    document.querySelector("#save_draft").addEventListener("click", e => {
+        // e.preventDefault();
+        const form = document.querySelector("#EvaluationReportForm");
+        
+        if (form) { // Ensure form exists
+            form.querySelectorAll("input, select, textarea").forEach(input => {
+                input.required = false;
+            });
+            console.log('Fields made not required. Submitting form...');
+            form.submit();
+            console.log('Form submitted.');
+        } else {
+            console.error("Form not found");
+        }
+    });
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const maketypeField = document.getElementById("id_make_types");
+        const makeField = document.getElementById("id_make");
+
+        // Function to toggle the make field based on maketype value
+        function toggleMakeField() {
+            if (maketypeField.value.toLowerCase() === "other") {
+                const makeLabel = document.querySelector("label[for='id_make']");
+                if (makeLabel) {
+                    makeLabel.style.display = "block"; // Hide the make field label
+                }
+                makeField.style.display = "block";
+                makeField.value = ""; // Clear any pre-existing value if it's set to "Other"
+            } else {
+                makeField.style.display = "none";
+                makeField.value = maketypeField.value; // Set the make field value to maketypes value
+                const makeLabel = document.querySelector("label[for='id_make']");
+                if (makeLabel) {
+                    makeLabel.style.display = "none"; // Hide the make field label
+                }
+            }
+        }
+
+        // Run on load in case of form reloads
+        toggleMakeField();
+
+        // Listen for changes on the maketype field
+        maketypeField.addEventListener("change", toggleMakeField);
+    });
+</script>
+
+{% else %}
+
+<!-- render from for editing exiting report -->
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Retrieve the max values from the card (these should be set dynamically on the server side)
+        const maxMarketValue = parseInt("{{ v_reports.market_value|default:0 }}".replace(/,/g, ''));
+        const maxForcedSaleValue = parseInt("{{ v_reports.forced_sale|default:0 }}".replace(/,/g, ''));
+    
+        // Market and Forced Sale input fields
+        const marketValueInput = document.getElementById("id_v_market_value");
+        const forcedSaleInput = document.getElementById("id_v_forced_sale");
+    
+        // Function to validate input against the maximum values
+        function validateInput(inputElement, maxValue) {
+            // Remove commas and convert to an integer
+            const inputValue = parseInt(inputElement.value.replace(/,/g, ''));
+    
+            // Check if the value exceeds the maximum allowed
+            if (inputValue > maxValue) {
+                alert(`Value cannot exceed ${maxValue.toLocaleString()}`);
+                inputElement.value = maxValue.toLocaleString(); // Set to max as formatted number
+                inputElement.style.borderColor = "red";
+            } else {
+                inputElement.style.borderColor = "initial";
+            }
+        }
+        
+        // Event listeners for input validation
+        marketValueInput.addEventListener("blur", function() {
+            validateInput(marketValueInput, maxMarketValue);
+        });
+    
+        forcedSaleInput.addEventListener("blur", function() {
+            validateInput(forcedSaleInput, maxForcedSaleValue);
+        });
+    });
+</script>
+
+    {% endif %} {% endblock %}
