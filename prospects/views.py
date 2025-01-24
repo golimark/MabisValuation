@@ -229,11 +229,9 @@ class ProspectDetailView(LoginRequiredMixin, View):
 
                 # forms for modal
 
-                # delete existing to tracking mabis updates
-                for proof in ProofofPayment.objects.filter(prospect = context['prospect']):
-                    proof.delete()
-
                 # get proof of payment
+                #
+                proof_ids = []
                 api_url = f'{request.user.active_company.api}/proof-of-payment/?prospect={slug}'
                 response = requests.get(api_url)
                 response.raise_for_status()
@@ -241,6 +239,7 @@ class ProspectDetailView(LoginRequiredMixin, View):
 
                 for proof in proof_of_payments:
                     proof['prospect'] = context['prospect'].id
+                    proof_ids.append(proof["proof_of_payment_id"])
 
                     proofOfPaymentSerializer = ApiSerializers.ProofofPaymentSerializer(data=proof)
 
@@ -260,6 +259,10 @@ class ProspectDetailView(LoginRequiredMixin, View):
                             validated_data['proof_of_payment'] = proof_of_payment_url.geturl()
 
                         proofOfPaymentSerializer.save()
+
+                # delete records that are not on mabis
+                for proof in ProofofPayment.objects.filter(Q(proof_of_payment_id__in = proof_ids)):
+                    proof.delete()
 
                 context["page_name"] =  "valuation"
                 context["sub_page_name"] =  "valuation_requests"
