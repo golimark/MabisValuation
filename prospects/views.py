@@ -230,6 +230,8 @@ class ProspectDetailView(LoginRequiredMixin, View):
                 # forms for modal
 
                 # get proof of payment
+                #
+                proof_ids = []
                 api_url = f'{request.user.active_company.api}/proof-of-payment/?prospect={slug}'
                 response = requests.get(api_url)
                 response.raise_for_status()
@@ -237,12 +239,10 @@ class ProspectDetailView(LoginRequiredMixin, View):
 
                 for proof in proof_of_payments:
                     proof['prospect'] = context['prospect'].id
+                    proof_ids.append(proof["proof_of_payment_id"])
+                    print(proof["proof_of_payment_id"])
 
-                    existing_proof = ProofofPayment.objects.filter(proof_of_payment_id = proof["proof_of_payment_id"])
-                    if existing_proof:
-                        proofOfPaymentSerializer = ApiSerializers.VehicleAssetSerializer(existing_proof.first(), data=proof, partial=True)
-                    else:
-                        proofOfPaymentSerializer = ApiSerializers.ProofofPaymentSerializer(data=proof)
+                    proofOfPaymentSerializer = ApiSerializers.ProofofPaymentSerializer(data=proof)
 
                     if proofOfPaymentSerializer.is_valid(raise_exception=True):
                         # first handle modifying the url to have  port number
@@ -260,6 +260,10 @@ class ProspectDetailView(LoginRequiredMixin, View):
                             validated_data['proof_of_payment'] = proof_of_payment_url.geturl()
 
                         proofOfPaymentSerializer.save()
+
+                # delete records that are not on mabis
+                for proof in ProofofPayment.objects.filter(~Q(proof_of_payment_id__in = proof_ids)):
+                    proof.delete()
 
                 context["page_name"] =  "valuation"
                 context["sub_page_name"] =  "valuation_requests"
@@ -1592,7 +1596,7 @@ def drafts_list(request):
     drafts = VehicleEvaluationReport.objects.filter(is_draft=True).order_by('-updated_at')
     context = {
         "drafts": drafts,
-        "page_name": "valuation", 
+        "page_name": "valuation",
         "sub_page_name": "draft_listing_report"
     }
     return render(request, 'valuations/draft_list.html', context=context)
@@ -1699,7 +1703,7 @@ def edit_draft(request, slug):
 def delete_draft(request, slug):
     # Get the draft object or return a 404 if not found
     draft = get_object_or_404(VehicleEvaluationReport, slug=slug)
-    
+
     if request.method == 'POST':
         draft.delete()
         messages.success(request, "Draft deleted successfully!")

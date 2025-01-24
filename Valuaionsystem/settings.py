@@ -150,8 +150,7 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = os.environ.get("RESPONSE_EMAIL", None)
 
-# Set session timeout to 5 minutes (300 seconds)
-SESSION_COOKIE_AGE = 900  # 15 minutes in seconds
+SESSION_COOKIE_AGE = 1800  # 30 minutes in seconds
 
 # Enable session to expire after inactivity
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
