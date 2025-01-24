@@ -1401,7 +1401,7 @@ def add_valuation_report_details(request, slug):
             v_reports = VehicleEvaluationReport.objects.filter(vehicle__prospect=prospect).order_by('-created_at')
             if not v_reports:
                 form = VehicleEvaluationReportForm(request.POST, request.FILES, prospect=prospect, instance=instance)
-                
+
                 if 'save_draft' in request.POST:  # Save as draft
                     if form.is_valid():
                         form = form.save(commit=False)
@@ -1569,7 +1569,7 @@ def drafts_list(request):
     drafts = VehicleEvaluationReport.objects.filter(is_draft=True).order_by('-updated_at')
     context = {
         "drafts": drafts,
-        "page_name": "valuation", 
+        "page_name": "valuation",
         "sub_page_name": "draft_listing_report"
     }
     return render(request, 'valuations/draft_list.html', context=context)
@@ -1578,7 +1578,7 @@ def drafts_list(request):
 def edit_draft(request, slug):
     # Get the draft object or return a 404 if not found
     draft = get_object_or_404(VehicleEvaluationReport, slug=slug)
-    
+
     if request.method == 'POST':
         form = VehicleEvaluationReportForm(request.POST, instance=draft, prospect=draft.vehicle.prospect)
         if form.is_valid():
@@ -1594,7 +1594,7 @@ def edit_draft(request, slug):
 def delete_draft(request, slug):
     # Get the draft object or return a 404 if not found
     draft = get_object_or_404(VehicleEvaluationReport, slug=slug)
-    
+
     if request.method == 'POST':
         draft.delete()
         messages.success(request, "Draft deleted successfully!")

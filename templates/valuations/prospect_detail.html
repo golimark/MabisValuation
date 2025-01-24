@@ -732,7 +732,8 @@
             const verifyPaymentCta = document.querySelector("#verify_payment_cta");
 
             if (verifyPaymentCta) {
-                verifyPaymentCta.addEventListener("click", () => {
+                verifyPaymentCta.addEventListener("click", e => {
+                    e.preventDefault()
 
                     let payment_ids = []
                     document.querySelectorAll(".payment-id-verification-field").forEach(elem => {
