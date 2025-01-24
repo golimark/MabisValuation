@@ -40,8 +40,9 @@
                 <th>Prospect</th>
                 <th>Make</th>
                 <th>Model</th>
-                <th>Date Created</th>
-                <th>Actions</th>
+                <th style="text-align: start;">Date Created</th>
+                <th>Created By</th>
+                <th style="text-align: center;">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -51,10 +52,11 @@
                 <td>{{ draft.vehicle.prospect.name }}</td> 
                 <td>{{ draft.make }}</td> 
                 <td>{{ draft.model }}</td> 
-                <td>{{ draft.created_at|date:"Y-m-d H:i" }}</td>
-                <td>
+                <td style="text-align: start;">{{ draft.created_at|date:"Y-m-d H:i" }}</td>
+                <td style="text-align: start;">{{ draft.prospect.valuer_assigned}}</td>
+                <td style="text-align: center;">
                     <!-- <a href="{% url 'create_valuation_report' draft.vehicle.prospect.slug %}" class="btn">Edit</a> -->
-                    <a href="{% url 'draft_editing' draft.slug %}" class="btn">Edit</a>
+                    <a href="{% url 'draft_editing' draft.slug %}" class="btn me-4">Edit</a>
 
                     <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-draft-id="{{ draft.slug }}" data-url="{% url 'delete_draft' draft.slug %}">
                         DELETE
