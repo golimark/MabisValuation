@@ -262,9 +262,7 @@ class ProspectDetailView(LoginRequiredMixin, View):
                         proofOfPaymentSerializer.save()
 
                 # delete records that are not on mabis
-                print(proof_ids)
-                for proof in ProofofPayment.objects.filter(Q(proof_of_payment_id__in = proof_ids)):
-                    print("deleting")
+                for proof in ProofofPayment.objects.filter(~Q(proof_of_payment_id__in = proof_ids)):
                     proof.delete()
 
                 context["page_name"] =  "valuation"
