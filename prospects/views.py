@@ -240,6 +240,7 @@ class ProspectDetailView(LoginRequiredMixin, View):
                 for proof in proof_of_payments:
                     proof['prospect'] = context['prospect'].id
                     proof_ids.append(proof["proof_of_payment_id"])
+                    print(proof["proof_of_payment_id"])
 
                     proofOfPaymentSerializer = ApiSerializers.ProofofPaymentSerializer(data=proof)
 
@@ -261,6 +262,7 @@ class ProspectDetailView(LoginRequiredMixin, View):
                         proofOfPaymentSerializer.save()
 
                 # delete records that are not on mabis
+                print(proof_ids)
                 for proof in ProofofPayment.objects.filter(Q(proof_of_payment_id__in = proof_ids)):
                     proof.delete()
 
