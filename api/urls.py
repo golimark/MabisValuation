@@ -64,7 +64,7 @@ api_router = routers.DefaultRouter()
 
 # Register the User viewset with the router
 api_router.register(r'users', views.UserViewSet, basename='user')
-api_router.register(r'company', views.CompanyViewSet, basename='company')
+api_router.register(r'companies', views.CompanyViewSet, basename='company')
 
 # Define the URL patterns
 urlpatterns = [
