@@ -13,6 +13,12 @@ class UserSerializer(serializers.ModelSerializer):
         ]
 
 
+class CompanySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Company
+        fields = "__all__"
+
+
 class ProspectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Prospect

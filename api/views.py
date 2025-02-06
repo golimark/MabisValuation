@@ -47,8 +47,8 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
-from accounts.models import User
-from .serializers import UserSerializer
+from accounts.models import User, Company
+from .serializers import UserSerializer, CompanySerializer
 from django.db.models import Q
 from rest_framework.viewsets import ReadOnlyModelViewSet
 
@@ -56,6 +56,14 @@ class UserViewSet(ReadOnlyModelViewSet):  # Use ReadOnlyModelViewSet for GET-onl
     queryset = User.objects.all()
     serializer_class = UserSerializer
     
+
+
+class CompanyViewSet(ReadOnlyModelViewSet):  # Use ReadOnlyModelViewSet for GET-only views
+    queryset = Company.objects.all()
+    serializer_class = CompanySerializer
+
+
+
 # class ProspectViews(viewsets.ModelViewSet):
 #     serializer_class = serializers.ProspectSerializer
 #     lookup_field = 'slug'
