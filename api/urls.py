@@ -69,7 +69,7 @@ api_router.register(r'companies', views.CompanyViewSet, basename='company')
 # Define the URL patterns
 urlpatterns = [
     # Swagger documentation
-    path('api/docs/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    path('docs/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
 ]
 urlpatterns += api_router.urls
 
