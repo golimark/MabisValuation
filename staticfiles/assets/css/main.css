@@ -503,7 +503,7 @@ body.collapsed {
 .sidebar .submenu {
     background-color: hsla(212, 71%, 32%, 1);
     color: white;
-    padding-inline-start: 3rem;
+    /* padding-inline-start: 3rem; */
 }
 
 .sidebar .submenu:hover,

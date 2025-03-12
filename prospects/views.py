@@ -589,9 +589,15 @@ class ValuationProspectListView(LoginRequiredMixin, View):
                 response.raise_for_status()
                 data = response.json()
                 self.context['prospects'] = data
+
             except requests.exceptions.RequestException as e:
                 messages.error(request, "Unable to fetch prospects")
 
+            users_with_permission = User.objects.filter(
+                        role__permissions__code='can_be_valuers',
+                        company=self.request.user.company
+                    )
+            self.context["valuers"] =  users_with_permission
             self.context["page_name"] =  "valuation"
             self.context["sub_page_name"] =  "valuation_requests"
             return render(request, 'valuations/pending_prospect.html', context=self.context)
@@ -951,6 +957,12 @@ class ProspectValuationView(LoginRequiredMixin, ListView):
                 else:
                     context['prospects'] = [prospect for prospect in data if (prospect['valuer_assigned'] == request.user.username or prospect['valuer_assigned'] == (request.user.first_name + ' ' + request.user.last_name))]
 
+                users_with_permission = User.objects.filter(
+                        role__permissions__code='can_be_valuers',
+                        company=self.request.user.company
+                    )
+                context["valuers"] =  users_with_permission
+
             except requests.exceptions.RequestException:
                 messages.error(request, "Unable to fetch prospects")
 
@@ -958,6 +970,92 @@ class ProspectValuationView(LoginRequiredMixin, ListView):
             context["sub_page_name"] =  "valuation_requests"
             return render(request, 'valuations/prospect_list_valuation.html', context=context)
 
+        else:
+            messages.error(request, "Please select a loan company to work with before you proceed.")
+            return redirect('dashboard')
+        
+class ManuallyAssignNewValuer(LoginRequiredMixin, View):
+    def post(self, request, slug):
+        if request.user.active_company:
+            prospect = get_object_or_404(Prospect, slug=slug)
+            valuer_id = request.POST.get("valuer")
+            try:
+                api_url = f'{request.user.active_company.api}/prospects/{prospect.slug}/'
+                valuer = User.objects.get(
+                    pk=valuer_id,
+                    role__permissions__code='can_be_valuers',
+                    company=request.user.company
+                )
+               
+                if valuer:
+                    response = requests.patch(api_url, data={
+                        "valuer_assigned" : valuer.name,
+                        "valuer_assigned_on" : timezone.now(),
+                    })
+                    if response.status_code >= 200 and response.status_code <= 399:
+                        prospect.valuer_assigned = valuer.name
+                        prospect.valuer_assigned_on = timezone.now()
+                        prospect.save()
+
+                        messages.success(request, "Valuer assigned successfully.")
+                        return redirect(reverse('prospect_valuation'))
+                    else:
+                        return JsonResponse({'error': 'Unable to update prospect data'}, status=403)
+                else:
+                    return JsonResponse({'error': 'No valuers available.'}, status=404)
+
+            except User.DoesNotExist:
+                messages.error(request, "Selected valuer is invalid or does not have permission.")
+            return redirect(reverse('prospect_valuation'))
+        else:
+            messages.error(request, "Please select a loan company to work with before you proceed.")
+            return redirect('dashboard')
+
+class AutoAssignNewValuer(LoginRequiredMixin, View):
+    def get(self, request, slug):
+        prospect = Prospect.objects.filter(slug=slug).first()
+
+        api_url = f'{request.user.active_company.api}/prospects/{slug}/'
+        if request.user.active_company:
+            # assign valuer
+            users_with_permission = [user for user in User.objects.filter(
+                Q(role__permissions__code='can_be_valuers'),
+                Q(company=request.user.company),
+            ) if user.name != prospect.valuer_assigned]
+            # Get all prospects with an assigned valuer
+            valuer_assignments = (
+                Prospect.objects
+                .exclude(valuer_assigned=None)  # Exclude unassigned prospects
+                .values('valuer_assigned')  # Group by each valuer
+                .annotate(assign_count=Count('valuer_assigned'))  # Count their assignments
+                .order_by('assign_count')  # Sort by the count in ascending order
+            )
+
+            # Check the current valuer assignment counts and find the least assigned valuer
+            valuer_assignment_dict = {assign['valuer_assigned']: assign['assign_count'] for assign in valuer_assignments}
+
+            least_assigned_valuer = None
+            for valuer in users_with_permission:
+                # If the valuer doesn't have an assignment yet, they should be first in line
+                if valuer.name not in valuer_assignment_dict:
+                    least_assigned_valuer = valuer
+                    break
+                # If valuer has the least assignments, choose them
+                if least_assigned_valuer is None or valuer_assignment_dict[valuer.name] < valuer_assignment_dict[least_assigned_valuer.name]:
+                    least_assigned_valuer = valuer
+
+            # If a least assigned valuer was found, assign them to the prospect
+            if least_assigned_valuer:
+                response = requests.patch(api_url, data={
+                    "valuer_assigned" : least_assigned_valuer.name,
+                    "valuer_assigned_on" : timezone.now(),
+                })
+                if response.status_code >= 200 and response.status_code <= 399:
+                    # was successful
+                    return redirect(reverse('prospect_valuation'))
+                else:
+                    return redirect(reverse('prospect_valuation'))
+            return redirect(reverse('prospect_valuation'))
         else:
             messages.error(request, "Please select a loan company to work with before you proceed.")
             return redirect('dashboard')

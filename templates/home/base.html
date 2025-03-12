@@ -90,26 +90,36 @@
                 </div>
             </a>
             {% endif %}
+            
+            <div class="section-lead">
+                
+                <a
+                    href="#vatrargpsmenu"
+                    data-bs-toggle="collapse"
+                    aria-expanded="false"
+                    class="sidebar-item d-flex justify-content-between align-items-center {% if page_name == 'vatrargps' %} open active{%endif%}"
+                >
+                    <div>
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Vatrar GPS</span>
+                    </div>
+                    <span><i class="fas fa-chevron-down"></i></span>
+                </a>
 
-            <!-- LOAN PROCESSIN DASHBOARD -->
-            {% if 'can_view_loan_origination' in request.user.permissions %}
-            <a
-                href="#loanProcessing"
-                data-bs-toggle="collapse"
-                aria-expanded="false"
-                class="sidebar-item d-flex justify-content-between align-items-center {% if page_name in 'prospects, valuation, loan_application, loan_approval, offer_review, loan_perfection, disbursement_review, loan_disbursement' %} open active {%endif%}"
-            >
-                <!-- <div class="menu-item-submenu"> -->
-                <!-- <i class="fas fa-users"></i> -->
-                <!-- Icon -->
-                <span >ASSET VALUATION</span>
-                <!-- </div> -->
-                <!-- <span><i class="fas fa-chevron-down"></i></span> -->
-                <!-- Dropdown Toggle Icon -->
-            </a>
-            {% endif %}
+                <div class="collapse" id="vatrargpsmenu">
+                    <a
+                        href=""
+                        class="submenu {% if sub_page_name == 'vatrargps' %} open active {%endif%}"
+                        ><div style="display: flex;align-items: center; justify-content: start;">
+                            <i class="far fa-circle" style="font-size: 8px;"></i>
+                            <span>Vatrar GPS</span>
+                        </div></a
+                    >
+                </div>
+                
+            </div>
 
-            <div class="collapse section-lead" id="loanProcessing">
+            <div class="section-lead">
                 {% if 'can_view_valuation_requests' in request.user.permissions %}
                 <a
                     href="#valuationsSubmenu"
@@ -118,12 +128,10 @@
                     class="sidebar-item d-flex justify-content-between align-items-center {% if page_name == 'valuation' %} open active{%endif%}"
                 >
                     <div>
-                        <i class="fas fa-money-bill-wave"></i>
-                        <!-- Icon -->
-                        <span>VALUATION</span>
+                        <i class="fas fa-car"></i>
+                        <span>Asset Valuation</span>
                     </div>
                     <span><i class="fas fa-chevron-down"></i></span>
-                    <!-- Dropdown Toggle Icon -->
                 </a>
 
                 <div class="collapse" id="valuationsSubmenu">
@@ -131,31 +139,48 @@
                     <a
                         href="{% url 'get_data_from_mabis' %}"
                         class="submenu {% if sub_page_name == 'payment_verification' %} open active {%endif%}"
-                        >Payment Verification</a
+                        >
+                        <div style="display: flex;align-items: center; justify-content: start;">
+                            <i class="far fa-circle" style="font-size: 8px;"></i>
+                            <span>Payment Verification</span>
+                        </div>
+                        </a
                     >
                     <a
                         href="{% url 'prospect_declined' %}"
                         class="submenu {% if sub_page_name == 'declined_valuation_prospects' %} open active {%endif%}"
-                        >Declined Valuations</a
+                        ><div style="display: flex;align-items: center; justify-content: start;">
+                            <i class="far fa-circle" style="font-size: 8px;"></i>
+                            <span>Declined Verifications</span>
+                        </div></a
                     >
                     {%endif%}
                     {% if 'can_be_valuers' in request.user.permissions %}
                     <a
                         href="{% url 'prospect_valuation' %}"
                         class="submenu {% if sub_page_name == 'valuation_requests' %} open active {%endif%}"
-                        >Valuation Requests</a
+                        ><div style="display: flex;align-items: center; justify-content: start;">
+                            <i class="far fa-circle" style="font-size: 8px;"></i>
+                            <span>Valuation Instructions</span>
+                        </div></a
                     >
                     {%endif%}
                     <a
                         href="{% url 'draft_list' %}"
                         class="submenu {% if sub_page_name == 'draft_listing_report' %} open active {%endif%}"
-                        >Draft Reports</a
+                        ><div style="display: flex;align-items: center; justify-content: start;">
+                            <i class="far fa-circle" style="font-size: 8px;"></i>
+                            <span>Draft Reports</span>
+                        </div></a
                     >
                     {% if 'can_be_supervisor' in request.user.permissions %}
                     <a
                         href="{% url 'prospect_supervisor_review' %}"
                         class="submenu {% if sub_page_name == 'supevisor_valuation_requests' %} open active {%endif%}"
-                        >Supervisory Valuation Review</a
+                        ><div style="display: flex;align-items: center; justify-content: start;">
+                            <i class="far fa-circle" style="font-size: 8px;"></i>
+                            <span>Valuation Review</span>
+                        </div></a
                     >
 
                     {%endif%}
@@ -163,21 +188,88 @@
                     <a
                         href="{% url 'prospect_review' %}"
                         class="submenu {% if sub_page_name == 'valuation_review' %} open active {%endif%}"
-                        >Review</a
+                        ><div style="display: flex;align-items: center; justify-content: start;">
+                            <i class="far fa-circle" style="font-size: 8px;"></i>
+                            <span>Valuation Approval</span>
+                        </div></a
                     >{%endif%}
 
                     <a href="{% url 'get_vehicle_asset_data' %}" class="submenu {% if sub_page_name == 'asset_vehicle_list' %} open active {%endif%}">
-                        Vehicle Assets
+                        <div style="display: flex;align-items: center; justify-content: start;">
+                            <i class="far fa-circle" style="font-size: 8px;"></i>
+                            <span>Vehicle Assets</span>
+                        </div>
                     </a>
 
                     <a
                         href="{% url 'prospect_inspection' %}"
                         class="submenu {% if sub_page_name == 'inspection_requests' %} open active {%endif%}"
-                        >Inspection Requests</a
+                        ><div style="display: flex;align-items: center; justify-content: start;">
+                            <i class="far fa-circle" style="font-size: 8px;"></i>
+                            <span>Inspection Requests</span>
+                        </div></a
                     >
                 </div>
                 {%endif%}
             </div>
+
+            <div class="section-lead">
+                <a
+                    href="#vatrar-recovery-submenu"
+                    data-bs-toggle="collapse"
+                    aria-expanded="false"
+                    class="sidebar-item d-flex justify-content-between align-items-center {% if page_name == 'recovery' %} open active{%endif%}"
+                >
+                    <div>
+                        <i class="fas fa-tools"></i>
+                        <span>Recovery</span>
+                    </div>
+                    <span><i class="fas fa-chevron-down"></i></span>
+                </a>
+
+                <div class="collapse" id="vatrar-recovery-submenu">
+                    
+                    <a
+                        href=""
+                        class="submenu {% if sub_page_name == 'collateral-recovery' %} open active {%endif%}"
+                        ><div style="display: flex;align-items: center; justify-content: start;">
+                            <i class="far fa-circle" style="font-size: 8px;"></i>
+                            <span>Recovery</span>
+                        </div></a
+                    >                    
+                </div>
+                
+            </div>
+            
+            <div class="section-lead">
+                
+                <a
+                    href="#vatrar-parking-submenu"
+                    data-bs-toggle="collapse"
+                    aria-expanded="false"
+                    class="sidebar-item d-flex justify-content-between align-items-center {% if page_name == 'parking' %} open active{%endif%}"
+                >
+                    <div>
+                        <i class="fas fa-parking"></i>
+                        <span>Parking</span>
+                    </div>
+                    <span><i class="fas fa-chevron-down"></i></span>
+                </a>
+
+                <div class="collapse" id="vatrar-parking-submenu">
+                    
+                    <a
+                        href=""
+                        class="submenu {% if sub_page_name == 'collateral-parking' %} open active {%endif%}"
+                        ><div style="display: flex;align-items: center; justify-content: start;">
+                            <i class="far fa-circle" style="font-size: 8px;"></i>
+                            <span>Collateral Parking</span>
+                        </div></a
+                    >                    
+                </div>
+                
+            </div>
+
 
         </div>
 

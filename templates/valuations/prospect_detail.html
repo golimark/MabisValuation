@@ -220,9 +220,9 @@
             </div>
         </div>
     </div>
-
+    
     {% if prospect.valuer_assigned%}
-    <div class="card mb-3">
+    <div class="card mb-3" {% if prospect.status in "Payment Verified, Pending" %} style="display: none;" {%endif%}>
         <div class="card-header with-minimizer">
                 <p class="">VALUATION DETAILS</p>
                 <span class="card-body-minimizer">
@@ -530,9 +530,9 @@
 
     <!-- <a href="{% url 'valuate_prospect' prospect.slug %}" class="btn btn-secondary">Submit to Valuation</a> -->
     <a href="{% url 'set_valuation' prospect.slug %}" id="submit-button" class="btn btn-primary">SUBMIT FOR VALUATION</a>
-    <button type="button" data-bs-toggle="modal" data-bs-target="#assignValuerModal" class="btn btn-primary" style="margin: 0 30px;">
+    <!-- <button type="button" data-bs-toggle="modal" data-bs-target="#assignValuerModal" class="btn btn-primary" style="margin: 0 30px;">
         REASSIGN VALUER
-    </button>
+    </button> -->
 
 {% endif %}
 

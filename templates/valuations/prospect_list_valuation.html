@@ -2,7 +2,7 @@
 <!--  -->
 
 {% block content %}
-<h1>VALUATION REQUESTS</h1>
+<h1>Valuation Instructions</h1>
 <!-- <a href="{% url 'prospect_create' %}" class="btn btn-primary">Add Prospect</a> -->
 <table class="table table-striped">
     <thead>
@@ -24,7 +24,14 @@
             <td>{{ prospect.gender }}</td>
             <td>{{ prospect.phone_number }}</td>
             <td style="text-align: center;">{{ prospect.company }}</td>
-            <td>{{ prospect.valuer_assigned }}</td>
+            <td>{{ prospect.valuer_assigned }} <br>
+            <a href="#" data-bs-toggle="modal" data-bs-target="#assignValuerModal-{{prospect.slug}}" style="font-size: 10px; color: #3c8dbc;">
+                Manual Reassign
+            </a> <br>
+            <a href="{% url 'auto_assign_valuer' prospect.slug %}" style="font-size: 10px; color: #3c8dbc;">
+                Auto Reassign
+            </a>
+            </td>
             <td style="color: blueviolet;">{{ prospect.status }}</td>
             <td> {{ prospect.submitted_for_valuation_on }}</td>
             <td>
@@ -36,6 +43,36 @@
                 <!-- <a href="#" class="btn btn-warning" data-toggle="modal" data-target="#valuationModal" data-prospect="{{ prospect.id }}">Submit to Valuation</a> -->
             </td>
         </tr>
+        
+        <!-- Modal for Assign Valuer -->
+        <div class="modal fade" id="assignValuerModal-{{prospect.slug}}" tabindex="-1" role="dialog" aria-labelledby="assignValuerModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="assignValuerModalLabel">Reassign Valuer</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="padding: 0.5rem 1rem;border: none; outline: transparent;background-color: black;color: white; font-size: 12px;">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" style="display: grid; justify-content: stretch;">
+                        <form id="assignValuerForm" method="POST" action="{% url 'manually_assign_valuer' prospect.slug %}">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="valuerSelect">Select Valuer</label>
+                                <select class="form-control" id="valuerSelect" name="valuer">
+                                    {% for valuer in valuers %}
+                                        <option value="{{ valuer.id}}">{{ valuer.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary" style="margin-top: 20px">Assign</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
         {% endif %} {% endfor %}
     </tbody>
 </table>
