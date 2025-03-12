@@ -4,7 +4,7 @@
 {% block content %}
 <style>
     th, td {
-        text-align: center!important;
+        text-align: start!important;
     }
 </style>
 
@@ -12,7 +12,7 @@
 <!-- <a href="{% url 'prospect_create' %}" class="btn btn-primary">Add Prospect</a> -->
 <table class="table table-striped">
     <thead>
-        <tr style="text-align: center;">
+        <tr>
             <th>Name</th>
             <th>Gender</th>
             <th>Phone Number</th>
@@ -25,7 +25,7 @@
             <th>Actions</th>
         </tr>
     </thead>
-    <tbody style="text-align: center;">
+    <tbody>
         {% for prospect in prospects %} {% if prospect.status == 'Valuation' %}
         <tr>
             <td>{{ prospect.name }}</td>
@@ -34,7 +34,7 @@
             <td>{{ prospect.company }}</td>
             <td>{{ prospect.vehicle }}</td>
             <td>{{ prospect.location }}</td>
-            <td>{{ prospect.valuer_assigned }} <br>
+            <td>{{ prospect.valuer_assigned }}<br>
             <a href="#" data-bs-toggle="modal" data-bs-target="#assignValuerModal-{{prospect.slug}}" style="font-size: 10px; color: #3c8dbc;">
                 Manual Reassign
             </a> <br>
