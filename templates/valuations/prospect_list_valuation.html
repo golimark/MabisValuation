@@ -10,7 +10,7 @@
             <th style="text-align: start;">Name</th>
             <th style="text-align: center;">Gender</th>
             <th style="text-align: center;">Phone Number</th>
-            <th style="text-align: center;">company</th>
+            <th style="text-align: center;">Company</th>
             <th style="text-align: center;">Licence Plate</th>
             <th style="text-align: center;">Location</th>
             <th style="text-align: center;">Valuer Assigned</th>
@@ -25,9 +25,9 @@
             <td style="text-align: start;">{{ prospect.name }}</td>
             <td>{{ prospect.gender }}</td>
             <td style="text-align: center;">{{ prospect.phone_number }}</td>
+            <td style="text-align: center;">{{ prospect.company }}</td>
             <td style="text-align: center;">{{ prospect.vehicle }}</td>
             <td style="text-align: center;">{{ prospect.location }}</td>
-            <td style="text-align: center;">{{ prospect.company }}</td>
             <td>{{ prospect.valuer_assigned }} <br>
             <a href="#" data-bs-toggle="modal" data-bs-target="#assignValuerModal-{{prospect.slug}}" style="font-size: 10px; color: #3c8dbc;">
                 Manual Reassign

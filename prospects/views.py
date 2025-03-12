@@ -967,7 +967,10 @@ class ProspectValuationView(LoginRequiredMixin, ListView):
                 #     context['prospects'] = [prospect for prospect in data if (prospect['valuer_assigned'] == request.user.username or prospect['valuer_assigned'] == (request.user.first_name + ' ' + request.user.last_name))]
 
                 context['prospects'] = [prospect for prospect in context['prospects']]
-
+                for prospect in context['prospects']:
+                    vehicles = VehicleAsset.objects.filter(prospect__slug=prospect['slug'])
+                    prospect['vehicle'] = ', '.join([vehicle.license_plate for vehicle in vehicles]) if vehicles else None
+                    prospect['location'] = ', '.join([vehicle.location for vehicle in vehicles]) if vehicles else None
 
                 users_with_permission = User.objects.filter(
                         role__permissions__code='can_be_valuers',
