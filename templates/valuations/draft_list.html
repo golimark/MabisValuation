@@ -45,8 +45,8 @@
                 <th style="text-align: center;">Actions</th>
             </tr>
         </thead>
+        {% for draft in drafts %}
         <tbody>
-            {% for draft in drafts %}
             <tr>
                 <td>{{ draft.id }}</td>
                 <td>{{ draft.vehicle.prospect.name }}</td> 
@@ -63,12 +63,10 @@
                     </button>
                 </td>
             </tr>
-            {% empty %}
-            <tr>
-                <td colspan="4" style="text-align: center;">No drafts available</td>
-            </tr>
-            {% endfor %}
         </tbody>
+        {% empty %}
+            <b style="text-align: center;">No drafts available</b>
+        {% endfor %}
     </table>
 
     <!-- Delete Confirmation Modal -->
