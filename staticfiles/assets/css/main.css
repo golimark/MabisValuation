@@ -103,7 +103,7 @@ body {
 *,
 input,
 textarea {
-    text-transform: uppercase;
+    text-transform: none;
 }
 
 :root {
