@@ -2437,7 +2437,7 @@ def PipelineView(request, slug):
                                 prospect.valuation_reviewd_on = datetime.now()
                                 prospect.valuation_reviewd_by = request.user
                                 prospect.save()
-                                vehicle.status = "VALUED"
+                                vehicle.status = "Valued"
                                 vehicle.save()
 
                         finally:

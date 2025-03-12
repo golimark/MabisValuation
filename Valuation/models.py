@@ -36,7 +36,7 @@ CAR_MAKES = [
     ('MASERATI', 'MASERATI'),
     ('MAZDA', 'MAZDA'),
     ('MCLAREN', 'MCLAREN'),
-    ('MERCEDES_BENZ', 'MERCEDES-BENZ'),
+    ('MERCEDES BENZ', 'MERCEDES BENZ'),
     ('MITSUBISHI', 'MITSUBISHI'),
     ('NISSAN', 'NISSAN'),
     ('PAGANI', 'PAGANI'),
@@ -85,17 +85,17 @@ GEARBOX_CHOICES = [
 
 class VehicleAsset(models.Model):
     STATUS = [
-        ('NOT VALUED', 'NOT VALUED'),
-        ('VALUED', 'VALUED'),
-        ('INSPECTION REQUIRED','INSPECTION REQUIRED'),
-        ('INSPECTED', 'INSPECTED'),
-        ('IN TRACKING', 'IN TRACKING'),
-        ('UNPOCESSED', 'UNPOCESSED'),
-        ('REPOSESSED', 'REPOSESSED'),
-        ('IMPOUNDED', 'IMPOUNDED'),
-        ('SELF_PARKED', 'SELF_PARKED'),
-        ('RECLAIMED', 'RECLAIMED'),
-        ('DISPOSED_OFF', 'DISPOSED_OFF'),
+        ('Not valued', 'Not valued'),
+        ('Valued', 'Valued'),
+        ('Inspection required', 'Inspection required'),
+        ('Inspected', 'Inspected'),
+        ('In tracking', 'In tracking'),
+        ('Unpossessed', 'Unpossessed'),
+        ('Repossessed', 'Repossessed'),
+        ('Impounded', 'Impounded'),
+        ('Self parked', 'Self parked'),
+        ('Reclaimed', 'Reclaimed'),
+        ('Disposed off', 'Disposed off'),
     ]
 
     VEHICLE_TYPE_OPTIONS = [
@@ -113,7 +113,7 @@ class VehicleAsset(models.Model):
     model = models.CharField("Car Model", max_length=50, null=True, blank=True)
     location = models.CharField("location of vehicle", max_length=255)
 
-    status = models.CharField("Status", choices=STATUS, default="NOT VALUED")
+    status = models.CharField("Status", choices=STATUS, default="Not valued")
 
     # fields to use by system
     slug = models.SlugField("Safe Url", unique=True, blank=True, null=True, max_length=200)
@@ -315,7 +315,7 @@ it for the purpose of lending against it.
         super().save(*args, **kwargs)
 
         # update asset status
-        self.vehicle.status = "VALUED"
+        self.vehicle.status = "Valued"
         self.vehicle.save()
 
 
