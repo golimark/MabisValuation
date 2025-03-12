@@ -74,6 +74,15 @@ class ProspectListView(LoginRequiredMixin, ListView):
             )
         ).order_by('is_new', '-updated_at').filter(agent__company=self.request.user.company)
 
+        # prospect vehicle data
+        vehicle_assets = []
+        for prospect in prospects:
+            vehicles = [VehicleAsset.objects.filter(prospect=prospect)]
+            for vehicle in vehicles:
+                vehicle_assets.append(vehicle)
+
+
+
         if "can_view_all_application_data" not in self.request.user.permissions:
             prospects = prospects.filter(created_by=self.request.user)
             # context["prospects"] = prospects
@@ -945,10 +954,10 @@ class ProspectValuationView(LoginRequiredMixin, ListView):
                 data = response.json()
                 context['prospects'] = data
 
-                if 'can_verify_payment' in request.user.permissions:
-                    context['prospects'] = [prospect for prospect in context['prospects']]
-                else:
-                    context['prospects'] = [prospect for prospect in context['prospects'] if (prospect['valuer_assigned'] == request.user.username or prospect['valuer_assigned'] == (request.user.first_name + ' ' + request.user.last_name))]
+                # if 'can_verify_payment' in request.user.permissions:
+                #     context['prospects'] = [prospect for prospect in context['prospects']]
+                # else:
+                #     context['prospects'] = [prospect for prospect in context['prospects'] if (prospect['valuer_assigned'] == request.user.username or prospect['valuer_assigned'] == (request.user.first_name + ' ' + request.user.last_name))]
 
                 # valuer_assigned = request.GET.get('valuer_assigned')
                 # if valuer_assigned:
