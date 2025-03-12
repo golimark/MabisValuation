@@ -962,7 +962,8 @@ class ProspectValuationView(LoginRequiredMixin, ListView):
                 # if 'can_verify_payment' in request.user.permissions:
 
                 context['prospects'] = [prospect for prospect in context['prospects']]
-                
+                print(context['prospects'])
+
                 # else:
                 #     context['prospects'] = [prospect for prospect in data if (prospect['valuer_assigned'] == request.user.username or prospect['valuer_assigned'] == (request.user.first_name + ' ' + request.user.last_name))]
 
