@@ -959,12 +959,12 @@ class ProspectValuationView(LoginRequiredMixin, ListView):
                 # else:
                 #     context['prospects'] = [prospect for prospect in context['prospects'] if (prospect['valuer_assigned'] == request.user.username or prospect['valuer_assigned'] == (request.user.first_name + ' ' + request.user.last_name))]
 
-                # valuer_assigned = request.GET.get('valuer_assigned')
-                # if valuer_assigned:
-                if 'can_verify_payment' in request.user.permissions:
-                    context['prospects'] = [prospect for prospect in context['prospects']]
-                else:
-                    context['prospects'] = [prospect for prospect in data if (prospect['valuer_assigned'] == request.user.username or prospect['valuer_assigned'] == (request.user.first_name + ' ' + request.user.last_name))]
+                # if 'can_verify_payment' in request.user.permissions:
+
+                context['prospects'] = [prospect for prospect in context['prospects']]
+                
+                # else:
+                #     context['prospects'] = [prospect for prospect in data if (prospect['valuer_assigned'] == request.user.username or prospect['valuer_assigned'] == (request.user.first_name + ' ' + request.user.last_name))]
 
                 users_with_permission = User.objects.filter(
                         role__permissions__code='can_be_valuers',
