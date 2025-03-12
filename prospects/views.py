@@ -525,7 +525,7 @@ class ProspectDeclinedView(LoginRequiredMixin, ListView):
 
         for prospect in prospects:
             vehicles = VehicleAsset.objects.filter(prospect__slug=prospect.slug)
-            
+
             # Dynamically adding attributes to the model instance
             setattr(prospect, 'vehicle', ', '.join([vehicle.license_plate for vehicle in vehicles]) if vehicles else None)
             setattr(prospect, 'location', ', '.join([vehicle.location for vehicle in vehicles]) if vehicles else None)
@@ -1113,7 +1113,6 @@ class InspectionView(LoginRequiredMixin, ListView):
                 response = requests.get(api_url)
                 response.raise_for_status()
                 data = response.json()
-                print('\n\n\n data', data)
                 context['prospects'] = data
             except requests.exceptions.RequestException:
                 messages.error(request, "Unable to fetch prospects")
