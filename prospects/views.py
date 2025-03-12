@@ -512,12 +512,6 @@ class ProspectPendingView(LoginRequiredMixin, ListView):
         context["sub_page_name"] =  "pending_valuation_prospects"
         return context
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["page_name"] =  "prospects"
-        context["sub_page_name"] =  "pending_valuation_prospects"
-        return context
-
 
 # View to display prospects with 'Declined' status
 class ProspectDeclinedView(LoginRequiredMixin, ListView):
@@ -527,7 +521,16 @@ class ProspectDeclinedView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         # Filter the queryset to only include prospects with 'Declined' status
-        return Prospect.objects.filter(status='Declined').order_by('updated_at')
+        prospects = Prospect.objects.filter(status='Declined').order_by('updated_at')
+
+        for prospect in prospects:
+            vehicles = VehicleAsset.objects.filter(prospect__slug=prospect.slug)
+            
+            # Dynamically adding attributes to the model instance
+            setattr(prospect, 'vehicle', ', '.join([vehicle.license_plate for vehicle in vehicles]) if vehicles else None)
+            setattr(prospect, 'location', ', '.join([vehicle.location for vehicle in vehicles]) if vehicles else None)
+
+        return prospects 
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -1136,7 +1139,16 @@ class ProspectReviewView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         # Filter the queryset to only include prospects with 'Failed' status
-        return Prospect.objects.filter(status='Review', company__icontains=self.request.user.active_company.name).order_by('created_at')
+        prospects = Prospect.objects.filter(status='Review', company__icontains=self.request.user.active_company.name).order_by('created_at')
+
+        for prospect in prospects:
+            vehicles = VehicleAsset.objects.filter(prospect__slug=prospect.slug)
+
+            # Dynamically adding attributes to the model instance
+            setattr(prospect, 'vehicle', ', '.join([vehicle.license_plate for vehicle in vehicles]) if vehicles else None)
+            setattr(prospect, 'location', ', '.join([vehicle.location for vehicle in vehicles]) if vehicles else None)
+
+        return prospects
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -1154,7 +1166,16 @@ class ProspectSupervisorReviewView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         # Filter the queryset to only include prospects with 'Failed' status
-        return Prospect.objects.filter(status='Valuation Supervisor').order_by('created_at')
+        prospects = Prospect.objects.filter(status='Valuation Supervisor').order_by('created_at')
+        for prospect in prospects:
+            vehicles = VehicleAsset.objects.filter(prospect__slug=prospect.slug)
+
+            # Dynamically adding attributes to the model instance
+            setattr(prospect, 'vehicle', ', '.join([vehicle.license_plate for vehicle in vehicles]) if vehicles else None)
+            setattr(prospect, 'location', ', '.join([vehicle.location for vehicle in vehicles]) if vehicles else None)
+
+
+        return prospects
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

@@ -595,7 +595,17 @@ def fetch_prospects_from_mabis(request):
             data = response.json()
             data.extend(payment_verified_response.json())
 
-            context['prospects']= data
+            context['prospects'] = data
+            # get the vehicle data for each prospect
+            for prospect in context['prospects']:
+                response = requests.get(f'{request.user.active_company.api}/vehicles/?prospect={prospect["slug"]}')
+                response.raise_for_status()
+                vehicle_data = response.json()
+                for vehicle in vehicle_data:
+                    prospect['vehicle'] = ', '.join([vehicle['license_plate'] for vehicle in vehicle_data]) if vehicle_data else None
+                    prospect['location'] = ', '.join([vehicle['location'] for vehicle in vehicle_data]) if vehicle_data else None
+
+
             return render(request, 'valuations/pending_prospect.html', context)
         except requests.exceptions.RequestException as e:
             return render(request, 'valuations/pending_prospect.html', context)

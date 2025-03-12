@@ -1,6 +1,12 @@
 {% extends 'home/base.html' %} {% block content %}
 <h1>Prospects Pending Payments Verification</h1>
 
+<style>
+    th, td {
+        text-align: start!important;
+    }
+</style>
+
 <table class="table table-striped">
     <thead>
         <tr>
@@ -8,6 +14,8 @@
             <th>Gender</th>
             <th>Company</th>
             <th>Phone Number</th>
+            <th>Licence Plate</th>
+            <th>Location</th>
             <th>Status</th>
             <th>Updated On</th>
             <th>Actions</th>
@@ -20,12 +28,14 @@
             <td>{{ prospect.gender }}</td>
             <td>{{ prospect.company }}</td>
             <td>{{ prospect.phone_number }}</td>
+            <td>{{ prospect.vehicle }}</td>
+            <td>{{ prospect.location }}</td>
             {% if prospect.status in 'Declined, Failed' %}
             <td style="font-style: italic; color: red">
                 {{ prospect.status }}
             </td>
             {% else %}
-            <td style="font-style: italic; color: blueviolet">
+            <td style="color: blueviolet">
                 {{ prospect.status }}
             </td>
             {% endif %}

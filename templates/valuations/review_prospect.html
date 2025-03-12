@@ -1,14 +1,21 @@
 {% extends 'home/base.html' %} {% block title %}Failed Prospects{% endblock %}
 {% block content %}
-<h1>Prospects in Review</h1>
+<style>
+    th, td {
+        text-align: start!important;
+    }
+</style>
+<h1>Prospects Awaiting Valuation Approval</h1>
 <table class="table table-striped">
     <thead>
         <tr>
             <th>Name</th>
             <th>Gender</th>
-            <th style="text-align: center;">Phone Number</th>
+            <th>Phone Number</th>
             <th>Company</th>
-            <th style="text-align: center;">Valuer Assigned</th>
+            <th>Licence Plate</th>
+            <th>Location</th>
+            <th>Valuer Assigned</th>
             <th>Status</th>
             <th>Updated At</th>
             <th>Actions</th>
@@ -19,9 +26,11 @@
         <tr>
             <td>{{ prospect.name }}</td>
             <td>{{ prospect.gender }}</td>
-            <td style="text-align: center;">{{ prospect.phone_number }}</td>
+            <td>{{ prospect.phone_number }}</td>
             <td>{{ prospect.company }}</td>
-            <td style="text-align: center;">{{prospect.valuer_assigned}}</td>
+            <td>{{ prospect.vehicle }}</td>
+            <td>{{ prospect.location }}</td>
+            <td>{{ prospect.valuer_assigned}}</td>
             <td>{{ prospect.status }}</td>
             <td>{{ prospect.updated_at }}</td>
             <td>

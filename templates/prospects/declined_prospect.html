@@ -1,4 +1,15 @@
 {% extends 'home/base.html' %} {% block content %}
+
+<style>
+    th, td {
+        text-align: start!important;
+    }
+
+    td {
+        color: red;
+    }
+</style>
+
 <h1 style="color: red">Declined Valuations</h1>
 
 <table class="table table-striped">
@@ -6,7 +17,10 @@
         <tr>
             <th>Name</th>
             <th>Gender</th>
-            <th style="text-align: start;">Phone Number</th>
+            <th>Phone Number</th>
+            <th>Company</th>
+            <th>Licence Plate</th>
+            <th>Location</th>
             <th>Status</th>
             <th>Decline At</th>
             <th>Reason</th>
@@ -16,28 +30,21 @@
     <tbody>
         {% for prospect in prospects %}
         <tr>
-            <td style="color: red">{{ prospect.name }}</td>
-            <td style="color: red">{{ prospect.gender }}</td>
-            <td style="color: red; text-align: start;">{{ prospect.phone_number }}</td>
-            <td style="color: red">{{ prospect.status }}</td>
-            <td style="color: red">{{ prospect.updated_at }}</td>
-            <td style="color: red">{{ prospect.decline_reason }}</td>
+            <td>{{ prospect.name }}</td>
+            <td>{{ prospect.gender }}</td>
+            <td>{{ prospect.phone_number }}</td>
+            <td>{{ prospect.company }}</td>
+            <td>{{ prospect.vehicle }}</td>
+            <td>{{ prospect.location }}</td>
+            <td>{{ prospect.status }}</td>
+            <td>{{ prospect.updated_at }}</td>
+            <td>{{ prospect.decline_reason }}</td>
             <td>
-                <!-- <a href="{% url 'prospect_detail' prospect.slug %}" class=""
-                    >Detail</a
-                > -->
                 <a
                     href=""
                     class="btn btn-secondary btn-sm inactive"
                     ><i class="fas fa-eye"></i>  DETAILS</a
                 >
-                <!-- <a
-                    href="{% url 'restore_prospect_fr_decline' prospect.slug %}"
-                    class="btn btn-success btn-sm" style="background-color: brown; border: none;"
-                    ><i class="fas"></i>RESTORE</a
-                > -->
-
-
             </td>
         </tr>
         {% endfor %}
