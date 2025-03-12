@@ -2,32 +2,38 @@
 <!--  -->
 
 {% block content %}
+<style>
+    th, td {
+        text-align: center!important;
+    }
+</style>
+
 <h1>Valuation Instructions</h1>
 <!-- <a href="{% url 'prospect_create' %}" class="btn btn-primary">Add Prospect</a> -->
 <table class="table table-striped">
     <thead>
-        <tr>
-            <th style="text-align: start;">Name</th>
-            <th style="text-align: center;">Gender</th>
-            <th style="text-align: center;">Phone Number</th>
-            <th style="text-align: center;">Company</th>
-            <th style="text-align: center;">Licence Plate</th>
-            <th style="text-align: center;">Location</th>
-            <th style="text-align: center;">Valuer Assigned</th>
-            <th style="text-align: center;">Status</th>
-            <th style="text-align: center;">Updated At</th>
-            <th style="text-align: center;">Actions</th>
+        <tr style="text-align: center;">
+            <th>Name</th>
+            <th>Gender</th>
+            <th>Phone Number</th>
+            <th>Company</th>
+            <th>Licence Plate</th>
+            <th>Location</th>
+            <th>Valuer Assigned</th>
+            <th>Status</th>
+            <th>Updated At</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody style="text-align: center;">
         {% for prospect in prospects %} {% if prospect.status == 'Valuation' %}
-        <tr style="text-align: center;" >
-            <td style="text-align: start;">{{ prospect.name }}</td>
+        <tr>
+            <td>{{ prospect.name }}</td>
             <td>{{ prospect.gender }}</td>
-            <td style="text-align: center;">{{ prospect.phone_number }}</td>
-            <td style="text-align: center;">{{ prospect.company }}</td>
-            <td style="text-align: center;">{{ prospect.vehicle }}</td>
-            <td style="text-align: center;">{{ prospect.location }}</td>
+            <td>{{ prospect.phone_number }}</td>
+            <td>{{ prospect.company }}</td>
+            <td>{{ prospect.vehicle }}</td>
+            <td>{{ prospect.location }}</td>
             <td>{{ prospect.valuer_assigned }} <br>
             <a href="#" data-bs-toggle="modal" data-bs-target="#assignValuerModal-{{prospect.slug}}" style="font-size: 10px; color: #3c8dbc;">
                 Manual Reassign
@@ -37,7 +43,7 @@
             </a>
             </td>
             <td style="color: blueviolet;">{{ prospect.status }}</td>
-            <td> {{ prospect.submitted_for_valuation_on }}</td>
+            <td>{{ prospect.submitted_for_valuation_on }}</td>
             <td>
                 <a
                     href="{% url 'prospect_detail' prospect.slug %}"
