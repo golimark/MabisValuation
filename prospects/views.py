@@ -221,8 +221,9 @@ class ProspectDetailView(LoginRequiredMixin, View):
                         vehicleSerializer.save()
 
                 users_with_permission = User.objects.filter(
-                        role__permissions__code='can_be_valuers',
-                        company=self.request.user.company
+                        Q(role__permissions__code='can_be_valuers'),
+                        ~Q(role__permissions__code='can_perform_admin_functions'),
+                        Q(company=self.request.user.company)
                     )
                 context["valuers"] =  users_with_permission
 
@@ -429,8 +430,9 @@ class ProspectDetailViewforNewProspects(LoginRequiredMixin, View):
                         vehicleSerializer.save()
 
                 users_with_permission = User.objects.filter(
-                        role__permissions__code='can_be_valuers',
-                        company=self.request.user.company
+                        Q(role__permissions__code='can_be_valuers'),
+                        ~Q(role__permissions__code='can_perform_admin_functions'),
+                        Q(company=self.request.user.company)
                     )
                 context["valuers"] =  users_with_permission
 
@@ -606,9 +608,10 @@ class ValuationProspectListView(LoginRequiredMixin, View):
                 messages.error(request, "Unable to fetch prospects")
 
             users_with_permission = User.objects.filter(
-                        role__permissions__code='can_be_valuers',
-                        company=self.request.user.company
-                    )
+                    Q(role__permissions__code='can_be_valuers'),
+                    ~Q(role__permissions__code='can_perform_admin_functions'),
+                    Q(company=self.request.user.company)
+                )
             self.context["valuers"] =  users_with_permission
             self.context["page_name"] =  "valuation"
             self.context["sub_page_name"] =  "valuation_requests"
@@ -712,8 +715,9 @@ class ValuationProspectDetailView(LoginRequiredMixin, DetailView):
                         context['land_asset'] = land_assets
 
                     users_with_permission = User.objects.filter(
-                        role__permissions__code='can_be_valuers',
-                        company=self.request.user.company
+                        Q(role__permissions__code='can_be_valuers'),
+                        ~Q(role__permissions__code='can_perform_admin_functions'),
+                        Q(company=self.request.user.company)
                     )
                     context["valuers"] =  users_with_permission
                 else:
@@ -866,8 +870,9 @@ class ValuationProspectDetailViewforNewProspects(LoginRequiredMixin, DetailView)
                         context['land_asset'] = land_assets
 
                     users_with_permission = User.objects.filter(
-                        role__permissions__code='can_be_valuers',
-                        company=self.request.user.company
+                        Q(role__permissions__code='can_be_valuers'),
+                        ~Q(role__permissions__code='can_perform_admin_functions'),
+                        Q(company=self.request.user.company)
                     )
                     context["valuers"] =  users_with_permission
                 else:
@@ -976,8 +981,9 @@ class ProspectValuationView(LoginRequiredMixin, ListView):
                     prospect['location'] = ', '.join([vehicle.location for vehicle in vehicles]) if vehicles else None
 
                 users_with_permission = User.objects.filter(
-                        role__permissions__code='can_be_valuers',
-                        company=self.request.user.company
+                        Q(role__permissions__code='can_be_valuers'),
+                        ~Q(role__permissions__code='can_perform_admin_functions'),
+                        Q(company=self.request.user.company)
                     )
                 context["valuers"] =  users_with_permission
 
@@ -1008,12 +1014,43 @@ class ManuallyAssignNewValuer(LoginRequiredMixin, View):
                 if valuer:
                     response = requests.patch(api_url, data={
                         "valuer_assigned" : valuer.name,
-                        "valuer_assigned_on" : timezone.now(),
+                        "valuer_assigned_on" : datetime.now(),
                     })
                     if response.status_code >= 200 and response.status_code <= 399:
                         prospect.valuer_assigned = valuer.name
-                        prospect.valuer_assigned_on = timezone.now()
+                        prospect.valuer_assigned_on = datetime.now()
                         prospect.save()
+
+                        # send email to the valuer
+                        vehicle = VehicleAsset.objects.filter(prospect=prospect).first()
+                        valuer_assigned = prospect.valuer_assigned
+
+                        if valuer_assigned:
+                            # Split the valuer_assigned into first_name and last_name if it contains a space
+                            name_parts = valuer_assigned.split(" ")
+
+                            # Use Q objects to filter by username or full name
+                            if len(name_parts) == 2:  # If it's "FirstName LastName"
+                                user = User.objects.filter(
+                                    Q(username=valuer_assigned) |
+                                    Q(first_name=name_parts[0], last_name=name_parts[1])
+                                ).first()
+                            else:  # If it's just the username
+                                user = User.objects.filter(username=valuer_assigned).first()
+
+                            if user:
+                                # Send the email if a user is found
+
+                                subject =  "Received Prospect {} for Valuation.".format(prospect).upper()
+                                email = user.email
+                                message = f"You have been assigned a prospect for valuation. Please log in to continue.\n\nProspect: {str(prospect).upper()} - {prospect.phone_number}\nVehicle: {str(vehicle).upper()}\nValuer: {str(valuer_assigned).upper()}\n"
+
+                                send_email_task(subject, email, message)
+                                messages.success(request, "Prospect: {} assigned to valuer: {} successfully and email sent for notification.".format(prospect, valuer_assigned).upper())
+                            else:
+                                # Handle the case where no matching user is found
+                                messages.error(request, "No matching user found for the assigned valuer.")
+                                return redirect(reverse_lazy("prospect_valuation"))
 
                         messages.success(request, "Valuer assigned successfully.")
                         return redirect(reverse('prospect_valuation'))
@@ -1038,6 +1075,7 @@ class AutoAssignNewValuer(LoginRequiredMixin, View):
             # assign valuer
             users_with_permission = [user for user in User.objects.filter(
                 Q(role__permissions__code='can_be_valuers'),
+                ~Q(role__permissions__code='can_perform_admin_functions'),
                 Q(company=request.user.company),
             ) if user.name != prospect.valuer_assigned]
             # Get all prospects with an assigned valuer
@@ -1066,10 +1104,39 @@ class AutoAssignNewValuer(LoginRequiredMixin, View):
             if least_assigned_valuer:
                 response = requests.patch(api_url, data={
                     "valuer_assigned" : least_assigned_valuer.name,
-                    "valuer_assigned_on" : timezone.now(),
+                    "valuer_assigned_on" : datetime.now(),
                 })
                 if response.status_code >= 200 and response.status_code <= 399:
                     # was successful
+                    vehicle = VehicleAsset.objects.filter(prospect=prospect).first()
+                    valuer_assigned = prospect.valuer_assigned
+
+                    if valuer_assigned:
+                        # Split the valuer_assigned into first_name and last_name if it contains a space
+                        name_parts = valuer_assigned.split(" ")
+
+                        # Use Q objects to filter by username or full name
+                        if len(name_parts) == 2:  # If it's "FirstName LastName"
+                            user = User.objects.filter(
+                                Q(username=valuer_assigned) |
+                                Q(first_name=name_parts[0], last_name=name_parts[1])
+                            ).first()
+                        else:  # If it's just the username
+                            user = User.objects.filter(username=valuer_assigned).first()
+
+                        if user:
+                            # Send the email if a user is found
+
+                            subject =  "Received Prospect {} for Valuation.".format(prospect).upper()
+                            email = user.email
+                            message = f"You have been assigned a prospect for valuation. Please log in to continue.\n\nProspect: {str(prospect).upper()} - {prospect.phone_number}\nVehicle: {str(vehicle).upper()}\nValuer: {str(valuer_assigned).upper()}\n"
+
+                            send_email_task(subject, email, message)
+                            messages.success(request, "Prospect: {} assigned to valuer: {} successfully and email sent for notification.".format(prospect, valuer_assigned).upper())
+                        else:
+                            # Handle the case where no matching user is found
+                            messages.error(request, "No matching user found for the assigned valuer.")
+                            return redirect(reverse_lazy("prospect_valuation"))
                     return redirect(reverse('prospect_valuation'))
                 else:
                     return redirect(reverse('prospect_valuation'))
@@ -1309,8 +1376,9 @@ from django.db.models import Count
 
 def get_least_assigned_valuer(company):
         users_with_permission = User.objects.filter(
-            role__permissions__code='can_be_valuers',
-            active_company=company
+            Q(role__permissions__code='can_be_valuers'),
+            ~Q(role__permissions__code='can_perform_admin_functions'),
+            Q(active_company=company)
         )
 
         assignments = Prospect.objects.filter(valuer_assigned__in=users_with_permission).values('valuer_assigned').annotate(count=Count('valuer_assigned')).order_by('count')
@@ -1355,9 +1423,9 @@ def prospect_in_valuation(request, slug):
             api_url = f'{request.user.active_company.api}/prospects/{slug}/'
             # assign valuer
             users_with_permission = User.objects.filter(
-                # role__permissions__code='can_view_valuation_requests',
-                role__permissions__code='can_be_valuers',
-                company=request.user.company
+                Q(role__permissions__code='can_be_valuers'),
+                ~Q(role__permissions__code='can_perform_admin_functions'),
+                Q(company=request.user.company)
             )
             # Get all prospects with an assigned valuer
             valuer_assignments = (
