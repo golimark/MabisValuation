@@ -35,12 +35,14 @@
             <td>{{ prospect.vehicle }}</td>
             <td>{{ prospect.location }}</td>
             <td>{{ prospect.valuer_assigned }}<br>
+            {% if "can_assign_valuers" in request.user.permissions %}
             <a href="#" data-bs-toggle="modal" data-bs-target="#assignValuerModal-{{prospect.slug}}" style="font-size: 10px; color: #3c8dbc;">
                 Manual Reassign
             </a> <br>
             <a href="{% url 'auto_assign_valuer' prospect.slug %}" style="font-size: 10px; color: #3c8dbc;">
                 Auto Reassign
             </a>
+            {% endif %}
             </td>
             <td style="color: blueviolet;">{{ prospect.status }}</td>
             <td>{{ prospect.submitted_for_valuation_on }}</td>

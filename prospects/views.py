@@ -1030,6 +1030,7 @@ class ManuallyAssignNewValuer(LoginRequiredMixin, View):
                     if response.status_code >= 200 and response.status_code <= 399:
                         prospect.valuer_assigned = valuer.name
                         prospect.valuer_assigned_on = datetime.now()
+                        prospect.updated_at = datetime.now()
                         prospect.save()
 
                         # send email to the valuer
@@ -1123,6 +1124,7 @@ class AutoAssignNewValuer(LoginRequiredMixin, View):
                     # was successful
                     prospect.valuer_assigned = least_assigned_valuer.name
                     prospect.valuer_assigned_on = datetime.now()
+                    prospect.updated_at = datetime.now()
                     prospect.save()
 
                     vehicle = VehicleAsset.objects.filter(prospect=prospect).first()
@@ -1154,6 +1156,7 @@ class AutoAssignNewValuer(LoginRequiredMixin, View):
                             # Handle the case where no matching user is found
                             messages.error(request, "No matching user found for the assigned valuer.")
                             return redirect(reverse_lazy("prospect_valuation"))
+                        messages.success(request, "Valuer assigned successfully.")
                     return redirect(reverse('prospect_valuation'))
                 else:
                     return redirect(reverse('prospect_valuation'))
@@ -1502,6 +1505,7 @@ def set_valuation(request, slug):
             #set prospect status on local
             prospect = Prospect.objects.filter(slug=slug).first()
             prospect.status = 'Valuation'
+            prospect.submitted_for_valuation_on = datetime.now()
             prospect.save()
 
             vehicle = VehicleAsset.objects.filter(prospect=prospect).first()
