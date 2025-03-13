@@ -1301,64 +1301,6 @@ def DeclineView(request, slug):
         messages.error(request, "Please select a loan company to work with before you proceed.")
         return redirect('dashboard')
 
-
-# def DeclineView(request, slug):
-#     prospect = get_object_or_404(Prospect, slug=slug)
-#     prospect.status='Declined'
-#     prospect.save()
-
-#     context = {
-#         "page_name": "valuation",
-#         'prospect': prospect,
-#         "sub_page_name" : "declined_valuation_prospects"
-#     }
-
-#     return render(request, 'prospects/prospect_list.html', context=context)
-
-# @login_required
-# def prospect_in_valuation(request, slug):
-#     if request.method == "POST":
-#         data = json.loads(request.body)
-#         payment_id = data.get('payment_id')
-
-#         if not payment_id:
-#             return JsonResponse({'error': 'No payment ID provided.'}, status=403)
-
-#         prospect = Prospect.objects.filter(slug=slug, proof_of_payment_id=payment_id).first()
-
-#         if not prospect:
-#             return JsonResponse({'error': 'Invalid payment ID.'}, status=403)
-
-#         # Update prospect's status and assign valuer
-#         prospect.status = "Payment Verified"
-#         prospect.payment_verified_on = timezone.now()
-#         prospect.payment_verified_by = request.user
-#         prospect.save()
-
-#         # Get valuer assignment logic
-#         users_with_permission = User.objects.filter(
-#             role__permissions__code='can_be_valuers',
-#             active_company=request.user.company
-#         )
-#         assignments = Prospect.objects.filter(valuer_assigned__in=users_with_permission).values('valuer_assigned').annotate(count=Count('valuer_assigned')).order_by('count')
-
-#         if assignments:
-#             # Get the valuer with the least assignments
-#             least_assigned_valuer_id = assignments[0]['valuer_assigned']
-#             valuer = User.objects.get(id=least_assigned_valuer_id)
-#         else:
-#             # If no assignments, return the first valuer
-#             valuer = users_with_permission.first()
-
-#         # Assign the valuer to the prospect
-#         prospect.valuer_assigned = valuer
-#         prospect.valuer_assigned_on = timezone.now()
-#         prospect.save()
-
-#         return JsonResponse({'success': 'Payment verified and valuer assigned.'})
-
-#     return JsonResponse({'error': 'Invalid request method.'}, status=405)
-
 # check two
 # from django.contrib.auth.models import User
 from django.db.models import Count, Q, F
@@ -1700,7 +1642,7 @@ def add_valuation_report_details(request, slug):
                             messages.add_message(request, messages.SUCCESS, "Asset Valuation submitted successfully. Valuation Pending for other assets.")
                             return redirect('valuation_prospect_detail', slug=slug)
                     else:
-                        messages.add_message(request, messages.ERROR, "ERROR MODIFYING RECORDS. TRY AGAIN!!")
+                        messages.add_message(request, messages.ERROR, "Error modifying records. Try again!")
                         return redirect('valuation_prospect_detail', slug=slug)
             else:
                 # save edited data
@@ -1709,7 +1651,7 @@ def add_valuation_report_details(request, slug):
                     report = VehicleEvaluationReport.objects.filter(pk=submitted_report_id)
                     # save updated data
                     if not report:
-                        messages.add_message(request, messages.ERROR, "REPORT NOT FOUND. TRY AGAIN!")
+                        messages.add_message(request, messages.ERROR, "Report not found. Try again!")
                     else:
                         form = VehicleEvaluationReportForm(request.POST, request.FILES, instance=report.first(), prospect=prospect,
                             initial={
@@ -1735,7 +1677,7 @@ def add_valuation_report_details(request, slug):
                                 prospect.valuation_submitted_on = datetime.now()
                                 prospect.valuation_submitted_by = request.user
 
-                            messages.add_message(request, messages.SUCCESS, "RECORDS MODIFIED SUCCESSFULLY")
+                            messages.add_message(request, messages.SUCCESS, "Records modified successfully.")
 
                 # redirect to details page if form id is found or not
                 return redirect(reverse_lazy("valuation_prospect_detail", args=[prospect.slug]))
@@ -1888,7 +1830,7 @@ def edit_draft(request, slug):
                     messages.add_message(request, messages.SUCCESS, "Asset Valuation submitted successfully. Valuation Pending for other assets.")
                     return redirect('valuation_prospect_detail', slug=prospect_slug)
             else:
-                messages.add_message(request, messages.ERROR, "ERROR MODIFYING RECORDS. TRY AGAIN!!")
+                messages.add_message(request, messages.ERROR, "Error modifying records. Try again!")
                 return redirect('valuation_prospect_detail', slug=prospect_slug)
         else:
             messages.add_message(request, messages.ERROR, "ERROR MODIFYING DRAFT. TRY AGAIN!!")
@@ -1979,67 +1921,11 @@ def add_another_valuation_report_details(request, slug):
                     messages.add_message(request, messages.SUCCESS, "Asset Valuation submitted successfully. Valuation Pending for other assets.")
                     return redirect('valuation_prospect_detail', slug=slug)
             else:
-                messages.add_message(request, messages.ERROR, "ERROR MODIFYING RECORDS. TRY AGAIN!!")
-        # else:
-        #     # save edited data
-        #     submitted_report_id = request.GET.get("form_id")
-        #     if submitted_report_id:
-        #         report = VehicleEvaluationReport.objects.filter(pk=submitted_report_id)
-        #         # save updated data
-        #         if not report:
-        #             messages.add_message(request, messages.ERROR, "REPORT NOT FOUND. TRY AGAIN!")
-        #         else:
-        #             form = VehicleEvaluationReportForm(request.POST, request.FILES, instance=report.first(), prospect=prospect,
-        #                 initial={
-        #             "date_of_registration": report.first().date_of_registration,
-        #             "date_of_valuation": report.first().date_of_valuation,
-        #             "valuation_report_date": report.first().valuation_report_date,
-        #         })
-        #             if form.is_valid():
-        #                 form = form.save(commit=False)
-        #                 form.prospect = prospect
-        #                 # form.prospect.status = 'Valuation Supervisor'
-        #                 form.save()
-        #                 # prospect.status = 'Review'
-
-        #                 # update upstream prospect status
-        #                 response = requests.patch(api_url, data={
-        #                     "status" : prospect.status,
-        #                     "valuation_submitted_on" : datetime.now(),
-        #                     "valuation_submitted_by" : request.user.username,
-        #                 })
-        #                 if response.status_code >= 200 and response.status_code <= 399:
-        #                     prospect.status = prospect.status
-        #                     prospect.valuation_submitted_on = datetime.now()
-        #                     prospect.valuation_submitted_by = request.user
-
-        #                 messages.add_message(request, messages.SUCCESS, "RECORDS MODIFIED SUCCESSFULLY")
-
-        #     # redirect to details page if form id is found or not
-        #     return redirect(reverse_lazy("valuation_prospect_detail", args=[prospect.slug]))
-
+                messages.add_message(request, messages.ERROR, "Error modifying records. Try again!")
+        
         else:
             prospect = Prospect.objects.filter(slug=slug).first()
 
-            # v_reports = VehicleEvaluationReport.objects.filter(vehicle__prospect=prospect)
-            # if v_reports.exists():
-            #     # prospect.status = 'Valuation Supervisor' --> don't put prospect status here.
-
-            #     context["v_reports"] = [
-            #         {"form": VehicleEvaluationReportForm(
-            #             instance=report,
-            #             prospect=prospect,
-            #         initial={
-            #             "date_of_registration": report.date_of_registration,
-            #             "date_of_valuation": report.date_of_valuation,
-            #             "valuation_report_date": report.valuation_report_date,
-            #         }
-            #         ),
-            #         "report": report,
-            #         }
-            #         for report in v_reports
-            #         ]
-            # else:
             context["create_vehicle_report_form"] = VehicleEvaluationReportForm(
                 prospect=prospect,
                     # initial={
@@ -2109,7 +1995,7 @@ def add_inspection_report_details(request, slug):
                     return redirect('valuation_prospect_detail', slug=slug)
                 else:
                     print('\n\n\n form errors', form.errors)
-                    messages.add_message(request, messages.ERROR, "ERROR MODIFYING RECORDS. TRY AGAIN!!")
+                    messages.add_message(request, messages.ERROR, "Error modifying records. Try again!")
             else:
                 print('some i reports')
                 submitted_report_id = request.GET.get("form_id")
@@ -2118,7 +2004,7 @@ def add_inspection_report_details(request, slug):
                     report = VehicleInspectionReport.objects.filter(pk=submitted_report_id).first()
                     print('report', report)
                     if not report:
-                        messages.add_message(request, messages.ERROR, "REPORT NOT FOUND. TRY AGAIN!")
+                        messages.add_message(request, messages.ERROR, "Report not found. Try again!")
                     else:
                         form = VehicleInspectionReportForm(request.POST, instance=report, prospect=prospect)
                         if form.is_valid():
@@ -2126,7 +2012,7 @@ def add_inspection_report_details(request, slug):
                             form.prospect = prospect
                             form.save()
                             print('sucess')
-                            messages.add_message(request, messages.SUCCESS, "RECORDS MODIFIED SUCCESSFULLY")
+                            messages.add_message(request, messages.SUCCESS, "Records modified successfully.")
                     return redirect(reverse_lazy("valuation_prospect_detail", args=[prospect.slug]))
                 else:
                     messages.add_message(request, messages.ERROR, 'No form Id found')
@@ -2157,20 +2043,6 @@ def view_valuation_report(request, slug):
     return render(request, 'valuations/prospect_detail.html', context=context)
 
 
-
-
-# View for submitting the report
-# @login_required
-# def submit_report(request, prospect_id):
-#     prospect = get_object_or_404(Prospect, pk=prospect_id)
-#     evaluation_report = get_object_or_404(EvaluationReport, prospect=prospect)
-
-#     if request.method == 'POST':
-#         prospect.status = 'Review'
-#         prospect.save()
-#         return redirect('prospect_detail', prospect_id=prospect.pk)
-#         # return redirect('valuations_prospect_list')
-#     return render(request, 'valuations/submit_report.html', {'prospect': prospect, 'evaluation_report': evaluation_report})
 @login_required
 def submit_report(request, slug):
     if request.user.active_company:
@@ -2294,147 +2166,6 @@ def printout_report(request, slug):
 # END OF VIEWS FOR HANDLING THE VALUATIONS SECTION FROM THE BASE.HTML
 
 
-
-
-# @login_required
-# def PipelineView(request, slug):
-#     prospect = get_object_or_404(Prospect, slug=slug)
-#     api_url_prospect_test = f'{request.user.active_company.api}/vehicles/?prospect={slug}'
-
-#     response = requests.get(api_url_prospect_test)
-#     response.raise_for_status()
-#     data = response.json()
-#     print('\n\n\n\n Data for prospect',data)
-
-
-#     if request.method == 'POST':
-#         v_reports = VehicleEvaluationReport.objects.filter(vehicle__prospect=prospect)
-#         l_reports = LandEvaluationReport.objects.filter(land__prospect=prospect)
-#         # vehicle['prospect'] = data[0]['prospect']
-#         # api_url_prospect = f'{request.user.active_company.api}/prospects/{slug}/'
-
-#         # response = requests.get(api_url_prospect)
-#         # response.raise_for_status()
-#         # data = response.json()
-
-#         if v_reports or l_reports:
-#             for v_report in v_reports:
-#                 print('\n\n\n V report',v_report)
-#                 # prospect.id = data[0]
-#                 # print(prospect.id)
-#                 serializer = ApiSerializers.VehicleEvaluationReportSerializer(v_report)
-#                 api_url = f'{request.user.active_company.api}/vehicle-reports/'
-
-#                 # Prepare files
-#                 files = {
-#                     "right_hand_side_view": open(f"{settings.BASE_DIR}{serializer.data.get('right_hand_side_view')}", "rb"),
-#                     "left_hand_eside_view": open(f"{settings.BASE_DIR}{serializer.data.get('left_hand_eside_view')}", "rb"),
-#                     "engine_compartment": open(f"{settings.BASE_DIR}{serializer.data.get('engine_compartment')}", "rb"),
-#                     "upholstery": open(f"{settings.BASE_DIR}{serializer.data.get('upholstery')}", "rb"),
-#                     "vehicle_id_plate": open(f"{settings.BASE_DIR}{serializer.data.get('vehicle_id_plate')}", "rb"),
-#                 }
-
-#                 # Remove file fields from data
-#                 file_fields = ['right_hand_side_view', 'left_hand_eside_view', 'engine_compartment', 'upholstery', 'vehicle_id_plate']
-#                 for field in file_fields:
-#                     serializer.data.pop(field, None)
-
-
-
-#                 response = requests.post(api_url, data=serializer.data, files=files)
-#                 # print(response.status_code, response.text)
-#                 print(f"\n\n\n\n Status Code: {response.status_code}")
-#                 print(f"Response Text: {response.text}")  # The server's error message or details
-#                 print(f"Response Headers: {response.headers}")  # Headers returned by the server
-#                 print(f"Request URL: {response.request.url}")  # URL used for the request
-#                 print(f"Request Method: {response.request.method}")  # HTTP method used (GET, POST, etc.)
-#                 print(f"Request Headers: {response.request.headers}")  # Headers sent in the request
-#                 # print(f"Request Body: {response.request.body}")  # Data sent in the request body
-
-
-#                 if 200 <= response.status_code <= 399:
-#                     api_url = f'{request.user.active_company.api}/prospects/{slug}/'
-#                     response = requests.patch(api_url, data={
-#                         "status": "Pipeline",
-#                         "valuation_reviewd_on": datetime.now(),
-#                         "valuation_reviewd_by": request.user.username,
-#                     })
-
-#                     if 200 <= response.status_code <= 399:
-#                         prospect.status = 'Pipeline'
-#                         prospect.valuation_reviewd_on = datetime.now()
-#                         prospect.valuation_reviewd_by = request.user
-#                         prospect.save()
-
-#             return redirect(reverse_lazy("prospect_review"))
-
-#         messages.error(request, "NO VALUATION REPORT FOUND FOR THIS PROSPECT!")
-#     return redirect(reverse_lazy("valuation_prospect_detail", args=[prospect.slug]))
-
-
-# END OF VIEWS FOR HANDLING THE LOAN APPLICATION FROM THE BASE.HTML
-
-# login_view
-# def PipelineView(request, slug):
-#     # Get the prospect object
-#     prospect = get_object_or_404(Prospect, slug=slug)
-
-#     # Check if the request is a POST request to handle the form submission
-#     if request.method == 'POST':
-
-#         # check for vehicle or land valuation report
-#         v_reports = VehicleEvaluationReport.objects.filter(vehicle__prospect=prospect)
-#         l_reports = LandEvaluationReport.objects.filter(land__prospect=prospect)
-
-
-#         # if this prospect has a valuation report proceed
-#         if v_reports or l_reports:
-#             # submit reports to upstream
-#             for v_report in v_reports:
-#                 serializer = ApiSerializers.VehicleEvaluationReportSerializer(v_report)
-
-#                 api_url = f'{request.user.active_company.api}/vehicle-reports/'
-#                 # handle images
-
-#                 files = {
-#                     "right_hand_side_view": open(f"{settings.BASE_DIR}{serializer.data.get("right_hand_side_view")}", "rb"),
-#                     "left_hand_eside_view": open(f"{settings.BASE_DIR}{serializer.data.get("left_hand_eside_view")}", "rb"),
-#                     "engine_compartment": open(f"{settings.BASE_DIR}{serializer.data.get("engine_compartment")}", "rb"),
-#                     "upholstery": open(f"{settings.BASE_DIR}{serializer.data.get("upholstery")}", "rb"),
-#                     "vehicle_id_plate": open(f"{settings.BASE_DIR}{serializer.data.get("vehicle_id_plate")}", "rb"),
-#                 }
-#                 serializer.data.pop('right_hand_side_view', None)
-#                 serializer.data.pop('left_hand_eside_view', None)
-#                 serializer.data.pop('engine_compartment', None)
-#                 serializer.data.pop('upholstery', None)
-#                 serializer.data.pop('vehicle_id_plate', None)
-#                 # serializer.data['pk'] = v_report.prospect.pk
-
-#                 response = requests.post(api_url, data=serializer.data, files=files)
-
-#                 if response.status_code >= 200 and response.status_code <= 399:
-
-#                     api_url = f'{request.user.active_company.api}/prospects/{slug}/'
-#                     response = requests.patch(api_url, data={
-#                         "status" : 'Pipeline',
-#                         "valuation_reviewd_on" : datetime.now(),
-#                         "valuation_reviewd_by" : request.user.username,
-#                     })
-
-
-#                     if response.status_code >= 200 and response.status_code <= 399:
-#                         prospect.status = 'Pipeline'
-#                         prospect.valuation_reviewd_on = datetime.now()
-#                         prospect.valuation_reviewd_by = request.user
-#                         prospect.save()
-
-#             return redirect(reverse_lazy("prospect_review"))
-
-
-#         messages.add_message(request, messages.ERROR, "NO VALUATION REPORT FOUND FOR THIS PROSPECT!")
-#     return redirect(reverse_lazy("valuation_prospect_detail", args=[prospect.slug]))
-
-
 from datetime import datetime
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib import messages
@@ -2450,84 +2181,6 @@ def retry_post(url, payload, files=None, headers=None, retries=3, delay=5):
             return response
         sleep(delay)
     response.raise_for_status()
-
-# def PipelineView(request, slug):
-#     # Get the prospect object
-#     prospect = get_object_or_404(Prospect, slug=slug)
-
-#     # Check if the request is a POST request to handle the form submission
-#     if request.method == 'POST':
-#         # Check for vehicle or land valuation reports
-#         v_reports = VehicleEvaluationReport.objects.filter(vehicle__prospect=prospect)
-#         l_reports = LandEvaluationReport.objects.filter(land__prospect=prospect)
-
-#         # If this prospect has a valuation report, proceed
-#         if v_reports or l_reports:
-#             # Submit reports to upstream
-#             try:
-#                 for v_report in v_reports:
-#                     # Serialize the vehicle report
-#                     serializer = ApiSerializers.VehicleEvaluationReportSerializer(v_report)
-#                     api_url = f'{request.user.active_company.api}/vehicle-reports/'
-
-#                     # Handle images
-#                     files = {}
-#                     try:
-#                         file_fields = [
-#                             "right_hand_side_view",
-#                             "left_hand_eside_view",
-#                             "engine_compartment",
-#                             "upholstery",
-#                             "vehicle_id_plate",
-#                         ]
-
-#                         for field in file_fields:
-#                             file_path = serializer.data.get(field)
-#                             if file_path:
-#                                 files[field] = open(f"{settings.BASE_DIR}{file_path}", "rb")
-#                                 serializer.data.pop(field, None)
-
-#                         # Post data to the external API
-#                         response = requests.post(api_url, data=serializer.data, files=files)
-
-#                         print(response.status_code, response.text)
-
-#                         # Update prospect status upstream if successful
-#                         prospect_api_url = f'{request.user.active_company.api}/prospects/{slug}/'
-#                         prospect_response = requests.patch(
-#                             prospect_api_url,
-#                             data={
-#                                 "status": "Pipeline",
-#                                 "valuation_reviewd_on": datetime.now().isoformat(),
-#                                 "valuation_reviewd_by": request.user.username,
-#                             },
-#                         )
-
-#                         # Update local prospect status
-#                         if 200 <= prospect_response.status_code <= 399:
-#                             prospect.status = "Pipeline"
-#                             prospect.valuation_reviewd_on = datetime.now()
-#                             prospect.valuation_reviewd_by = request.user
-#                             prospect.save()
-
-#                     finally:
-#                         # Close all file handles
-#                         for file in files.values():
-#                             file.close()
-
-#                 return redirect(reverse_lazy("prospect_review"))
-
-#             except Exception as e:
-#                 # Log the error and show a message to the user
-#                 messages.add_message(request, messages.ERROR, f"Error submitting report: {str(e)}")
-#                 return redirect(reverse_lazy("valuation_prospect_detail", args=[prospect.slug]))
-
-#         # No valuation report found
-#         messages.add_message(request, messages.ERROR, "NO VALUATION REPORT FOUND FOR THIS PROSPECT!")
-#         return redirect(reverse_lazy("valuation_prospect_detail", args=[prospect.slug]))
-
-#     # For non-POST requests, redirect to valuation detail page
-#     return redirect(reverse_lazy("valuation_prospect_detail", args=[prospect.slug]))
 
 
 def PipelineView(request, slug):
@@ -2558,8 +2211,6 @@ def PipelineView(request, slug):
                         response = requests.get(vehicle_api_url)
                         response.raise_for_status()
                         # resp_veh = response.json()
-
-
 
                         if response.status_code != 200:
                             messages.error(request, "Failed to fetch vehicle data from the external system.")
@@ -2620,8 +2271,6 @@ def PipelineView(request, slug):
                                     messages.add_message(request, messages.ERROR, "Error submitting report")
                                     return redirect(reverse_lazy("valuation_prospect_detail", args=[prospect.slug]))
 
-                            # print(response.status_code, response.text)
-
                             # Update prospect status upstream if successful
                             prospect_api_url = f'{request.user.active_company.api}/prospects/{slug}/'
                             prospect_response = requests.patch(
@@ -2651,7 +2300,7 @@ def PipelineView(request, slug):
 
                 except Exception as e:
                     # Log the error and show a message to the user
-                    messages.add_message(request, messages.ERROR, f"Error submitting report: {str(e)}")
+                    messages.add_message(request, messages.ERROR, f"Error submitting report: {e}")
                     return redirect(reverse_lazy("valuation_prospect_detail", args=[prospect.slug]))
 
             # No valuation report found

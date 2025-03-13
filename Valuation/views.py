@@ -394,7 +394,7 @@ def set_valuation_supervisor(request, slug):
 #                 messages.add_message(request, messages.SUCCESS, "Asset Valuation submitted successfully")
 #                 return redirect('valuation_prospect_detail', pk=prospect.id)
 #             else:
-#                 messages.add_message(request, messages.ERROR, "ERROR MODIFYING RECORDS. TRY AGAIN!!")
+#                 messages.add_message(request, messages.ERROR, "Error modifying records. Try again!")
 #         else:
 #             # save edited data
 #             submitted_report_id = request.GET.get("form_id")
@@ -402,7 +402,7 @@ def set_valuation_supervisor(request, slug):
 #                 report = VehicleEvaluationReport.objects.filter(pk=submitted_report_id)
 #                 # save updated data
 #                 if not report:
-#                     messages.add_message(request, messages.ERROR, "REPORT NOT FOUND. TRY AGAIN!")
+#                     messages.add_message(request, messages.ERROR, "Report not found. Try again!")
 #                 else:
 #                     form = VehicleEvaluationReportForm(request.POST, request.FILES, instance=report.first(), prospect=prospect)
 #                     if form.is_valid():
@@ -414,7 +414,7 @@ def set_valuation_supervisor(request, slug):
 #                         prospect.status = 'Valuation Supervisor'
 #                         prospect.valuation_submitted_on = datetime.now()
 #                         prospect.valuation_submitted_by = request.user
-#                         messages.add_message(request, messages.SUCCESS, "RECORDS MODIFIED SUCCESSFULLY")
+#                         messages.add_message(request, messages.SUCCESS, "Records modified successfully.")
 
 #             # redirect to details page if form id is found or not
 #             return redirect(reverse_lazy("valuation_prospect_detail", args=[prospect.slug]))
