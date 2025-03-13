@@ -1121,6 +1121,10 @@ class AutoAssignNewValuer(LoginRequiredMixin, View):
                 })
                 if response.status_code >= 200 and response.status_code <= 399:
                     # was successful
+                    prospect.valuer_assigned = least_assigned_valuer.name
+                    prospect.valuer_assigned_on = datetime.now()
+                    prospect.save()
+
                     vehicle = VehicleAsset.objects.filter(prospect=prospect).first()
                     valuer_assigned = prospect.valuer_assigned
 
