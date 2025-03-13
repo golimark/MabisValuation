@@ -221,10 +221,12 @@ class ProspectDetailView(LoginRequiredMixin, View):
                         vehicleSerializer.save()
 
                 users_with_permission = User.objects.filter(
-                        Q(role__permissions__code='can_be_valuers'),
-                        ~Q(role__permissions__code='can_perform_admin_functions'),
-                        Q(company=self.request.user.company)
-                    )
+                    role__permissions__code='can_be_valuers',
+                    company=self.request.user.company
+                ).exclude(
+                    role__permissions__code='can_perform_admin_functions'
+                ).distinct()
+
                 context["valuers"] =  users_with_permission
 
                 vehicle_assets = VehicleAsset.objects.filter(prospect=context['prospect'])
@@ -430,10 +432,11 @@ class ProspectDetailViewforNewProspects(LoginRequiredMixin, View):
                         vehicleSerializer.save()
 
                 users_with_permission = User.objects.filter(
-                        Q(role__permissions__code='can_be_valuers'),
-                        ~Q(role__permissions__code='can_perform_admin_functions'),
-                        Q(company=self.request.user.company)
-                    )
+                    role__permissions__code='can_be_valuers',
+                    company=self.request.user.company
+                ).exclude(
+                    role__permissions__code='can_perform_admin_functions'
+                ).distinct()
                 context["valuers"] =  users_with_permission
 
                 vehicle_assets = VehicleAsset.objects.filter(prospect=prospect)
@@ -608,10 +611,12 @@ class ValuationProspectListView(LoginRequiredMixin, View):
                 messages.error(request, "Unable to fetch prospects")
 
             users_with_permission = User.objects.filter(
-                    Q(role__permissions__code='can_be_valuers'),
-                    ~Q(role__permissions__code='can_perform_admin_functions'),
-                    Q(company=self.request.user.company)
-                )
+                    role__permissions__code='can_be_valuers',
+                    company=self.request.user.company
+                ).exclude(
+                    role__permissions__code='can_perform_admin_functions'
+                ).distinct()
+            
             self.context["valuers"] =  users_with_permission
             self.context["page_name"] =  "valuation"
             self.context["sub_page_name"] =  "valuation_requests"
@@ -715,10 +720,12 @@ class ValuationProspectDetailView(LoginRequiredMixin, DetailView):
                         context['land_asset'] = land_assets
 
                     users_with_permission = User.objects.filter(
-                        Q(role__permissions__code='can_be_valuers'),
-                        ~Q(role__permissions__code='can_perform_admin_functions'),
-                        Q(company=self.request.user.company)
-                    )
+                    role__permissions__code='can_be_valuers',
+                    company=self.request.user.company
+                ).exclude(
+                    role__permissions__code='can_perform_admin_functions'
+                ).distinct()
+                    
                     context["valuers"] =  users_with_permission
                 else:
                     context['vehicle_asset_form'] = VehicleAssetForm()
@@ -870,10 +877,12 @@ class ValuationProspectDetailViewforNewProspects(LoginRequiredMixin, DetailView)
                         context['land_asset'] = land_assets
 
                     users_with_permission = User.objects.filter(
-                        Q(role__permissions__code='can_be_valuers'),
-                        ~Q(role__permissions__code='can_perform_admin_functions'),
-                        Q(company=self.request.user.company)
-                    )
+                    role__permissions__code='can_be_valuers',
+                    company=self.request.user.company
+                    ).exclude(
+                        role__permissions__code='can_perform_admin_functions'
+                    ).distinct()
+                    
                     context["valuers"] =  users_with_permission
                 else:
                     context['vehicle_asset_form'] = VehicleAssetForm()
@@ -981,10 +990,12 @@ class ProspectValuationView(LoginRequiredMixin, ListView):
                     prospect['location'] = ', '.join([vehicle.location for vehicle in vehicles]) if vehicles else None
 
                 users_with_permission = User.objects.filter(
-                        Q(role__permissions__code='can_be_valuers'),
-                        ~Q(role__permissions__code='can_perform_admin_functions'),
-                        Q(company=self.request.user.company)
-                    )
+                    role__permissions__code='can_be_valuers',
+                    company=self.request.user.company
+                ).exclude(
+                    role__permissions__code='can_perform_admin_functions'
+                ).distinct()
+
                 context["valuers"] =  users_with_permission
 
             except requests.exceptions.RequestException:
@@ -1074,10 +1085,12 @@ class AutoAssignNewValuer(LoginRequiredMixin, View):
         if request.user.active_company:
             # assign valuer
             users_with_permission = [user for user in User.objects.filter(
-                Q(role__permissions__code='can_be_valuers'),
-                ~Q(role__permissions__code='can_perform_admin_functions'),
-                Q(company=request.user.company),
-            ) if user.name != prospect.valuer_assigned]
+                    role__permissions__code='can_be_valuers',
+                    company=self.request.user.company
+                ).exclude(
+                    role__permissions__code='can_perform_admin_functions'
+                ).distinct() if user.name != prospect.valuer_assigned]
+
             # Get all prospects with an assigned valuer
             valuer_assignments = (
                 Prospect.objects
@@ -1145,28 +1158,6 @@ class AutoAssignNewValuer(LoginRequiredMixin, View):
             messages.error(request, "Please select a loan company to work with before you proceed.")
             return redirect('dashboard')
 
-# class ProspectValuationView(LoginRequiredMixin, ListView):
-#     model = Prospect
-#     template_name = 'valuations/prospect_list_valuation.html'
-#     context_object_name = 'prospects'
-#     context = {}
-
-#     def get(self, request):
-
-#         api_url = f'{request.user.active_company.api}/prospects/?status=valuation'
-#         try:
-#             response = requests.get(api_url)
-#             response.raise_for_status()
-#             data = response.json()
-#             self.context['prospects'] = data
-#         except requests.exceptions.RequestException as e:
-#             messages.error(request, "Unable to fetch prospects")
-
-#         self.context["page_name"] =  "valuation"
-#         self.context["sub_page_name"] =  "valuation_requests"
-#         return render(request, 'valuations/prospect_list_valuation.html', context=self.context)
-
-# View to display prospects with 'Valuation' status
 class InspectionView(LoginRequiredMixin, ListView):
     model = Prospect
     template_name = 'valuations/inspection_list.html'
@@ -1376,10 +1367,11 @@ from django.db.models import Count
 
 def get_least_assigned_valuer(company):
         users_with_permission = User.objects.filter(
-            Q(role__permissions__code='can_be_valuers'),
-            ~Q(role__permissions__code='can_perform_admin_functions'),
-            Q(active_company=company)
-        )
+                    role__permissions__code='can_be_valuers',
+                    active_company=company
+                ).exclude(
+                    role__permissions__code='can_perform_admin_functions'
+                ).distinct()
 
         assignments = Prospect.objects.filter(valuer_assigned__in=users_with_permission).values('valuer_assigned').annotate(count=Count('valuer_assigned')).order_by('count')
 
@@ -1423,10 +1415,11 @@ def prospect_in_valuation(request, slug):
             api_url = f'{request.user.active_company.api}/prospects/{slug}/'
             # assign valuer
             users_with_permission = User.objects.filter(
-                Q(role__permissions__code='can_be_valuers'),
-                ~Q(role__permissions__code='can_perform_admin_functions'),
-                Q(company=request.user.company)
-            )
+                    role__permissions__code='can_be_valuers',
+                    company=request.user.company
+                ).exclude(
+                    role__permissions__code='can_perform_admin_functions'
+                ).distinct()
             # Get all prospects with an assigned valuer
             valuer_assignments = (
                 Prospect.objects
