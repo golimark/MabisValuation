@@ -47,12 +47,13 @@
             <td style="color: blueviolet;">{{ prospect.status }}</td>
             <td>{{ prospect.submitted_for_valuation_on }}</td>
             <td>
+                {% if prospect.valuer_assigned == request.user.name %}
                 <a
                     href="{% url 'prospect_detail' prospect.slug %}"
                     class="btn btn-primary"
                     >View</a
                 >
-                <!-- <a href="#" class="btn btn-warning" data-toggle="modal" data-target="#valuationModal" data-prospect="{{ prospect.id }}">Submit to Valuation</a> -->
+                {% endif %}
             </td>
         </tr>
         
